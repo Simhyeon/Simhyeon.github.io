@@ -49,7 +49,7 @@ function get_dark_mode() {
     localStorage.getItem("dark-mode"); 
 }
 
-function init() {
+function init_theme() {
     let dark_mode = get_dark_mode();
 
     if (!dark_mode) {
@@ -61,7 +61,6 @@ function init() {
 }
 
 function law_init() {
-	init();
 	let elems = document.getElementsByTagName("span");
 	Array.from(elems).forEach(e => { 
 		e.onclick = function(){toggle_view(e);}
