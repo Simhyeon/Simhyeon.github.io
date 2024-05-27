@@ -30,9 +30,18 @@ a {
 /* 1. 숨기기 */
 /* 2. 하이라이트 */
 /* 3. 원래대로 돌리기 */
-.hidden {
+.hidden:not(.disclosed) {
 	color: rgba(0,0,0,0) !important;
 	border-bottom: 1px solid #ff5370;
+}
+
+.hidden.disclosed {
+	color: #ff5370;
+	font-weight: bold;
+}
+
+.hidden {
+	cursor: pointer;
 }
 
 .highlight {

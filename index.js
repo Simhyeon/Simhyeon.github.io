@@ -1,3 +1,14 @@
+function toggle_view(spanObj) {
+	let clsl = spanObj.classList;
+	if (clsl.contains('hidden')) {
+		if (clsl.contains('disclosed')) {
+			clsl.remove('disclosed');
+		} else {
+			clsl.add('disclosed');
+		}
+	}
+}
+
 function toggle_study_style(buttonObject) {
 	let current_status = buttonObject.dataset.status;
 	let elems = document.getElementsByTagName("span");
@@ -47,4 +58,12 @@ function init() {
     } else {
 
     }
+}
+
+function law_init() {
+	init();
+	let elems = document.getElementsByTagName("span");
+	Array.from(elems).forEach(e => { 
+		e.onclick = function(){toggle_view(e);}
+	});
 }
