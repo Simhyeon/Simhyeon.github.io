@@ -26,6 +26,20 @@ a {
 	background: #263238;
 }
 
+/* 기능 로테이션 */
+/* 1. 숨기기 */
+/* 2. 하이라이트 */
+/* 3. 원래대로 돌리기 */
+.hidden {
+	color: rgba(0,0,0,0) !important;
+	border-bottom: 1px solid #ff5370;
+}
+
+.highlight {
+	color: #ff5370;
+	font-weight: bold;
+}
+
 p:not(.title) {
 	margin-bottom: 8px;
 	margin-top: 8px;
@@ -36,4 +50,21 @@ p:not(.title) {
 	display: flex;
 	flex-direction: column;
 	padding: min(20px, 5%);
+}
+
+.floater {
+	cursor: pointer;
+	position: fixed;
+	bottom: 3vw;
+	right: 3vw;
+	width: 50px;
+	border-radius: 20px;
+	background-color: #37474f;
+	border: 2px solid #eeffff;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+	display: block !important;
+	z-index: 99999;
 }
