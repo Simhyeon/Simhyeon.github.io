@@ -43,7 +43,7 @@ a {
 /* 3. 원래대로 돌리기 */
 .hidden:not(.disclosed) {
 	color: rgba(0,0,0,0) !important;
-	border-bottom: 1px solid #ff5370;
+	text-decoration: underline #ff5370;
 }
 
 .hidden.disclosed {
