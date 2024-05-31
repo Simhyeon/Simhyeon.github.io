@@ -11,12 +11,21 @@
 	<script src="./index.js" charset="utf-8"></script>
         <title>국가직 공무원 7급 우정행정 법률 모음</title>
     </head>
-    <body>
+    <body onload="init()">
 	    <script charset="utf-8">
 		    init_theme();
 	    </script>
 	<div class="container">
-		<h2>사용법</h2>
+		<h2>환경설정</h2>
+		<label>
+			<input id="dark_switch" role="switch" type="checkbox" onclick="toggle_dark_mode(this)"/>
+			<span>다크모드</span>
+		</label>
+		<label>
+			<input id="drag_switch" role="switch" type="checkbox" onclick="toggle_draggable(this)"/>
+			<span>드래그 활성화</span>
+		</label>
+		<h2>사용 방법</h2>
 		<ol>
 			<li>더블 클릭으로 양식 설정가능</li>
 			<ul>
@@ -27,7 +36,7 @@
 			<li>인덱스에서 원하는 법률을 선택해서 공부</li>
 		</ol>
         	<h2>인덱스</h2>
-        	<ol>
+        	<ol style="font-size: 1.5em;">
         	    <li><a href=./laws/hang_gi.html>행정 기본법</a></li>
         	    <li><a href=./laws/hang_zul.html>행정 절차법 ( 양식 미설정 )</a></li>
         	    <li><a href=./laws/hang_sim.html>행정 심판법 ( 양식 미설정 )</a></li>
