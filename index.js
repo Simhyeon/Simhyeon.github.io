@@ -177,6 +177,7 @@ function getRandomIntRange(min,max) {
 }
 
 function print_equations_to_blackboard() {
+	var sep = document.getElementById("answer-sep").dataset.status;
 	var bb = document.getElementById("blackboard")
 	bb.textContent = '';
 	bb.appendChild(document.createElement('hr'));
@@ -193,13 +194,14 @@ function print_equations_to_blackboard() {
 		var first = getRandomInt(dig);
 		var second = getRandomInt(dig);
 		var third = first + second
-console.log("1 : " + raw_dig)
-console.log("2 : " + first.toString().length)
 		var fpad = "0".repeat(raw_dig - first.toString().length + 1);
 		var spad = "0".repeat(raw_dig - second.toString().length + 1);
 		var tpad = "0".repeat(raw_dig - third.toString().length + 1);
 		newdiv.innerHTML = `[${num}] &nbsp:&nbsp <span class="noview">${fpad}</span>${first} &nbsp + &nbsp <span class="noview">${spad}</span>${second} &nbsp = &nbsp`;
 		answer.innerHTML = `<span class="noview">${tpad}</span>${third}`;
+		if (sep === "sep") {
+			answer.classList.add("sep_answer");
+		}
 		bb.appendChild(newdiv);
 		newdiv.appendChild(answer);
 	}
@@ -219,8 +221,27 @@ console.log("2 : " + first.toString().length)
 		var tpad = "0".repeat(raw_dig - third.toString().length + 1);
 		newdiv.innerHTML = `[${num}] &nbsp:&nbsp <span class="noview">${fpad}</span>${first} &nbsp - &nbsp <span class="noview">${spad}</span>${second} &nbsp = &nbsp`;
 		answer.innerHTML = `<span class="noview">${tpad}</span>${third}`;
+		if (sep === "sep") {
+			answer.classList.add("sep_answer");
+		}
 		bb.appendChild(newdiv);
 		newdiv.appendChild(answer);
 	}
 	bb.appendChild(document.createElement('hr'));
+}
+
+function separate_answers(btnObj) {
+	let current_status = btnObj.dataset.status;
+	switch (current_status) {
+		case "no-sep":
+			btnObj.dataset.status = "sep"
+			btnObj.innerHTML = "정답 간격 줄이기"
+			break;
+		case "sep":
+			btnObj.dataset.status = "no-sep"
+			btnObj.innerHTML = "정답 간격 늘리기"
+			break;
+		default:
+			break;
+	}
 }
