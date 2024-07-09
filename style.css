@@ -134,3 +134,37 @@ input {
 	border-radius : 4px;
 	margin-right: 10px;
 }
+
+.eq-padding {
+	margin-bottom: 15px;
+}
+
+@media print {
+	body {
+		visibility: hidden;
+	}
+	#blackboard {
+		visibility: visible;
+		position: absolute;
+		left: 10%;
+		top: 3%;
+	}
+	@page { margin: 0; }
+	body { margin: 1.6cm; }
+}
+
+.circle-div {
+	height: 40px;
+	width: 40px;
+	border-radius: 100%;
+	position: fixed;
+	bottom: 21px;
+	right: 25px;
+	text-align:center;
+}
+
+.circle-div > img {
+	filter: invert(1);
+	background: none !important;
+	cursor: pointer;
+}

@@ -187,6 +187,7 @@ function print_equations_to_blackboard() {
 	/* 더하기 */
 	for (var i = 0; i < cnt; i++) {
 		var newdiv = document.createElement('div');
+		newdiv.classList.add("eq-padding");
 		var answer = document.createElement('span');
 		answer.classList.add("hidden");
 		answer.classList.add("psat-answer");
@@ -209,6 +210,7 @@ function print_equations_to_blackboard() {
 	/* 빼기 */
 	for (var i = 0; i < cnt; i++) {
 		var newdiv = document.createElement('div');
+		newdiv.classList.add("eq-padding");
 		var answer = document.createElement('span');
 		answer.classList.add("hidden");
 		answer.classList.add("psat-answer");
