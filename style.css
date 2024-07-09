@@ -55,6 +55,10 @@ a {
 	cursor: pointer;
 }
 
+.noview {
+	color: rgba(0,0,0,0) !important;
+}
+
 .highlight {
 	color: #ff5370;
 	font-weight: bold;
@@ -87,4 +91,13 @@ p:not(.title) {
 	line-height: 50px;
 	display: block !important;
 	z-index: 99999;
+}
+
+select {
+	margin-right: 10px;
+}
+
+hr {
+	max-width: 300px;
+	margin-left: 0;
 }

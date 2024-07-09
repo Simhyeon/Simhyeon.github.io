@@ -37,6 +37,36 @@ function toggle_study_style(buttonObject) {
 	}
 }
 
+function toggle_psat_answer(buttonObject) {
+	let current_status = buttonObject.dataset.status;
+	let elems = document.getElementsByClassName("psat-answer");
+
+	if (elems.length === 0 ) {
+		return;
+	}
+
+	/* Loop elems and set style*/
+	switch (current_status) {
+		case 'hidden':
+			Array.from(elems).forEach(e => { 
+				e.classList.add('highlight');
+				e.classList.remove('hidden');
+				}
+			);
+			buttonObject.dataset.status = 'highlight';
+			break;
+		case 'highlight':
+			Array.from(elems).forEach(e => { e.classList.add('hidden') });
+			buttonObject.dataset.status = 'hidden';
+			break;
+		case 'normal':
+			break;
+		default:
+			break;
+			
+	}
+}
+
 // This function is reserved for toggle switch
 function toggle_dark_mode(input) {
 	let value = input.checked;
@@ -133,4 +163,64 @@ function init_switch(obj, keyword) {
 			break;
 			
 	}
+}
+
+/* This is equal or bigger than 1*/
+function getRandomInt(max) {
+	return Math.max(Math.floor(Math.random() * max), 1);
+}
+
+function getRandomIntRange(min,max) {
+	const minCeiled = Math.ceil(min);
+	const maxFloored = Math.floor(max);
+	return Math.max(Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)); // The maximum is exclusive and the minimum is inclusive
+}
+
+function print_equations_to_blackboard() {
+	var bb = document.getElementById("blackboard")
+	bb.textContent = '';
+	bb.appendChild(document.createElement('hr'));
+	var raw_dig = document.getElementById("digit").value;
+	var dig = Math.pow(10,raw_dig);
+	var cnt = document.getElementById("count").value;
+	/* 더하기 */
+	for (var i = 0; i < cnt; i++) {
+		var newdiv = document.createElement('div');
+		var answer = document.createElement('span');
+		answer.classList.add("hidden");
+		answer.classList.add("psat-answer");
+		var num = (i+1).toString().padStart(raw_dig,'0');
+		var first = getRandomInt(dig);
+		var second = getRandomInt(dig);
+		var third = first + second
+console.log("1 : " + raw_dig)
+console.log("2 : " + first.toString().length)
+		var fpad = "0".repeat(raw_dig - first.toString().length + 1);
+		var spad = "0".repeat(raw_dig - second.toString().length + 1);
+		var tpad = "0".repeat(raw_dig - third.toString().length + 1);
+		newdiv.innerHTML = `[${num}] &nbsp:&nbsp <span class="noview">${fpad}</span>${first} &nbsp + &nbsp <span class="noview">${spad}</span>${second} &nbsp = &nbsp`;
+		answer.innerHTML = `<span class="noview">${tpad}</span>${third}`;
+		bb.appendChild(newdiv);
+		newdiv.appendChild(answer);
+	}
+	bb.appendChild(document.createElement('hr'));
+	/* 빼기 */
+	for (var i = 0; i < cnt; i++) {
+		var newdiv = document.createElement('div');
+		var answer = document.createElement('span');
+		answer.classList.add("hidden");
+		answer.classList.add("psat-answer");
+		var num = (i+1).toString().padStart(raw_dig,'0');
+		var second = getRandomInt(dig - 1);
+		var first = getRandomIntRange(second + 1, dig);
+		var third = first - second
+		var fpad = "0".repeat(raw_dig - first.toString().length + 1);
+		var spad = "0".repeat(raw_dig - second.toString().length + 1);
+		var tpad = "0".repeat(raw_dig - third.toString().length + 1);
+		newdiv.innerHTML = `[${num}] &nbsp:&nbsp <span class="noview">${fpad}</span>${first} &nbsp - &nbsp <span class="noview">${spad}</span>${second} &nbsp = &nbsp`;
+		answer.innerHTML = `<span class="noview">${tpad}</span>${third}`;
+		bb.appendChild(newdiv);
+		newdiv.appendChild(answer);
+	}
+	bb.appendChild(document.createElement('hr'));
 }
