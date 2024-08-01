@@ -287,7 +287,7 @@ function createProblemList(jsonObject) {
 	jsonObject.forEach(e => { 
 		let dupNode = listDiv.cloneNode(true);
 		parentNode.appendChild(dupNode);
-		dupNode.children[0].textContent = e.problem;
+		dupNode.children[0].innerHTML = e.problem;
 		dupNode.children[1].children[0].textContent = e.first;
 		dupNode.children[1].children[1].textContent = e.second;
 		dupNode.children[1].children[e.answer].dataset.answer = "true";

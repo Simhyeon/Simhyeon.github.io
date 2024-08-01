@@ -105,176 +105,176 @@
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":31,
+        "problem": "수요함수는 P=25-3Q로 동일한 소비자가 n명 있다. 가격이 P<sub>0</sub>일 때 한 개인의 수요의 가격탄력성이 4라면 동일한 가격에서 소비자집단 전체에 대해서 구한 수요의 가격탄력성은 4n이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":33,
+        "problem": "나희는 항상 자기소득의 30%를 콜라 구입에 사용한다면 콜라 수요의 소득탄력성은 0.3이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":35,
+        "problem": "공급이 비탄력적인 재화의 경우 공급이 증가하면 판매자의 총수입은 감소한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":37,
+        "problem": "가격소비곡선이 우하향하는 경우 가격을 인상하면 판매자의 총수입은 증가한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":39,
+        "problem": "S기업이 생산하는 X재의 40%는 중고생, 60%는 일반인에게 판매되는데, 중고생과 일반인의 X재 수요의 가격탄력성이 각각 2와 0.5라면 X재 가격이 상승하면 이 기업의 총수입은 증가한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":41,
+        "problem": "최고가격제가 실시되면 재화의 거래량은 감소하나, 최저가격제가 실시되면 거래량은 증가한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":43,
+        "problem": "최고가격제가 실시되면 저소득층이 더 많은 재화를 소비할 수 있게 되므로 사회후생이 증대된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":45,
+        "problem": "대체재가 많은 상품에 대해 물품세가 부과되면 소비자의 상대적인 조세부담은 작다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":47,
+        "problem": "단위당 100원의 조세를 소비자에게 부과하면 생산자에게 100원씩 조세를 부과할 때보다 소비자 부담이 커진다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":49,
+        "problem": "물품세 부과에 따른 초과부담을 극소화하고자 한다면 수요가 탄력적인 재화에 대해 조세를 부과하여야 한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":51,
+        "problem": "수요곡선이 우하향하는 것은 한계효용이 체감하기 때문이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":53,
+        "problem": "무차별곡선이 우상향하면 두 재화 중 한 재화가 열등재이다",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":55,
+        "problem": "한계대체율이 체감하는 것은 무차별곡선이 우하향하기 때문이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":57,
+        "problem": "효용함수가 U = X<sup>0.6</sup>Y<sup>0.4</sup>로 주어져 있다면 원점을 통과하는 45선 상에서는 한계대체율이 항상 1.5이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":59,
+        "problem": "어떤 재화의 소득탄력성이 0보다 크다면 보상수요곡선이 통상적인 수요곡선보다 더 완만한 형태가 된다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":61,
+        "problem": "김씨는 X재와 Y재를 항상 1:1의 비율로 구입한다면 김씨의 X재 수요의 가격탄력성은 반드시 1보다 작다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":63,
+        "problem": "한계대체율이 1.5로 일정하고, X재 가격이 Y재 가격의 2배라면 소득소비곡선은 수평선이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":65,
+        "problem": "효용함수가 U = 5X<sup>0.8</sup>Y<sup>0.2</sup>로 주어진 경우 X재와 Y재 소비량이 절반으로 줄어들면 한계대체율도 절반으로 감소한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":67,
+        "problem": "어떤 소비자의 효용함수가 U = X<sup>0.5</sup>Y<sup>0.5</sup>로 주어져 있다면 이 소비자의 X재 구입액과 Y재 구입액은 동일할 것이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":69,
+        "problem": "어떤 재화의 수요곡선이 우하향이면, 그 재화는 정상재이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":71,
+        "problem": "MRS가 3으로 일정하고 X개 가격이 100원, Y재 가격이 50원이라면 효용을 극대화하려면 소득 전부를 X재 구입에 지출해야 한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":73,
+        "problem": "어떤 재화가격이 상승하면 소비자는 그 재화가 정상재일 경우엔느 구입량을 감소시키나, 열등재일 경우에는 구입량을 증가시킨다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":75,
+        "problem": "효용함수가 U=2XY로 주어져 있다면 X재와 Y재 구입비율이 일정하면, 한계대체율도 일정하다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":77,
+        "problem": "B씨의 효용함수가 U=X+10Y로 주어져 있다면 B씨는 소득 전부를 Y재 구입에 지출하는 것이 합리적이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
+        "number":79,
+        "problem": "어떤 소비자가 재화 A와 B를 소비할 때 소비자균형은 두 재화의 총효용이 같아지는 점에서 이루어진다.",
         "answer": 1,
         "first": "O",
         "second": "X"
