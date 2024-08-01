@@ -168,3 +168,42 @@ input {
 	background: none !important;
 	cursor: pointer;
 }
+
+/* Economics 300 */
+
+.eco-list-wrapper {
+	display: flex;
+	flex-basis: 100%;
+	flex-wrap:wrap;
+	justify-content: space-between;
+	margin-bottom: 1em;
+}
+
+.eco-list-problem {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.eco-list-answer {
+	display: flex;
+	flex-direction: row;
+}
+
+.eco-list-answer-first
+{
+	padding: 1em;
+	margin-right: 1em;
+	cursor: pointer;
+}
+.eco-list-answer-second {
+	padding: 1em;
+	cursor: pointer;
+}
+
+.correct_answer {
+	background: skyblue;
+}
+
+.incorrect_answer {
+	background: red;
+}

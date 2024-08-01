@@ -247,3 +247,67 @@ function separate_answers(btnObj) {
 			break;
 	}
 }
+
+
+/* Economics 300 problems for micro and macro */
+function load_eco_problems() {
+	fetch("./eco_input.json")
+		.then((res) => {
+			if (!res.ok) {
+				throw new Error
+				(`HTTP error! Status: ${res.status}`);
+			}
+			return res.json();
+		})
+		.then((data) => 
+			createProblemList(data))
+			.catch((error) => 
+				console.error("Unable to fetch data:", error));
+}
+
+function createProblemList(jsonObject) {
+	// Get parent node
+	let parentNode = document.getElementById("container")
+	// Start node creation
+	let listDiv = document.createElement('div');
+	listDiv.classList.add('eco-list-wrapper');
+	let probDiv = document.createElement('div');
+	probDiv.classList.add('eco-list-problem');
+	let answerDiv = document.createElement('div');
+	answerDiv.classList.add('eco-list-answer');
+	let firstAnswerDiv = document.createElement('div');
+	firstAnswerDiv.classList.add('eco-list-answer-first');
+	let secondAnswerDiv = document.createElement('div');
+	secondAnswerDiv.classList.add('eco-list-answer-second');
+	listDiv.appendChild(probDiv);
+	answerDiv.appendChild(firstAnswerDiv);
+	answerDiv.appendChild(secondAnswerDiv);
+	listDiv.appendChild(answerDiv);
+	// End node creation
+	jsonObject.forEach(e => { 
+		let dupNode = listDiv.cloneNode(true);
+		parentNode.appendChild(dupNode);
+		dupNode.children[0].textContent = e.problem;
+		dupNode.children[1].children[0].textContent = e.first;
+		dupNode.children[1].children[1].textContent = e.second;
+		dupNode.children[1].children[e.answer].dataset.answer = "true";
+
+		// Add event listener
+		dupNode.children[1].children[0].addEventListener('click', (vom) => {
+			select_answer(vom.target, 0);
+		});
+		dupNode.children[1].children[1].addEventListener('click', (vom) => {
+			select_answer(vom.target, 1);
+		});
+	})
+}
+
+function select_answer(button, index) {
+	if ( button.dataset.answer === "true" ) {
+		button.parentNode.childNodes[index].classList.add("correct_answer")
+		button.parentNode.childNodes[index^1].classList.remove("incorrect_answer")
+	}  else {
+		button.parentNode.childNodes[index].classList.add("incorrect_answer")
+		button.parentNode.childNodes[index^1].classList.remove("correct_answer")
+	}
+}

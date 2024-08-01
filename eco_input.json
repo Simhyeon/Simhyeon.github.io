@@ -1,0 +1,996 @@
+[
+    {
+        "number":1,
+        "problem": "어떤 재화의 시장가격이 0보다 높다면 그 재화는 희소함이 틀림없다",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":3,
+        "problem": "생산가능곡선상의 모든 점은 경제적 효율성이 달성되는 점이다",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":5,
+        "problem": "PPC가 원점에 대해 오목한 것은 X재 생산량을 증가시킬수록 점점 Y재 생산에 적합한 생산요소까지 X재 생산에 투입되기 때문이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":7,
+        "problem": "현재 생산되는 자본재의 양이 감가상각에 미달한다면 장기에는 생산가능곡선이 안쪽으로 이동할 것이다",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":9,
+        "problem": "여가는 자유재의 한 예이다",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":11,
+        "problem": "콜라 판매량과 사이다 판매량 간에는 강한 양의 상관관계가 존재하나 인과관계는 존재하지 않는다",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":13,
+        "problem": "부동상 투기를 억제하기 위해 보유세를 강화하면 주택수요가 감소할 것이다 라는 명제는 규범적인 주장이다",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":15,
+        "problem": "작년보다 MP3의 가격이 하락하고 거래량이 증가하였다면 MP3의 수요와 공급이 증가하였음이 확실하다",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":17,
+        "problem": "A제약이 생산하는 제니시스라는 소화제에 비만억제 기능이 있음이 확인된다면 기존에 판매되고 있는 비만치료제인 리덕션의 공급이 감소한다",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":19,
+        "problem": "다른 조건이 일정한 상황에서 소득이 감소하면 열등재의 가격은 하락하고 정상재의 가격은 상승할 것이다",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":21,
+        "problem": "열등재인 알사탕의 수요곡선은 우하향의 직선이고, 공급은 완전탄력적이라고 하자. 소득이 증가하면 새로운 균형에서 알사탕 수요의 가격탄력성은 원래 균형점에서 보다 작다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":23,
+        "problem": "어떤 재화의 시장수요곡선이 P=80-aQ(a는 양의 상수), 시장공급곡선이 P=60으로 주어져 있다면 균형에서 수요의 가격탄력성은 3이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":25,
+        "problem": "공급함수가 Q=P-10으로 주어져 있다면 가격이 상승할수록 공급의 가격탄력성은 점점 커진다",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":27,
+        "problem": "수요함수가 Q=P<sup>-3</sup>이라면 수요의 가격탄력성은 항상 일정한 값을 갖는다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":29,
+        "problem": "수요곡선이 우하향의 직선인 경우 수요곡선상의 모든 점에서 수요의 가격탄력성이 동일하다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":0,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    }
+]
