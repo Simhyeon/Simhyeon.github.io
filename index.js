@@ -285,20 +285,23 @@ function createProblemList(jsonObject) {
 	listDiv.appendChild(answerDiv);
 	// End node creation
 	jsonObject.forEach(e => { 
-		let dupNode = listDiv.cloneNode(true);
-		parentNode.appendChild(dupNode);
-		dupNode.children[0].innerHTML = e.problem;
-		dupNode.children[1].children[0].textContent = e.first;
-		dupNode.children[1].children[1].textContent = e.second;
-		dupNode.children[1].children[e.answer].dataset.answer = "true";
+		// Temporary fix for skipping empty values
+		if (e.problem !== "") {
+			let dupNode = listDiv.cloneNode(true);
+			parentNode.appendChild(dupNode);
+			dupNode.children[0].innerHTML = e.problem;
+			dupNode.children[1].children[0].textContent = e.first;
+			dupNode.children[1].children[1].textContent = e.second;
+			dupNode.children[1].children[e.answer].dataset.answer = "true";
 
-		// Add event listener
-		dupNode.children[1].children[0].addEventListener('click', (vom) => {
-			select_answer(vom.target, 0);
-		});
-		dupNode.children[1].children[1].addEventListener('click', (vom) => {
-			select_answer(vom.target, 1);
-		});
+			// Add event listener
+			dupNode.children[1].children[0].addEventListener('click', (vom) => {
+				select_answer(vom.target, 0);
+			});
+			dupNode.children[1].children[1].addEventListener('click', (vom) => {
+				select_answer(vom.target, 1);
+			});
+		}
 	})
 }
 

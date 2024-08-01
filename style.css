@@ -169,19 +169,43 @@ input {
 	cursor: pointer;
 }
 
+/* ---------     */
 /* Economics 300 */
+/* ---------     */
 
-.eco-list-wrapper {
-	display: flex;
-	flex-basis: 100%;
-	flex-wrap:wrap;
-	justify-content: space-between;
-	margin-bottom: 1em;
+
+/* More than tablets */
+@media (min-width: 480px){
+	/* CSS */
+	.eco-list-wrapper {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 1em;
+	}
+
+	.eco-list-problem {
+		margin-top: auto;
+		margin-bottom: auto;
+		width: 80%;
+	}
+
 }
 
-.eco-list-problem {
-	margin-top: auto;
-	margin-bottom: auto;
+/* mobile media query */
+@media (min-width: 320px) and (max-width: 480px) {
+	/* CSS */
+	.eco-list-wrapper {
+		display: flex;
+		flex-direction : column;
+		margin-bottom: 1em;
+	}
+
+	.eco-list-problem {
+		margin-top: auto;
+		margin-bottom: auto;
+		/* border-bottom: 1px solid #eeffff; */
+		padding-bottom: 10px;
+	}
 }
 
 .eco-list-answer {
@@ -189,15 +213,22 @@ input {
 	flex-direction: row;
 }
 
+.eco-list-answer * {
+	text-align: center;
+	border-radius: 5px;
+}
+
 .eco-list-answer-first
 {
 	padding: 1em;
 	margin-right: 1em;
 	cursor: pointer;
+	flex : 1;
 }
 .eco-list-answer-second {
 	padding: 1em;
 	cursor: pointer;
+	flex : 1;
 }
 
 .correct_answer {
@@ -205,7 +236,7 @@ input {
 }
 
 .incorrect_answer {
-	background: red;
+	background: IndianRed;
 }
 
 sup {

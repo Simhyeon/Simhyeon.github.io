@@ -280,497 +280,497 @@
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":81,
+        "problem": "X재와 Y재만 존재하는 경우 두 재호가 모두 열등재가 될 수 없다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":83,
+        "problem": "최초구입점이 구입불가능하게 되면 새로운 예산선의 어떤 점에서 구입하더라도 약공리는 충족된다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":85,
+        "problem": "소비자물가지수는 생계비변화를 과대평가하는 경향이 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":87,
+        "problem": "소득지수가 라스파이레스 가격지수보다 크면 생활수준이 개선, 소득지수가 라스파이레스 가격지수보다 작으면 생활수준이 악화되었다고 판단할 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":89,
+        "problem": "위험선호자란 불확실성이 내포된 자산보다 동일 액수의 확실한 잦산을 더 선호하는 사람으로 기대효용보다 기대치의 효용이 더 크기에 효용함수가 아래로 오목하다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":91,
+        "problem": "X재에 대해 가격보조를 할 때와 동일한 효용을 얻도록 현금보조를 한다면 돈이 더 적게 든다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":93,
+        "problem": "두 기간 모형에서 어떤 개인이 차입제약에 직면해 있다면 이자율이 상승하더라도 현재소비는 불변이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":95,
+        "problem": "한계생산물이 증가하는 구간에서는 평균생산물과 총생산물이 모두 증가한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":97,
+        "problem": "노동투입량이 증가할 때 노동의 평균생산물이 감소하는 것을 수확체감의 법칙이라고 한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":99,
+        "problem": "MRTS가 2로 일정하고, w = 20, r = 30이라면 노동만 투입하는 것이 최적이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":101,
+        "problem": "생산함수가 규모에 대한 수익체증인 경우 노동과 자본투입량이 10% 감소하면 생산량은 10% 미만으로 감소한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":103,
+        "problem": "생산함수가 Q=2L+3K로 주어져 있고 임금이 500원, 자본임대료가 200원인 경우 300단위의 재화를 생산할 때의 최소비용은 75,000이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":105,
+        "problem": "생산함수가 Q=5LK로 주어져 있다면 장기평균비용곡선은 수평의 형태로 도출된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":107,
+        "problem": "생산함수가 Q=min[5L,8K]로 주어져 있다면 장기평균비용곡선은 수평의 형태로 도출된다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":109,
+        "problem": "생산함수가 Q=min[L,4K]로 주어져 있다면 규모에 대한 수익이 체증한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":111,
+        "problem": "생산함수가 Q=ALK ( 단, A는 기술수준을 나타내는 계수 )로 주어져 있다면 규모에 대한 수익불변이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":113,
+        "problem": "노동의 한계생산물이 자본의 한계생산물의 2배라면 기업은 노동을 자본의 2배만큼 고용할 것이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":115,
+        "problem": "생산함수가 Q=AL<sup>0.5</sup>K<sup>0.3</sup>으로 주어져 있다면 규모에 대한 수익이 체감하고 대체탄력성은 1보다 작다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":117,
+        "problem": "임금과 자본임대료가 모두 2배로 상승하더라도 확장경로는 변하지 않는다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":119,
+        "problem": "단기총비용곡선이 우상향의 직선이라면 단기평균비용은 항상 단기한계비용보다 크다. ( 단, 고정비용이 있다고 전제한다. )",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":121,
+        "problem": "어떤 기업이 회계적으로는 이윤을 얻고 있더라도 경제적 관점에서 보면 손실이 발생하는 상태일 수도 있다. ",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":123,
+        "problem": "단기한계비용곡선이 수평선이라면 단기평균비용곡선도 수평선이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":125,
+        "problem": "단기평균비용곡선이 장기평균비용곡선보다 높을 때 단기한계비용도 장기한계비용보다 높다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":127,
+        "problem": "단기평균비용곡선이 U자 형태이면 장기평균비용곡선도 U자 형태가 된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":129,
+        "problem": "차입금에 대한 이자율이 상승하면 단기평균비용이 상승한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":131,
+        "problem": "장기평균비용곡선이 U자 형태가 되는 것은  한계생산물이 체감하기 때문이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":133,
+        "problem": "장기한계비용은 단기한계비용보다 낮다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":135,
+        "problem": "개별기업이 직면하는 수요곡선이 완전탄력적이므로 시장수요곡선이 비탄력적일 수는 없다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":137,
+        "problem": "현재 완전경쟁기업이 조업중단점에서 생산하고 있다면 한계생산물이 극대가 되는 상태이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":139,
+        "problem": "단기에 생산자잉여는 총수입에서 총가변비용을 뺀 값이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":141,
+        "problem": "완전경쟁기업은 장기에 초과이윤을 얻을 수 있으나 그 크기가 매우 작다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":143,
+        "problem": "차입금에 대한 이자율이 상승하면 개별기업의 공급곡선이 상방으로 이동한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":145,
+        "problem": "완전경쟁의 경우 단기에 AC>P>AVC라면 장기에는 기업수가 감소한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":147,
+        "problem": "완전경쟁기업의 공급곡선이 우상향이 되는 것은 수확체감의 법칙 때문이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":149,
+        "problem": "완전경쟁기업은 장기에 규모에 대한 수익불변인 점에서 생산한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":151,
+        "problem": "독점기업은 시장지배력을 갖고 있으므로 가격과 공급량을 모두 원하는 수준으로 결정할 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":153,
+        "problem": "가격이 평균가변비용보다 낮더라도 독점기업은 단기에는 생산을 지속한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":155,
+        "problem": "일반적으로 독점기업에 대한 가격차별화는 자원배분의 효율성을 저해시킨다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":157,
+        "problem": "단기에는 고정비용이 증가하더라도 독점기업의 생산량은 변하지 않는다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":159,
+        "problem": "완전가격차별이 이루어질 때 사회전체의 총잉여는 완전경쟁일 때와 동일하다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":161,
+        "problem": "다공장독점의 균형에서는 모든 공장에서의 한계비용이 동일하다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":163,
+        "problem": "독점기업에 대한 이윤세 부과는 자원배분에는 아무런 영향을 미치지 않는다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":165,
+        "problem": "독점기업에게 조세가 부과되면 완전경쟁일 때보다 소비자에게 더 많이 전가된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":167,
+        "problem": "규모의 경제가 존재하는 산업의 경우 독점기업을 몇 개의 기업으로 분할하면 평균생산비가 낮아질 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":169,
+        "problem": "독점기업은 재화가격과 평균비용의 차이가 가장 큰 점에서 생산량을 결정할 것이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":171,
+        "problem": "독점기업의 단기공급곡선은 우상향하는 형태이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":173,
+        "problem": "독점적 경쟁시장에서는 초과이윤이 존재하면 계속적으로 새로운 기업이 진입하므로 장기에 개별기업은 LAC최소점에서 생산을 하게 된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":175,
+        "problem": "독점적 경쟁의 단기균형에서 P>MC이면 장기에 기업수가 증가한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":177,
+        "problem": "독점적 경쟁시장에서 제품차별화 정도가 클수록 교차탄력성(절대값)은 작아진다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":179,
+        "problem": "제품차별화가 크게 이루어질수록 독점적 경쟁기업의 직면하는 수요곡선은 탄력적이 된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":181,
+        "problem": "독점적 경쟁시장에서는 각 기업이 생산하는 재화가 서로 이질적인데 비해, 과점시장에서는  각 기업이 생산하는 재화는 동질적이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":183,
+        "problem": "불완전경쟁기업에게 정액세가 부과되면 한계비용곡선이 상방으로 이동하므로 생산량은 감소하고 가격은 상승한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":185,
+        "problem": "규모의 경제가 크게 발생하는 산업은 완전경쟁적이 될 가능성이 없다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":187,
+        "problem": "독점적 경쟁기업의 공급곡선은 평균가변비용을 상회하는 한계비용곡선이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":189,
+        "problem": "독점적 경쟁의 경우 장기에는 P = AR이 성립한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":191,
+        "problem": "베르뜨랑 모형의 균형에서는 자원배분의 효율성이 달성된다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":193,
+        "problem": "과점기업들이 생산하는 재화가 이질적이면 동질적일 때보다 담합이 될 가능성이 높다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":195,
+        "problem": "꾸르노 모형에서의 생산량은 독점일 때보다는 더 많다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":197,
+        "problem": "내쉬균형상태에서 어떤 경기자가 전략을 변경하면 자신의 보수가 감소한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":199,
+        "problem": "진입게임에서 기존기업이 새로운 기업의 진입을 막는 방법은 자신의 위협을 신뢰성을 갖도록 보수체계를 바꾸는 것이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":201,
+        "problem": "생산요소시장이 완전경쟁이면 임금은 항상 한계수입생산과 일치한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":203,
+        "problem": "비례적인 근로소득세를 부과하였으나 노동시간이 불변이라면 여가는 열등재이다",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":205,
+        "problem": "생산요소시장이 수요독점이면 수요독점기업은 평균요소비용보다 낮은 임금을 지급한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":207,
+        "problem": "준지대는 항상 이윤보다는 크거나 같다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":209,
+        "problem": "애킨슨지수가 0.7이라면 현재소득의 70%만 있어도 이를 균등하게 배분한다면 동일한 사회후생을 누릴 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":211,
+        "problem": "생산요소의 가격이 1,000이고, 한계비용이 400원이라면 한계생산물은 2.5이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":213,
+        "problem": "기술적인 특성 때문에 생산요소 투입비율을 일정하게 유지해야 한다면 생산요소수요는 매우 탄력적이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":215,
+        "problem": "생산요소시장이 수요독점이라면 수요독점기업의 요소수요곡선은 한계생산물가치곡선이 아니라 한계수입생산곡선이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":217,
+        "problem": "이전수입은 요소공급에 따른 기회비용을 나타내므로 생산요소공급자의 잉여로 볼 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":219,
+        "problem": "사회내의 총소득을 사회구성원 80%에게 동일하게 나누어준다면 십분위분배율은 1, 지니계수는 0.2이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
+        "number":221,
         "problem": "",
         "answer": 1,
         "first": "O",
