@@ -4,6 +4,10 @@ html {
 	background: #fafafa;
 }
 
+button {
+	all: unset;
+}
+
 /* Variables */
 :root {
 	--answer-margin : 6em;
@@ -224,11 +228,13 @@ input {
 	margin-right: 1em;
 	cursor: pointer;
 	flex : 1;
+	border:none;
 }
 .eco-list-answer-second {
 	padding: 1em;
 	cursor: pointer;
 	flex : 1;
+	border:none;
 }
 
 .correct_answer {

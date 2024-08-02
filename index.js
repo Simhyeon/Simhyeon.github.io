@@ -275,9 +275,9 @@ function createProblemList(jsonObject) {
 	probDiv.classList.add('eco-list-problem');
 	let answerDiv = document.createElement('div');
 	answerDiv.classList.add('eco-list-answer');
-	let firstAnswerDiv = document.createElement('div');
+	let firstAnswerDiv = document.createElement('button');
 	firstAnswerDiv.classList.add('eco-list-answer-first');
-	let secondAnswerDiv = document.createElement('div');
+	let secondAnswerDiv = document.createElement('button');
 	secondAnswerDiv.classList.add('eco-list-answer-second');
 	listDiv.appendChild(probDiv);
 	answerDiv.appendChild(firstAnswerDiv);
