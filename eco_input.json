@@ -771,225 +771,281 @@
     },
     {
         "number":221,
-        "problem": "",
+        "problem": "대체탄력성이 클수록 요소수요는 탄력적이고, 총생산비에서 차지하는 비중이 클수록 비탄력적이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":223,
+        "problem": "생산요소 A와 B가 보완적인 생산요소라면 생산요소 A의 가격이 상승하면 생산요소 B의 수요가 감소한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":225,
+        "problem": "생산요소시장이 완전경쟁일 때 모든 기업의 자본고용량이 증가하면 실질임금이 상승한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":227,
+        "problem": "순수한 경제적 지대에 대한 조세는 자원배분의 왜곡을 유발하지 않는다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":229,
+        "problem": "생산요소시장이 완전경쟁이면 개별기업의 한계수입생산은 일정하다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":231,
+        "problem": "사회구성원들이 소득분배공평성에 높은 가중치를 부여하고 있다면 균등분배대등소득이 커진다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":233,
+        "problem": "초과이윤은 자원배분의 비효율성을 초래한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":235,
+        "problem": "교환에 있어 파레토 효율성 조건이 충족된 상태에서는 두 사람의 예산선의 기울기는 동일하다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":237,
+        "problem": "두 사람이 동일한 양의 X재와 Y재를 갖고 있으며, 두 사람의 효용함수가 동일하다면 파레토 개선이 불가능하다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":239,
+        "problem": "후생경제학의 제 2정리는 정부개입을 통해 항상 파레토개선이 가능함을 보여준다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":241,
+        "problem": "불가능성정리란 모든 파레토 효율성 조건이 모두 충족되는 상태는 불가능하다는 것을 말한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":243,
+        "problem": "재화생산에 있어 외부불경제가 발생하는 경우 시장공급곡선은 생산비를 적정수준보다 과소평가한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":245,
+        "problem": "공공재의 경우 모든 사람의 소비량이 동일하므로 각 개인이 얻는 편익도 동일하다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":247,
+        "problem": "네트워크 외부성이 발생하는 경우 사람들이 그 재화에 대해 지불하려는 가격은 그 재화를 사용하는 사람 수에 따라 달라진다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":249,
+        "problem": "생산요소시장이 완전경쟁일 때 MRTS<span class='supsub'><sup>A</sup><sub>LK</sub></span> = MRTS<span class='supsub'><sup>B</sup><sub>LK</sub></span>가 성립하는 것은 모든 생산자가 가격수용자이기 때문이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":251,
+        "problem": "생산에 있어 외부경제가 발생한다면 SMB<PMB이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":253,
+        "problem": "생산에 있어 외부불경제가 있는 경우 시장기구에 의한 가격수준은 사회적인 최적수준보다 낮다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":255,
+        "problem": "공유지의 비극은 부정적인 외부성과 관련된다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":257,
+        "problem": "소득분배공평성을 중요시할수록 사회무차별곡선은 우하향의 직선에 가까워진다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":259,
+        "problem": "점수투표제하에서는 전략적인 행동이 나타날 가능성이 매우 높다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":261,
+        "problem": "생산에 있어 외부경제가 발생한다면 SMC<PMC이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":263,
+        "problem": "코즈정리에 의하면 재산권이 누구에게 귀속되느냐는 자원배분의 효율성과 소득분배에 아무런 영향을 미치지 않는다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":265,
+        "problem": "투표의 역설이 발생하면 다수결투표를 통해 사회적인 합의 도달이 가능하다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":267,
+        "problem": "어떤 개인의 공유자원 소비는 긍정적인 외부성을 유발한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":269,
+        "problem": "한계변환율이 한계대체율보다 크다면 X재 생산을 증가시킴으로써 파레토 개선이 가능하다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":271,
+        "problem": "공리주의 사회후생함수를 가정하더라도 소득의 한계효용이 체감하고, 모든 개인의 효용함수가 동일하다면 완전히 균등하게 소득분배가 이루어질 때 사회후생이 극대가 된다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":273,
+        "problem": "애로우의 불가능성 정리에 의하면 다수결투표를 통해 개인의 선호를 사회선호와 일치시키기 어렵다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":275,
+        "problem": "다수결투표를 통해 공공재 공급량을 결정하면 적정수준보다 과잉으로 공급된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":277,
+        "problem": "정보의 비대칭성이란 측면에서 볼 때 광고는 역선택을 줄이는 역할을 한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":279,
+        "problem": "의료보험제도가 도입되면 의료서비스에 대한 수요가 증가하는 역선택 현상이 발생한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":281,
+        "problem": "기업에서 채용할 때 학력에 따라 초봉을 다르게 설정하는 것은 선별의 사례이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":283,
+        "problem": "자동차 보험회사가 운전경력에 따라 차등의 보험료를 정하는 것은 선별의 사례이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":285,
+        "problem": "이자율이 상승하면 안전한 투자를 하는 사람이 대출신청을 기피하게 되는 도덕적 해이가 발생할 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":287,
+        "problem": "효율성임금은 노동시장에서의 역선택과 도덕적 해이를 모두 줄일 수 있는 방법 중의 하나이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":289,
+        "problem": "역선택이 발생하면 시장거래규모가 축소될 가능성이 있다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":291,
+        "problem": "실질 GNI=(   ) + 교역조건변화실질무역손익 + 해외순수취요소소득",
+        "answer": 1,
+        "first": "명목GDP",
+        "second": "실질GDP"
+    },
+    {
+        "number":293,
+        "problem": "기업이 보유중인 재고를 판매하면 투자지출은 감소하고 GDP는 증가한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
+        "number":295,
+        "problem": "공무원에게 지급한 월급과 생활보호대상자에게 지급한 생계비는 모두 이전지출이며 정부지출에는 포함되지 않는다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":297,
+        "problem": "가처분소득이 4,000, 소비가 3,500 정부소비지출이 1,000, 조세수입이 800인 경우 총저축은 300이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":0,
-        "problem": "",
-        "answer": 1,
+        "number":299,
+        "problem": "한계저축성향이 0.2이고 소득세율이 0.25일 때 독립투자가 400만큼 증가하면 저축은 150만큼 증가한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     }
