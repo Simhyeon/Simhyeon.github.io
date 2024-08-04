@@ -180,6 +180,18 @@ input {
 
 /* More than tablets */
 @media (min-width: 480px){
+	.problem-header {
+		margin-bottom : 1em;
+	}
+
+	.option-space-mobile {
+		display: none;
+	}
+
+	.option-space-tablet {
+		display: block;
+	}
+
 	/* CSS */
 	.eco-list-wrapper {
 		display: flex;
@@ -197,6 +209,27 @@ input {
 
 /* mobile media query */
 @media (min-width: 320px) and (max-width: 480px) {
+
+    .eco-options {
+        text-align : center;
+    }
+
+    .eco-separator {
+        margin-bottom: 5em;
+    }
+
+	.problem-header {
+		margin-bottom: 2em;
+	}
+	.option-space-mobile {
+		display: block;
+		font-size: 1.5em;
+	}
+
+	.option-space-tablet {
+		display: none;
+	}
+
 	/* CSS */
 	.eco-list-wrapper {
 		display: flex;
@@ -263,4 +296,27 @@ sup {
 
 .supsub sub {
     top: .3em;
+}
+
+.clickable > * {
+	cursor: pointer;
+}
+.eco-list-wrapper-from-right {
+	flex-direction:row-reverse;
+}
+
+.eco-list-answer-left {
+	margin-right: auto;
+}
+
+.eco-list-answer-right {
+	margin-left: auto;
+}
+
+#toggle_single_hand {
+	display: none;
+}
+
+.visible {
+	display: block !important;
 }

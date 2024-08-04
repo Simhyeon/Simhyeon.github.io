@@ -205,7 +205,7 @@
     {
         "number":59,
         "problem": "어떤 재화의 소득탄력성이 0보다 크다면 보상수요곡선이 통상적인 수요곡선보다 더 완만한 형태가 된다.",
-        "answer": 0,
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
@@ -281,7 +281,7 @@
     },
     {
         "number":81,
-        "problem": "X재와 Y재만 존재하는 경우 두 재호가 모두 열등재가 될 수 없다.",
+        "problem": "X재와 Y재만 존재하는 경우 두 재화가 모두 열등재가 될 수 없다.",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -296,7 +296,7 @@
     {
         "number":85,
         "problem": "소비자물가지수는 생계비변화를 과대평가하는 경향이 있다.",
-        "answer": 1,
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
@@ -709,7 +709,7 @@
     {
         "number":203,
         "problem": "비례적인 근로소득세를 부과하였으나 노동시간이 불변이라면 여가는 열등재이다",
-        "answer": 0,
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
@@ -876,7 +876,7 @@
     },
     {
         "number":251,
-        "problem": "생산에 있어 외부경제가 발생한다면 SMB<PMB이다.",
+        "problem": "생산에 있어 외부경제가 발생한다면 SMB&lt;PMB이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -911,7 +911,7 @@
     },
     {
         "number":261,
-        "problem": "생산에 있어 외부경제가 발생한다면 SMC<PMC이다.",
+        "problem": "생산에 있어 외부경제가 발생한다면 SMC&lt;PMC이다.",
         "answer": 0,
         "first": "O",
         "second": "X"

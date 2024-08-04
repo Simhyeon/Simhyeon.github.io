@@ -250,7 +250,7 @@ function separate_answers(btnObj) {
 
 
 /* Economics 300 problems for micro and macro */
-function load_eco_problems() {
+function load_eco_init() {
 	fetch("./eco_input.json")
 		.then((res) => {
 			if (!res.ok) {
@@ -289,7 +289,7 @@ function createProblemList(jsonObject) {
 		if (e.problem !== "") {
 			let dupNode = listDiv.cloneNode(true);
 			parentNode.appendChild(dupNode);
-			dupNode.children[0].innerHTML = e.problem;
+			dupNode.children[0].innerHTML = `${e.number}. ${e.problem}`;
 			dupNode.children[1].children[0].textContent = e.first;
 			dupNode.children[1].children[1].textContent = e.second;
 			dupNode.children[1].children[e.answer].dataset.answer = "true";
@@ -301,6 +301,16 @@ function createProblemList(jsonObject) {
 			dupNode.children[1].children[1].addEventListener('click', (vom) => {
 				select_answer(vom.target, 1);
 			});
+
+			// Modify text spacing for specific anwers
+			if (e.first.length !== 1) {
+				dupNode.children[1].children[0].style.setProperty('padding-right', '0');
+				dupNode.children[1].children[0].style.setProperty('padding-left', '0');
+			}
+			if (e.second.length !== 1) {
+				dupNode.children[1].children[1].style.setProperty('padding-right', '0');
+				dupNode.children[1].children[1].style.setProperty('padding-left', '0');
+			}
 		}
 	})
 }
@@ -312,5 +322,55 @@ function select_answer(button, index) {
 	}  else {
 		button.parentNode.childNodes[index].classList.add("incorrect_answer")
 		button.parentNode.childNodes[index^1].classList.remove("correct_answer")
+	}
+}
+
+/* 왼손잡이 모드 */
+function toggle_left_hand_mode(input) {
+	let elems = document.getElementsByClassName("eco-list-wrapper");
+	if (input.checked === true) {
+		Array.from(elems).forEach(e => {
+			e.classList.add("eco-list-wrapper-from-right");
+		});
+	} else {
+		Array.from(elems).forEach(e => {
+			e.classList.remove("eco-list-wrapper-from-right");
+		});
+	}
+}
+
+/* 한손 모드 */
+function toggle_single_hand_mode(input) {
+	let button = document.getElementById("toggle_single_hand");
+	let elems = document.getElementsByClassName("eco-list-answer");
+	if (input.checked === true ) {
+		button.classList.add("visible");
+
+		Array.from(elems).forEach(e => {
+			e.classList.add("eco-list-answer-right");
+			e.classList.remove("eco-list-answer-left");
+		});
+	} else {
+		button.classList.remove("visible");
+		Array.from(elems).forEach(e => {
+			e.classList.remove("eco-list-answer-right");
+			e.classList.remove("eco-list-answer-left");
+		});
+	}
+}
+
+/* 한손 모드 :: 왼손잡이 */
+function toggle_single_hand_direction(input) {
+	let elems = document.getElementsByClassName("eco-list-answer");
+	if (input.checked === false) {
+		Array.from(elems).forEach(e => {
+			e.classList.add("eco-list-answer-right");
+			e.classList.remove("eco-list-answer-left");
+		});
+	} else {
+		Array.from(elems).forEach(e => {
+			e.classList.add("eco-list-answer-left");
+			e.classList.remove("eco-list-answer-right");
+		});
 	}
 }
