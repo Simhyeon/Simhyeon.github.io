@@ -141,140 +141,140 @@
     },
     {
         "number":341,
-        "problem": "",
-        "answer": 1,
+        "problem": "나희는 유동성제약에 직면해 있다면 현재소득이 증가하면 나희의 소비는 대폭 증가한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":343,
-        "problem": "",
+        "problem": "가속도원리가 효과적으로 작동하기 위해서는 유휴시설이 존재하여 소비변화에 대응하여 ",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":345,
-        "problem": "",
-        "answer": 0,
+        "problem": "이자율이 하락하면 투자의 한계효율이 높아지므로 투자가 감소한다",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":347,
-        "problem": "",
+        "problem": "기업의 사내유보가 많을수록 투자의 이자율탄력성이 커진다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":349,
-        "problem": "",
+        "problem": "q이론에 따르면 미래시점의 법인세율 인상이 예상되면 현시점에서 투자가 증가한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":351,
-        "problem": "",
+        "problem": "q이론에 따르면 미래시점의 자본수익성 상승이 예상되면 현시점에서 투자가 증한다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":353,
-        "problem": "",
-        "answer": 1,
+        "problem": "은행의 저축예금, 투신사의 MMF는 M1에 포함되지만 정기적금은 M1에 포함되지 않는다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":355,
-        "problem": "",
-        "answer": 1,
+        "problem": "콜시장은 금융기관간 단기자금이 거래되는 시장이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":357,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":359,
-        "problem": "",
+        "problem": "예금은행이 시재금의 일부를 중앙은행에 예치하면 본원통화와 화폐발행액이 감소한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":361,
-        "problem": "",
+        "number":359,
+        "problem": "전액지급준비금제도하에서 예금에 대한 이자지급이 불가능하다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
+        "number":361,
+        "problem": "중앙은행이 예금은행이 보유한 국채를 100억 원어치 매입할 경우 법정지급준비율이 20%라면 통화량의 최대증가 가능액은 400억원이다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
         "number":363,
-        "problem": "",
+        "problem": "법정지급준비율이 20%일 때 A은행이 초과지급준비금 100억 원을 대출할 경우 은행조직 전체를 통해 최대로 증가할 수 있는 통화량의 크기는 400억 원이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":365,
-        "problem": "",
+        "problem": "한국은행이 콜금리를 인하하면 산출량이 증가하고, 물가가 하락하는 긍정적인 효과가 발생한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":367,
-        "problem": "",
-        "answer": 0,
+        "problem": "화폐보유의 기회비용은 명목이자율이 아니라 실질이자율이다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":369,
-        "problem": "",
-        "answer": 1,
+        "problem": "현금잔고수량설에 따르면 화폐수요는 이자율의 영향을 전혀 받지 않는다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":371,
-        "problem": "",
-        "answer": 1,
+        "problem": "케인즈학파에 따르면 통화량을 일정하게 유지할 경우 이자율 변동 때문에 민간투자가 불안정해져 경제의 불안정성이 유발된다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":373,
-        "problem": "",
-        "answer": 1,
+        "problem": "예금은행이 지급준비예치금을 인출하여 시재금을 증가시키면 화폐발행액이 증가한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":375,
-        "problem": "",
+        "problem": "이자율을 금융정책의 중간목표로 삼는 경우 금융제도의 변화로 인해 화폐수요가 감소하면 중앙은행은 공개시장에서 국채를 매각해야 한다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":377,
-        "problem": "",
+        "problem": "양도성예금증서는 M1(협의통화)과 M2(광의통화)에는 포함되지 않으나 M3(총유동성)에는 포함된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":379,
-        "problem": "",
+        "problem": "토빈의 자산선택이론에 의하면 대체효과가 소득효과보다 크다면 이자율 상승시 화폐수요가 증가한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
