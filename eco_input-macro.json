@@ -526,525 +526,525 @@
     },
     {
         "number":451,
-        "problem": "",
-        "answer": 1,
+        "problem": "새고전학파의 경우 실제물가가 노동자의 예상물가보다 높다면 총공급곡선이 우상향한다. ",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":453,
-        "problem": "",
-        "answer": 1,
+        "problem": "생산자물가지수와 소비자물가지수의 기준연도는 매 5년마다 조정된다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":455,
-        "problem": "",
+        "problem": "국민연금지급액이 소비자물가지수에 연동되어 있다면 물가가 상승하더라도 연금생활자들의 후생수준은 변하지 않는다. ",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":457,
-        "problem": "",
-        "answer": 0,
+        "problem": "통화주의 학파는 비용인상 인플레이션에 대한 대처방안으로 소득정책을 주장한다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":459,
-        "problem": "",
-        "answer": 0,
+        "problem": "인플레이션이 완전히 예견될 수만 있다면 손해 보는 사람은 없을 것이다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":461,
-        "problem": "",
-        "answer": 0,
+        "problem": "물가가 상승할 때 명목임금도 비례적으로 상승하면 사람들의 실질적 조세부담에는 아무런 변화가 없다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":463,
-        "problem": "",
-        "answer": 0,
+        "problem": "구직을 포기한 노동자는 실업자에 속하나, 아르바이트하는 학생은 취업자에 속한다. ",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":465,
-        "problem": "",
-        "answer": 1,
+        "problem": "경제활동인구가 1,000명이고, 이직률이 5%, 구직률이 45%일 때 노동시장이 동태적으로 균형상태에 놓인다면 실업자 수는 100명이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":467,
-        "problem": "",
-        "answer": 1,
+        "problem": "직업탐색이론에 따르면 예상치 못한 인플레이션이 발생하면 단기적으로는 실업률이 낮아진다. ",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":469,
-        "problem": "",
+        "problem": "고용보험제도가 잘 마련되어 있는 나라일수록 자연실업률이 낮다. ",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":471,
-        "problem": "",
-        "answer": 1,
+        "problem": "노동자의 예상인플레이션율이 낮아지면 노동자의 유보임금이 낮아진다. ",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":473,
-        "problem": "",
+        "problem": "미조정(fine-tuing)이란 총공급을 조절함으로써 경제를 안정화시키는 정책을 말한다. ",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":475,
-        "problem": "",
+        "problem": "인플레이션에 대한 기대가 높아지면 필립스곡선이 점점 급경사가 된다. ",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":477,
-        "problem": "",
-        "answer": 0,
+        "problem": "이력현상이 발생하더라도 재정*금융정책은 자연실업률에 영향을 미칠 수 없다. ",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":479,
-        "problem": "",
+        "problem": "새고전학파에 따르면 급진주의(cold turkey) 정책을 실시하더라도 사람들이 예상하지 못하 시점에서 정책을 시행하면 희생비율은 0에 가까워질 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":481,
-        "problem": "",
+        "problem": "고전학파에 따르면 화폐는 일종의 베일에 불과하므로 통화량 변화는 명목변수에 아무런 영향을 미치지 않는다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":483,
-        "problem": "",
+        "problem": "고전학파에 의하면 투자가 증가하면 총수요곡선이 우측으로 이동한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":485,
-        "problem": "",
+        "problem": "케인즈학파에 의하면 확대재정정책은 장기에는 산출량을 증가시킬 수 없다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":487,
-        "problem": "",
-        "answer": 1,
+        "problem": "통화주의학파에 따르면 통화량 증가는 직접 총수요를 증가시킨다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":489,
-        "problem": "",
+        "problem": "공급경제학자들은 조세의 누진성을 완화하면 경제활동이 더욱 활발하게 되어 과세베이스가 커진다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":491,
-        "problem": "",
-        "answer": 0,
+        "problem": "새케인즈학파에 따르면 예상된 정책의 경우에는 단기적으로는 효과를 가져올 수 없다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":493,
-        "problem": "",
+        "problem": "총수요외부성이란 정부가 확대적인 재정정책을 실시하면 소득이 증가하고 그에 따라 소비가 증가하므로 총수요가 추가적으로 증가하는 효과를 말한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":495,
-        "problem": "",
-        "answer": 0,
+        "problem": "효율성임금이론에 의하면 생산성에 의해 노동자의 임금이 결정된다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":497,
-        "problem": "",
-        "answer": 0,
+        "problem": "내부자-외부자이론에 따르면 외부자는 임금결정에 커다란 영향을 미친다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":499,
-        "problem": "",
-        "answer": 0,
+        "problem": "조정실패모형은 노동자와 기업주간의 임금협상에서 조정이 제대로 이루어지지 않는 경우 임금이 경직적일 수 있음을 설명하는 이론이다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":501,
-        "problem": "",
+        "problem": "광공업생산지수는 경기종합지수의 동행지수에 속한다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":503,
-        "problem": "",
-        "answer": 1,
+        "problem": "실물적 균형경기변동이론에 따르면 노동공급곡선은 매우 완만하다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":505,
-        "problem": "",
+        "problem": "실물적 균형경기변동에 따르면 LM곡선 이동도 경기변동의 원인이 될 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":507,
-        "problem": "",
+        "problem": "실물적 균형경기변동이론에서는 실물부분의 변화가 통화량 변화를 가져온다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":509,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":511,
-        "problem": "",
+        "problem": "경기호황이 발생하면 고용량은 크게 증가하고, 실질임금은 완만하게 상승한다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":513,
-        "problem": "",
+        "number":511,
+        "problem": "경제성장률이 0보다 크면 1인당 소득은 증가한다.",
         "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":513,
+        "problem": "해로드-도마 모형에 따르면 자연성장률이 적정성장률 보다 큰 상태에서는 저축이 미덕이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":515,
-        "problem": "",
-        "answer": 1,
+        "problem": "솔로우모형에서 인구증가율이 높아지면 1인당 경제성장률은 일시적으로 (-)가 된다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":517,
-        "problem": "",
+        "problem": "솔로우모형에서 sf(k) &gt; uk이면 1인당 자본량이 감소한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":519,
-        "problem": "",
-        "answer": 0,
+        "problem": "A국과 B국의 모든 여건이 동일하고 저축률만 A국이 B국보다 높다면 균제상태에서의 1인당 소득과 경제성장률은 A국은 B국보다 높다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":521,
-        "problem": "",
+        "problem": "솔로우모형에서 저축률이 10%, 인구증가율이 4%, 기수진보율이 3%라면 균제상태에서의 경제성장률은 6%이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":523,
-        "problem": "",
-        "answer": 0,
+        "problem": "자본축적의 황금률 상태에서는 노동소득분배율과 저축률이 동일해진다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":525,
-        "problem": "",
-        "answer": 0,
+        "problem": "내생적 성장이론에 의하면 정부소비지출의 증가는 경제성장을 촉진하는 효과를 갖는다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":527,
-        "problem": "",
+        "problem": "AK모형에 의하면 저축률이 높을수록 경제성장률은 높아진다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":529,
-        "problem": "",
+        "problem": "리카도의 비교우위론에서는 수확체감의 법칙을 가정하고 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":531,
-        "problem": "",
-        "answer": 1,
+        "problem": "H-O정리에 따르면 자유무역이 이루어지면 각국의 산업구조는 무역이전보다 더 상이해진다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":533,
-        "problem": "",
+        "problem": "헥셔-올린정리에는 양국의 생산함수가 서로 상이하다고 가정한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":535,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":537,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":539,
-        "problem": "",
+        "problem": "요소가격균등화 정리에 의하면 국가간 생산요소이동이 자유롭다면 국가간의 요소가격이 균등화된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
+        "number":537,
+        "problem": "립진스키 정리에 의하면 자본풍부국인 A국에서 노동부존량이 증가하면 자본집약재 생산이 증가할 것이다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":539,
+        "problem": "각국의 비교우위에 따라 특화하여 무역을 하게 되면 생산요소 부존량이 증가한 것과 동일한 효과가 발생한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
         "number":541,
-        "problem": "",
+        "problem": "특정산업에 관세가 부과되면 그 산업에 종사하는 노동자들의 실질임금은 하락한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":543,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":545,
-        "problem": "",
+        "problem": "양국에서 각 재화생산의 기회비용이 동일하더라도 비교우의에 따른 국제무역이 발생할 수 있다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":547,
-        "problem": "",
+        "number":545,
+        "problem": "규모의 경제가 있는 경우 각국은 한 재화생산에 완전특활르 하게 된다.",
         "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":547,
+        "problem": "수출품의 가격이 상승하면 상품교역조건은 개선된다 소득교역조건은 약화된다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":549,
-        "problem": "",
-        "answer": 0,
+        "problem": "궁핍화성장이 일어나는 경우에는 수출품의 가격이 상승하므로 교역조건이 개선된다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":551,
-        "problem": "",
+        "problem": "만약 국내공급이 완전비탄력적이라면 관세가 부과되더라도 경상수지 개선효과는 나타나지 않을 것이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":553,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":555,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":557,
-        "problem": "",
+        "problem": "무역상대국이 수출품에 대해 보조금을 지급할 경우 이에 대응하여 부과하는 관세를 보복 관세라고 한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
-        "number":559,
-        "problem": "",
+        "number":555,
+        "problem": "관세가 부과되면 대국과 소국의 후생수준은 모두 명백히 감소한다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":557,
+        "problem": "수입국 후생측면에서 볼 때는 수출자유규제보다는 관세가 더 유리하다.",
         "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":559,
+        "problem": "수요과 공급이 비탄력적일수록 관세부과시 경상수지 개선효과가 크게 나타난다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":561,
-        "problem": "",
-        "answer": 0,
+        "problem": "관세동맹이 이루어지면 역내에서 생산요소의 자유로운 이동이 허용된다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":563,
-        "problem": "",
+        "problem": "WTO의 기본원칙 중 하나인 최혜국대우조항은 특정국가가 자국에 대해 관세우대조치를 해 줄 경우 상대방 국가에 대해서도 마찬가지 혜택을 주어야 한다는 원칙이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":565,
-        "problem": "",
-        "answer": 1,
+        "problem": "원화의 가치가 상승하면 수출기업들의 채산성이 악화된다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":567,
-        "problem": "",
-        "answer": 1,
+        "problem": "환율상승이 예상되면 외환의 수요는 증가하는 반면 외환의 공급은 감소한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":569,
-        "problem": "",
+        "problem": "국내이자율이 7%, 해외이자율이 4%임에도 불구하고 자본유입이 이루어지지 않고 있다면 미래에 원화의 평가절상이 예상되고 있는 상태이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":571,
-        "problem": "",
-        "answer": 0,
+        "problem": "우리나라 명목이자율이 6%이고, 미국의 명목이자율이 4%일 때 A가 미국에 투자하기로 결정하였다면 이는 개인 A가, 원화가 달러화에 대해 2% 이상 평가절상될 것으로 예상하고 있음을 의미한다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":573,
-        "problem": "",
-        "answer": 0,
+        "problem": "구매력 평가설에 의하면 (국내물가상승률-해외물가상승률)의 차이만큼 환율이 하락한다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":575,
-        "problem": "",
+        "problem": "다른 조건이 일정할 때 원화가 절상되면 해외투자수익률이 상승한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":577,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":579,
-        "problem": "",
+        "problem": "한국과 미국의 이자율이 각각 연 4%와 연 2%이고, 현문환율이 1달러=1,200원이라면 이자율 평가이론에 따르면 3개월 뒤 미래의 현물환율은 1,224원이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
+        "number":579,
+        "problem": "통화론자들에 의하면 자국의 이자율 상승은 화폐수요를 감소시키므로 환율이 상승한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
         "number":581,
-        "problem": "",
+        "problem": "고정환율제도하에서는 환율정책과 통화정책을 분리하여 운용할 수 없다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":583,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":585,
-        "problem": "",
+        "problem": "변동환율제도하에서는 금융정책의 자율성이 유지되기 어렵다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
+        "number":585,
+        "problem": "외자가 도입되는 시점에서는 자본수지가 개선되나, 외채원리금이 상환되는 시점에서는 경상수지와 자본수지가 모두 악화된다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
         "number":587,
-        "problem": "",
+        "problem": "정부재정이 균형이고, 국내총투자가 민간저축을 상회하면 경상수지는 적자상태이다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":589,
-        "problem": "",
-        "answer": 0,
+        "problem": "어느 나라의 소비지출과 투자지출이 각각 600, 400이고, 정부지출과 조세수입이 각각 150, 120 수출과 수입이 각각 300, 200이라면 민간저축은 430이다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":591,
-        "problem": "",
-        "answer": 1,
+        "problem": "J-curve효과가 나타난다면 단기적으로 마샬-러너조건이 성립하지 않는다.",
+        "answer": 0,
         "first": "명목GDP",
         "second": "실질GDP"
     },
     {
         "number":593,
-        "problem": "",
+        "problem": "다른 조건이 일정할 때 국채발행이 증가하면 경상수지 흑자규모가 커진다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":595,
-        "problem": "",
+        "problem": "금본위제도하에선는 국제수지가 흑자를 보이면 국내물가가 하락한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":597,
-        "problem": "",
+        "problem": "고정환율제도에서 외국의 경기가 호황이 되면 국내통화량이 증가하는 경향이 있다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":599,
-        "problem": "",
+        "problem": "고정환율제도하에서는 해외경기가 침체되면 국내경기도 침체된다.",
         "answer": 0,
         "first": "O",
         "second": "X"
