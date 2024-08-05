@@ -281,245 +281,245 @@
     },
     {
         "number":381,
-        "problem": "",
-        "answer": 0,
+        "problem": "전액지급준비금제도하세어는 새로운 예금이 이루어지더라도 대출이 불가능하므로 신용승수는 1이다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":383,
-        "problem": "",
-        "answer": 0,
+        "problem": "일반적으로 이자율이 상승하면 마샬 K는 커진다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":385,
-        "problem": "",
+        "problem": "현재 이자율이 매우 낮은 수준이라면 중앙은행이 국민소득에 큰 영향을 미칠 수 있다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":387,
-        "problem": "",
-        "answer": 1,
+        "problem": "화폐수량설에 의하면 통화량이 증가하면 명목GDP가 증가한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":389,
-        "problem": "",
-        "answer": 1,
+        "problem": "보몰의 재고이론에 따르면 금융기술 발전이 이루어지면 화폐수요는 감소한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":391,
-        "problem": "",
+        "problem": "공개시장조자정책은 간접규제수단의 하나이다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":393,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":395,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":397,
-        "problem": "",
+        "problem": "재할인율 정책이 효과적이기 위해서는 예금은행의 중앙은행에 대한 자금의존도가 낮아야 한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
+        "number":395,
+        "problem": "중앙은행이 환율하락을 방어하기 위해 외환시장에 개입하면서 통화량도 일정수준에서 유지하고자 한다면 국채를 매입해야 한다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":397,
+        "problem": "일반적으로 실질화폐수요는 실질국민소득과 명목이자율의 함수이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
         "number":399,
-        "problem": "",
+        "problem": "시장이자율이 정상이자율보다 높다면 사람들은 채권을 매입하려고 할 것이다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":401,
-        "problem": "",
-        "answer": 1,
+        "problem": "화폐수요가 소득에 의해서만 결정되는 경우에는 정부가 확대재정정책을 실시하더라도 국민소득은 변하지 않는다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":403,
-        "problem": "",
-        "answer": 1,
+        "problem": "다른 조건이 일정할 때 신용카드 보급이 확대되면 국민소득이 증가할 것이다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":405,
-        "problem": "",
+        "problem": "IS-LM모형에 의하면 저축성향이 높아질 경우 국민소득은 증가하게 된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":407,
-        "problem": "",
-        "answer": 0,
+        "problem": "리카도의 등가정리가 성립하는 경우 정부지출의 변화없이 일시적으로 조세를 감면하면 정부저축과 민간저축은 모두 증가한다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":409,
-        "problem": "",
-        "answer": 1,
+        "problem": "총수요곡선에서 좌상방으로 이동할수록 더 높은 이자율에 대응된다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":411,
-        "problem": "",
-        "answer": 1,
+        "problem": "화폐수요가 소득변화에 민감하다면 구축효과는 크게 나타난다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":413,
-        "problem": "",
-        "answer": 1,
+        "problem": "통화주의학파에 따르면 단기적으로는 물가가 상승할 때 명목임금 상승률은 물가상승률에 미달하나, 장기적으로는 항상 명목임금 상승률과 물가상승률이 동일하다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":415,
-        "problem": "",
-        "answer": 1,
+        "problem": "금융정책이 효과적이 되기 위해서는 투자승수가 커야 한다.",
+        "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":417,
-        "problem": "",
+        "problem": "현재의 국민소득이 완전고용산출량에 미달한다면 장기에는 LM곡선이 우측으로 이동한다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":419,
-        "problem": "",
-        "answer": 0,
+        "problem": "자동안정화장치가 잘 작동하는 경우에는 투자승수가 커진다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":421,
-        "problem": "",
-        "answer": 0,
+        "problem": "다른 조건이 일정한 상태에서 노동자의 기대물가가 상승하면 총공급곡선이 우측으로 이동한다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":423,
-        "problem": "",
+        "problem": "다른 조건이 일정할 때 정부의 환경규제 강화조치가 취해진다면 물가가 하락할 것이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":425,
-        "problem": "",
+        "problem": "세율이 인상되면 장기에는 물가가 하락하고 국민소득고 감소한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":427,
-        "problem": "",
-        "answer": 1,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":429,
-        "problem": "",
+        "problem": "경기가 호황이 되면 기업이윤 증가로 법인세 납세액도 증가하므로 법인세도 자동안정화 기능을 수행한다.",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
-        "number":431,
-        "problem": "",
+        "number":429,
+        "problem": "추가적인 정부지출재원을 조세증대를 통해 조달하는 경우에는 IS곡선은 이동하지 않는다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
+        "number":431,
+        "problem": "리카도의 등가정리가 성립한다면 민간저축과 정부저축은 음(-)의 관계를 보일 것이다. ",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
         "number":433,
-        "problem": "",
+        "problem": "화폐환상이란 실질임금 상승을 명목임금 상승으로 착각하는 것을 말한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":435,
-        "problem": "",
+        "problem": "물가가 하락한다면 LM곡선이 우측으로 이동하므로 총수요곡선이 우측으로 이동한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":437,
-        "problem": "",
+        "problem": "체계적 오차란 지속적으로 과대예상하는 것을, 비체계적 오차란 지속적으로 과소예상하는 것을 말한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":439,
-        "problem": "",
-        "answer": 0,
-        "first": "O",
-        "second": "X"
-    },
-    {
-        "number":441,
-        "problem": "",
+        "problem": "자동안정화장치가 잘 작동하는 경우에는 IS곡선이 보다 완만한 형태가 된다.",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
+        "number":441,
+        "problem": "유동성함정에서 IS곡선과 LM곡선이 교차할 때 정부지출이 증가하면 국민소득은 승부배만큼 증가한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
         "number":443,
-        "problem": "",
+        "problem": "피구효과가 존재하지 않는 경우 케인즈단순모형의 총수요곡선은 수평선이다. ",
         "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":445,
-        "problem": "",
+        "problem": "확대재정정책을 실시하면 정부부문의 비중이 커지는 반면, 확대금융정책을 실시하면 민간부문의 비중이 커진다. ",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":447,
-        "problem": "",
-        "answer": 0,
+        "problem": "통화량은 재정정책에 비해 내부시차와 외부시차가 모두 같다.",
+        "answer": 1,
         "first": "O",
         "second": "X"
     },
     {
         "number":449,
-        "problem": "",
+        "problem": "화폐환상이 존재한다면 물가가 10% 상승할 때 명목임금은 10%보다 작게 상승한다.",
         "answer": 0,
         "first": "O",
         "second": "X"
