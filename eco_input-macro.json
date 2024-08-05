@@ -1018,8 +1018,8 @@
         "number":591,
         "problem": "J-curve효과가 나타난다면 단기적으로 마샬-러너조건이 성립하지 않는다.",
         "answer": 0,
-        "first": "명목GDP",
-        "second": "실질GDP"
+        "first": "O",
+        "second": "X"
     },
     {
         "number":593,
