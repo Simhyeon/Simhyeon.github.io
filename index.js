@@ -250,8 +250,9 @@ function separate_answers(btnObj) {
 
 
 /* Economics 300 problems for micro and macro */
-function load_eco_init() {
-	fetch("./eco_input.json")
+function load_eco_init(eco_type) {
+	let merged_path = `./eco_input-${eco_type}.json`;
+	fetch(merged_path)
 		.then((res) => {
 			if (!res.ok) {
 				throw new Error

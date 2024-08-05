@@ -1,0 +1,1052 @@
+[
+    {
+        "number":301,
+        "problem": "선진국에서는 절약의 역설이 발생할 가능성이 있으므로 장기적으로도 저축은 악덕이다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":303,
+        "problem": "고전학파 모형에서 국민들의 여가선호가 증대되면 완전고용 국민소득이 감소한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":305,
+        "problem": "케인즈 단순모형에서 이자율이 하락하면 투자가 증가하므로 국민소득이 증가한다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":307,
+        "problem": "어떤 기업이 재고로 보유하고 있던 제품 1,000만 원어치를 판매하면 그 해의 GDP가 감소한다. ",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":309,
+        "problem": "고전학파 모형에서는 모든 사람들의 저축이 증가하면 국민소득이 감소한다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":311,
+        "problem": "케인즈의 국민소득결정이론에 의하면 저축의 감소는 저축감소분과 동일한 정도의 국민소득 증가를 유발한다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":313,
+        "problem": "정액세만 존재하는 3부문 경제에서 균형국민소득이 2,000억 원이고, 완전고용국민소득이 2,400억 원일 때 완전고용국민소득에 도달하기 위해서 100억 원의 조세감면이 필요하다면 정부지출 승수는 5이다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":315,
+        "problem": "중고차 거래금액은 GDP에 포함되지 않지만, 중고차 판매상의 마진은 GDP에 포함된다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":317,
+        "problem": "한계수입성향이 커지면 승수도 커진다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":319,
+        "problem": "정액세만 존재하는 경우 한계소비성향이 커지면 균형재정승수도 커진다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":321,
+        "problem": "현재 경제가 균형국민소득수준에 있다면 가장 바람직한 상태에 있음을 의미한다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":323,
+        "problem": "일반적으로 투자가 증가하면 경제전체의 총저축도 증가한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":325,
+        "problem": "시장에서 거래되지 않음에도 불구하고 GDP집계에 포함되는 대표적인 예로는 귀속임대료와 자기소비농산물을 들 수 있다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":327,
+        "problem": "케인즈 단순모형에서 재고증가분이 (-)를 보인다면 주입보다 누출이 크다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":329,
+        "problem": "절대소득가설에서 개인의 소비의 규모를 결정하는 가장 중요한 변수는 평균소비성향이다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":331,
+        "problem": "항상소득가설에 따르면 일시적인 세율인상의 경우에는 저축이 별로 감소하지 않는다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":333,
+        "problem": "소득재분배정책을 통해 소득분배공평성이 높아지면 사회전체의 총소비는 증가한다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":335,
+        "problem": "항상소득가설에 의하면 임시소득이 실제소득에서 차지하는 비중이 클수록 APC는 낮아진다.",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":337,
+        "problem": "상대소득가설에서 전시효과는 소비의 비가역성 때문에 발생한다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":339,
+        "problem": "어느 가계의 한계소비성향이 0.8이라면 소비지출은 가계소득의 80%일 것이다.",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":341,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":343,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":345,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":347,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":349,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":351,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":353,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":355,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":357,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":359,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":361,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":363,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":365,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":367,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":369,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":371,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":373,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":375,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":377,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":379,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":381,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":383,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":385,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":387,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":389,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":391,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":393,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":395,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":397,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":399,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":401,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":403,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":405,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":407,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":409,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":411,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":413,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":415,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":417,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":419,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":421,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":423,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":425,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":427,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":429,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":431,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":433,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":435,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":437,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":439,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":441,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":443,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":445,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":447,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":449,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":451,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":453,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":455,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":457,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":459,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":461,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":463,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":465,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":467,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":469,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":471,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":473,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":475,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":477,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":479,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":481,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":483,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":485,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":487,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":489,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":491,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":493,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":495,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":497,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":499,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":501,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":503,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":505,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":507,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":509,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":511,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":513,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":515,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":517,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":519,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":521,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":523,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":525,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":527,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":529,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":531,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":533,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":535,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":537,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":539,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":541,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":543,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":545,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":547,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":549,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":551,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":553,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":555,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":557,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":559,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":561,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":563,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":565,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":567,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":569,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":571,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":573,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":575,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":577,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":579,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":581,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":583,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":585,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":587,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":589,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":591,
+        "problem": "",
+        "answer": 1,
+        "first": "명목GDP",
+        "second": "실질GDP"
+    },
+    {
+        "number":593,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":595,
+        "problem": "",
+        "answer": 1,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":597,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    },
+    {
+        "number":599,
+        "problem": "",
+        "answer": 0,
+        "first": "O",
+        "second": "X"
+    }
+]
