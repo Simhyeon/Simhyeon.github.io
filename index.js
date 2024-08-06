@@ -312,10 +312,10 @@ function createProblemList(jsonObject) {
 
 			// Add event listener
 			if (e.explanation === "")  {
-				dupNode.children[0].children[0].disabled = true;
-				dupNode.children[0].children[0].classList.add('disabled-hint');
+				dupNode.children[0].lastChild.disabled = true;
+				dupNode.children[0].lastChild.classList.add('disabled-hint');
 			} else {
-				dupNode.children[0].children[0].addEventListener('click', () => {
+				dupNode.children[0].lastChild.addEventListener('click', () => {
 					show_hint(e.number, e.problem ,e.explanation);
 				})
 			}

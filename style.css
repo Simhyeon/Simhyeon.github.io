@@ -356,8 +356,8 @@ sup {
 
 #popup-container {
 	padding: 10px;
-	display: flex;
-	flex-direction:column;
+	/* display: flex; */
+	/* flex-direction:column; */
 	flex: 1;
 	justify-content: center;
 }

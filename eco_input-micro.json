@@ -2,7 +2,7 @@
     {
         "number":1,
         "problem": "어떤 재화의 시장가격이 0보다 높다면 그 재화는 희소함이 틀림없다",
-	"explanation": "",
+	"explanation": "가격의 결정요인은 희소성이다.",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -26,7 +26,7 @@
     {
         "number":7,
         "problem": "현재 생산되는 자본재의 양이 감가상각에 미달한다면 장기에는 생산가능곡선이 안쪽으로 이동할 것이다",
-	"explanation": "",
+	"explanation": "점차 자본량이 감소한다면 생산가능한 수량의 양이 감소할 것이다.",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -42,7 +42,7 @@
     {
         "number":11,
         "problem": "콜라 판매량과 사이다 판매량 간에는 강한 양의 상관관계가 존재하나 인과관계는 존재하지 않는다",
-	"explanation": "쨰째",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -50,7 +50,7 @@
     {
         "number":13,
         "problem": "부동산 투기를 억제하기 위해 보유세를 강화하면 주택수요가 감소할 것이다 라는 명제는 규범적인 주장이다",
-	"explanation": "본문은 사실적인 주장이다.",
+	"explanation": "A라면 B이다는 사실적 주장이고, A이라면 B해야 한다는 규범적 주장이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -58,7 +58,7 @@
     {
         "number":15,
         "problem": "작년보다 MP3의 가격이 하락하고 거래량이 증가하였다면 MP3의 수요와 공급이 증가하였음이 확실하다",
-	"explanation": "",
+	"explanation": "수량과 가격이 같은 방향으로 움직일 때에는 수요곡선의 영향이다. <mark>같수</mark> 서로 다른 방향으로 움직였다면 공급곡선의 영향이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -106,7 +106,7 @@
     {
         "number":27,
         "problem": "수요함수가 Q=P<sup>-3</sup>이라면 수요의 가격탄력성은 항상 일정한 값을 갖는다.",
-	"explanation": "",
+	"explanation": "지수함수 형태에서 가격탄력성은 지수의 절대값과 일치하므로  Q=P<sup><mark>-3</mark></sup>의 가격탄력성은 3으로 일정하다.",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -114,7 +114,7 @@
     {
         "number":29,
         "problem": "수요곡선이 우하향의 직선인 경우 수요곡선상의 모든 점에서 수요의 가격탄력성이 동일하다.",
-	"explanation": "",
+	"explanation": "탄력도는 원점 기울기/ 곡선 기울기로 도출할 수 있다. 이 때 직선상 모든 점에서 원점 기울기가 계속 변하므로 가격탄력성은 서로 동일할 수 없다.",
         "answer": 1,
         "first": "O",
         "second": "X"
