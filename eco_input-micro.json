@@ -2,6 +2,7 @@
     {
         "number":1,
         "problem": "어떤 재화의 시장가격이 0보다 높다면 그 재화는 희소함이 틀림없다",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -9,6 +10,7 @@
     {
         "number":3,
         "problem": "생산가능곡선상의 모든 점은 경제적 효율성이 달성되는 점이다",
+	"explanation": "생산가능곡선상의 모든 점은 <mark>기술적 효율성</mark>이 달성되는 점이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -16,6 +18,7 @@
     {
         "number":5,
         "problem": "PPC가 원점에 대해 오목한 것은 X재 생산량을 증가시킬수록 점점 Y재 생산에 적합한 생산요소까지 X재 생산에 투입되기 때문이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -23,6 +26,7 @@
     {
         "number":7,
         "problem": "현재 생산되는 자본재의 양이 감가상각에 미달한다면 장기에는 생산가능곡선이 안쪽으로 이동할 것이다",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -30,6 +34,7 @@
     {
         "number":9,
         "problem": "여가는 자유재의 한 예이다",
+	"explanation": "자유재는 대가를 지불하지 않는다. 여가는 기회비용을 지불하므로 자유재가 아니라 경제재이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -37,13 +42,15 @@
     {
         "number":11,
         "problem": "콜라 판매량과 사이다 판매량 간에는 강한 양의 상관관계가 존재하나 인과관계는 존재하지 않는다",
+	"explanation": "쨰째",
         "answer": 0,
         "first": "O",
         "second": "X"
     },
     {
         "number":13,
-        "problem": "부동상 투기를 억제하기 위해 보유세를 강화하면 주택수요가 감소할 것이다 라는 명제는 규범적인 주장이다",
+        "problem": "부동산 투기를 억제하기 위해 보유세를 강화하면 주택수요가 감소할 것이다 라는 명제는 규범적인 주장이다",
+	"explanation": "본문은 사실적인 주장이다.",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -51,6 +58,7 @@
     {
         "number":15,
         "problem": "작년보다 MP3의 가격이 하락하고 거래량이 증가하였다면 MP3의 수요와 공급이 증가하였음이 확실하다",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -58,6 +66,7 @@
     {
         "number":17,
         "problem": "A제약이 생산하는 제니시스라는 소화제에 비만억제 기능이 있음이 확인된다면 기존에 판매되고 있는 비만치료제인 리덕션의 공급이 감소한다",
+	"explanation": "대체재인 다른 재화의 수요가 증가한다면 기존 재화의 수요는 감소하고 종국적으로 그 재화의 공급량이 감소한다. ( 공급 != 공급량 )",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -65,6 +74,7 @@
     {
         "number":19,
         "problem": "다른 조건이 일정한 상황에서 소득이 감소하면 열등재의 가격은 하락하고 정상재의 가격은 상승할 것이다",
+	"explanation": "소득이 감소하면 열등재 수요는 증가하고 정상재 수요는 감소한다. 결과적으로 열등재 가격은 상승하고 정상재 가격은 하락한다.",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -72,6 +82,7 @@
     {
         "number":21,
         "problem": "열등재인 알사탕의 수요곡선은 우하향의 직선이고, 공급은 완전탄력적이라고 하자. 소득이 증가하면 새로운 균형에서 알사탕 수요의 가격탄력성은 원래 균형점에서 보다 작다.",
+	"explanation": "소득 감소로 열등재의 수요가 감소하면 해당 재화의 수요 곡선이 좌측으로 이동한다. 수평인 공급곡선 상에서 균형점이 좌측으로 이동하므로 탄력도는 커진다. (탄력도 = 원점 기울기 / 곡선 기울기)",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -79,6 +90,7 @@
     {
         "number":23,
         "problem": "어떤 재화의 시장수요곡선이 P=80-aQ(a는 양의 상수), 시장공급곡선이 P=60으로 주어져 있다면 균형에서 수요의 가격탄력성은 3이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -86,6 +98,7 @@
     {
         "number":25,
         "problem": "공급함수가 Q=P-10으로 주어져 있다면 가격이 상승할수록 공급의 가격탄력성은 점점 커진다",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -93,6 +106,7 @@
     {
         "number":27,
         "problem": "수요함수가 Q=P<sup>-3</sup>이라면 수요의 가격탄력성은 항상 일정한 값을 갖는다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -100,6 +114,7 @@
     {
         "number":29,
         "problem": "수요곡선이 우하향의 직선인 경우 수요곡선상의 모든 점에서 수요의 가격탄력성이 동일하다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -107,6 +122,7 @@
     {
         "number":31,
         "problem": "수요함수는 P=25-3Q로 동일한 소비자가 n명 있다. 가격이 P<sub>0</sub>일 때 한 개인의 수요의 가격탄력성이 4라면 동일한 가격에서 소비자집단 전체에 대해서 구한 수요의 가격탄력성은 4n이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -114,6 +130,7 @@
     {
         "number":33,
         "problem": "나희는 항상 자기소득의 30%를 콜라 구입에 사용한다면 콜라 수요의 소득탄력성은 0.3이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -121,6 +138,7 @@
     {
         "number":35,
         "problem": "공급이 비탄력적인 재화의 경우 공급이 증가하면 판매자의 총수입은 감소한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -128,6 +146,7 @@
     {
         "number":37,
         "problem": "가격소비곡선이 우하향하는 경우 가격을 인상하면 판매자의 총수입은 증가한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -135,6 +154,7 @@
     {
         "number":39,
         "problem": "S기업이 생산하는 X재의 40%는 중고생, 60%는 일반인에게 판매되는데, 중고생과 일반인의 X재 수요의 가격탄력성이 각각 2와 0.5라면 X재 가격이 상승하면 이 기업의 총수입은 증가한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -142,6 +162,7 @@
     {
         "number":41,
         "problem": "최고가격제가 실시되면 재화의 거래량은 감소하나, 최저가격제가 실시되면 거래량은 증가한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -149,6 +170,7 @@
     {
         "number":43,
         "problem": "최고가격제가 실시되면 저소득층이 더 많은 재화를 소비할 수 있게 되므로 사회후생이 증대된다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -156,6 +178,7 @@
     {
         "number":45,
         "problem": "대체재가 많은 상품에 대해 물품세가 부과되면 소비자의 상대적인 조세부담은 작다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -163,6 +186,7 @@
     {
         "number":47,
         "problem": "단위당 100원의 조세를 소비자에게 부과하면 생산자에게 100원씩 조세를 부과할 때보다 소비자 부담이 커진다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -170,6 +194,7 @@
     {
         "number":49,
         "problem": "물품세 부과에 따른 초과부담을 극소화하고자 한다면 수요가 탄력적인 재화에 대해 조세를 부과하여야 한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -177,6 +202,7 @@
     {
         "number":51,
         "problem": "수요곡선이 우하향하는 것은 한계효용이 체감하기 때문이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -184,6 +210,7 @@
     {
         "number":53,
         "problem": "무차별곡선이 우상향하면 두 재화 중 한 재화가 열등재이다",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -191,6 +218,7 @@
     {
         "number":55,
         "problem": "한계대체율이 체감하는 것은 무차별곡선이 우하향하기 때문이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -198,6 +226,7 @@
     {
         "number":57,
         "problem": "효용함수가 U = X<sup>0.6</sup>Y<sup>0.4</sup>로 주어져 있다면 원점을 통과하는 45선 상에서는 한계대체율이 항상 1.5이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -205,6 +234,7 @@
     {
         "number":59,
         "problem": "어떤 재화의 소득탄력성이 0보다 크다면 보상수요곡선이 통상적인 수요곡선보다 더 완만한 형태가 된다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -212,6 +242,7 @@
     {
         "number":61,
         "problem": "김씨는 X재와 Y재를 항상 1:1의 비율로 구입한다면 김씨의 X재 수요의 가격탄력성은 반드시 1보다 작다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -219,6 +250,7 @@
     {
         "number":63,
         "problem": "한계대체율이 1.5로 일정하고, X재 가격이 Y재 가격의 2배라면 소득소비곡선은 수평선이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -226,6 +258,7 @@
     {
         "number":65,
         "problem": "효용함수가 U = 5X<sup>0.8</sup>Y<sup>0.2</sup>로 주어진 경우 X재와 Y재 소비량이 절반으로 줄어들면 한계대체율도 절반으로 감소한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -233,6 +266,7 @@
     {
         "number":67,
         "problem": "어떤 소비자의 효용함수가 U = X<sup>0.5</sup>Y<sup>0.5</sup>로 주어져 있다면 이 소비자의 X재 구입액과 Y재 구입액은 동일할 것이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -240,6 +274,7 @@
     {
         "number":69,
         "problem": "어떤 재화의 수요곡선이 우하향이면, 그 재화는 정상재이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -247,6 +282,7 @@
     {
         "number":71,
         "problem": "MRS가 3으로 일정하고 X개 가격이 100원, Y재 가격이 50원이라면 효용을 극대화하려면 소득 전부를 Y재 구입에 지출해야 한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -254,6 +290,7 @@
     {
         "number":73,
         "problem": "어떤 재화가격이 상승하면 소비자는 그 재화가 정상재일 경우에는 구입량을 감소시키나, 열등재일 경우에는 구입량을 증가시킨다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -261,6 +298,7 @@
     {
         "number":75,
         "problem": "효용함수가 U=2XY로 주어져 있다면 X재와 Y재 구입비율이 일정하면, 한계대체율도 일정하다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -268,6 +306,7 @@
     {
         "number":77,
         "problem": "B씨의 효용함수가 U=X+10Y로 주어져 있다면 B씨는 소득 전부를 Y재 구입에 지출하는 것이 합리적이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -275,6 +314,7 @@
     {
         "number":79,
         "problem": "어떤 소비자가 재화 A와 B를 소비할 때 소비자균형은 두 재화의 총효용이 같아지는 점에서 이루어진다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -282,6 +322,7 @@
     {
         "number":81,
         "problem": "X재와 Y재만 존재하는 경우 두 재화가 모두 열등재가 될 수 없다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -289,6 +330,7 @@
     {
         "number":83,
         "problem": "최초구입점이 구입불가능하게 되면 새로운 예산선의 어떤 점에서 구입하더라도 약공리는 충족된다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -296,6 +338,7 @@
     {
         "number":85,
         "problem": "소비자물가지수는 생계비변화를 과대평가하는 경향이 있다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -303,6 +346,7 @@
     {
         "number":87,
         "problem": "소득지수가 라스파이레스 가격지수보다 크면 생활수준이 개선, 소득지수가 라스파이레스 가격지수보다 작으면 생활수준이 악화되었다고 판단할 수 있다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -310,6 +354,7 @@
     {
         "number":89,
         "problem": "위험선호자란 불확실성이 내포된 자산보다 동일 액수의 확실한 자산을 더 선호하는 사람으로 기대효용보다 기대치의 효용이 더 크기에 효용함수가 아래로 오목하다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -317,6 +362,7 @@
     {
         "number":91,
         "problem": "X재에 대해 가격보조를 할 때와 동일한 효용을 얻도록 현금보조를 한다면 돈이 더 적게 든다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -324,6 +370,7 @@
     {
         "number":93,
         "problem": "두 기간 모형에서 어떤 개인이 차입제약에 직면해 있다면 이자율이 상승하더라도 현재소비는 불변이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -331,6 +378,7 @@
     {
         "number":95,
         "problem": "한계생산물이 증가하는 구간에서는 평균생산물과 총생산물이 모두 증가한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -338,6 +386,7 @@
     {
         "number":97,
         "problem": "노동투입량이 증가할 때 노동의 평균생산물이 감소하는 것을 수확체감의 법칙이라고 한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -345,6 +394,7 @@
     {
         "number":99,
         "problem": "MRTS가 2로 일정하고, w = 20, r = 30이라면 노동만 투입하는 것이 최적이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -352,6 +402,7 @@
     {
         "number":101,
         "problem": "생산함수가 규모에 대한 수익체증인 경우 노동과 자본투입량이 10% 감소하면 생산량은 10% 미만으로 감소한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -359,6 +410,7 @@
     {
         "number":103,
         "problem": "생산함수가 Q=2L+3K로 주어져 있고 임금이 500원, 자본임대료가 200원인 경우 300단위의 재화를 생산할 때의 최소비용은 75,000이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -366,6 +418,7 @@
     {
         "number":105,
         "problem": "생산함수가 Q=5LK로 주어져 있다면 장기평균비용곡선은 수평의 형태로 도출된다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -373,6 +426,7 @@
     {
         "number":107,
         "problem": "생산함수가 Q=min[5L,8K]로 주어져 있다면 장기평균비용곡선은 수평의 형태로 도출된다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -380,6 +434,7 @@
     {
         "number":109,
         "problem": "생산함수가 Q=min[L,4K]로 주어져 있다면 규모에 대한 수익이 체증한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -387,6 +442,7 @@
     {
         "number":111,
         "problem": "생산함수가 Q=ALK ( 단, A는 기술수준을 나타내는 계수 )로 주어져 있다면 규모에 대한 수익불변이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -394,6 +450,7 @@
     {
         "number":113,
         "problem": "노동의 한계생산물이 자본의 한계생산물의 2배라면 기업은 노동을 자본의 2배만큼 고용할 것이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -401,6 +458,7 @@
     {
         "number":115,
         "problem": "생산함수가 Q=AL<sup>0.5</sup>K<sup>0.3</sup>으로 주어져 있다면 규모에 대한 수익이 체감하고 대체탄력성은 1보다 작다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -408,6 +466,7 @@
     {
         "number":117,
         "problem": "임금과 자본임대료가 모두 2배로 상승하더라도 확장경로는 변하지 않는다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -415,6 +474,7 @@
     {
         "number":119,
         "problem": "단기총비용곡선이 우상향의 직선이라면 단기평균비용은 항상 단기한계비용보다 크다. ( 단, 고정비용이 있다고 전제한다. )",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -422,6 +482,7 @@
     {
         "number":121,
         "problem": "어떤 기업이 회계적으로는 이윤을 얻고 있더라도 경제적 관점에서 보면 손실이 발생하는 상태일 수도 있다. ",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -429,6 +490,7 @@
     {
         "number":123,
         "problem": "단기한계비용곡선이 수평선이라면 단기평균비용곡선도 수평선이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -436,6 +498,7 @@
     {
         "number":125,
         "problem": "단기평균비용곡선이 장기평균비용곡선보다 높을 때 단기한계비용도 장기한계비용보다 높다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -443,6 +506,7 @@
     {
         "number":127,
         "problem": "단기평균비용곡선이 U자 형태이면 장기평균비용곡선도 U자 형태가 된다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -450,6 +514,7 @@
     {
         "number":129,
         "problem": "차입금에 대한 이자율이 상승하면 단기평균비용이 상승한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -457,6 +522,7 @@
     {
         "number":131,
         "problem": "장기평균비용곡선이 U자 형태가 되는 것은  한계생산물이 체감하기 때문이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -464,6 +530,7 @@
     {
         "number":133,
         "problem": "장기한계비용은 단기한계비용보다 낮다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -471,6 +538,7 @@
     {
         "number":135,
         "problem": "개별기업이 직면하는 수요곡선이 완전탄력적이므로 시장수요곡선이 비탄력적일 수는 없다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -478,6 +546,7 @@
     {
         "number":137,
         "problem": "현재 완전경쟁기업이 조업중단점에서 생산하고 있다면 한계생산물이 극대가 되는 상태이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -485,6 +554,7 @@
     {
         "number":139,
         "problem": "단기에 생산자잉여는 총수입에서 총가변비용을 뺀 값이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -492,6 +562,7 @@
     {
         "number":141,
         "problem": "완전경쟁기업은 장기에 초과이윤을 얻을 수 있으나 그 크기가 매우 작다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -499,6 +570,7 @@
     {
         "number":143,
         "problem": "차입금에 대한 이자율이 상승하면 개별기업의 공급곡선이 상방으로 이동한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -506,6 +578,7 @@
     {
         "number":145,
         "problem": "완전경쟁의 경우 단기에 AC>P>AVC라면 장기에는 기업수가 감소한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -513,6 +586,7 @@
     {
         "number":147,
         "problem": "완전경쟁기업의 공급곡선이 우상향이 되는 것은 수확체감의 법칙 때문이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -520,6 +594,7 @@
     {
         "number":149,
         "problem": "완전경쟁기업은 장기에 규모에 대한 수익불변인 점에서 생산한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -527,6 +602,7 @@
     {
         "number":151,
         "problem": "독점기업은 시장지배력을 갖고 있으므로 가격과 공급량을 모두 원하는 수준으로 결정할 수 있다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -534,6 +610,7 @@
     {
         "number":153,
         "problem": "가격이 평균가변비용보다 낮더라도 독점기업은 단기에는 생산을 지속한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -541,6 +618,7 @@
     {
         "number":155,
         "problem": "일반적으로 독점기업에 대한 가격차별화는 자원배분의 효율성을 저해시킨다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -548,6 +626,7 @@
     {
         "number":157,
         "problem": "단기에는 고정비용이 증가하더라도 독점기업의 생산량은 변하지 않는다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -555,6 +634,7 @@
     {
         "number":159,
         "problem": "완전가격차별이 이루어질 때 사회전체의 총잉여는 완전경쟁일 때와 동일하다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -562,6 +642,7 @@
     {
         "number":161,
         "problem": "다공장독점의 균형에서는 모든 공장에서의 한계비용이 동일하다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -569,6 +650,7 @@
     {
         "number":163,
         "problem": "독점기업에 대한 이윤세 부과는 자원배분에는 아무런 영향을 미치지 않는다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -576,6 +658,7 @@
     {
         "number":165,
         "problem": "독점기업에게 조세가 부과되면 완전경쟁일 때보다 소비자에게 더 많이 전가된다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -583,6 +666,7 @@
     {
         "number":167,
         "problem": "규모의 경제가 존재하는 산업의 경우 독점기업을 몇 개의 기업으로 분할하면 평균생산비가 낮아질 수 있다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -590,6 +674,7 @@
     {
         "number":169,
         "problem": "독점기업은 재화가격과 평균비용의 차이가 가장 큰 점에서 생산량을 결정할 것이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -597,6 +682,7 @@
     {
         "number":171,
         "problem": "독점기업의 단기공급곡선은 우상향하는 형태이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -604,6 +690,7 @@
     {
         "number":173,
         "problem": "독점적 경쟁시장에서는 초과이윤이 존재하면 계속적으로 새로운 기업이 진입하므로 장기에 개별기업은 LAC최소점에서 생산을 하게 된다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -611,6 +698,7 @@
     {
         "number":175,
         "problem": "독점적 경쟁의 단기균형에서 P>MC이면 장기에 기업수가 증가한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -618,6 +706,7 @@
     {
         "number":177,
         "problem": "독점적 경쟁시장에서 제품차별화 정도가 클수록 교차탄력성(절대값)은 작아진다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -625,6 +714,7 @@
     {
         "number":179,
         "problem": "제품차별화가 크게 이루어질수록 독점적 경쟁기업의 직면하는 수요곡선은 탄력적이 된다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -632,6 +722,7 @@
     {
         "number":181,
         "problem": "독점적 경쟁시장에서는 각 기업이 생산하는 재화가 서로 이질적인데 비해, 과점시장에서는  각 기업이 생산하는 재화는 동질적이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -639,6 +730,7 @@
     {
         "number":183,
         "problem": "불완전경쟁기업에게 정액세가 부과되면 한계비용곡선이 상방으로 이동하므로 생산량은 감소하고 가격은 상승한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -646,6 +738,7 @@
     {
         "number":185,
         "problem": "규모의 경제가 크게 발생하는 산업은 완전경쟁적이 될 가능성이 없다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -653,6 +746,7 @@
     {
         "number":187,
         "problem": "독점적 경쟁기업의 공급곡선은 평균가변비용을 상회하는 한계비용곡선이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -660,6 +754,7 @@
     {
         "number":189,
         "problem": "독점적 경쟁의 경우 장기에는 P = AR이 성립한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -667,6 +762,7 @@
     {
         "number":191,
         "problem": "베르뜨랑 모형의 균형에서는 자원배분의 효율성이 달성된다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -674,6 +770,7 @@
     {
         "number":193,
         "problem": "과점기업들이 생산하는 재화가 이질적이면 동질적일 때보다 담합이 될 가능성이 높다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -681,6 +778,7 @@
     {
         "number":195,
         "problem": "꾸르노 모형에서의 생산량은 독점일 때보다는 더 많다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -688,6 +786,7 @@
     {
         "number":197,
         "problem": "내쉬균형상태에서 어떤 경기자가 전략을 변경하면 자신의 보수가 감소한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -695,6 +794,7 @@
     {
         "number":199,
         "problem": "진입게임에서 기존기업이 새로운 기업의 진입을 막는 방법은 자신의 위협을 신뢰성을 갖도록 보수체계를 바꾸는 것이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -702,6 +802,7 @@
     {
         "number":201,
         "problem": "생산요소시장이 완전경쟁이면 임금은 항상 한계수입생산과 일치한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -709,6 +810,7 @@
     {
         "number":203,
         "problem": "비례적인 근로소득세를 부과하였으나 노동시간이 불변이라면 여가는 열등재이다",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -716,6 +818,7 @@
     {
         "number":205,
         "problem": "생산요소시장이 수요독점이면 수요독점기업은 평균요소비용보다 낮은 임금을 지급한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -723,6 +826,7 @@
     {
         "number":207,
         "problem": "준지대는 항상 이윤보다는 크거나 같다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -730,6 +834,7 @@
     {
         "number":209,
         "problem": "애킨슨지수가 0.7이라면 현재소득의 70%만 있어도 이를 균등하게 배분한다면 동일한 사회후생을 누릴 수 있다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -737,6 +842,7 @@
     {
         "number":211,
         "problem": "생산요소의 가격이 1,000이고, 한계비용이 400원이라면 한계생산물은 2.5이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -744,6 +850,7 @@
     {
         "number":213,
         "problem": "기술적인 특성 때문에 생산요소 투입비율을 일정하게 유지해야 한다면 생산요소수요는 매우 탄력적이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -751,6 +858,7 @@
     {
         "number":215,
         "problem": "생산요소시장이 수요독점이라면 수요독점기업의 요소수요곡선은 한계생산물가치곡선이 아니라 한계수입생산곡선이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -758,6 +866,7 @@
     {
         "number":217,
         "problem": "이전수입은 요소공급에 따른 기회비용을 나타내므로 생산요소공급자의 잉여로 볼 수 있다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -765,6 +874,7 @@
     {
         "number":219,
         "problem": "사회내의 총소득을 사회구성원 80%에게 동일하게 나누어준다면 십분위분배율은 1, 지니계수는 0.2이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -772,6 +882,7 @@
     {
         "number":221,
         "problem": "대체탄력성이 클수록 요소수요는 탄력적이고, 총생산비에서 차지하는 비중이 클수록 비탄력적이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -779,6 +890,7 @@
     {
         "number":223,
         "problem": "생산요소 A와 B가 보완적인 생산요소라면 생산요소 A의 가격이 상승하면 생산요소 B의 수요가 감소한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -786,6 +898,7 @@
     {
         "number":225,
         "problem": "생산요소시장이 완전경쟁일 때 모든 기업의 자본고용량이 증가하면 실질임금이 상승한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -793,6 +906,7 @@
     {
         "number":227,
         "problem": "순수한 경제적 지대에 대한 조세는 자원배분의 왜곡을 유발하지 않는다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -800,6 +914,7 @@
     {
         "number":229,
         "problem": "생산요소시장이 완전경쟁이면 개별기업의 한계수입생산은 일정하다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -807,6 +922,7 @@
     {
         "number":231,
         "problem": "사회구성원들이 소득분배공평성에 높은 가중치를 부여하고 있다면 균등분배대등소득이 커진다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -814,6 +930,7 @@
     {
         "number":233,
         "problem": "초과이윤은 자원배분의 비효율성을 초래한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -821,6 +938,7 @@
     {
         "number":235,
         "problem": "교환에 있어 파레토 효율성 조건이 충족된 상태에서는 두 사람의 예산선의 기울기는 동일하다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -828,6 +946,7 @@
     {
         "number":237,
         "problem": "두 사람이 동일한 양의 X재와 Y재를 갖고 있으며, 두 사람의 효용함수가 동일하다면 파레토 개선이 불가능하다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -835,6 +954,7 @@
     {
         "number":239,
         "problem": "후생경제학의 제 2정리는 정부개입을 통해 항상 파레토개선이 가능함을 보여준다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -842,6 +962,7 @@
     {
         "number":241,
         "problem": "불가능성정리란 모든 파레토 효율성 조건이 모두 충족되는 상태는 불가능하다는 것을 말한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -849,6 +970,7 @@
     {
         "number":243,
         "problem": "재화생산에 있어 외부불경제가 발생하는 경우 시장공급곡선은 생산비를 적정수준보다 과소평가한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -856,6 +978,7 @@
     {
         "number":245,
         "problem": "공공재의 경우 모든 사람의 소비량이 동일하므로 각 개인이 얻는 편익도 동일하다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -863,6 +986,7 @@
     {
         "number":247,
         "problem": "네트워크 외부성이 발생하는 경우 사람들이 그 재화에 대해 지불하려는 가격은 그 재화를 사용하는 사람 수에 따라 달라진다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -870,6 +994,7 @@
     {
         "number":249,
         "problem": "생산요소시장이 완전경쟁일 때 MRTS<span class='supsub'><sup>A</sup><sub>LK</sub></span> = MRTS<span class='supsub'><sup>B</sup><sub>LK</sub></span>가 성립하는 것은 모든 생산자가 가격수용자이기 때문이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -877,6 +1002,7 @@
     {
         "number":251,
         "problem": "생산에 있어 외부경제가 발생한다면 SMB&lt;PMB이다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -884,6 +1010,7 @@
     {
         "number":253,
         "problem": "생산에 있어 외부불경제가 있는 경우 시장기구에 의한 가격수준은 사회적인 최적수준보다 낮다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -891,6 +1018,7 @@
     {
         "number":255,
         "problem": "공유지의 비극은 부정적인 외부성과 관련된다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -898,6 +1026,7 @@
     {
         "number":257,
         "problem": "소득분배공평성을 중요시할수록 사회무차별곡선은 우하향의 직선에 가까워진다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -905,6 +1034,7 @@
     {
         "number":259,
         "problem": "점수투표제하에서는 전략적인 행동이 나타날 가능성이 매우 높다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -912,6 +1042,7 @@
     {
         "number":261,
         "problem": "생산에 있어 외부경제가 발생한다면 SMC&lt;PMC이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -919,6 +1050,7 @@
     {
         "number":263,
         "problem": "코즈정리에 의하면 재산권이 누구에게 귀속되느냐는 자원배분의 효율성과 소득분배에 아무런 영향을 미치지 않는다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -926,6 +1058,7 @@
     {
         "number":265,
         "problem": "투표의 역설이 발생하면 다수결투표를 통해 사회적인 합의 도달이 가능하다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -933,6 +1066,7 @@
     {
         "number":267,
         "problem": "어떤 개인의 공유자원 소비는 긍정적인 외부성을 유발한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -940,6 +1074,7 @@
     {
         "number":269,
         "problem": "한계변환율이 한계대체율보다 크다면 X재 생산을 증가시킴으로써 파레토 개선이 가능하다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -947,6 +1082,7 @@
     {
         "number":271,
         "problem": "공리주의 사회후생함수를 가정하더라도 소득의 한계효용이 체감하고, 모든 개인의 효용함수가 동일하다면 완전히 균등하게 소득분배가 이루어질 때 사회후생이 극대가 된다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -954,6 +1090,7 @@
     {
         "number":273,
         "problem": "애로우의 불가능성 정리에 의하면 다수결투표를 통해 개인의 선호를 사회선호와 일치시키기 어렵다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -961,6 +1098,7 @@
     {
         "number":275,
         "problem": "다수결투표를 통해 공공재 공급량을 결정하면 적정수준보다 과잉으로 공급된다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -968,6 +1106,7 @@
     {
         "number":277,
         "problem": "정보의 비대칭성이란 측면에서 볼 때 광고는 역선택을 줄이는 역할을 한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -975,6 +1114,7 @@
     {
         "number":279,
         "problem": "의료보험제도가 도입되면 의료서비스에 대한 수요가 증가하는 역선택 현상이 발생한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -982,6 +1122,7 @@
     {
         "number":281,
         "problem": "기업에서 채용할 때 학력에 따라 초봉을 다르게 설정하는 것은 선별의 사례이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -989,6 +1130,7 @@
     {
         "number":283,
         "problem": "자동차 보험회사가 운전경력에 따라 차등의 보험료를 정하는 것은 선별의 사례이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -996,6 +1138,7 @@
     {
         "number":285,
         "problem": "이자율이 상승하면 안전한 투자를 하는 사람이 대출신청을 기피하게 되는 도덕적 해이가 발생할 수 있다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -1003,6 +1146,7 @@
     {
         "number":287,
         "problem": "효율성임금은 노동시장에서의 역선택과 도덕적 해이를 모두 줄일 수 있는 방법 중의 하나이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -1010,6 +1154,7 @@
     {
         "number":289,
         "problem": "역선택이 발생하면 시장거래규모가 축소될 가능성이 있다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -1017,6 +1162,7 @@
     {
         "number":291,
         "problem": "실질 GNI=(   ) + 교역조건변화실질무역손익 + 해외순수취요소소득",
+	"explanation": "",
         "answer": 1,
         "first": "명목GDP",
         "second": "실질GDP"
@@ -1024,6 +1170,7 @@
     {
         "number":293,
         "problem": "기업이 보유중인 재고를 판매하면 투자지출은 감소하고 GDP는 증가한다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -1031,6 +1178,7 @@
     {
         "number":295,
         "problem": "공무원에게 지급한 월급과 생활보호대상자에게 지급한 생계비는 모두 이전지출이며 정부지출에는 포함되지 않는다.",
+	"explanation": "",
         "answer": 1,
         "first": "O",
         "second": "X"
@@ -1038,6 +1186,7 @@
     {
         "number":297,
         "problem": "가처분소득이 4,000, 소비가 3,500 정부소비지출이 1,000, 조세수입이 800인 경우 총저축은 300이다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"
@@ -1045,6 +1194,7 @@
     {
         "number":299,
         "problem": "한계저축성향이 0.2이고 소득세율이 0.25일 때 독립투자가 400만큼 증가하면 저축은 150만큼 증가한다.",
+	"explanation": "",
         "answer": 0,
         "first": "O",
         "second": "X"

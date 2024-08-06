@@ -6,6 +6,7 @@ html {
 
 button {
 	all: unset;
+	cursor: pointer;
 }
 
 /* Variables */
@@ -259,13 +260,11 @@ input {
 {
 	padding: 1em;
 	margin-right: 1em;
-	cursor: pointer;
 	flex : 1;
 	border:none;
 }
 .eco-list-answer-second {
 	padding: 1em;
-	cursor: pointer;
 	flex : 1;
 	border:none;
 }
@@ -319,4 +318,59 @@ sup {
 
 .visible {
 	display: block !important;
+}
+
+.eco-explanation {
+	border: none !important;
+	margin-left: 5px;
+	font-size: 0.8em;
+}
+
+/* Information related styles */
+
+#popup-hint-window {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: fixed;
+	/* Disabled for debugging */
+	visibility: hidden;
+	z-index: 1;
+	width: 85%;
+	max-height: 85%;
+	left: 7.5%;
+	top: 7.5%;
+	border-radius: 5px;
+	border: 2px solid white;
+	padding-bottom: 10px;
+}
+
+#popup-container {
+	padding: 10px;
+	display: flex;
+	flex-direction:column;
+	flex: 1;
+	justify-content: center;
+}
+
+#popup-close {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	text-align: center;
+}
+
+.disabled-hint {
+	color: gray;
+	cursor: default;
+}
+
+.long-br {
+	margin-bottom: 2em;
+}
+
+mark {
+	display: contents;
+	color: Red !important;
+	font-weight: bold;
 }

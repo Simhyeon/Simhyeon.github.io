@@ -264,6 +264,14 @@ function load_eco_init(eco_type) {
 			createProblemList(data))
 			.catch((error) => 
 				console.error("Unable to fetch data:", error));
+
+	// Add popup close event for window
+	window.addEventListener('mouseup',function(event){
+        var pol = document.getElementById('popup-hint-window');
+        if(!event.target.classList.contains("eco-explanation") && event.target != pol && event.target.parentNode != pol){
+		pol.style.setProperty('visibility','hidden');
+        }
+  });
 }
 
 function createProblemList(jsonObject) {
@@ -276,11 +284,15 @@ function createProblemList(jsonObject) {
 	probDiv.classList.add('eco-list-problem');
 	let answerDiv = document.createElement('div');
 	answerDiv.classList.add('eco-list-answer');
+	let expDiv = document.createElement('button');
+	expDiv.classList.add("eco-explanation");
+	expDiv.innerHTML = "&#9432";
 	let firstAnswerDiv = document.createElement('button');
 	firstAnswerDiv.classList.add('eco-list-answer-first');
 	let secondAnswerDiv = document.createElement('button');
 	secondAnswerDiv.classList.add('eco-list-answer-second');
 	listDiv.appendChild(probDiv);
+	probDiv.appendChild(expDiv);
 	answerDiv.appendChild(firstAnswerDiv);
 	answerDiv.appendChild(secondAnswerDiv);
 	listDiv.appendChild(answerDiv);
@@ -290,12 +302,23 @@ function createProblemList(jsonObject) {
 		if (e.problem !== "") {
 			let dupNode = listDiv.cloneNode(true);
 			parentNode.appendChild(dupNode);
-			dupNode.children[0].innerHTML = `${e.number}. ${e.problem}`;
+			// NOTE 
+			// Index 0 is prob div
+			// Index 1 is answer div
+			dupNode.children[0].insertAdjacentHTML("afterbegin",`${e.number}. ${e.problem}`);
 			dupNode.children[1].children[0].textContent = e.first;
 			dupNode.children[1].children[1].textContent = e.second;
 			dupNode.children[1].children[e.answer].dataset.answer = "true";
 
 			// Add event listener
+			if (e.explanation === "")  {
+				dupNode.children[0].children[0].disabled = true;
+				dupNode.children[0].children[0].classList.add('disabled-hint');
+			} else {
+				dupNode.children[0].children[0].addEventListener('click', () => {
+					show_hint(e.number, e.problem ,e.explanation);
+				})
+			}
 			dupNode.children[1].children[0].addEventListener('click', (vom) => {
 				select_answer(vom.target, 0);
 			});
@@ -314,6 +337,21 @@ function createProblemList(jsonObject) {
 			}
 		}
 	})
+}
+
+function show_hint(index,problem, explanation) {
+	let hint_container = document.getElementById("popup-hint-window");
+	hint_container.style.setProperty('visibility','unset');
+
+	if (hint_container.dataset.index !== index ) {
+		hint_container.children[0].innerHTML = `${index}. ${problem}<br class="long-br"/>${explanation}`;
+		hint_container.dataset.index = index 
+	} 
+
+	// TODO
+	//
+	// 3. Make ux pleasurable
+	
 }
 
 function select_answer(button, index) {
@@ -374,4 +412,9 @@ function toggle_single_hand_direction(input) {
 			e.classList.remove("eco-list-answer-right");
 		});
 	}
+}
+
+// HIde pope up window
+function close_pop_up(button) {
+	button.parentNode.style.setProperty('visibility','hidden');
 }
