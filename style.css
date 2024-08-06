@@ -181,6 +181,10 @@ input {
 
 /* More than tablets */
 @media (min-width: 480px){
+	.exp-demo {
+		max-width: 40%;
+		margin: auto;
+	}
 	.problem-header {
 		margin-bottom : 1em;
 	}
@@ -210,14 +214,18 @@ input {
 
 /* mobile media query */
 @media (min-width: 320px) and (max-width: 480px) {
+	.exp-demo {
+		max-width: 70%;
+		margin: auto;
+	}
 
-    .eco-options {
-        text-align : center;
-    }
+	.eco-options {
+		text-align : center;
+	}
 
-    .eco-separator {
-        margin-bottom: 5em;
-    }
+	.eco-separator {
+		margin-bottom: 5em;
+	}
 
 	.problem-header {
 		margin-bottom: 2em;
@@ -338,6 +346,7 @@ sup {
 	z-index: 1;
 	width: 85%;
 	max-height: 85%;
+	overflow: scroll;
 	left: 7.5%;
 	top: 7.5%;
 	border-radius: 5px;
