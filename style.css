@@ -182,8 +182,10 @@ input {
 /* More than tablets */
 @media (min-width: 480px){
 	.exp-demo {
+		display:block;
 		max-width: 40%;
 		margin: auto;
+		padding-bottom: 10px;
 	}
 	.problem-header {
 		margin-bottom : 1em;
@@ -215,8 +217,10 @@ input {
 /* mobile media query */
 @media (min-width: 320px) and (max-width: 480px) {
 	.exp-demo {
+		display: block;
 		max-width: 70%;
 		margin: auto;
+		padding-bottom: 10px;
 	}
 
 	.eco-options {
