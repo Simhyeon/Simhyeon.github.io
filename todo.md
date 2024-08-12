@@ -6,6 +6,7 @@
     -> 현재로서는 윈도우에 엮어 있는데, 이렇게 할 게 아니라, 투명 디스플레이를 만들어서 거기에 이벤트 트리거를 넣는게 좀 더 모던하고 UX 친화적이다. 
     --> 다만 현실적으로 중요도가 크지는 않다. 약간의 퍼포먼스 로스트가 있는데, 지금 시간을 너무 많이 썼다... 지금은 공부하자.
 1. 이유 명기하기 : 천천히 하자... 오래 걸리겠네
+0. 이유 팝업에 정다보 같이 표기하자. 껏다켰다 하기에는 너무 귀찮다.
 2. 그래프가 많이 필요한데, 데스모스는 너무 느리고, 리눅스판에서 계속 잉크스케이프가 튕긴다 개시발.
 
 # MISC
@@ -14,4 +15,21 @@
 
 ```
 <img class='exp-demo' src='svgs/desmos-graph.svg' alt='그래프'>
+```
+
+# Backup
+
+```
+function show_hint(e) {
+	let hint_container = document.getElementById("popup-hint-window");
+	hint_container.style.setProperty('visibility','unset');
+    console.log(hint_container.dataset.index)
+
+	if (hint_container.dataset.index !== e.index ) {
+        console.log("SAD");
+        let answer = e[answerMap[e.answer]]
+        console.log(answer);
+		hint_container.children[0].innerHTML = `${e.index}. ${e.problem} :: ${answer}<br class="long-br"/>${e.explanation}`;
+		hint_container.dataset.index = e.index 
+	} 
 ```
