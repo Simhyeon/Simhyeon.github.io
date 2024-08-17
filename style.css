@@ -120,6 +120,19 @@ p:not(.title) {
 	padding: 5px;
 }
 
+#killer-toc {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.killer-toc-list {
+	all: unset;
+	margin-bottom: 1em;
+	cursor: pointer;
+	display: flex;
+	flex-flow: row wrap;
+}
+
 .floater {
 	cursor: pointer;
 	position: fixed;
@@ -340,6 +353,36 @@ sup {
 }
 
 .supsub sub {
+    top: .3em;
+}
+
+.fraction {
+    display: inline-block;
+    text-align: center;
+    margin-right: 0.5em;
+    vertical-align: -10px;
+}
+
+/* multiple fraction multiplication */
+.m-frac {
+    margin-right: 0 !important;
+}
+
+.fraction > sup {
+	border-bottom: solid 0.1em;
+	padding-bottom: 0.5em;
+	margin-right: 0 !important;
+}
+
+.fraction > sup,
+.fraction > sub {
+    position: relative;
+    display: block;
+    font-size: 0.8em;
+    line-height: 1.2;
+}
+
+.fraction > sub {
     top: .3em;
 }
 

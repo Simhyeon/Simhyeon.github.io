@@ -31,6 +31,7 @@ function init(data) {
 	let next = document.getElementById("killer-next");
 	let prev = document.getElementById("killer-prev");
 	let home = document.getElementById("killer-home");
+	let toc = document.getElementById("killer-toc");
 
 	next.addEventListener('click', () => {
 		go_next();
@@ -41,6 +42,57 @@ function init(data) {
 	home.addEventListener('click', () => {
 		go_home();
 	})
+
+	// Initialize table of contents
+	let toc_window = document.getElementById("popup-hint-window");
+	let appendee = toc_window.children[0];
+
+	// Create go to object
+	let goto_elem = document.createElement('button');
+	goto_elem.classList.add('killer-toc-list');
+	goto_elem.dataset.target = -1;
+
+	let counter = 0;
+	SRC.forEach(e => {
+		let dupNode = goto_elem.cloneNode(true);
+		dupNode.innerHTML = `${e.header}`;
+		dupNode.dataset.target = counter;
+		appendee.appendChild(dupNode);
+		dupNode.addEventListener('click', (e) => {
+			go_to(e.currentTarget.dataset.target);
+			toc_window.style.setProperty('visibility','hidden');
+		});
+		// Clone paste
+		counter += 1;
+	});
+
+
+	// Add event listern
+	toc.addEventListener('click', () => {
+		show_toc(toc_window);
+	})
+
+	// Add popup close event for window
+	window.addEventListener('mouseup',function(event){
+		var pol = document.getElementById('popup-hint-window');
+		if(event.target != pol && event.target.parentNode != pol){
+			pol.style.setProperty('visibility','hidden');
+		}
+	});
+
+	// compile naviation with arrow keys
+	document.onkeydown = function(e) {
+		switch (e.keyCode) {
+			case 37:
+				go_prev();
+				break;
+			case 39:
+				go_next();
+				break;
+			default:
+				break;
+		}
+	};
 }
 
 function go_next() {
@@ -76,6 +128,19 @@ function go_home() {
 	elem.dataset.index = 0;
 }
 
+function go_to(index) {
+	let elem = document.getElementById("container");
+	let item = SRC[index];
+	elem.children[0].innerHTML = item.header // Header
+	elem.children[1].innerHTML = item.text // Content
+	elem.dataset.index = index;
+}
+
+function show_toc(toc_window) {
+	// Show toc-window
+	toc_window.style.setProperty('visibility','unset');
+}
+
 function init_theme() {
 	let dark_mode = get_dark_mode();
 	let html = document.getElementsByTagName("html")[0];
@@ -99,4 +164,9 @@ function get_dark_mode() {
 
 function get_draggable() {
     return localStorage.getItem("drag_able"); 
+}
+
+// HIde pope up window
+function close_pop_up(button) {
+	button.parentNode.style.setProperty('visibility','hidden');
 }

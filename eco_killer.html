@@ -15,12 +15,20 @@
         <script charset="utf-8">
             init_theme();
         </script>
+        <div id="popup-hint-window">
+            <div id="popup-container">
+            </div>
+            <button id="popup-close" style="border: none;" onclick="close_pop_up(this)">닫기</button>
+        </div>
         <div id="container" class="killer-cont" data-index=0>
 		<div id="header">PLACEHOLdER</div>
 		<div id="killer-contents"> PLACEHOLdER </div>
 		<div id="footer">
 			<button id="killer-prev" class="killer-nav">&lt;</button>
-			<button id="killer-home" class="killer-nav">처음으로</button>
+			<div>
+				<button id="killer-home" class="killer-nav">처음으로</button>
+				<button id="killer-toc" class="killer-nav">&#9776;</button>
+			</div>
 			<!-- DropDown button go to -->
 			<!-- <button class="killer-nav">처음으로</button> -->
 			<button id="killer-next" class="killer-nav">&gt;</button>

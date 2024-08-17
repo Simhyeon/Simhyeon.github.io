@@ -1,3 +1,12 @@
+# Big todos
+
+1. 헌법 300제 완성하기 : 전반 완성
+2. 경제학 킬러 완성하기
+    -> 스크롤 기능?
+    -> Disable navigation button for clarity when naviation cannot work.
+3. 신판례 적어넣기
+4. 경제학 이유 명기하기
+
 # Todos
 
 0. 다크 모드 호환 css 변수 설정하기 주로 border color 때문

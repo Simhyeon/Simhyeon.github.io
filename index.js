@@ -293,11 +293,11 @@ function load_eco_init(eco_type) {
 
 	// Add popup close event for window
 	window.addEventListener('mouseup',function(event){
-        var pol = document.getElementById('popup-hint-window');
-        if(!event.target.classList.contains("eco-explanation") && event.target != pol && event.target.parentNode != pol){
-		pol.style.setProperty('visibility','hidden');
-        }
-  });
+		var pol = document.getElementById('popup-hint-window');
+		if(!event.target.classList.contains("eco-explanation") && event.target != pol && event.target.parentNode != pol){
+			pol.style.setProperty('visibility','hidden');
+		}
+	});
 }
 
 function createProblemList(jsonObject) {
