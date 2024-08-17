@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="data:,">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="./style.css" type="text/css" media="all">
+        <script src="./index.js" charset="utf-8"></script>
+        <title>헌법 OX 300제</title>
+    </head>
+    <body onload="load_cons_init()">
+        <script charset="utf-8">
+            init_theme();
+        </script>
+        <div id="popup-hint-window">
+            <div id="popup-container">
+            </div>
+            <button id="popup-close" style="border: none;" onclick="close_pop_up(this)">닫기</button>
+        </div>
+        <div id="container" class="container">
+            <div class="eco-options">
+                <div class="problem-header">헌법 OX 300제 - 미시편</div>
+                <div class="option-space-mobile">
+                    <label class="clickable">
+                        <input id="single_hand_switch" role="switch" type="checkbox" onclick="toggle_single_hand_mode(this)"/>
+                        <span>한손으로 풀기</span>
+                    </label>
+                    <label class="clickable" id="toggle_single_hand" >
+                        <input role="switch" type="checkbox" onclick="toggle_single_hand_direction(this)"/>
+                        <span>왼손으로 풀기</span>
+                    </label>
+                </div>
+                <div class="option-space-tablet">
+                    <label class="clickable">
+                        <input id="left_hand_switch" role="switch" type="checkbox" onclick="toggle_left_hand_mode(this)"/>
+                        <span>태블릿 :: 왼손으로 풀기</span>
+                    </label>
+                </div>
+                <hr class="eco-separator" style="max-width: 100%;"/>
+            </div>
+        </div>
+    </body>
+</html>

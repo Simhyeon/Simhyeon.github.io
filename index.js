@@ -248,6 +248,32 @@ function separate_answers(btnObj) {
 	}
 }
 
+/* Constitution 300 problems  */
+function load_cons_init() {
+	let merged_path = `./cons_input.json`;
+	fetch(merged_path)
+		.then((res) => {
+			if (!res.ok) {
+				throw new Error
+				(`HTTP error! Status: ${res.status}`);
+			}
+			return res.json();
+		})
+		.then((data) => 
+			createProblemList(data))
+			.catch((error) => 
+				console.error("Unable to fetch data:", error));
+
+	// TODO Not yet
+	// Add popup close event for window
+	// window.addEventListener('mouseup',function(event){
+	//        var pol = document.getElementById('popup-hint-window');
+	//        if(!event.target.classList.contains("eco-explanation") && event.target != pol && event.target.parentNode != pol){
+	// 	pol.style.setProperty('visibility','hidden');
+	//        }
+	//  });
+}
+
 
 /* Economics 300 problems for micro and macro */
 function load_eco_init(eco_type) {
@@ -297,7 +323,9 @@ function createProblemList(jsonObject) {
 	answerDiv.appendChild(secondAnswerDiv);
 	listDiv.appendChild(answerDiv);
 	// End node creation
+	let counter = 0;
 	jsonObject.forEach(e => { 
+		counter += 1;
 		// Temporary fix for skipping empty values
 		if (e.problem !== "") {
 			let dupNode = listDiv.cloneNode(true);
@@ -305,7 +333,11 @@ function createProblemList(jsonObject) {
 			// NOTE 
 			// Index 0 is prob div
 			// Index 1 is answer div
-			dupNode.children[0].insertAdjacentHTML("afterbegin",`${e.number}. ${e.problem}`);
+			let number = e.number; 
+			if (number === undefined) {
+				number = counter;
+			}
+			dupNode.children[0].insertAdjacentHTML("afterbegin",`${number}. ${e.problem}`);
 			dupNode.children[1].children[0].textContent = e.first;
 			dupNode.children[1].children[1].textContent = e.second;
 			dupNode.children[1].children[e.answer].dataset.answer = "true";
