@@ -481,3 +481,11 @@ mark {
 	color: Red !important;
 	font-weight: bold;
 }
+
+ul, ol {
+	padding-left: 5px;
+}
+
+li {
+	margin-bottom: 10px;
+}

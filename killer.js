@@ -1,5 +1,5 @@
 let SRC = '';
-const MAX_INDEX = 107;
+let MAX_INDEX = -1;
 
 // Touch swipe related
 // Source https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -25,9 +25,9 @@ function checkDirection() {
 }
 // </TOUCH>
 
-function fetchSrcData() {
+function fetchSrcData(file_name) {
 	if (SRC !== '') { return; }
-	fetch('./eco_killer_src.json')
+	fetch(`./${file_name}.json`)
 		.then((res) => {
 			if (!res.ok) {
 				throw new Error
@@ -46,6 +46,7 @@ function fetchSrcData() {
 
 function init(data) {
 	SRC = data;
+	MAX_INDEX = SRC.length - 1
 	let elem = document.getElementById("container");
 	let item = SRC[0];
 
