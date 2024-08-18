@@ -14,8 +14,21 @@ document.addEventListener('touchend', e => {
 	touchendX = e.changedTouches[0].screenX
 	checkDirection()
 })
+
+document.addEventListener('mousedown', e => {
+	touchstartX = e.screenX
+})
+
+document.addEventListener('mouseup', e => {
+	touchendX = e.screenX
+	checkDirection()
+})
     
 function checkDirection() {
+    let distance = Math.abs(touchendX - touchstartX);
+    if (distance < 50) {
+        return;
+    } 
 	if (touchendX < touchstartX) {
 		go_next();
 	}
