@@ -1,6 +1,30 @@
 let SRC = '';
 const MAX_INDEX = 107;
 
+// Touch swipe related
+// Source https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
+let touchstartX = 0
+let touchendX = 0
+
+document.addEventListener('touchstart', e => {
+	touchstartX = e.changedTouches[0].screenX
+})
+
+document.addEventListener('touchend', e => {
+	touchendX = e.changedTouches[0].screenX
+	checkDirection()
+})
+    
+function checkDirection() {
+	if (touchendX < touchstartX) {
+		go_next();
+	}
+	if (touchendX > touchstartX) {
+		go_prev();
+	}
+}
+// </TOUCH>
+
 function fetchSrcData() {
 	if (SRC !== '') { return; }
 	fetch('./eco_killer_src.json')

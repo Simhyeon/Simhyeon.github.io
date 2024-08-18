@@ -3,7 +3,7 @@
 1. 헌법 300제 완성하기 : 전반 완성
 2. 경제학 킬러 완성하기
     -> 스크롤 기능?
-    -> Disable navigation button for clarity when naviation cannot work.
+    -> (스와이프) 
 3. 신판례 적어넣기
 4. 경제학 이유 명기하기
 
@@ -11,6 +11,8 @@
 
 0. 다크 모드 호환 css 변수 설정하기 주로 border color 때문
     -> 현재로서는 다크 모드에 최적화되어 있음.
+    -> media="(prefers-color-scheme: dark) 를 활용하여 제대로된 호환성 챙기기
+    [제대로 된 다크모드 이미지 인버트 방법](https://stackoverflow.com/questions/74638826/alternate-images-based-on-users-color-preference-without-using-javascript)
 0. Popup 로직 모던화하기
     -> 현재로서는 윈도우에 엮어 있는데, 이렇게 할 게 아니라, 투명 디스플레이를 만들어서 거기에 이벤트 트리거를 넣는게 좀 더 모던하고 UX 친화적이다. 
     --> 다만 현실적으로 중요도가 크지는 않다. 약간의 퍼포먼스 로스트가 있는데, 지금 시간을 너무 많이 썼다... 지금은 공부하자.

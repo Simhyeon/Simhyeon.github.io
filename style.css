@@ -99,7 +99,7 @@ p:not(.title) {
 	flex-direction: column;
 	padding: min(20px, 5%);
 	width: 90%;
-	height: 90%;
+	height: 95%;
 	max-width: 95%;
 	max-height: 95%;
 	justify-content: space-between;
@@ -109,6 +109,12 @@ p:not(.title) {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	max-height: 5%;
+}
+
+#killer-toc img {
+	max-height: 100%;
+	max-width: 100%;
 }
 
 #killer-contents {
@@ -118,11 +124,14 @@ p:not(.title) {
 
 .killer-nav {
 	padding: 5px;
+	border: none;
 }
 
 #killer-toc {
 	padding-left: 7px;
 	padding-right: 7px;
+	width : 15px;
+	vertical-align: -2px;
 }
 
 .killer-toc-list {
@@ -131,6 +140,11 @@ p:not(.title) {
 	cursor: pointer;
 	display: flex;
 	flex-flow: row wrap;
+}
+
+#killer-prev, #killer-next {
+	flex: 1;
+	text-align: center;
 }
 
 .floater {
@@ -228,6 +242,9 @@ input {
 
 /* More than tablets */
 @media (min-width: 480px){
+	.killer-cont {
+		height: 93% !important;
+	}
 	.exp-demo {
 		display:block;
 		max-width: 40%;
@@ -427,7 +444,6 @@ sup {
 	z-index: 1;
 	width: 85%;
 	max-height: 85%;
-	overflow: scroll;
 	left: 7.5%;
 	top: 7.5%;
 	border-radius: 5px;
@@ -436,6 +452,7 @@ sup {
 }
 
 #popup-container {
+	overflow: scroll;
 	padding: 10px;
 	/* display: flex; */
 	/* flex-direction:column; */
