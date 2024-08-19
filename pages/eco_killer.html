@@ -2,13 +2,14 @@
 <html>
     <head>
         <link rel="icon" href="data:,">
+	<base href="../" target="">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="./style.css" type="text/css" media="all">
-        <script src="./killer.js" charset="utf-8"></script>
+        <script src="/scripts/killer.js" charset="utf-8"></script>
         <title>국가직 공무원 7급 우정행정 경제학 킬러 정리</title>
     </head>
     <body onload="fetchSrcData('eco_killer_src')">
@@ -21,13 +22,13 @@
             <button id="popup-close" style="border: none;" onclick="close_pop_up(this)">닫기</button>
         </div>
         <div id="container" class="killer-cont" data-index=0>
-		<div id="header">PLACEHOLdER</div>
-		<div id="killer-contents"> PLACEHOLdER </div>
+		<div id="header"></div>
+		<div id="killer-contents"></div>
 		<div id="footer" class="non_dragable">
 			<button id="killer-prev" class="killer-nav">&lt;</button>
 			<div>
 				<button id="killer-home" class="killer-nav">처음으로</button>
-                <button id="killer-toc" class="killer-nav"><img src='./svgs/hamburger_menu_dark_mode.svg'></i></button>
+                <button id="killer-toc" class="killer-nav"><img src='/svgs/hamburger_menu_dark_mode.svg'></i></button>
 			</div>
 			<!-- DropDown button go to -->
 			<!-- <button class="killer-nav">처음으로</button> -->

@@ -40,7 +40,7 @@ function checkDirection() {
 
 function fetchSrcData(file_name) {
 	if (SRC !== '') { return; }
-	fetch(`./${file_name}.json`)
+	fetch(`/rcs/${file_name}.json`)
 		.then((res) => {
 			if (!res.ok) {
 				throw new Error

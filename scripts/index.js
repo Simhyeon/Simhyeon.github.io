@@ -250,7 +250,7 @@ function separate_answers(btnObj) {
 
 /* Constitution 300 problems  */
 function load_cons_init() {
-	let merged_path = `./cons_input.json`;
+	let merged_path = `/rcs/cons_input.json`;
 	fetch(merged_path)
 		.then((res) => {
 			if (!res.ok) {
@@ -277,7 +277,7 @@ function load_cons_init() {
 
 /* Economics 300 problems for micro and macro */
 function load_eco_init(eco_type) {
-	let merged_path = `./eco_input-${eco_type}.json`;
+	let merged_path = `/rcs/eco_input-${eco_type}.json`;
 	fetch(merged_path)
 		.then((res) => {
 			if (!res.ok) {

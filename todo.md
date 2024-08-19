@@ -1,6 +1,5 @@
 # Big todos
 
-0. 파일 구조 좀 정리하기
 1. 헌법 300제 완성하기 : 전반 완성
 2. 경제학 킬러 완성하기
 3. 신판례 적어넣기
@@ -28,21 +27,4 @@
 
 ```
 <img class='exp-demo' src='svgs/desmos-graph.svg' alt='그래프'>
-```
-
-# Backup
-
-```
-function show_hint(e) {
-	let hint_container = document.getElementById("popup-hint-window");
-	hint_container.style.setProperty('visibility','unset');
-    console.log(hint_container.dataset.index)
-
-	if (hint_container.dataset.index !== e.index ) {
-        console.log("SAD");
-        let answer = e[answerMap[e.answer]]
-        console.log(answer);
-		hint_container.children[0].innerHTML = `${e.index}. ${e.problem} :: ${answer}<br class="long-br"/>${e.explanation}`;
-		hint_container.dataset.index = e.index 
-	} 
 ```
