@@ -1,35 +1,35 @@
 [
     {
         "header": "가정폭력법상 피해자 보호명령",
-        "text": "<mark>합헌</mark><br/>우편을 이용한 접근금지를 피해자보호명령의 종류로 정하지 않은 것은 "
+        "text": "<mark class='blue-mark'>합헌</mark><br/>우편을 이용한 접근금지를 피해자보호명령의 종류로 정하지 않은 것은 평등원칙에 위반되지 않는다."
     },
     {
         "header": "비급여 진료비용의 보고 및 공개에 관한 사건",
-        "text": " <mark>합헌</mark><br/>비급여 진료시 해당 내용을 보고하는 것을 의무로 하는 조항은 합헌. 또한 법률 유보에 반하지 않으므로 직업수행의 자유를 침해한다고 볼 수 없음."
+        "text": " <mark class='blue-mark'>합헌</mark><br/>비급여 진료시 해당 내용을 보고하는 것을 의무로 하는 조항은 합헌. 또한 법률 유보에 반하지 않으므로 직업수행의 자유를 침해한다고 볼 수 없음."
     },
     {
         "header": "외국에 영주할 목적이 없이 체류한 직계존속으로부터 태어난 자의 국적이탈 제한",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "중등교사 임용시험에서 코로나19 확진자의 응시를 금지하고, 자가격리자 및 접촉자의 응시를 제한한 강원도교육청 공고",
-        "text": "<mark>각하</mark><br/>별도시험장에서 응시를 할 수 있도록 했으므로 소의 이익을 인정할 수 없다."
+        "text": "<mark class='green-mark'>각하</mark><br/>별도시험장에서 응시를 할 수 있도록 했으므로 소의 이익을 인정할 수 없다."
     },
     {
         "header": "변호사시험에서 코로나19 확진환자의 응시를 금지하고, 자가격리자 및 고위험자의 응시를 제한",
-        "text": "<mark>위헌</mark><br/>다른 시험 우회적인 방법을 제시하지 않고 일률적으로 응시를 제한한 것은 기본권은 과도하게 제한한 것으로서"
+        "text": "<mark>위헌</mark><br/>다른 시험 우회적인 방법을 제시하지 않고 일률적으로 응시를 제한한 것은 기본권은 과도하게 제한한 것으로서 과도한 제한이다."
     },
     {
         "header": "택시운전근로자 최저임금산입",
-        "text": " <mark>합헌</mark><br/>택시운전근로자의 보호를 위하여 최저임금 산입 범위에 생산고 임금을 제외한 것은 헌법에 위반되지 않음."
+        "text": " <mark class='blue-mark'>합헌</mark><br/>택시운전근로자의 보호를 위하여 최저임금 산입 범위에 생산고 임금을 제외한 것은 헌법에 위반되지 않음."
     },
     {
         "header": "이자제한법상 최고이자율 상한을 위반하는 행위에 대해 형사처벌",
-        "text": " <mark>합헌</mark><br/>고금리 채무로 비롯하는 국민의 이자 부담을 감경하기 위하여 형사처벌을 과하는 것은 과도한 제한이 아니다."
+        "text": " <mark class='blue-mark'>합헌</mark><br/>고금리 채무로 비롯하는 국민의 이자 부담을 감경하기 위하여 형사처벌을 과하는 것은 과도한 제한이 아니다."
     },
     {
         "header": "외국에 주소 없는 자의 국적이탈 제한",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "성폭법상 주거침입강제추행·준강제추행죄",
@@ -37,63 +37,63 @@
     },
     {
         "header": "야간주거침입절도미수범의 준강제추행죄",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "어린이 보호구역에서 교통사고로 어린이를 상해나 사망에 이르게 한 경우를 가중처벌",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "대한적십자사 회비모금 목적의 자료제공",
-        "text": "<mark>합헌</mark><br/>지로제출의 경우 단순한 착오로 회비를 납부할 가능성은 인정하기 어렵다. 제공되는 자료의 내용 또한 과도하다고 볼 수 없으므로 "
+        "text": "<mark class='blue-mark'>합헌</mark><br/>지로제출의 경우 단순한 착오로 회비를 납부할 가능성은 인정하기 어렵다. 제공되는 자료의 내용 또한 과도하다고 볼 수 없으므로 개인정보자기결정권을 침해하지 않는다."
     },
     {
         "header": "학교폭력 가해학생에 대한 서면사과 조치 및 학교장의 가해학생 조치 의무조항",
-        "text": " <mark>합헌</mark><br/>가해학생의 선도와 피해학생의 피해회복 및 정상적인 교육관계 회복 등의 공익을 고려한다면 과도하지 않다."
+        "text": " <mark class='blue-mark'>합헌</mark><br/>가해학생의 선도와 피해학생의 피해회복 및 정상적인 교육관계 회복 등의 공익을 고려한다면 과도하지 않다."
     },
     {
         "header": "건설업 등록증 대여시 필요적 말소",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "집단민원현장에 일반 경비원 배치할 경우 허가를 받도록 한 경우",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "관련 자격증 소지자에게 가산점을 부여",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "수석교사의 경우 교육연구사 제한",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "육아 휴직 급여 12개월 이내 청구",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "약식에서 정식재판 청구시 형종상향 금지로 개정",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "병역준비역에 대하여 27세 초과하지 않는 범위에서 단기 국외여행을 허가",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "관세직 국가공무원의 선발예정인원을 정한 인사혁신처 공고",
-        "text": " <mark>각하</mark><br/>모집인원의 감소로 인하여 합격할 가능성이 줄었다는 것은 간접적이고 사실적인 불이익에 불과하다."
+        "text": " <mark class='green-mark'>각하</mark><br/>모집인원의 감소로 인하여 합격할 가능성이 줄었다는 것은 간접적이고 사실적인 불이익에 불과하다."
     },
     {
         "header": "변론종결시까지만 청구의 취지 또는 원인을 변경",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "음란 영상 전시-공연 금지",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "시정명령의 상당한 기간 불이행시 이행강제금 부과",
-        "text": "<mark>합헌</mark><br/>상당한 기간은 여러 사정을 종합하면 어느 정도일지를 대략 예측할 수 있으므로 불명확한 규정으로서 명확성 원칙에 위반한다고 볼 수는 없다. "
+        "text": "<mark class='blue-mark'>합헌</mark><br/>상당한 기간은 여러 사정을 종합하면 어느 정도일지를 대략 예측할 수 있으므로 불명확한 규정으로서 명확성 원칙에 위반한다고 볼 수는 없다. "
     },
     {
         "header": "남양주시와 경기도 간의 권한쟁의",
@@ -101,7 +101,7 @@
     },
     {
         "header": "반복적 절도 사범에 대한 가중 처벌",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "외국거주 외국인유족의 퇴직공제금 수급 자격 불인정",
@@ -137,19 +137,19 @@
     },
     {
         "header": "(국회 청원시) 일정한 기간 동안 일정 수 이상의 국민의 동의를 요구하는 국회법",
-        "text": "<mark>합헌</mark> <br class='long-br'/> cf. 국회 청원 동의 요건은 10만 명에서 5만명으로 완화되었다."
+        "text": "<mark class='blue-mark'>합헌</mark> <br class='long-br'/> cf. 국회 청원 동의 요건은 10만 명에서 5만명으로 완화되었다."
     },
     {
         "header": "특수경비원의 일체의 쟁의행위 금지",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "상업지역의 도시정비형 재개발 사업을 직권해제 대상에서 제외",
-        "text": "<mark>합헌</mark><br/>해당 사업은 지역별 실정이 특히 고려되어야 하므로 지방의회가 조례를 통하여 정할 필요성이 크다. 따라서 직권해제 대상에서 제외한 것이 재산권의 침해라고 볼 수 없다."
+        "text": "<mark class='blue-mark'>합헌</mark><br/>해당 사업은 지역별 실정이 특히 고려되어야 하므로 지방의회가 조례를 통하여 정할 필요성이 크다. 따라서 직권해제 대상에서 제외한 것이 재산권의 침해라고 볼 수 없다."
     },
     {
         "header": "이혼한 배우자의 분할연금 수급요건을 16년 이후 이혼한 사람으로부터 적용",
-        "text": "<mark>합헌</mark><br/>해당 조항은 소급적용할 경우 이미 형성된 법률관계에 중대한 영향을 미쳐 법적 안정성이 훼손될 우려가 매우 크므로 이를 입법재량의 범위를 벗어나 현저리 불합리하다고 볼 수는 없다. "
+        "text": "<mark class='blue-mark'>합헌</mark><br/>해당 조항은 소급적용할 경우 이미 형성된 법률관계에 중대한 영향을 미쳐 법적 안정성이 훼손될 우려가 매우 크므로 이를 입법재량의 범위를 벗어나 현저리 불합리하다고 볼 수는 없다. "
     },
     {
         "header": "집단급식소 영양사 직무미수행 처벌사건",
@@ -157,19 +157,19 @@
     },
     {
         "header": "서울대학교가 행정심판 인용재결에 기속",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "행정사에게 연수의무 부과",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "의약품 판매는 원칙적으로 약국에서 함",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "준강도죄를 행위 양태로 구별하지 않고 강도에 준하여 처벌",
-        "text": "<mark>합헌</mark><br/>그 행위의 죄질이 강도와 등가로 평가될 수 있기 때문에, 처벌의 정도를 구분하지 않은 것이 평등의 원칙에 위반되지 않는다. "
+        "text": "<mark class='blue-mark'>합헌</mark><br/>그 행위의 죄질이 강도와 등가로 평가될 수 있기 때문에, 처벌의 정도를 구분하지 않은 것이 평등의 원칙에 위반되지 않는다. "
     },
     {
         "header": "표준휠체어만을 고려한 장애인 특별교통수단 기준 조항",
@@ -177,39 +177,39 @@
     },
     {
         "header": "아동학대관련범죄 처벌시 어린이집 원장 및 보육교사의 자격취소를 규정한 조항",
-        "text": " <mark>합헌</mark><br/>영유아를 보호 양육하는 관점에서 그에 부합하는 자질을 갖추지 못한 인원을 배제할 필요성은 매우 크므로 직업의 자유를 침해한다고 볼 수 없다."
+        "text": " <mark class='blue-mark'>합헌</mark><br/>영유아를 보호 양육하는 관점에서 그에 부합하는 자질을 갖추지 못한 인원을 배제할 필요성은 매우 크므로 직업의 자유를 침해한다고 볼 수 없다."
     },
     {
         "header": "공조조업 금지",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "코로나바이러스감염증19의 예방을 위한 방역조치를 명하는 서울특별시고시",
-        "text": "<mark>각하</mark> <br/>해당 조치는 처분이므로 보충성을 갖추지 못하였다."
+        "text": "<mark class='green-mark'>각하</mark> <br/>해당 조치는 처분이므로 보충성을 갖추지 못하였다."
     },
     {
         "header": "기타 어떠한 방법으로도 연설-대담장소 등의 질서를 문란하게 하면 안 된다는 조항",
-        "text": " <mark>합헌</mark> <br/>해당 조항에서는 폭행-협박 등의 행위태양을 직접 규정하고 있으므로 그 제한의 정도가 과도하다고 볼 수는 없다."
+        "text": " <mark class='blue-mark'>합헌</mark> <br/>해당 조항에서는 폭행-협박 등의 행위태양을 직접 규정하고 있으므로 그 제한의 정도가 과도하다고 볼 수는 없다."
     },
     {
         "header": "형의 종류-형량에 따라 차등을 두어 의료기관 취업을 제한",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "대한민국과 미합중국 간의 상호방위조약",
-        "text": "<mark>각하</mark> <br/>재판의 전제성를 갖추지 못했다. "
+        "text": "<mark class='green-mark'>각하</mark> <br/>재판의 전제성를 갖추지 못했다. "
     },
     {
         "header": "죄를 증명할 수 있는 과학적 증거가 있는 경우 성범죄 공소시효 연장",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "농협중앙회 회장선거를 중앙선관위에 위탁",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
-        "header": "수의사가 처방전 없이도 특정 동물용 의약품을 판매하도록 하는 조항",
-        "text": "<mark>합헌</mark>"
+        "header": "수의사의 처방전 없이는 특정 동물용 의약품을 판매하지 못하도록 하는 조항",
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "집한제한 조치로 발생한 손실을 보상하는 규정을 두지 않는 법률",
@@ -221,15 +221,15 @@
     },
     {
         "header": "정부광고 업무를 한국언론진흥재단에 독점적으로 위탁",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "상가임차인의 권리금 회수기회 보호의 예외사유를 둔 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "대규모 밀반송범의 관세법 및 특정범죄가중법상 처벌",
-        "text": " <mark>합헌</mark> <br/>'반송'이라는 개념이 명확성 원칙에 위반되지 않는다고 보았다."
+        "text": " <mark class='blue-mark'>합헌</mark> <br/>'반송'이라는 개념이 명확성 원칙에 위반되지 않는다고 보았다."
     },
     {
         "header": "화환 설치를 금지하는 공직선거법",
@@ -237,111 +237,111 @@
     },
     {
         "header": "5억이상 국세징수권의 소멸시효를 10년으로 한 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "법정대기실내 쇠창살 격리시설에서 수갑 착용",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "총장선출에 있어 교원과 직원을 차별하는 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "집행유예를 선고 받고 그 유예기간에 있는 경우를 특수경비원의 결격사유로 정하고 있는 조항",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "전유부분과 대지사용권의 분리 처분을 금지",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "가짜석유제품을 판매하여 조사 포탈시 형사처벌하는 조항",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "종합문화재수리업을 하려는 자에게 요구되는 기술능력의 등록 요건을 대통령령에 위임",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "2회 이상 음주운전시 필요적 면허취소",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "소방시공과 감리의 하자시 형사처벌",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "문서등의 위변조를 재심 사유로 인정하는 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "폭행죄로 2회 이상 징역형을 받은 사람이 다시 같은 죄를 범하여 누범으로 처벌하는 경우 가중처벌",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "토지소유자의 100분의 30이상이 구역의 해제를 요청할 경우 정비예정구역을 해제할 수 있도록 한 조항",
-        "text": "<mark>합헌</mark> <br/>추구 보강"
+        "text": "<mark class='blue-mark'>합헌</mark> <br/>추구 보강"
     },
     {
         "header": "간호조무사 시험 토요일 시행",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "도서정가제",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "준연동형 비례대표제",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "장애인 편의시설 (장애인 승강기 또는 화장실) 설치 부작위 사건",
-        "text": "  <mark>각하</mark><br/>보충성을 갖추지 못했다고 판단했다."
+        "text": "  <mark class='green-mark'>각하</mark><br/>보충성을 갖추지 못했다고 판단했다."
     },
     {
         "header": "신규성 상실의 예외를 제한하는 디자인보호법 조항",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "공익법인 주식 등의 보유 기준 초과시 가산세를 부과",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "공정위의 열람-복사 요구에 대한 거부",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "외교기간 100m 이내 옥외집회의 금지",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark><br/> 해당 조항에서는 옥외집회가 허용되는 예외를 두고 있으므로 침해의 최소성에 반한다고 볼 수 없다."
     },
     {
         "header": "별정우체국 복무-징계에 관한 부분을 행정입법에 위임",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "전과자는 선고유예가 불가능하도록 한 조항",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "후보자와 후보자가 되고자 하는 자는 허위사실 공표 금지",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "사립학교 교비회계의 전용 금지",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "전투근무수당에서 수당 지급 조건을 전시-사변으로 규정하고 있는 구 군인보수법",
-        "text": "<mark>합헌</mark><br/>베트남 참전은 전시-사변에 해당하지 않아 근무수당을 지불하지 않고 이것을 평등 원칙에 위반한다고 볼 수 없다. "
+        "text": "<mark class='blue-mark'>합헌</mark><br/>베트남 참전은 전시-사변에 해당하지 않아 근무수당을 지불하지 않고 이것을 평등 원칙에 위반한다고 볼 수 없다. "
     },
     {
         "header": "군사법원상 비용보상청구권의 제척기간을 6개월로 정한 것 ",
-        "text": "<mark>위헌</mark><br/> 추후 내용 보강 "
+        "text": "<mark>위헌</mark><br/> {형사비용보상 청구권의 제척기간이 3.5년으로 이미 개정된 상황이었음} 추후 내용 보강 "
     },
     {
         "header": "총장 후보자 선정에서 시간제 강사에게 선거권을 부여하지 않는 조항",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "대북 전단 등의 살포 금지-처벌 사건",
@@ -357,42 +357,46 @@
     },
     {
         "header": "대한민국 국민인 남성에만 병역의무를 부과하는 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "반사회질서의 법률행위를 무효로 하는 민법 제103조",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "국가보안법상 이적행위 및 이적표현물 제작행위 등 처벌규정",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "정당법 제59조 2항 등에 대한 판단",
-        "text": "<mark>합헌</mark><br/> 다음 모두에 대해서 헌법에 합치한다고 보았다. <ol><ul>등록을 정당의 설립요건으로 정한 것</ul><ul>등록된 정당이 아니면 정당이라는 명칭을 사용하지 못하게 하는 것</ul><ul>5 이상의 시·도당을 갖추어야 한다고 정한 것</ul><ul>시·도당은 1천인 이상의 당원을 가져야 한다고 정한 것</ul></ol> "
+        "text": "<mark class='blue-mark'>합헌</mark><br/> 다음 모두에 대해서 헌법에 합치한다고 보았다. <ol><ul>등록을 정당의 설립요건으로 정한 것</ul><ul>등록된 정당이 아니면 정당이라는 명칭을 사용하지 못하게 하는 것</ul><ul>5 이상의 시·도당을 갖추어야 한다고 정한 것</ul><ul>시·도당은 1천인 이상의 당원을 가져야 한다고 정한 것</ul></ol> "
     },
     {
         "header": "예비역 복무의무자의 범위에서 일반적으로 여성을 제외",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "양형자료를 법원에 통보한 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "가사소송 재심 제기기간을 30일로 정한 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "교도소-구치소에 수용 중인 자에 대하여 의료급여 수급 자격을 부여하지 않는 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "사전투표시에 바코드방식의 일련번호를 사용하는 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
     },
     {
         "header": "사전투표용지에 서명날인을 하지 않고 인쇄날인을 하는 것",
-        "text": "<mark>합헌</mark>"
+        "text": "<mark class='blue-mark'>합헌</mark>"
+    },
+    {
+        "header": "",
+        "text": ""
     }
 ]

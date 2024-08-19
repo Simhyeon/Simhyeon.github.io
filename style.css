@@ -496,4 +496,13 @@ mark {
 
 #header {
     font-size: 2rem;
+    /* word-break: keep-all; */
+}
+
+mark.blue-mark {
+	color : #0CAFFF !important;
+}
+
+mark.green-mark {
+	color : #66FF00 !important;
 }
