@@ -1,0 +1,17 @@
+i {
+    all : unset;
+    color: darkturquoise !important;
+}
+
+i * {
+    color: darkturquoise !important;
+}
+
+u {
+    all : unset;
+    color: yellow !important;
+}
+
+u * {
+    color: yellow !important;
+}

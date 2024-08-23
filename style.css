@@ -144,6 +144,7 @@ p:not(.title) {
 	cursor: pointer;
 	display: flex;
 	flex-flow: row wrap;
+	width: 100%;
 }
 
 #killer-prev, #killer-next {

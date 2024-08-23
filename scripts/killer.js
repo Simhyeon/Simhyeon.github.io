@@ -39,7 +39,7 @@ function checkDirection() {
 }
 // </TOUCH>
 
-function fetchSrcData(file_name, page_name) {
+function fetch_data_and_init(file_name, page_name, use_numbering) {
 	if (SRC !== '') { return; }
 	fetch(`/rcs/${file_name}.json`)
 		.then((res) => {
@@ -50,12 +50,12 @@ function fetchSrcData(file_name, page_name) {
 			return res.json();
 		})
 		.then((data) => 
-            		{ init(data, page_name); })
+            		{ init(data, page_name,use_numbering); })
 			.catch((error) => 
 				console.error("Unable to fetch data:", error));
 }
 
-function init(data, page_name) {
+function init(data, page_name,use_numbering) {
 	SRC = data;
 	MAX_INDEX = SRC.length - 1
 	let elem = document.getElementById("container");
@@ -91,7 +91,13 @@ function init(data, page_name) {
 	let counter = 0;
 	SRC.forEach(e => {
 		let dupNode = goto_elem.cloneNode(true);
-		dupNode.innerHTML = `${e.header}`;
+		let toc_text = '';
+		if (use_numbering) {
+			toc_text = `${counter}. ${e.header}`
+		} else {
+			toc_text = e.header
+		}
+		dupNode.innerHTML = toc_text;
 		dupNode.dataset.target = counter;
 		appendee.appendChild(dupNode);
 		dupNode.addEventListener('click', (e) => {
