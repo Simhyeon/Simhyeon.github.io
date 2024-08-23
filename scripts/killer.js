@@ -1,5 +1,6 @@
 let SRC = '';
 let MAX_INDEX = -1;
+let LC_PAGE_NAME = '';
 
 // Touch swipe related
 // Source https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -38,7 +39,7 @@ function checkDirection() {
 }
 // </TOUCH>
 
-function fetchSrcData(file_name) {
+function fetchSrcData(file_name, page_name) {
 	if (SRC !== '') { return; }
 	fetch(`/rcs/${file_name}.json`)
 		.then((res) => {
@@ -49,15 +50,12 @@ function fetchSrcData(file_name) {
 			return res.json();
 		})
 		.then((data) => 
-            		{ init(data); })
+            		{ init(data, page_name); })
 			.catch((error) => 
 				console.error("Unable to fetch data:", error));
-
-	// Init first data
-    
 }
 
-function init(data) {
+function init(data, page_name) {
 	SRC = data;
 	MAX_INDEX = SRC.length - 1
 	let elem = document.getElementById("container");
@@ -131,6 +129,18 @@ function init(data) {
 				break;
 		}
 	};
+
+	// Init first data
+	LC_PAGE_NAME = page_name;
+	if (localStorage.getItem(LC_PAGE_NAME) === null) {
+		localStorage.setItem(LC_PAGE_NAME,0)
+	}
+	let new_index = localStorage.getItem(LC_PAGE_NAME);
+	go_to(new_index);
+}
+
+function update_page_bookmark(current_page) {
+	localStorage.setItem(LC_PAGE_NAME, current_page); 
 }
 
 function go_next() {
@@ -145,6 +155,7 @@ function go_next() {
 
 	// GEt target container
 	elem.dataset.index = index + 1;
+	update_page_bookmark(index + 1);
 }
 
 function go_prev() {
@@ -156,6 +167,7 @@ function go_prev() {
 	elem.children[1].innerHTML = item.text // Content
 
 	elem.dataset.index = index - 1;
+	update_page_bookmark(index - 1);
 }
 
 function go_home() {
@@ -164,6 +176,7 @@ function go_home() {
 	elem.children[0].innerHTML = item.header // Header
 	elem.children[1].innerHTML = item.text // Content
 	elem.dataset.index = 0;
+	update_page_bookmark(0);
 }
 
 function go_to(index) {
@@ -172,6 +185,7 @@ function go_to(index) {
 	elem.children[0].innerHTML = item.header // Header
 	elem.children[1].innerHTML = item.text // Content
 	elem.dataset.index = index;
+	update_page_bookmark(index);
 }
 
 function show_toc(toc_window) {

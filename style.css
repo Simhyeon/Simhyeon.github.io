@@ -100,7 +100,7 @@ p:not(.title) {
 	display: flex;
 	flex-direction: column;
 	padding: min(20px, 5%);
-	width: 90%;
+	width: 91%;
 	height: 95%;
 	max-width: 95%;
 	max-height: 95%;
