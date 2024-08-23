@@ -338,8 +338,8 @@ function createProblemList(jsonObject) {
 				number = counter;
 			}
 			dupNode.children[0].insertAdjacentHTML("afterbegin",`${number}. ${e.problem}`);
-			dupNode.children[1].children[0].textContent = e.first;
-			dupNode.children[1].children[1].textContent = e.second;
+			dupNode.children[1].children[0].textContent = e.first ?? 'O';
+			dupNode.children[1].children[1].textContent = e.second ?? 'X';
 			dupNode.children[1].children[e.answer].dataset.answer = "true";
 
 			// Add event listener
@@ -359,11 +359,11 @@ function createProblemList(jsonObject) {
 			});
 
 			// Modify text spacing for specific anwers
-			if (e.first.length !== 1) {
+			if (e.first != undefined && e.first.length !== 1) {
 				dupNode.children[1].children[0].style.setProperty('padding-right', '0');
 				dupNode.children[1].children[0].style.setProperty('padding-left', '0');
 			}
-			if (e.second.length !== 1) {
+			if (e.second != undefined && e.second.length !== 1) {
 				dupNode.children[1].children[1].style.setProperty('padding-right', '0');
 				dupNode.children[1].children[1].style.setProperty('padding-left', '0');
 			}

@@ -191,6 +191,14 @@ function go_to(index) {
 function show_toc(toc_window) {
 	// Show toc-window
 	toc_window.style.setProperty('visibility','unset');
+
+	// Scroll to current status
+	let target_index = document.getElementById('container').dataset.index;
+	toc_window.children[0].children[target_index].scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+        });
 }
 
 function init_theme() {
