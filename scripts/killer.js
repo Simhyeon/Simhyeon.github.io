@@ -1,6 +1,7 @@
 let SRC = '';
 let MAX_INDEX = -1;
 let LC_PAGE_NAME = '';
+let page_number_elem = null;
 
 // Touch swipe related
 // Source https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -142,11 +143,17 @@ function init(data, page_name,use_numbering) {
 		localStorage.setItem(LC_PAGE_NAME,0)
 	}
 	let new_index = localStorage.getItem(LC_PAGE_NAME);
+
+	page_number_elem = document.getElementById('page-number')
+
 	go_to(new_index);
 }
 
 function update_page_bookmark(current_page) {
 	localStorage.setItem(LC_PAGE_NAME, current_page); 
+	if (page_number_elem !== null) {
+		page_number_elem.textContent = `-${current_page}-`
+	}
 }
 
 function go_next() {

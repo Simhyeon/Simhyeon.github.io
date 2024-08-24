@@ -15,3 +15,45 @@ u {
 u * {
     color: yellow !important;
 }
+
+img {
+	vertical-align: middle;
+}
+
+#killer-toc > img {
+	vertical-align: -2px !important;
+}
+
+.yellow * {
+    color: yellow !important;
+}
+
+#killer-home, #page-number {
+	margin-right: 10px;
+}
+
+.killer-nav {
+	border: none;
+}
+
+#killer-toc {
+	padding-left: 7px;
+	padding-right: 7px;
+	width : 15px;
+	vertical-align: 1px;
+}
+
+.killer-toc-list {
+	all: unset;
+	margin-bottom: 1em;
+	cursor: pointer;
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+}
+
+#killer-prev, #killer-next {
+	flex: 1;
+	text-align: center;
+}
+

@@ -125,33 +125,6 @@ p:not(.title) {
     overflow: scroll;
     font-size: 1.2rem;
 }
-
-.killer-nav {
-	padding: 5px;
-	border: none;
-}
-
-#killer-toc {
-	padding-left: 7px;
-	padding-right: 7px;
-	width : 15px;
-	vertical-align: -2px;
-}
-
-.killer-toc-list {
-	all: unset;
-	margin-bottom: 1em;
-	cursor: pointer;
-	display: flex;
-	flex-flow: row wrap;
-	width: 100%;
-}
-
-#killer-prev, #killer-next {
-	flex: 1;
-	text-align: center;
-}
-
 .floater {
 	cursor: pointer;
 	position: fixed;
