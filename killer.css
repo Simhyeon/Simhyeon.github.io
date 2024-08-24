@@ -1,18 +1,36 @@
-i {
+:not(.dark_mode) i {
+    all : unset;
+    color: dodgerblue !important;
+}
+
+:not(.dark_mode) i * {
+    color: dodgerblue !important;
+}
+
+:not(.dark_mode) u {
+    all : unset;
+    color: darkorange !important;
+}
+
+:not(.dark_mode) u * {
+    color: darkorange !important;
+}
+
+.dark_mode i {
     all : unset;
     color: darkturquoise !important;
 }
 
-i * {
+.dark_mode i * {
     color: darkturquoise !important;
 }
 
-u {
+.dark_mode u {
     all : unset;
     color: yellow !important;
 }
 
-u * {
+.dark_mode u * {
     color: yellow !important;
 }
 
@@ -57,3 +75,14 @@ img {
 	text-align: center;
 }
 
+
+.img-with-txt {
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 1em;
+}
+
+.img-with-txt span {
+	margin-top: auto;
+	margin-bottom: auto;
+}

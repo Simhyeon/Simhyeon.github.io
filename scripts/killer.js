@@ -126,6 +126,12 @@ function init(data, page_name,use_numbering) {
 	// compile naviation with arrow keys
 	document.onkeydown = function(e) {
 		switch (e.keyCode) {
+			case 35: 
+				go_to(MAX_INDEX);
+				break;
+			case 36: 
+				go_home();
+				break;
 			case 37:
 				go_prev();
 				break;

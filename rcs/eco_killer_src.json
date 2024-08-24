@@ -25,7 +25,7 @@
     },
     {
         "header": "4장의 2 : &nbsp <span>이중가격제</span>",
-        "text": "최고 · 최저가격제와 마찬가지로 이중가격제 시행 시 사회적 잉여가 <i>감소</i>한다. <br class='long-br'/> <img src='/svgs/double_price_white.svg' alt='[그래프]'/> 비법: <i>이중가격제 시행 시 사회적 잉여 감소분 : G</i>"
+        "text": "최고 · 최저가격제와 마찬가지로 이중가격제 시행 시 사회적 잉여가 <i>감소</i>한다. <br class='long-br'/> <span class='img-with-txt'><img class='dark-img' src='/svgs/double_price_white.svg' alt='[그래프]'/><img class='light-img' src='/svgs/double_price.svg' alt='[그래프]'/> <span><u>비법</u>: <i>이중가격제 시행 시 사회적 잉여 감소분 : G</i></span></span>"
     },
     {
         "header": "4장의 3 : &nbsp <span>농산물의 가격파동</span>",
@@ -41,7 +41,7 @@
     },
     {
         "header": "6장의 2 : &nbsp <span>특수한 형태의 소비자균형</span>",
-        "text": "모든 점에서 MRS<sub>XY</sub>가 <span class='fraction'><sup>P<sub>X</sub></sup><sub>P<sub>Y</sub></sub></span> 보다 크거나 작을 때에는 예산선과 무차별곡선이 X축 혹은 Y축 위에서 접한다. <br class='long-br'/> <span style='text-align: center;'><img src='/svgs/saturation_white.svg' alt='[그래프]'/> <u>비법:</u>  <i>Y비-Y재 비재화</i></span>"
+        "text": "모든 점에서 MRS<sub>XY</sub>가 <span class='fraction'><sup>P<sub>X</sub></sup><sub>P<sub>Y</sub></sub></span> 보다 크거나 작을 때에는 예산선과 무차별곡선이 X축 혹은 Y축 위에서 접한다. <br class='long-br'/> <span class='img-with-txt'><img class='dark-img' src='/svgs/saturation_white.svg' alt='[그래프]'/> <img class='light-img' src='/svgs/saturation.svg' alt='[그래프]'/><span><u>비법:</u>  <i>Y비-Y재 비재화</i></span></span>"
     },
     {
         "header": "6장의 3 : &nbsp <span>두 재화가 완전대체재일 때 수요함수</span>",
@@ -105,7 +105,7 @@
     },
     {
         "header": "14장의 2 : &nbsp <span>과점 모형</span>",
-        "text": "P = 50 - 5Q<sub>A</sub> - 5Q<sub>B</sub>에서 <wbr/> MR<sub>A</sub> = 50 - 10Q<sub>A</sub> - 5Q<sub>B</sub>이다."
+        "text": "P &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 50 - <i>5Q<sub>A</sub></i> - 5Q<sub>B</sub> 에서 <br/> MR<sub>A</sub> = 50 - <u>10Q<sub>A</sub></u> - 5Q<sub>B</sub> 이다."
     },
     {
         "header": "14장의 3 : &nbsp <span>가격선도이론</span>",
@@ -157,7 +157,7 @@
     },
     {
         "header": "20장의 3 : &nbsp <span>로렌츠곡선</span>",
-	"text": " 로렌츠곡선의 기울기는 <i>같거나 증가</i>한다. <br class='long-br'/> <img style='vertical-align: -120px !important' src='/svgs/rorentz_white.svg' alt='[그래프]'/> <i>소득 동일</i>"
+	"text": " 로렌츠곡선의 기울기는 <i>같거나 증가</i>한다. <br class='long-br'/> <span class='img-with-txt'><img class='dark-img' src='/svgs/rorentz_white.svg' alt='[그래프]'/><img class='light-img' src='/svgs/rorentz.svg' alt='[그래프]'/> <span><i>소득 동일</i></span></span>"
     },
     {
         "header": "21장의 2 : &nbsp <span>효용극대화와 파레토효율성</span>",
@@ -229,7 +229,7 @@
     },
     {
         "header": "29장의 3 : &nbsp <span>균형재정승수</span>",
-        "text": "한계소비성향이 0.6, 한계수입성향이 0.1이고, 수입이 처분가능소득의 증가함수이기에 조세승수는 <br class='long-br'/><span class='fraction'><sup>ΔY</sup> <sub>ΔT</sub></span> = <span class='fraction'><sup>-c</sup> <sub>1-c+m</sub></span>이 아니라 <br class='long-br'/> <span class='fraction'><sup>ΔY</sup> <sub>ΔT</sub></span> = <span class='fraction yellow'><sup>-c + m</sup> <sub>1-c+m</sub></span> = <span class='fraction'><sup>-0.6 + 0.1</sup> <sub>1 - 0.6+0.1</sub></span> = -1 이다. <br class='long-br'/> Y = <span class='fraction'><sup>1</sup><sub>1 - c + m</sub></span> ( C<sub>0</sub> - cT<sub>0</sub> + I<sub>0</sub> + G<sub>0</sub> + X<sub>0</sub> - M<sub>0</sub> + mT<sub>0</sub> )"
+        "text": "한계소비성향이 0.6, 한계수입성향이 0.1이고, 수입이 처분가능소득의 증가함수이기에 조세승수는 <br class='long-br'/> <span class='img-with-txt' style='column-gap: 1em;'> <span><span class='fraction'><sup>ΔY</sup> <sub>ΔT</sub></span> = <span class='fraction'><sup>-c</sup> <sub>1-c+m</sub></span>이 아니라</span> <span> <span class='fraction'><sup>ΔY</sup> <sub>ΔT</sub></span> = <span class='fraction yellow'><sup>-c + m</sup> <sub>1-c+m</sub></span> = <span class='fraction'><sup>-0.6 + 0.1</sup> <sub>1 - 0.6+0.1</sub></span> = -1 이다.</span> <span>Y = <span class='fraction'><sup>1</sup><sub>1 - c + m</sub></span> ( C<sub>0</sub> - <i>cT<sub>0</sub></i> + I<sub>0</sub> + G<sub>0</sub> + X<sub>0</sub> - M<sub>0</sub> + <i>mT<sub>0</sub></i> )</span></span>"
     },
     {
         "header": "30장의 2 : &nbsp <span>항상소득가설</span>",

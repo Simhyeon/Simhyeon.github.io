@@ -1,8 +1,15 @@
 html {
 	width: 100%;
 	height: 100%;
-	background: #fafafa;
-    font-size: 100%;
+	font-size: 100%;
+}
+
+:not(dark_mode) {
+	background: #fafafa
+}
+
+:not(dark_mode) * {
+	background: #fafafa
 }
 
 body {
@@ -45,15 +52,28 @@ a {
 	font-size: 1.2em;
 }
 
-.dark_mode {
-	color: #eeffff;
-	background: #263238;
+:not(dark_mode) .dark-img {
+	display: none !important;
+}
+
+.dark_mode .dark-img {
+	display: block !important;
+}
+
+.dark_mode .light-img {
+	display: none !important;
 }
 
 .dark_mode * {
 	color: #eeffff;
 	background: #263238;
 }
+
+.dark_mode {
+	color: #eeffff;
+	background: #263238;
+}
+
 
 /* 기능 로테이션 */
 /* 1. 숨기기 */
@@ -479,4 +499,8 @@ mark.blue-mark {
 
 mark.green-mark {
 	color : #66FF00 !important;
+}
+
+a:visited {
+	color: inherit;
 }
