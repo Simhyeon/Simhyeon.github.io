@@ -80,15 +80,6 @@ function toggle_dark_mode(input) {
 	init_theme();
 }
 
-function toggle_click_to_move_on(input) {
-	let value = input.checked;
-	if (value === true) {
-		localStorage.setItem("click_move_on", true); 
-	} else {
-		localStorage.setItem("click_move_on", false); 
-	}
-}
-
 function toggle_draggable(input) {
 	let value = input.checked;
 	if (value === true) {

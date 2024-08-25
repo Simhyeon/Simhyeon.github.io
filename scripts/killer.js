@@ -2,7 +2,6 @@ let SRC = '';
 let MAX_INDEX = -1;
 let LC_PAGE_NAME = '';
 let page_number_elem = null;
-const CLICK_TO_MOVE = localStorage.getItem("click_move_on") ?? 'false';
 
 // Touch swipe related
 // Source https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -10,31 +9,6 @@ let touchstartX = 0
 let touchendX = 0
 
 let ON_POPUP = false;
-
-if (CLICK_TO_MOVE === false) {
-	document.addEventListener('touchstart', e => {
-		if (ON_POPUP) { return ; }
-		touchstartX = e.changedTouches[0].screenX
-	})
-
-	document.addEventListener('touchend', e => {
-		if (ON_POPUP) { return ; }
-		touchendX = e.changedTouches[0].screenX
-		checkDirection()
-	})
-
-	document.addEventListener('mousedown', e => {
-		if (ON_POPUP) { return ; }
-		touchstartX = e.screenX
-	})
-
-	document.addEventListener('mouseup', e => {
-		if (ON_POPUP) { return ; }
-		touchendX = e.screenX
-		checkDirection()
-	})
-
-}
 
 function checkDirection() {
     let distance = Math.abs(touchendX - touchstartX);
@@ -139,23 +113,14 @@ function init(data, page_name,use_numbering) {
 			return;
 		} 
 
-		// Do page navigation
-		if ( CLICK_TO_MOVE === 'true' ) {
-			let clickTarget = e.target;
-			let clickTargetWidth = clickTarget.offsetWidth;
-			let xCoordInClickTarget = e.clientX - clickTarget.getBoundingClientRect().left;
-			if (clickTargetWidth / 2 > xCoordInClickTarget) {
-				go_prev();
-			} else {
-				go_next();
-			}
+		let clickTarget = e.target;
+		let clickTargetWidth = clickTarget.offsetWidth;
+		let xCoordInClickTarget = e.clientX - clickTarget.getBoundingClientRect().left;
+		if (clickTargetWidth / 2 > xCoordInClickTarget) {
+			go_prev();
+		} else {
+			go_next();
 		}
-
-		// OG
-		// if(event.target != pol && event.target.parentNode != pol){
-		// 	pol.style.setProperty('visibility','hidden');
-		// 	ON_POPUP = false;
-		// }
 	});
 
 	// compile naviation with arrow keys
