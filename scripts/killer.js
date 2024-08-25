@@ -110,6 +110,7 @@ function init(data, page_name,use_numbering) {
 		dupNode.addEventListener('click', (e) => {
 			go_to(e.currentTarget.dataset.target);
 			toc_window.style.setProperty('visibility','hidden');
+			ON_POPUP = false;
 		});
 		// Clone paste
 		counter += 1;
@@ -128,6 +129,7 @@ function init(data, page_name,use_numbering) {
 		var pol = document.getElementById('popup-hint-window');
 		if(event.target != pol && event.target.parentNode != pol){
 			pol.style.setProperty('visibility','hidden');
+			ON_POPUP = false;
 		}
 	});
 
