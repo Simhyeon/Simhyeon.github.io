@@ -7,6 +7,14 @@
 2. 이유 명기하기
     -> 최후위, 진지하게 공부할거면 종이로 하는 게 맞다.
 
+killer.js에 클릭하여 이동 넣기
+
+click을 document에 넣지 말고, background에 제대로 넣자. 
+
+-> 현재 문제
+    : document에 하지 않으니, 마진을 클릭하면 넘어가지지가 않음. 
+    : stop bubbling을 해야하 지 않을까 싶음. 자꾸 popup창을 닫으면서 클릭이 된다. 이게 정 싫다면 투명한 background를 만들어서 해결하는 게 정답이기는 하다. Timeout보다는 이게 정당한 방법이다. 
+
 # Todos
 
 0. 다크 모드 호환 css 변수 설정하기 주로 border color 때문
