@@ -8,20 +8,26 @@ let page_number_elem = null;
 let touchstartX = 0
 let touchendX = 0
 
+let ON_POPUP = false;
+
 document.addEventListener('touchstart', e => {
+	if (ON_POPUP) { return ; }
 	touchstartX = e.changedTouches[0].screenX
 })
 
 document.addEventListener('touchend', e => {
+	if (ON_POPUP) { return ; }
 	touchendX = e.changedTouches[0].screenX
 	checkDirection()
 })
 
 document.addEventListener('mousedown', e => {
+	if (ON_POPUP) { return ; }
 	touchstartX = e.screenX
 })
 
 document.addEventListener('mouseup', e => {
+	if (ON_POPUP) { return ; }
 	touchendX = e.screenX
 	checkDirection()
 })
@@ -115,7 +121,9 @@ function init(data, page_name,use_numbering) {
 		show_toc(toc_window);
 	})
 
-	// Add popup close event for window
+	// Add window click event
+	// 1. Add popup close event for window
+	// TODO 2. add click naviation
 	window.addEventListener('mouseup',function(event){
 		var pol = document.getElementById('popup-hint-window');
 		if(event.target != pol && event.target.parentNode != pol){
@@ -208,6 +216,7 @@ function go_to(index) {
 }
 
 function show_toc(toc_window) {
+	ON_POPUP = true;
 	// Show toc-window
 	toc_window.style.setProperty('visibility','unset');
 
