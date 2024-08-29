@@ -136,6 +136,14 @@ function init_theme() {
 	}
 }
 
+/* Toggle direction of buttons by double click */
+function init_ox() {
+    let elem = document.getElementById('toggle_single_hand').children[0];
+    document.getElementById('container').addEventListener('dblclick', () => {
+	    elem.click();
+    })
+}
+
 function law_init() {
 	init_local_storage();
 
@@ -307,6 +315,9 @@ function load_eco_init(eco_type) {
 			pol.style.setProperty('visibility','hidden');
 		}
 	});
+
+	// Init dblclick
+	init_ox();
 }
 
 function createProblemList(jsonObject) {
@@ -423,6 +434,7 @@ function toggle_left_hand_mode(input) {
 function toggle_single_hand_mode(input) {
 	let button = document.getElementById("toggle_single_hand");
 	let elems = document.getElementsByClassName("eco-list-answer");
+	button.children[0].checked = false;
 	if (input.checked === true ) {
 		button.classList.add("visible");
 

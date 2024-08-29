@@ -277,7 +277,7 @@ input {
 }
 
 /* mobile media query */
-@media (min-width: 320px) and (max-width: 480px) {
+@media (max-width: 480px) {
 	.exp-demo {
 		display: block;
 		max-width: 70%;
