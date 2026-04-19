@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지출 대시보드</title>
+<style>
+  :root {
+    --color-bg: #f8f7f4;
+    --color-surface: #ffffff;
+    --color-surface2: #f1efe8;
+    --color-border: rgba(0,0,0,0.12);
+    --color-border2: rgba(0,0,0,0.22);
+    --color-text: #2c2c2a;
+    --color-text2: #5f5e5a;
+    --color-text3: #888780;
+    --color-accent: #534ab7;
+    --color-accent-bg: #eeedfe;
+    --color-accent-text: #3c3489;
+    --color-success: #3b6d11;
+    --color-success-bg: #eaf3de;
+    --color-warning: #854f0b;
+    --color-warning-bg: #faeeda;
+    --color-danger: #a32d2d;
+    --color-danger-bg: #fcebeb;
+    --color-teal: #0f6e56;
+    --color-teal-bg: #e1f5ee;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #1a1a18;
+      --color-surface: #2c2c2a;
+      --color-surface2: #232321;
+      --color-border: rgba(255,255,255,0.1);
+      --color-border2: rgba(255,255,255,0.2);
+      --color-text: #f1efe8;
+      --color-text2: #b4b2a9;
+      --color-text3: #888780;
+      --color-accent: #afa9ec;
+      --color-accent-bg: #26215c;
+      --color-accent-text: #ceebf6;
+      --color-success: #c0dd97;
+      --color-success-bg: #173404;
+      --color-warning: #fac775;
+      --color-warning-bg: #412402;
+      --color-danger: #f7c1c1;
+      --color-danger-bg: #501313;
+      --color-teal: #9fe1cb;
+      --color-teal-bg: #04342c;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    padding: 0;
+  }
+  .header {
+    background: var(--color-surface);
+    border-bottom: 0.5px solid var(--color-border);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .header-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .header-period {
+    font-size: 13px;
+    color: var(--color-text2);
+    background: var(--color-surface2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 0.5px solid var(--color-border);
+  }
+  .main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--color-surface2);
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    margin-bottom: 2rem;
+    border: 0.5px solid var(--color-border);
+  }
+  .tab {
+    flex: 1;
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text2);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: var(--font);
+  }
+  .tab.active {
+    background: var(--color-surface);
+    color: var(--color-accent);
+    border: 0.5px solid var(--color-border);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .metric-card {
+    background: var(--color-surface2);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+  }
+  .metric-label {
+    font-size: 12px;
+    color: var(--color-text3);
+    margin-bottom: 6px;
+  }
+  .metric-value {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .metric-sub {
+    font-size: 12px;
+    color: var(--color-text3);
+    margin-top: 4px;
+  }
+  .card {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text2);
+    margin-bottom: 1rem;
+  }
+  .category-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .category-row:last-child { border-bottom: none; }
+  .category-name {
+    font-size: 14px;
+    color: var(--color-text);
+    min-width: 100px;
+  }
+  .bar-wrap {
+    flex: 1;
+    height: 6px;
+    background: var(--color-surface2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--color-accent);
+  }
+  .category-amount {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text);
+    min-width: 90px;
+    text-align: right;
+  }
+  .category-pct {
+    font-size: 12px;
+    color: var(--color-text3);
+    min-width: 36px;
+    text-align: right;
+  }
+  .tx-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .tx-table th {
+    text-align: left;
+    padding: 6px 8px;
+    color: var(--color-text3);
+    font-weight: 500;
+    border-bottom: 0.5px solid var(--color-border2);
+    font-size: 12px;
+  }
+  .tx-table td {
+    padding: 9px 8px;
+    border-bottom: 0.5px solid var(--color-border);
+    color: var(--color-text);
+    vertical-align: top;
+  }
+  .tx-table tr:last-child td { border-bottom: none; }
+  .tx-table .amount { text-align: right; font-weight: 500; }
+  .tx-table .date { color: var(--color-text2); white-space: nowrap; }
+  .tx-table .cat-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    background: var(--color-accent-bg);
+    color: var(--color-accent-text);
+    white-space: nowrap;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--color-text3);
+    font-size: 14px;
+  }
+  .empty-state .icon {
+    font-size: 36px;
+    margin-bottom: 1rem;
+    display: block;
+    opacity: 0.4;
+  }
+  .upload-area {
+    border: 1.5px dashed var(--color-border2);
+    border-radius: var(--radius);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--color-surface);
+    margin-bottom: 1.5rem;
+  }
+  .upload-area:hover, .upload-area.drag-over {
+    border-color: var(--color-accent);
+    background: var(--color-accent-bg);
+  }
+  .upload-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 12px;
+    opacity: 0.5;
+  }
+  .upload-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+  .upload-hint {
+    font-size: 13px;
+    color: var(--color-text3);
+  }
+  input[type="file"] { display: none; }
+  .api-form {
+    display: grid;
+    gap: 1rem;
+  }
+  .form-group { display: grid; gap: 6px; }
+  .form-label { font-size: 13px; color: var(--color-text2); font-weight: 500; }
+  .form-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 0.5px solid var(--color-border2);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font);
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-accent-bg);
+  }
+  .btn {
+    padding: 9px 20px;
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--color-border2);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font);
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition: all 0.15s;
+  }
+  .btn:hover { background: var(--color-surface2); }
+  .btn-primary {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .btn-primary:hover { opacity: 0.88; background: var(--color-accent); }
+  .alert {
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    margin-bottom: 1rem;
+    display: none;
+  }
+  .alert-danger { background: var(--color-danger-bg); color: var(--color-danger); display: block; }
+  .alert-success { background: var(--color-success-bg); color: var(--color-success); display: block; }
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+  .filter-label { font-size: 13px; color: var(--color-text3); }
+  .filter-btn {
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 0.5px solid var(--color-border);
+    font-size: 12px;
+    background: transparent;
+    color: var(--color-text2);
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.12s;
+  }
+  .filter-btn.active {
+    background: var(--color-accent-bg);
+    color: var(--color-accent-text);
+    border-color: var(--color-accent);
+  }
+  .summary-note {
+    font-size: 13px;
+    color: var(--color-text3);
+    margin-top: 0.5rem;
+  }
+  .sort-select {
+    padding: 4px 8px;
+    border: 0.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    background: var(--color-surface);
+    color: var(--color-text2);
+    font-family: var(--font);
+    cursor: pointer;
+  }
+  .tip-box {
+    background: var(--color-teal-bg);
+    border: 0.5px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--color-teal);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">지출 대시보드</div>
+    <div class="summary-note" id="periodLabel">데이터를 불러오면 기간이 표시됩니다</div>
+  </div>
+  <div id="todayBadge" class="badge"></div>
+</div>
+
+<div class="main">
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('dashboard')">대시보드</button>
+    <button class="tab" onclick="switchTab('transactions')">거래 내역</button>
+    <button class="tab" onclick="switchTab('source')">데이터 연결</button>
+  </div>
+
+  <!-- 대시보드 탭 -->
+  <div class="tab-panel active" id="tab-dashboard">
+    <div id="dashboardContent">
+      <div class="empty-state">
+        <span class="icon">📊</span>
+        <div>데이터 연결 탭에서 CSV를 업로드하거나<br>Google API로 연결해주세요</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 거래 내역 탭 -->
+  <div class="tab-panel" id="tab-transactions">
+    <div id="txContent">
+      <div class="empty-state">
+        <span class="icon">🧾</span>
+        <div>데이터를 먼저 불러와주세요</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 데이터 연결 탭 -->
+  <div class="tab-panel" id="tab-source">
+
+    <div class="tip-box">
+      CSV 파일 업로드 또는 Google Sheets API로 데이터를 연결할 수 있어요.<br>
+      Google Sheets API를 사용하려면 <b>Google Cloud Console</b>에서 API 키와 시트 ID가 필요합니다.
+    </div>
+
+    <!-- CSV 업로드 -->
+    <div class="card">
+      <div class="card-title">CSV 파일 업로드</div>
+      <div id="alertCsv"></div>
+      <label>
+        <div class="upload-area" id="dropZone">
+          <svg class="upload-icon" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="8" fill="currentColor" opacity="0.06"/>
+            <path d="M20 8v16M13 18l7-10 7 10M10 28h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="upload-label">CSV 파일을 여기에 끌어다 놓거나 클릭해서 선택</div>
+          <div class="upload-hint">Google Sheets에서 파일 > 다운로드 > CSV로 내보낸 파일</div>
+        </div>
+        <input type="file" id="csvInput" accept=".csv,text/csv">
+      </label>
+      <button class="btn btn-primary" onclick="loadFromCsv()">CSV 분석하기</button>
+    </div>
+
+    <!-- Google Sheets API -->
+    <div class="card">
+      <div class="card-title">Google Sheets API 연결</div>
+      <div id="alertApi"></div>
+      <div id="savedNotice" style="display:none;align-items:center;gap:10px;background:var(--color-teal-bg);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:1rem;font-size:13px;color:var(--color-teal);">
+        <span>✓ 이전에 저장된 API 정보가 있어요. 바로 불러올 수 있습니다.</span>
+        <button class="btn" style="font-size:12px;padding:4px 10px;margin-left:auto;color:var(--color-danger);border-color:var(--color-danger)" onclick="clearSaved()">저장 삭제</button>
+      </div>
+      <div class="api-form">
+        <div class="form-group">
+          <label class="form-label">Google API 키</label>
+          <input class="form-input" id="apiKey" type="password" placeholder="AIzaSy...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">스프레드시트 ID</label>
+          <input class="form-input" id="sheetId" placeholder="URL의 /d/ 이후 ~ /edit 사이의 문자열">
+          <div class="summary-note">예: https://docs.google.com/spreadsheets/d/<b>[여기]</b>/edit</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">시트 이름</label>
+          <input class="form-input" id="sheetName" value="지출 정리">
+        </div>
+        <button class="btn btn-primary" onclick="loadFromApi()">Google Sheets에서 불러오기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let allData = [];
+let filteredData = [];
+let activeCategory = 'all';
+
+const COLORS = [
+  '#534ab7','#0f6e56','#993c1d','#185fa5',
+  '#639922','#ba7517','#993556','#5f5e5a',
+  '#a32d2d','#3b6d11'
+];
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', ['dashboard','transactions','source'][i] === name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+function parseTimestamp(ts) {
+  if (!ts) return null;
+  ts = ts.trim();
+  let m = ts.match(/(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})\s+(오전|오후)\s+(\d{1,2}):(\d{2}):(\d{2})/);
+  if (m) {
+    let [,y,mo,d,ampm,h,mi,s] = m;
+    h = parseInt(h); if (ampm==='오후' && h<12) h+=12; if (ampm==='오전' && h===12) h=0;
+    return new Date(+y,+mo-1,+d,h,+mi,+s);
+  }
+  m = ts.match(/(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2})/);
+  if (m) return new Date(+m[1],+m[2]-1,+m[3]);
+  let d = new Date(ts);
+  return isNaN(d) ? null : d;
+}
+
+function getPeriod() {
+  const now = new Date();
+  const day = now.getDate();
+  let start, end;
+  if (day >= 25) {
+    start = new Date(now.getFullYear(), now.getMonth(), 25);
+  } else {
+    let prev = new Date(now.getFullYear(), now.getMonth() - 1, 25);
+    start = prev;
+  }
+  end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+  return { start, end };
+}
+
+function formatDate(d) {
+  return `${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}`;
+}
+
+function formatMoney(n) {
+  return '₩' + Math.round(n).toLocaleString();
+}
+
+function parseAmount(s) {
+  if (!s) return 0;
+  return parseFloat(String(s).replace(/[^0-9.]/g,'')) || 0;
+}
+
+function processData(rows) {
+  const { start, end } = getPeriod();
+  const filtered = rows.filter(r => {
+    const d = r.date;
+    return d && d >= start && d <= end;
+  });
+  allData = filtered;
+  filteredData = filtered;
+  activeCategory = 'all';
+  renderDashboard();
+  renderTransactions();
+  const today = new Date();
+  document.getElementById('periodLabel').textContent =
+    `${formatDate(start)} ~ ${formatDate(end)} 기간 지출`;
+  document.getElementById('todayBadge').textContent =
+    `오늘 ${formatDate(today)}`;
+  switchTab('dashboard');
+}
+
+function renderDashboard() {
+  const data = filteredData;
+  if (!data.length) {
+    document.getElementById('dashboardContent').innerHTML =
+      '<div class="empty-state"><span class="icon">📭</span><div>해당 기간에 지출 내역이 없습니다</div></div>';
+    return;
+  }
+  const total = data.reduce((s,r) => s + r.amount, 0);
+  const catMap = {};
+  data.forEach(r => {
+    catMap[r.category] = (catMap[r.category]||0) + r.amount;
+  });
+  const cats = Object.entries(catMap).sort((a,b) => b[1]-a[1]);
+  const avgPerDay = (() => {
+    const { start, end } = getPeriod();
+    const days = Math.max(1, Math.round((end - start) / 86400000) + 1);
+    return total / days;
+  })();
+
+  let html = `
+  <div class="metric-grid">
+    <div class="metric-card">
+      <div class="metric-label">총 지출</div>
+      <div class="metric-value">${formatMoney(total)}</div>
+      <div class="metric-sub">${data.length}건</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">일평균 지출</div>
+      <div class="metric-value">${formatMoney(avgPerDay)}</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">지출 항목 수</div>
+      <div class="metric-value">${cats.length}개</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">최다 지출 항목</div>
+      <div class="metric-value" style="font-size:16px;margin-top:2px">${cats[0]?cats[0][0]:'-'}</div>
+      <div class="metric-sub">${cats[0]?formatMoney(cats[0][1]):''}</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">항목별 지출 비중</div>`;
+  cats.forEach(([cat, amt], i) => {
+    const pct = total > 0 ? (amt / total * 100) : 0;
+    const color = COLORS[i % COLORS.length];
+    html += `
+    <div class="category-row">
+      <div class="category-name">${cat}</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:${pct.toFixed(1)}%;background:${color}"></div></div>
+      <div class="category-amount">${formatMoney(amt)}</div>
+      <div class="category-pct">${pct.toFixed(1)}%</div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('dashboardContent').innerHTML = html;
+}
+
+function renderTransactions() {
+  const data = [...filteredData].sort((a,b) => b.date - a.date);
+  if (!data.length) {
+    document.getElementById('txContent').innerHTML =
+      '<div class="empty-state"><span class="icon">📭</span><div>내역이 없습니다</div></div>';
+    return;
+  }
+  const cats = ['all', ...new Set(allData.map(r => r.category))];
+  let filterHtml = '<div class="filter-row"><span class="filter-label">항목</span>';
+  cats.forEach(c => {
+    filterHtml += `<button class="filter-btn ${c===activeCategory?'active':''}" onclick="filterByCategory('${c.replace(/'/g,"\\'")}')">
+      ${c === 'all' ? '전체' : c}
+    </button>`;
+  });
+  filterHtml += '</div>';
+
+  let tableHtml = `
+  <div class="card" style="padding:0;overflow:hidden">
+  <table class="tx-table">
+  <thead><tr>
+    <th>날짜</th>
+    <th>항목</th>
+    <th>내용</th>
+    <th style="text-align:right">금액</th>
+  </tr></thead><tbody>`;
+  data.forEach(r => {
+    tableHtml += `<tr>
+      <td class="date">${formatDate(r.date)}</td>
+      <td><span class="cat-badge">${r.category}</span></td>
+      <td style="color:var(--color-text2)">${r.content||''}</td>
+      <td class="amount">${formatMoney(r.amount)}</td>
+    </tr>`;
+  });
+  tableHtml += '</tbody></table></div>';
+  document.getElementById('txContent').innerHTML = filterHtml + tableHtml;
+}
+
+function filterByCategory(cat) {
+  activeCategory = cat;
+  filteredData = cat === 'all' ? allData : allData.filter(r => r.category === cat);
+  renderDashboard();
+  renderTransactions();
+}
+
+function parseCsvRows(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return null;
+  const parse = line => {
+    const cols = []; let cur = ''; let inQ = false;
+    for (let c of line) {
+      if (c === '"') { inQ = !inQ; continue; }
+      if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+      else cur += c;
+    }
+    cols.push(cur.trim());
+    return cols;
+  };
+  const header = parse(lines[0]);
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = parse(lines[i]);
+    const obj = {};
+    header.forEach((h, j) => obj[h] = cols[j] || '');
+    rows.push(obj);
+  }
+  return { header, rows };
+}
+
+function mapRows(rows, header) {
+  const find = keywords => {
+    const k = keywords.split('|');
+    return header.find(h => k.some(kw => h.includes(kw))) || '';
+  };
+  const tsKey = find('타임스탬프|timestamp|날짜|일시');
+  const catKey = find('무엇에|지출을 하나|종류|카테고리|항목');
+  const contentKey = find('내용|무엇인가|세부');
+  const amtKey = find('비용|금액|얼마|amount');
+
+  return rows.map(r => ({
+    date: parseTimestamp(r[tsKey]),
+    category: r[catKey] || '기타',
+    content: r[contentKey] || '',
+    amount: parseAmount(r[amtKey]),
+    raw: r
+  })).filter(r => r.date && r.amount > 0);
+}
+
+let csvFile = null;
+document.getElementById('csvInput').addEventListener('change', e => {
+  csvFile = e.target.files[0];
+  if (csvFile) {
+    document.querySelector('.upload-label').textContent = '✓ ' + csvFile.name;
+  }
+});
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('drag-over');
+  csvFile = e.dataTransfer.files[0];
+  if (csvFile) document.querySelector('.upload-label').textContent = '✓ ' + csvFile.name;
+});
+
+function showAlert(id, msg, type) {
+  const el = document.getElementById(id);
+  el.className = 'alert alert-' + type;
+  el.textContent = msg;
+}
+
+function loadFromCsv() {
+  if (!csvFile) { showAlert('alertCsv','CSV 파일을 먼저 선택해주세요','danger'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    let text = e.target.result;
+    const parsed = parseCsvRows(text);
+    if (!parsed) { showAlert('alertCsv','파일 파싱 실패: 올바른 CSV인지 확인해주세요','danger'); return; }
+    const mapped = mapRows(parsed.rows, parsed.header);
+    if (!mapped.length) { showAlert('alertCsv','인식된 데이터가 없습니다. 열 이름을 확인해주세요','danger'); return; }
+    showAlert('alertCsv', `✓ ${mapped.length}건 불러옴`, 'success');
+    processData(mapped);
+  };
+  reader.readAsText(csvFile, 'UTF-8');
+}
+
+async function loadFromApi() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const sheetId = document.getElementById('sheetId').value.trim();
+  const sheetName = document.getElementById('sheetName').value.trim() || '지출 정리';
+  if (!apiKey || !sheetId) { showAlert('alertApi','API 키와 시트 ID를 입력해주세요','danger'); return; }
+  localStorage.setItem('expense_api_key', apiKey);
+  localStorage.setItem('expense_sheet_id', sheetId);
+  localStorage.setItem('expense_sheet_name', sheetName);
+
+  const range = encodeURIComponent(`${sheetName}!A:F`);
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
+  showAlert('alertApi','불러오는 중...','success');
+  try {
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json.error) { showAlert('alertApi','오류: ' + json.error.message,'danger'); return; }
+    const values = json.values || [];
+    if (values.length < 2) { showAlert('alertApi','데이터가 없습니다','danger'); return; }
+    const header = values[0];
+    const rows = values.slice(1).map(row => {
+      const obj = {};
+      header.forEach((h,i) => obj[h] = row[i] || '');
+      return obj;
+    });
+    const mapped = mapRows(rows, header);
+    if (!mapped.length) { showAlert('alertApi','인식된 데이터가 없습니다','danger'); return; }
+    showAlert('alertApi', `✓ ${mapped.length}건 불러옴`, 'success');
+    processData(mapped);
+  } catch(err) {
+    showAlert('alertApi','네트워크 오류: ' + err.message,'danger');
+  }
+}
+
+const today = new Date();
+document.getElementById('todayBadge').textContent = `오늘 ${formatDate(today)}`;
+const { start, end } = getPeriod();
+document.getElementById('periodLabel').textContent = `집계 기간: ${formatDate(start)} ~ ${formatDate(today)}`;
+
+(function restoreSaved() {
+  const key = localStorage.getItem('expense_api_key');
+  const sid = localStorage.getItem('expense_sheet_id');
+  const sname = localStorage.getItem('expense_sheet_name');
+  if (key) document.getElementById('apiKey').value = key;
+  if (sid) document.getElementById('sheetId').value = sid;
+  if (sname) document.getElementById('sheetName').value = sname;
+  if (key && sid) document.getElementById('savedNotice').style.display = 'flex';
+})();
+
+function clearSaved() {
+  localStorage.removeItem('expense_api_key');
+  localStorage.removeItem('expense_sheet_id');
+  localStorage.removeItem('expense_sheet_name');
+  document.getElementById('apiKey').value = '';
+  document.getElementById('sheetId').value = '';
+  document.getElementById('sheetName').value = '지출 정리';
+  document.getElementById('savedNotice').style.display = 'none';
+  showAlert('alertApi', '저장된 정보가 삭제되었습니다', 'success');
+}
+</script>
+</body>
+</html>
