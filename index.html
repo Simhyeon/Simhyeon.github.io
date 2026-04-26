@@ -292,31 +292,29 @@ const COLORS = ['#534ab7','#0f6e56','#993c1d','#185fa5','#639922','#ba7517','#99
 const MONTH_KO = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
 
 // ── 기간 계산 ─────────────────────────────────────────
-// "X월의 지출" = (X-1)월 25일 ~ X월 25일 (데이터 있는 마지막 날까지)
+// "X월의 지출" = (X-1)월 25일 ~ X월 24일 (진행 중이면 오늘까지)
 // selectedMonth=null이면 오늘 기준 자동 계산
 function getPeriod(sel) {
-  // sel: { year, month(1~12) } or null
   const today = new Date();
 
   if (!sel) {
-    // 자동: 오늘이 25일 이전이면 전달 25일~오늘, 이후면 이번달 25일~오늘
+    // 자동: 오늘이 25일 이상이면 이번달 25일 시작, 미만이면 전달 25일 시작
     const day = today.getDate();
-    let start;
-    if (day >= 25) {
-      start = new Date(today.getFullYear(), today.getMonth(), 25);
-    } else {
-      start = new Date(today.getFullYear(), today.getMonth() - 1, 25);
-    }
+    const start = day >= 25
+      ? new Date(today.getFullYear(), today.getMonth(), 25)
+      : new Date(today.getFullYear(), today.getMonth() - 1, 25);
     const end = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
     return { start, end, isCurrent: true };
   }
 
-  // 선택한 달: (month-1)월 25일 ~ month월 25일
+  // 선택한 달: (month-1)월 25일 ~ month월 24일 23:59:59
   const { year, month } = sel;
-  const start = new Date(year, month - 2, 25); // month는 1-based
-  const endDay25 = new Date(year, month - 1, 25, 23, 59, 59);
-  // 미래 달이면 오늘까지만
-  const end = endDay25 > today ? new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59) : endDay25;
+  const start   = new Date(year, month - 2, 25);             // 전달 25일
+  const endFull = new Date(year, month - 1, 24, 23, 59, 59); // 해당 달 24일
+  // 아직 끝나지 않은 기간이면 오늘까지만
+  const end = endFull > today
+    ? new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59)
+    : endFull;
   const isCurrent = (year === today.getFullYear() && month === today.getMonth() + 1);
   return { start, end, isCurrent };
 }
@@ -343,14 +341,13 @@ function updateMonthNav() {
   el.className = 'month-label' + (isCurrent ? ' is-current' : '');
   el.title = isCurrent ? '현재 기간' : '이번 달로 이동';
 
-  // 미래로는 이동 불가 (다음 달 25일이 오늘 이후면 비활성)
+  // 미래로는 이동 불가: 다음 달 기간의 시작일(현재 달 25일)이 오늘 이후면 비활성
   const { year: cy, month: cm } = selectedMonth
     ? selectedMonth
     : { year: today.getFullYear(), month: today.getMonth() + 1 };
-  let ny = cy, nm = cm + 1;
-  if (nm > 12) { nm = 1; ny++; }
-  const nextStart = new Date(ny, nm - 2, 25); // 다음달 기간의 시작 = 현재달 25일
-  document.getElementById('btnNextMonth').disabled = nextStart >= today;
+  // 다음 달 기간의 시작 = 현재 선택 달의 25일
+  const nextPeriodStart = new Date(cy, cm - 1, 25);
+  document.getElementById('btnNextMonth').disabled = nextPeriodStart >= today;
 }
 
 function changeMonth(delta) {
