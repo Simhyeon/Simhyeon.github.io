@@ -7,39 +7,66 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=Bricolage+Grotesque:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+  /* ── DESIGN TOKENS (expense-dashboard 스타일 시스템) ── */
   :root {
-    --bg: #0e0e0f;
-    --surface: #161618;
-    --surface2: #1e1e21;
-    --surface3: #252529;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.13);
-    --text: #f0efe8;
-    --text-2: #9a9990;
-    --text-3: #5a5955;
-    --accent: #c8f064;
-    --accent-dim: rgba(200,240,100,0.12);
-    --accent-border: rgba(200,240,100,0.3);
-    --red: #ff6b6b;
-    --red-dim: rgba(255,107,107,0.12);
-    --amber: #f4a535;
-    --amber-dim: rgba(244,165,53,0.12);
-    --blue: #6db3f2;
-    --blue-dim: rgba(109,179,242,0.12);
-    --teal: #5dcaa5;
-    --teal-dim: rgba(93,202,165,0.12);
-    --purple: #a89fec;
-    --purple-dim: rgba(168,159,236,0.12);
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --surface2: #f1efe8;
+    --surface3: #e8e6df;
+    --border: rgba(0,0,0,0.10);
+    --border2: rgba(0,0,0,0.20);
+    --text: #2c2c2a;
+    --text-2: #5f5e5a;
+    --text-3: #888780;
+    --accent: #534ab7;
+    --accent-dim: #eeedfe;
+    --accent-border: rgba(83,74,183,0.35);
+    --red: #a32d2d;
+    --red-dim: #fcebeb;
+    --amber: #854f0b;
+    --amber-dim: #faeeda;
+    --blue: #1a5276;
+    --blue-dim: #d6eaf8;
+    --teal: #0f6e56;
+    --teal-dim: #e1f5ee;
+    --purple: #6c3483;
+    --purple-dim: #f5eef8;
     --radius: 12px;
     --radius-sm: 8px;
     --radius-xs: 5px;
-    --font-display: 'Instrument Serif', serif;
-    --font-body: 'Bricolage Grotesque', sans-serif;
-    --font-mono: 'DM Mono', monospace;
-    --transition: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+    --transition: 0.15s ease;
   }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18;
+      --surface: #2c2c2a;
+      --surface2: #232321;
+      --surface3: #2e2e2b;
+      --border: rgba(255,255,255,0.10);
+      --border2: rgba(255,255,255,0.20);
+      --text: #f1efe8;
+      --text-2: #b4b2a9;
+      --text-3: #888780;
+      --accent: #afa9ec;
+      --accent-dim: #26215c;
+      --accent-border: rgba(175,169,236,0.35);
+      --red: #f7c1c1;
+      --red-dim: #501313;
+      --amber: #fac775;
+      --amber-dim: #412402;
+      --blue: #9ec8f0;
+      --blue-dim: #0d2137;
+      --teal: #9fe1cb;
+      --teal-dim: #04342c;
+      --purple: #d2a8e8;
+      --purple-dim: #2e1542;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html, body {
     height: 100%;
@@ -62,21 +89,20 @@
 
   /* ── HEADER ── */
   #header {
-    padding: 20px 20px 12px;
+    padding: 18px 20px 12px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     flex-shrink: 0;
     border-bottom: 0.5px solid var(--border);
+    background: var(--surface);
   }
 
   #header-left h1 {
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 400;
-    font-style: italic;
+    font-size: 22px;
+    font-weight: 600;
     color: var(--text);
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
     line-height: 1;
   }
 
@@ -84,7 +110,7 @@
     font-family: var(--font-mono);
     font-size: 11px;
     color: var(--text-3);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     margin-top: 4px;
   }
 
@@ -97,16 +123,15 @@
   .stat-pill {
     font-family: var(--font-mono);
     font-size: 11px;
-    padding: 3px 8px;
+    padding: 3px 9px;
     border-radius: 20px;
     border: 0.5px solid var(--border2);
-    color: var(--text-2);
+    color: var(--text-3);
     background: var(--surface2);
     letter-spacing: 0.02em;
   }
-
   .stat-pill.active { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
-  .stat-pill.overdue { border-color: rgba(255,107,107,0.3); color: var(--red); background: var(--red-dim); }
+  .stat-pill.overdue { border-color: rgba(163,45,45,0.3); color: var(--red); background: var(--red-dim); }
 
   /* ── SUB BAR ── */
   #sub-bar {
@@ -115,6 +140,7 @@
     gap: 8px;
     flex-shrink: 0;
     border-bottom: 0.5px solid var(--border);
+    background: var(--surface);
   }
 
   .sub-bar-btn {
@@ -127,7 +153,7 @@
     color: var(--text-3);
     cursor: pointer;
     white-space: nowrap;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     transition: all var(--transition);
     display: flex; align-items: center; gap: 5px;
   }
@@ -139,8 +165,9 @@
   #todo-scroll {
     flex: 1;
     overflow-y: auto;
-    padding: 8px 20px 120px;
+    padding: 10px 16px 120px;
     scrollbar-width: none;
+    background: var(--bg);
   }
   #todo-scroll::-webkit-scrollbar { display: none; }
 
@@ -155,24 +182,28 @@
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: var(--radius);
-    transition: border-color var(--transition), transform var(--transition), background var(--transition);
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
     position: relative;
     overflow: hidden;
-    cursor: grab;
-    user-select: none;
+    cursor: default;
   }
-  .todo-card:hover { border-color: var(--border2); }
+  .card-main { user-select: none; }
+  .card-drag-handle { cursor: grab; }
+  .card-drag-handle:active { cursor: grabbing; }
+  .card-expanded { user-select: text; cursor: default; }
+  .card-expanded * { -webkit-user-select: text; user-select: text; }
+  .inline-edit-content { -webkit-user-modify: read-write; }
+
+  .todo-card:hover { border-color: var(--border2); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
   .todo-card.dragging {
     opacity: 0.5;
-    cursor: grabbing;
     transform: scale(0.98);
     border-color: var(--accent-border);
   }
-  .todo-card.drag-over { border-color: var(--accent-border); background: var(--surface2); }
+  .todo-card.drag-over { border-color: var(--accent-border); background: var(--accent-dim); }
   .todo-card.pinned { cursor: default; }
-  .todo-card.expanded { border-color: var(--border2); background: var(--surface2); }
+  .todo-card.expanded { border-color: var(--border2); background: var(--surface); }
 
-  /* color accent bar */
   .todo-card::before {
     content: '';
     position: absolute;
@@ -183,7 +214,7 @@
   }
 
   .card-main {
-    padding: 12px 14px 12px 18px;
+    padding: 11px 12px 11px 16px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -191,15 +222,16 @@
 
   .card-drag-handle {
     flex-shrink: 0;
-    width: 16px;
+    width: 14px;
     display: flex;
     flex-direction: column;
     gap: 3px;
-    opacity: 0.25;
+    opacity: 0.2;
     transition: opacity var(--transition);
     padding: 2px 0;
+    user-select: none;
   }
-  .todo-card:hover .card-drag-handle { opacity: 0.5; }
+  .todo-card:hover .card-drag-handle { opacity: 0.4; }
   .todo-card.pinned .card-drag-handle { opacity: 0.1; }
   .card-drag-handle span {
     display: block;
@@ -209,7 +241,7 @@
   }
 
   .card-checkbox {
-    width: 18px; height: 18px;
+    width: 17px; height: 17px;
     border: 1.5px solid var(--border2);
     border-radius: 50%;
     flex-shrink: 0;
@@ -219,15 +251,12 @@
     position: relative;
   }
   .card-checkbox:hover { border-color: var(--accent); }
-  .card-checkbox.checked {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
+  .card-checkbox.checked { background: var(--accent); border-color: var(--accent); }
   .card-checkbox.checked::after {
     content: '';
     width: 6px; height: 4px;
-    border-left: 1.5px solid #0e0e0f;
-    border-bottom: 1.5px solid #0e0e0f;
+    border-left: 1.5px solid #fff;
+    border-bottom: 1.5px solid #fff;
     transform: rotate(-45deg) translateY(-1px);
   }
 
@@ -245,7 +274,7 @@
 
   .card-meta-row {
     display: flex;
-    gap: 6px;
+    gap: 5px;
     margin-top: 3px;
     flex-wrap: wrap;
   }
@@ -254,22 +283,26 @@
     font-family: var(--font-mono);
     font-size: 10px;
     padding: 2px 6px;
-    border-radius: 4px;
-    letter-spacing: 0.03em;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+    font-weight: 500;
   }
   .meta-tag.status-active { background: var(--accent-dim); color: var(--accent); }
-  .meta-tag.status-completed { background: var(--surface3); color: var(--text-3); }
-  .meta-tag.status-archived { background: var(--surface3); color: var(--text-3); }
+  .meta-tag.status-completed { background: var(--surface2); color: var(--text-3); }
+  .meta-tag.status-archived { background: var(--surface2); color: var(--text-3); }
   .meta-tag.status-overdue { background: var(--red-dim); color: var(--red); }
   .meta-tag.status-notyet { background: var(--blue-dim); color: var(--blue); }
-  .meta-tag.repeat { background: var(--blue-dim); color: var(--blue); }
+  .meta-tag.repeat { background: var(--teal-dim); color: var(--teal); }
+  .meta-tag.repeat-daily { background: var(--blue-dim); color: var(--blue); }
+  .meta-tag.repeat-weekly { background: var(--teal-dim); color: var(--teal); }
+  .meta-tag.repeat-monthly { background: var(--purple-dim); color: var(--purple); }
   .meta-tag.deadline { background: var(--amber-dim); color: var(--amber); }
   .meta-tag.template { background: var(--purple-dim); color: var(--purple); }
 
   .card-right {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex-shrink: 0;
   }
 
@@ -279,7 +312,6 @@
     border: none;
     cursor: pointer;
     color: var(--text-3);
-    transition: color var(--transition), transform var(--transition);
     display: flex; align-items: center; justify-content: center;
     border-radius: 4px;
     padding: 0;
@@ -297,7 +329,7 @@
     cursor: pointer;
     color: var(--text-3);
     display: flex; align-items: center; justify-content: center;
-    transition: color var(--transition), transform var(--transition);
+    transition: color var(--transition);
     border-radius: 4px;
   }
   .expand-btn:hover { color: var(--text-2); }
@@ -310,27 +342,74 @@
   /* ── EXPANDED PANEL ── */
   .card-expanded {
     display: none;
-    padding: 0 18px 14px 18px;
+    padding: 0 16px 14px 16px;
     border-top: 0.5px solid var(--border);
-    margin-top: 0;
   }
   .card-expanded.open { display: block; }
 
-  .detail-text {
+  /* ── EXPANDED INLINE EDIT ── */
+  .expanded-view-mode { padding: 10px 0 8px; }
+  .expanded-title-display {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .expanded-detail-display {
     font-size: 13px;
     color: var(--text-2);
     line-height: 1.6;
-    margin: 10px 0;
     white-space: pre-wrap;
-    min-height: 16px;
   }
-  .detail-text.empty { color: var(--text-3); font-style: italic; }
+  .expanded-detail-display.empty { color: var(--text-3); font-style: italic; }
+
+  .expanded-edit-mode { padding: 10px 0 8px; }
+  .inline-edit-field { margin-bottom: 8px; }
+  .inline-edit-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .inline-edit-content {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+    padding: 6px 10px;
+    border-radius: var(--radius-xs);
+    border: 0.5px solid var(--accent-border);
+    background: var(--surface2);
+    outline: none;
+    min-height: 34px;
+    word-break: break-word;
+    -webkit-user-select: text;
+    user-select: text;
+    cursor: text;
+    touch-action: manipulation;
+  }
+  .inline-edit-content.multiline {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-2);
+    min-height: 60px;
+    white-space: pre-wrap;
+  }
+  .inline-edit-content:focus {
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 0 0 2px var(--accent-dim);
+  }
 
   .meta-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
   .meta-field {
@@ -346,7 +425,7 @@
     text-transform: uppercase;
   }
   .meta-field input, .meta-field select {
-    background: var(--surface3);
+    background: var(--surface2);
     border: 0.5px solid var(--border2);
     border-radius: var(--radius-xs);
     color: var(--text);
@@ -358,17 +437,14 @@
     width: 100%;
   }
   .meta-field input:focus, .meta-field select:focus {
-    border-color: var(--accent-border);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-dim);
   }
-  .meta-field select option { background: var(--surface2); }
-
+  .meta-field input[type="date"]:focus { border-color: var(--accent-border); }
+  .meta-field select option { background: var(--surface); }
   .meta-field.full-width { grid-column: 1 / -1; }
 
-  .color-picker-row {
-    display: flex;
-    gap: 6px;
-    margin-top: 4px;
-  }
+  .color-picker-row { display: flex; gap: 6px; margin-top: 4px; }
   .color-dot {
     width: 20px; height: 20px;
     border-radius: 50%;
@@ -379,12 +455,7 @@
   .color-dot:hover { transform: scale(1.15); }
   .color-dot.selected { border-color: var(--text); }
 
-  .template-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-  }
+  .template-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
   .toggle-switch {
     width: 32px; height: 18px;
     background: var(--surface3);
@@ -427,13 +498,17 @@
     transition: all var(--transition);
   }
   .action-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
-  .action-btn.danger:hover { border-color: rgba(255,107,107,0.4); color: var(--red); background: var(--red-dim); }
-  .action-btn.archive:hover { border-color: rgba(244,165,53,0.4); color: var(--amber); background: var(--amber-dim); }
+  .action-btn.danger:hover { border-color: rgba(163,45,45,0.4); color: var(--red); background: var(--red-dim); }
+  .action-btn.archive:hover { border-color: rgba(133,79,11,0.4); color: var(--amber); background: var(--amber-dim); }
   .action-btn.archive.disabled { opacity: 0.3; cursor: not-allowed; }
   .action-btn.archive.disabled:hover { border-color: var(--border2); color: var(--text-2); background: transparent; }
+  .action-btn.danger.disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+  .action-btn.danger.disabled:hover { border-color: var(--border2); color: var(--text-2); background: transparent; }
   .action-btn.save { margin-left: auto; }
+  .action-btn.repeat-close { border-color: var(--blue-dim); color: var(--blue); }
+  .action-btn.repeat-close:hover { border-color: var(--blue); background: var(--blue-dim); color: var(--blue); }
 
-  /* PINNED SECTION LABEL */
+  /* SECTION LABEL */
   .section-label {
     font-family: var(--font-mono);
     font-size: 10px;
@@ -464,15 +539,10 @@
     text-align: center;
   }
   #empty-state.show { display: flex; }
-  #empty-state .empty-icon {
-    font-size: 40px;
-    font-family: var(--font-display);
-    font-style: italic;
-    color: var(--surface3);
-  }
+  #empty-state .empty-icon { font-size: 32px; color: var(--surface3); }
   #empty-state p { font-size: 13px; color: var(--text-3); }
 
-  /* ── QUICK ACTION ── */
+  /* ── FAB & CLOSE BTN ── */
   #fab {
     position: fixed;
     bottom: 28px;
@@ -484,218 +554,40 @@
     border: none;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 24px rgba(200,240,100,0.25);
+    box-shadow: 0 2px 12px rgba(83,74,183,0.30);
     transition: transform var(--transition), box-shadow var(--transition);
     z-index: 100;
   }
-  #fab:hover { transform: translateX(calc(-100% - 6px)) scale(1.06); box-shadow: 0 6px 32px rgba(200,240,100,0.35); }
+  #fab:hover { transform: translateX(calc(-100% - 6px)) scale(1.06); box-shadow: 0 4px 20px rgba(83,74,183,0.40); }
   #fab:active { transform: translateX(calc(-100% - 6px)) scale(0.96); }
-  #fab svg { width: 22px; height: 22px; color: #0e0e0f; }
+  #fab svg { width: 22px; height: 22px; color: #fff; }
 
-  /* ── CLOSE (마감) BUTTON ── */
   #close-btn {
     position: fixed;
     bottom: 28px;
     left: 50%;
     transform: translateX(6px);
     width: 52px; height: 52px;
-    background: var(--surface2);
+    background: var(--surface);
     border-radius: 50%;
     border: 0.5px solid var(--border2);
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: transform var(--transition), background var(--transition), border-color var(--transition);
+    transition: transform var(--transition), background var(--transition);
     z-index: 100;
     color: var(--text-2);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
   }
-  #close-btn:hover { transform: translateX(6px) scale(1.06); background: var(--surface3); border-color: var(--accent-border); color: var(--accent); }
+  #close-btn:hover { transform: translateX(6px) scale(1.06); background: var(--surface2); color: var(--accent); }
   #close-btn:active { transform: translateX(6px) scale(0.96); }
   #close-btn svg { width: 20px; height: 20px; }
-
-  /* ── ARCHIVE OVERLAY ── */
-  #archive-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 150;
-    display: none;
-    flex-direction: column;
-    max-width: 480px;
-    margin: 0 auto;
-    transform: translateX(100%);
-    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  #archive-overlay.open { display: flex; transform: translateX(0); }
-
-  #archive-header {
-    padding: 20px 20px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 0.5px solid var(--border);
-    flex-shrink: 0;
-  }
-  #archive-header-left {
-    display: flex; align-items: center; gap: 12px;
-  }
-  #archive-back-btn {
-    width: 32px; height: 32px;
-    background: var(--surface2);
-    border: 0.5px solid var(--border);
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--text-2);
-    display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition);
-  }
-  #archive-back-btn:hover { background: var(--surface3); color: var(--text); }
-  #archive-header h2 {
-    font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--text);
-  }
-  #archive-count-pill {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 0.5px solid var(--border2);
-    color: var(--text-3);
-    background: var(--surface2);
-  }
-  #archive-scroll {
-    flex: 1;
-    overflow-y: auto;
-    padding: 8px 20px 40px;
-    scrollbar-width: none;
-  }
-  #archive-scroll::-webkit-scrollbar { display: none; }
-  #archive-list { display: flex; flex-direction: column; gap: 6px; }
-  #archive-empty {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    gap: 8px;
-    color: var(--text-3);
-    text-align: center;
-  }
-  #archive-empty.show { display: flex; }
-
-  /* Archive card — read-only, muted */
-  .archive-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 10px 14px 10px 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-    overflow: hidden;
-  }
-  .archive-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--card-color, transparent);
-    border-radius: 3px 0 0 3px;
-  }
-  .archive-card-title {
-    flex: 1;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-3);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .archive-card-date {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-3);
-    flex-shrink: 0;
-  }
-  .archive-restore-btn {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    border: 0.5px solid var(--border2);
-    background: transparent;
-    color: var(--text-3);
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all var(--transition);
-  }
-  .archive-restore-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
-  .archive-delete-btn {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    border: 0.5px solid var(--border2);
-    background: transparent;
-    color: var(--text-3);
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all var(--transition);
-  }
-  .archive-delete-btn:hover { border-color: rgba(255,107,107,0.4); color: var(--red); background: var(--red-dim); }
-
-  /* ── CONFIRM MODAL ── */
-  #confirm-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(6px);
-    z-index: 300;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  #confirm-modal.open { display: flex; }
-  #confirm-box {
-    background: var(--surface);
-    border: 0.5px solid var(--border2);
-    border-radius: 16px;
-    padding: 24px 20px 20px;
-    width: 100%;
-    max-width: 320px;
-    text-align: center;
-  }
-  #confirm-box h3 {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-  #confirm-box p {
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  #confirm-box p span { color: var(--accent); font-weight: 500; }
-  .confirm-actions { display: flex; gap: 8px; }
-  .confirm-actions button { flex: 1; padding: 10px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 14px; cursor: pointer; transition: all var(--transition); }
-  #confirm-cancel { background: var(--surface3); border: 0.5px solid var(--border2); color: var(--text-2); }
-  #confirm-cancel:hover { background: var(--surface2); }
-  #confirm-ok { background: var(--accent); border: none; color: #0e0e0f; font-weight: 600; }
-  #confirm-ok:hover { background: #d4f56a; }
 
   /* ── MODAL OVERLAY ── */
   #modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(3px);
     z-index: 200;
     display: none;
     align-items: flex-end;
@@ -703,10 +595,10 @@
   }
   #modal-overlay.open { display: flex; }
 
-  /* ── ADD TODO SHEET ── */
+  /* ── ADD SHEET ── */
   #add-sheet {
     background: var(--surface);
-    border-radius: 20px 20px 0 0;
+    border-radius: 16px 16px 0 0;
     border-top: 0.5px solid var(--border2);
     border-left: 0.5px solid var(--border);
     border-right: 0.5px solid var(--border);
@@ -714,13 +606,13 @@
     max-width: 480px;
     padding: 0 0 env(safe-area-inset-bottom, 16px);
     transform: translateY(100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     max-height: 90vh;
     overflow-y: auto;
+    scrollbar-width: none;
   }
-  #modal-overlay.open #add-sheet {
-    transform: translateY(0);
-  }
+  #add-sheet::-webkit-scrollbar { display: none; }
+  #modal-overlay.open #add-sheet { transform: translateY(0); }
 
   .sheet-handle {
     width: 36px; height: 4px;
@@ -737,16 +629,14 @@
     border-bottom: 0.5px solid var(--border);
   }
   .sheet-header h2 {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 400;
-    font-style: italic;
+    font-size: 16px;
+    font-weight: 600;
     color: var(--text);
   }
 
   .sheet-close {
     width: 28px; height: 28px;
-    background: var(--surface3);
+    background: var(--surface2);
     border: 0.5px solid var(--border);
     border-radius: 50%;
     cursor: pointer;
@@ -754,7 +644,7 @@
     display: flex; align-items: center; justify-content: center;
     transition: all var(--transition);
   }
-  .sheet-close:hover { background: var(--surface2); color: var(--text); }
+  .sheet-close:hover { background: var(--surface3); color: var(--text); }
   .sheet-close svg { width: 12px; height: 12px; }
 
   .sheet-body { padding: 16px 20px; }
@@ -765,12 +655,12 @@
     border: none;
     outline: none;
     font-family: var(--font-body);
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 600;
     color: var(--text);
     padding: 0;
     caret-color: var(--accent);
-    resize: none;
+    display: block;
   }
   .sheet-input::placeholder { color: var(--text-3); }
 
@@ -791,13 +681,8 @@
   }
   .sheet-detail-input::placeholder { color: var(--text-3); }
 
-  .sheet-divider {
-    height: 0.5px;
-    background: var(--border);
-    margin: 12px 0;
-  }
+  .sheet-divider { height: 0.5px; background: var(--border); margin: 12px 0; }
 
-  /* meta expand toggle */
   .meta-expand-btn {
     display: flex;
     align-items: center;
@@ -810,7 +695,7 @@
     color: var(--text-3);
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     transition: all var(--transition);
     width: 100%;
     justify-content: center;
@@ -819,23 +704,20 @@
   .meta-expand-btn svg { width: 12px; height: 12px; transition: transform var(--transition); }
   .meta-expand-btn.expanded svg { transform: rotate(180deg); }
 
-  #add-meta-block {
-    display: none;
-    padding-top: 12px;
-  }
+  #add-meta-block { display: none; padding-top: 12px; }
   #add-meta-block.open { display: block; }
 
   .sheet-footer {
     padding: 12px 20px 16px;
     border-top: 0.5px solid var(--border);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
   }
 
   .submit-btn {
     background: var(--accent);
-    color: #0e0e0f;
+    color: #fff;
     border: none;
     border-radius: var(--radius-sm);
     padding: 10px 24px;
@@ -844,43 +726,654 @@
     font-weight: 600;
     cursor: pointer;
     transition: all var(--transition);
-    letter-spacing: 0.01em;
   }
-  .submit-btn:hover { background: #d4f56a; }
+  .submit-btn:hover { opacity: 0.88; }
   .submit-btn:active { transform: scale(0.97); }
-  .submit-btn:disabled { opacity: 0.4; cursor: default; }
+  .submit-btn:disabled { opacity: 0.35; cursor: default; }
 
   .char-hint {
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-3);
   }
 
   /* ── DRAG PLACEHOLDER ── */
   .drag-placeholder {
-    height: 56px;
+    height: 52px;
     border: 1.5px dashed var(--accent-border);
     border-radius: var(--radius);
     background: var(--accent-dim);
     pointer-events: none;
   }
 
-  /* Scrollbar */
-  #todo-scroll::-webkit-scrollbar { width: 3px; }
-  #todo-scroll::-webkit-scrollbar-track { background: transparent; }
-  #todo-scroll::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 2px; }
+  /* ── ARCHIVE OVERLAY ── */
+  #archive-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 150;
+    display: none;
+    flex-direction: column;
+    max-width: 480px;
+    margin: 0 auto;
+    transform: translateX(100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  #archive-overlay.open { display: flex; transform: translateX(0); }
+  #archive-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
 
-  /* Animations */
+  #archive-header {
+    padding: 18px 20px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--border);
+    flex-shrink: 0;
+    background: var(--surface);
+  }
+  #archive-header-left { display: flex; align-items: center; gap: 12px; }
+  #archive-back-btn {
+    width: 32px; height: 32px;
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition);
+  }
+  #archive-back-btn:hover { background: var(--surface3); color: var(--text); }
+  #archive-header h2 { font-size: 18px; font-weight: 600; color: var(--text); }
+  #archive-count-pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border2);
+    color: var(--text-3);
+    background: var(--surface2);
+  }
+  #archive-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 16px 40px;
+    scrollbar-width: none;
+    background: var(--bg);
+  }
+  #archive-scroll::-webkit-scrollbar { display: none; }
+  #archive-list { display: flex; flex-direction: column; gap: 6px; }
+  #archive-empty { display: none; flex-direction: column; align-items: center; padding: 60px 20px; gap: 8px; color: var(--text-3); text-align: center; }
+  #archive-empty.show { display: flex; }
+
+  .archive-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--transition);
+  }
+  .archive-card:hover { border-color: var(--border2); }
+  .archive-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--card-color, transparent);
+    border-radius: 3px 0 0 3px;
+  }
+  .archive-card-main {
+    padding: 10px 12px 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .archive-card-title { flex: 1; font-size: 13px; font-weight: 500; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .archive-card-date { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); flex-shrink: 0; }
+  .archive-expand-btn {
+    width: 22px; height: 22px; background: none; border: none;
+    cursor: pointer; color: var(--text-3); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: color var(--transition);
+  }
+  .archive-expand-btn:hover { color: var(--text-2); }
+  .archive-expand-btn svg { width: 11px; height: 11px; transition: transform var(--transition); }
+  .archive-card.expanded .archive-expand-btn svg { transform: rotate(180deg); }
+  .archive-card-detail {
+    display: none;
+    padding: 0 14px 12px 16px;
+    border-top: 0.5px solid var(--border);
+  }
+  .archive-card.expanded .archive-card-detail { display: block; }
+  .archive-detail-text {
+    font-size: 12px; color: var(--text-2); line-height: 1.55;
+    white-space: pre-wrap; margin: 8px 0 6px;
+    min-height: 0;
+  }
+  .archive-detail-text.empty { color: var(--text-3); font-style: italic; }
+  .archive-meta-line {
+    font-family: var(--font-mono); font-size: 10px; color: var(--text-3);
+    margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .archive-meta-line span { display: flex; gap: 4px; align-items: center; }
+  .archive-meta-line strong { color: var(--text-2); font-weight: 500; }
+  .archive-card-actions {
+    display: flex; gap: 6px; margin-top: 8px; padding-top: 8px;
+    border-top: 0.5px solid var(--border);
+  }
+  .archive-restore-btn {
+    font-family: var(--font-mono); font-size: 10px; padding: 3px 8px;
+    border-radius: 4px; border: 0.5px solid var(--border2);
+    background: transparent; color: var(--text-3); cursor: pointer; flex-shrink: 0;
+    transition: all var(--transition);
+  }
+  .archive-restore-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
+  .archive-delete-btn {
+    font-family: var(--font-mono); font-size: 10px; padding: 3px 8px;
+    border-radius: 4px; border: 0.5px solid var(--border2);
+    background: transparent; color: var(--text-3); cursor: pointer; flex-shrink: 0;
+    transition: all var(--transition);
+  }
+  .archive-delete-btn:hover { border-color: rgba(163,45,45,0.4); color: var(--red); background: var(--red-dim); }
+  .archive-card-actions { justify-content: flex-end; }
+  .archive-card-actions .archive-restore-btn { margin-right: auto; }
+
+  /* ── CONFIRM MODAL ── */
+  #confirm-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.40);
+    backdrop-filter: blur(4px);
+    z-index: 300; display: none;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  #confirm-modal.open { display: flex; }
+  #confirm-box {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 24px 20px 20px;
+    width: 100%; max-width: 300px;
+    text-align: center;
+  }
+  #confirm-box h3 { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  #confirm-box p { font-size: 13px; color: var(--text-2); line-height: 1.6; margin-bottom: 20px; }
+  #confirm-box p span { color: var(--accent); font-weight: 500; }
+  .confirm-actions { display: flex; gap: 8px; }
+  .confirm-actions button { flex: 1; padding: 10px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 14px; cursor: pointer; transition: all var(--transition); }
+  #confirm-cancel { background: var(--surface2); border: 0.5px solid var(--border2); color: var(--text-2); }
+  #confirm-cancel:hover { background: var(--surface3); }
+  #confirm-ok { background: var(--accent); border: none; color: #fff; font-weight: 600; }
+  #confirm-ok:hover { opacity: 0.88; }
+
+  /* ── STAT ACTION MODAL ── */
+  #stat-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    z-index: 400; display: none;
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  #stat-modal.open { display: flex; }
+  #stat-modal-box {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 22px 20px 18px;
+    width: 100%; max-width: 280px;
+  }
+  #stat-modal-title {
+    font-size: 15px; font-weight: 600;
+    color: var(--text); margin-bottom: 6px;
+  }
+  #stat-modal-desc {
+    font-size: 12px; color: var(--text-2);
+    line-height: 1.55; margin-bottom: 18px;
+  }
+
+  /* ── CARD ANIMATIONS ── */
   @keyframes cardIn {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .todo-card { animation: cardIn 0.2s ease forwards; }
+  .todo-card { animation: cardIn 0.18s ease forwards; }
 
-  @keyframes sheetIn {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+  /* ── STATS OVERLAY ── */
+  #stats-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 150;
+    display: none;
+    flex-direction: column;
+    max-width: 480px;
+    margin: 0 auto;
+    transform: translateX(100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  #stats-overlay.open { display: flex; transform: translateX(0); }
+  #stats-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #stats-header {
+    padding: 18px 20px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--border);
+    flex-shrink: 0;
+    background: var(--surface);
+  }
+  #stats-header-left { display: flex; align-items: center; gap: 12px; }
+  #stats-back-btn {
+    width: 32px; height: 32px;
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition);
+  }
+  #stats-back-btn:hover { background: var(--surface3); color: var(--text); }
+  #stats-header h2 { font-size: 18px; font-weight: 600; color: var(--text); }
+
+  #stats-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px 40px;
+    scrollbar-width: none;
+    background: var(--bg);
+  }
+  #stats-scroll::-webkit-scrollbar { display: none; }
+  #stats-list { display: flex; flex-direction: column; gap: 12px; }
+  #stats-empty { display: none; flex-direction: column; align-items: center; padding: 60px 20px; gap: 8px; color: var(--text-3); text-align: center; }
+  #stats-empty.show { display: flex; }
+
+  .stat-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--card-color, var(--border2));
+    border-radius: 3px 0 0 3px;
+  }
+  .stat-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .stat-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .stat-card-badges {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .stat-rate {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* 히트맵 그리드 */
+  .stat-heatmap {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .heatmap-cell {
+    width: 20px; height: 20px;
+    border-radius: 4px;
+    background: var(--surface3);
+    border: 0.5px solid var(--border);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .heatmap-cell.done { background: var(--blue); border-color: transparent; }
+  .heatmap-cell.current { box-shadow: 0 0 0 1.5px var(--accent); }
+  .heatmap-cell.missed { background: var(--red-dim); border-color: transparent; }
+
+  .heatmap-label-row {
+    display: flex;
+    gap: 3px;
+    margin-top: 3px;
+    flex-wrap: wrap;
+  }
+  .heatmap-label {
+    width: 20px;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--text-3);
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .stat-summary {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 0.5px solid var(--border);
+  }
+  .stat-summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .stat-summary-val {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .stat-summary-lbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-3);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .stat-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 0.5px solid var(--border);
+  }
+  .stat-actions .action-btn { font-size: 11px; }
+  .stat-actions .stat-delete-btn { margin-left: auto; }
+
+  /* ── MOCK CLOCK PANEL ── */
+  #mock-panel {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    background: var(--surface);
+    border: 1px dashed var(--amber);
+    border-radius: var(--radius-sm);
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 500;
+    font-family: var(--font-mono);
+    font-size: 10px;
+  }
+  #mock-label { color: var(--amber); font-weight: 600; }
+  #mock-input {
+    background: var(--surface2);
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius-xs);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 6px;
+    outline: none;
+    width: 150px;
+  }
+  #mock-set-btn, #mock-reset-btn {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  #mock-set-btn:hover { border-color: var(--amber); color: var(--amber); }
+  #mock-reset-btn:hover { border-color: var(--red); color: var(--red); }
+  #mock-panel.mocked { border-color: var(--red); }
+  #mock-panel.mocked #mock-label { color: var(--red); }
+  #mock-hide-btn {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    color: var(--text-3);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  #mock-hide-btn:hover { border-color: var(--red); color: var(--red); }
+  #mock-toggle-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 28px; height: 28px;
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 13px;
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 499;
+    transition: all var(--transition);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  #mock-toggle-btn:hover { background: var(--surface3); }
+  #mock-toggle-btn.visible { display: flex; }
+
+
+
+  /* ── TRACKER ── */
+  .tracker-section {
+    margin-bottom: 10px;
+  }
+  .tracker-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .tracker-section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .tracker-add-btn {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    color: var(--text-3);
+    cursor: pointer;
+    display: flex; align-items: center; gap: 4px;
+    transition: all var(--transition);
+  }
+  .tracker-add-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
+
+  /* 트래커 종류 선택 드롭다운 */
+  .tracker-type-picker {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border);
+  }
+  .tracker-type-btn {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 6px 8px;
+    border-radius: var(--radius-xs);
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+    text-align: center;
+    transition: all var(--transition);
+  }
+  .tracker-type-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
+
+  /* 트래커 아이템 공통 */
+  .tracker-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border);
+    margin-bottom: 5px;
+    transition: border-color var(--transition);
+  }
+  .tracker-item:hover { border-color: var(--border2); }
+  .tracker-delete-btn {
+    width: 18px; height: 18px;
+    background: none; border: none;
+    cursor: pointer; color: var(--text-3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; border-radius: 3px;
+    transition: color var(--transition), background var(--transition);
+    margin-left: auto;
+  }
+  .tracker-delete-btn:hover { color: var(--red); background: var(--red-dim); }
+  .tracker-delete-btn svg { width: 11px; height: 11px; }
+
+  /* 체크박스 트래커 */
+  .tracker-checkbox {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--border2);
+    border-radius: 3px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition);
+    background: transparent;
+  }
+  .tracker-checkbox.checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .tracker-checkbox.checked::after {
+    content: '';
+    width: 5px; height: 3px;
+    border-left: 1.5px solid #fff;
+    border-bottom: 1.5px solid #fff;
+    transform: rotate(-45deg) translateY(-1px);
+  }
+  .tracker-text-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text);
+    caret-color: var(--accent);
+    min-width: 0;
+  }
+  .tracker-text-input::placeholder { color: var(--text-3); }
+  .tracker-text-input.checked { text-decoration: line-through; color: var(--text-3); }
+
+  /* 카운터 트래커 */
+  .tracker-counter-label {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-body);
+    caret-color: var(--accent);
+    min-width: 0;
+  }
+  .tracker-counter-label::placeholder { color: var(--text-3); }
+  .tracker-counter-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .tracker-counter-btn {
+    width: 22px; height: 22px;
+    background: var(--surface3);
+    border: 0.5px solid var(--border2);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .tracker-counter-btn:hover { background: var(--surface2); color: var(--accent); border-color: var(--accent-border); }
+  .tracker-counter-val {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text);
+    min-width: 20px;
+    text-align: center;
+  }
+  .tracker-counter-sep {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-3);
+  }
+  .tracker-counter-goal,
+  .tracker-counter-val-input {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    width: 36px;
+    background: var(--surface3);
+    border: 0.5px solid var(--border2);
+    border-radius: 3px;
+    color: var(--text);
+    text-align: center;
+    padding: 2px 4px;
+    outline: none;
+  }
+  .tracker-counter-goal:focus,
+  .tracker-counter-val-input:focus { border-color: var(--accent-border); }
+  /* 숫자 input 화살표 숨김 */
+  .tracker-counter-goal::-webkit-inner-spin-button,
+  .tracker-counter-val-input::-webkit-inner-spin-button,
+  .tracker-counter-goal::-webkit-outer-spin-button,
+  .tracker-counter-val-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .tracker-counter-goal, .tracker-counter-val-input { -moz-appearance: textfield; }
+
 </style>
 </head>
 <body>
@@ -904,6 +1397,10 @@
     <button id="archive-view-btn" class="sub-bar-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v11a1 1 0 001 1h14a1 1 0 001-1V9"/><path d="M10 13h4"/></svg>
       보관함
+    </button>
+    <button id="stats-view-btn" class="sub-bar-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      통계
     </button>
   </div>
 
@@ -938,6 +1435,38 @@
   </div>
 </div>
 
+<!-- STATS OVERLAY -->
+<div id="stats-overlay">
+  <div id="stats-panel">
+    <div id="stats-header">
+      <div id="stats-header-left">
+        <button id="stats-back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:16px;height:16px"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>통계</h2>
+      </div>
+    </div>
+    <div id="stats-scroll">
+      <div id="stats-list"></div>
+      <div id="stats-empty">
+        <div class="empty-icon">—</div>
+        <p>반복 TODO가 없어요</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOCK CLOCK PANEL (테스트용) -->
+<div id="mock-panel">
+  <div id="mock-label">🕐 Mock</div>
+  <input type="datetime-local" id="mock-input">
+  <button id="mock-set-btn">적용</button>
+  <button id="mock-reset-btn">리셋</button>
+  <button id="mock-hide-btn" title="숨기기" style="padding:2px 6px">✕</button>
+</div>
+<button id="mock-toggle-btn" title="Mock 시계 열기">🕐</button>
+
+
 <button id="fab" title="새 할 일 추가">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
     <path d="M12 5v14M5 12h14"/>
@@ -949,6 +1478,18 @@
     <path d="M20 6L9 17l-5-5"/>
   </svg>
 </button>
+
+<!-- STAT ACTION MODAL -->
+<div id="stat-modal">
+  <div id="stat-modal-box">
+    <p id="stat-modal-title"></p>
+    <p id="stat-modal-desc"></p>
+    <div class="confirm-actions">
+      <button id="stat-modal-cancel">취소</button>
+      <button id="stat-modal-ok">확인</button>
+    </div>
+  </div>
+</div>
 
 <!-- CONFIRM MODAL -->
 <div id="confirm-modal">
@@ -963,7 +1504,6 @@
 </div>
 <div id="modal-overlay">
   <div id="add-sheet">
-    <div class="sheet-handle"></div>
     <div class="sheet-header">
       <h2>New todo</h2>
       <button class="sheet-close" id="sheet-close-btn">
@@ -973,7 +1513,7 @@
       </button>
     </div>
     <div class="sheet-body">
-      <textarea class="sheet-input" id="todo-title-input" placeholder="제목을 입력하세요" rows="1" maxlength="100"></textarea>
+      <input type="text" class="sheet-input" id="todo-title-input" placeholder="제목을 입력하세요">
       <textarea class="sheet-detail-input" id="todo-detail-input" placeholder="상세 내용 (선택)" rows="3"></textarea>
       <div class="sheet-divider"></div>
       <button class="meta-expand-btn" id="meta-expand-toggle">
@@ -983,7 +1523,24 @@
         메타데이터 추가
       </button>
       <div id="add-meta-block">
-        <div class="meta-grid" style="margin-top:12px">
+        <!-- 트래커 섹션 -->
+        <div class="tracker-section" style="margin-top:12px">
+          <div class="tracker-section-header">
+            <span class="tracker-section-label">트래커</span>
+            <button class="tracker-add-btn" id="add-tracker-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:10px;height:10px"><path d="M12 5v14M5 12h14"/></svg>
+              추가
+            </button>
+          </div>
+          <div id="add-tracker-picker" style="display:none">
+            <div class="tracker-type-picker">
+              <button class="tracker-type-btn" data-type="checkbox">☑ 체크박스</button>
+              <button class="tracker-type-btn" data-type="counter">🔢 카운터</button>
+            </div>
+          </div>
+          <div id="add-tracker-list"></div>
+        </div>
+        <div class="meta-grid" style="margin-top:4px">
           <div class="meta-field">
             <label>상태</label>
             <select id="add-status" disabled style="opacity:0.4;cursor:not-allowed">
@@ -1023,20 +1580,115 @@
             <label>옵션</label>
             <label class="template-toggle" id="add-memorable-toggle">
               <div class="toggle-switch" id="add-memorable-switch"></div>
-              <span>Memorable</span>
+              <span>보관하기</span>
             </label>
           </div>
         </div>
       </div>
     </div>
     <div class="sheet-footer">
-      <span class="char-hint" id="title-char-hint">0/100</span>
       <button class="submit-btn" id="add-submit-btn" disabled>추가</button>
     </div>
   </div>
 </div>
 
 <script>
+// ── MOCK CLOCK (테스트용) ─────────────────────────────────────────
+const MockClock = (() => {
+  let _mockDate = null;
+  const now = () => _mockDate ? new Date(_mockDate) : new Date();
+  const set = (d) => { _mockDate = d ? new Date(d) : null; };
+  const isActive = () => _mockDate !== null;
+  return { now, set, isActive };
+})();
+
+// ── STATS REPOSITORY ──────────────────────────────────────────────
+// 반복 todo 완료 기록: { [itemId]: { [periodKey]: bool } }
+// periodKey: 'daily:2025-01-15' | 'weekly:2025-W03' | 'monthly:2025-01'
+const StatsRepository = (() => {
+  const KEY = 'todo_stats_v1';
+  const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
+  const write = (d) => localStorage.setItem(KEY, JSON.stringify(d));
+
+  // 로컬 날짜를 'YYYY-MM-DD' 문자열로 변환 (UTC 아닌 로컬 기준)
+  const localDateStr = (d) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  };
+
+  // 로컬 기준 ISO 주차 계산
+  const localISOWeek = (d) => {
+    const tmp = new Date(d.getFullYear(), d.getMonth(), d.getDate()); // 로컬 자정
+    const dayOfWeek = tmp.getDay() || 7; // 1=Mon ... 7=Sun
+    tmp.setDate(tmp.getDate() + 4 - dayOfWeek); // 해당 주의 목요일
+    const jan1 = new Date(tmp.getFullYear(), 0, 1);
+    const w = Math.ceil(((tmp - jan1) / 86400000 + 1) / 7);
+    return `${tmp.getFullYear()}-W${String(w).padStart(2, '0')}`;
+  };
+
+  const getPeriodKey = (repeat, date) => {
+    const d = date || MockClock.now();
+    if (repeat === 'Daily') {
+      return 'daily:' + localDateStr(d);
+    } else if (repeat === 'Weekly') {
+      return 'weekly:' + localISOWeek(d);
+    } else if (repeat === 'Monthly') {
+      return `monthly:${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    }
+    return null;
+  };
+
+  const mark = (itemId, repeat, done) => {
+    const key = getPeriodKey(repeat);
+    if (!key) return;
+    const data = read();
+    if (!data[itemId]) data[itemId] = {};
+    data[itemId][key] = done;
+    write(data);
+  };
+
+  const isCompletedThisPeriod = (itemId, repeat) => {
+    const key = getPeriodKey(repeat);
+    if (!key) return false;
+    const data = read();
+    return !!(data[itemId] && data[itemId][key]);
+  };
+
+  const getHistory = (itemId, repeat, periodsBack = 12) => {
+    const data = read();
+    const history = data[itemId] || {};
+    const result = [];
+    const now = MockClock.now();
+    // 로컬 자정 기준 날짜 복사
+    const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    for (let i = periodsBack - 1; i >= 0; i--) {
+      let d;
+      if (repeat === 'Daily') {
+        d = new Date(base);
+        d.setDate(base.getDate() - i);
+      } else if (repeat === 'Weekly') {
+        d = new Date(base);
+        d.setDate(base.getDate() - i * 7);
+      } else if (repeat === 'Monthly') {
+        d = new Date(base.getFullYear(), base.getMonth() - i, 1);
+      }
+      const key = getPeriodKey(repeat, d);
+      result.push({ key, done: !!(history[key]), date: d });
+    }
+    return result;
+  };
+
+  const getAllForItem = (itemId) => {
+    const data = read();
+    return data[itemId] || {};
+  };
+
+  return { mark, isCompletedThisPeriod, getHistory, getPeriodKey, getAllForItem };
+})();
+
 // ── DATA LAYER (Repository Pattern) ──────────────────────────────
 const TodoRepository = (() => {
   const STORAGE_KEY = 'todo_items_v1';
@@ -1079,8 +1731,10 @@ const TodoRepository = (() => {
         deadline: data.meta?.deadline || null,
         startDate: data.meta?.startDate || null,
         memorable: data.meta?.memorable || false,
+        paused: false,
         color: data.meta?.color || '',
       },
+      trackers: data.trackers || [],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -1098,8 +1752,12 @@ const TodoRepository = (() => {
     const items = getAll();
     const idx = items.findIndex(i => i.id === id);
     if (idx === -1) return null;
-    items[idx] = { ...items[idx], ...patch, updatedAt: new Date().toISOString() };
-    if (patch.meta) items[idx].meta = { ...items[idx].meta, ...patch.meta };
+    const updatedItem = { ...items[idx], ...patch, updatedAt: new Date().toISOString() };
+    if (patch.meta) {
+      // 기존 meta를 먼저 두고 patch.meta로 덮어쓰기 — repeat 등 미지정 필드는 보존
+      updatedItem.meta = { ...items[idx].meta, ...patch.meta };
+    }
+    items[idx] = updatedItem;
     save(items);
     return items[idx];
   };
@@ -1118,9 +1776,7 @@ const TodoRepository = (() => {
     const items = getAll();
     const order = getOrder();
     const map = Object.fromEntries(items.map(i => [i.id, i]));
-    // Pinned first, then follow saved order
     const ordered = order.map(id => map[id]).filter(Boolean);
-    // append any items not in order yet
     items.forEach(item => { if (!order.includes(item.id)) ordered.push(item); });
     return ordered;
   };
@@ -1133,7 +1789,7 @@ const TodoService = {
   checkOverdue: (item) => {
     if (!item.meta.deadline) return false;
     if (['Completed', 'Archived'].includes(item.meta.status)) return false;
-    return new Date(item.meta.deadline) < new Date();
+    return new Date(item.meta.deadline) < MockClock.now();
   },
 
   checkNotYet: (item) => {
@@ -1141,7 +1797,7 @@ const TodoService = {
     if (['Completed', 'Archived'].includes(item.meta.status)) return false;
     const start = new Date(item.meta.startDate);
     start.setHours(0, 0, 0, 0);
-    const today = new Date();
+    const today = MockClock.now();
     today.setHours(0, 0, 0, 0);
     return start > today;
   },
@@ -1175,7 +1831,8 @@ let dragState = { dragging: null, placeholder: null };
 let expandedId = null;
 let selectedAddColor = '';
 let addMemorableOn = false;
-let showCompleted = false;
+let addTrackers = [];
+let showCompleted = localStorage.getItem('show_completed') !== 'false';
 
 // ── RENDER ────────────────────────────────────────────────────────
 function getColorVar(colorVal) {
@@ -1194,6 +1851,7 @@ function getColorVar(colorVal) {
 function filterItems(items) {
   // 'all': Archived 항상 숨김, Completed·NotYet은 showCompleted 플래그에 따라 숨김
   return items.filter(i => {
+    if (i.meta.paused) return false;
     const s = TodoService.resolveStatus(i);
     if (s === 'Archived') return false;
     if ((s === 'Completed' || s === 'NotYet') && !showCompleted) return false;
@@ -1204,9 +1862,6 @@ function filterItems(items) {
 function renderAll() {
   const allItems = TodoRepository.getSorted();
   const filtered = filterItems(allItems);
-
-  const pinned = filtered.filter(i => i.pinned);
-  const unpinned = filtered.filter(i => !i.pinned);
 
   const list = document.getElementById('todo-list');
   const empty = document.getElementById('empty-state');
@@ -1219,20 +1874,7 @@ function renderAll() {
     empty.classList.remove('show');
   }
 
-  if (pinned.length > 0) {
-    const label = document.createElement('div');
-    label.className = 'section-label';
-    label.textContent = 'Pinned';
-    list.appendChild(label);
-    pinned.forEach(item => list.appendChild(createCard(item)));
-    if (unpinned.length > 0) {
-      const label2 = document.createElement('div');
-      label2.className = 'section-label';
-      label2.textContent = 'Others';
-      list.appendChild(label2);
-    }
-  }
-  unpinned.forEach(item => list.appendChild(createCard(item)));
+  filtered.forEach(item => list.appendChild(createCard(item)));
 
   updateStats(allItems);
   setupDragDrop();
@@ -1257,8 +1899,11 @@ function createCard(item) {
   const statusLabel = { Active: 'Active', Completed: 'Completed', Overdue: 'Overdue', NotYet: 'Not yet', Archived: 'Archived' };
   let metaTagsHTML = '';
   metaTagsHTML += `<span class="meta-tag status-${status.toLowerCase()}">${statusLabel[status] || status}</span>`;
-  if (item.meta.repeat) metaTagsHTML += `<span class="meta-tag repeat">${item.meta.repeat}</span>`;
-  if (item.meta.memorable) metaTagsHTML += `<span class="meta-tag template">Memorable</span>`;
+  if (item.meta.repeat) {
+    const rClass = item.meta.repeat === 'Daily' ? 'repeat-daily' : item.meta.repeat === 'Weekly' ? 'repeat-weekly' : 'repeat-monthly';
+    metaTagsHTML += `<span class="meta-tag ${rClass}">${item.meta.repeat}</span>`;
+  }
+  if (item.meta.memorable) metaTagsHTML += `<span class="meta-tag template">보관하기</span>`;
   if (item.meta.deadline) {
     const df = TodoService.formatDate(item.meta.deadline);
     metaTagsHTML += `<span class="meta-tag deadline">${df}</span>`;
@@ -1275,11 +1920,7 @@ function createCard(item) {
         <div class="card-meta-row">${metaTagsHTML}</div>
       </div>
       <div class="card-right">
-        <button class="pin-btn${item.pinned ? ' pinned' : ''}" data-pin title="${item.pinned ? '고정 해제' : '고정'}">
-          <svg viewBox="0 0 24 24" fill="${item.pinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-        </button>
+
         <button class="expand-btn" data-expand>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
             <path d="M19 9l-7 7-7-7"/>
@@ -1313,11 +1954,7 @@ function createCard(item) {
     renderAll();
   });
 
-  card.querySelector('[data-pin]').addEventListener('click', (e) => {
-    e.stopPropagation();
-    TodoRepository.update(item.id, { pinned: !item.pinned });
-    renderAll();
-  });
+
 
   card.querySelector('[data-expand]').addEventListener('click', (e) => {
     e.stopPropagation();
@@ -1330,25 +1967,12 @@ function createCard(item) {
     wireExpandedPanel(card, item);
   }
 
-  // Long press to pin
-  let pressTimer = null;
-  card.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('[data-pin],[data-toggle],[data-expand],.card-expanded')) return;
-    pressTimer = setTimeout(() => {
-      if (!item.pinned) {
-        TodoRepository.update(item.id, { pinned: true });
-        renderAll();
-      }
-    }, 600);
-  });
-  card.addEventListener('pointerup', () => clearTimeout(pressTimer));
-  card.addEventListener('pointermove', () => clearTimeout(pressTimer));
+
 
   return card;
 }
 
 function renderExpandedPanel(item) {
-  const colorHex = getColorVar(item.meta.color);
   const colorDots = [
     { val: '', bg: 'var(--surface3)', label: '없음' },
     { val: 'var(--accent)', bg: 'var(--accent)', label: 'Green' },
@@ -1358,12 +1982,33 @@ function renderExpandedPanel(item) {
     { val: 'var(--purple)', bg: 'var(--purple)', label: 'Purple' },
     { val: 'var(--teal)', bg: 'var(--teal)', label: 'Teal' },
   ];
-
   const statusLabel = { Active: 'Active', Completed: 'Completed', Overdue: 'Overdue', NotYet: 'Not yet', Archived: 'Archived' };
   const resolvedStatus = TodoService.resolveStatus(item);
+  const colorDotsHtml = colorDots.map(c =>
+    '<div class="color-dot' + (item.meta.color === c.val ? ' selected' : '') + '"' +
+    ' data-color-val="' + c.val + '"' +
+    ' style="background:' + c.bg + '"' +
+    ' title="' + c.label + '"></div>'
+  ).join('');
+  const repeatHtml = item.meta.repeat
+    ? '<span class="meta-tag ' + (item.meta.repeat === 'Daily' ? 'repeat-daily' : item.meta.repeat === 'Weekly' ? 'repeat-weekly' : 'repeat-monthly') + '" style="font-size:11px;padding:3px 8px">' + item.meta.repeat + '</span>'
+    : '<span style="font-size:12px;color:var(--text-3)">없음</span>';
 
   return `
-    <p class="detail-text${item.detail ? '' : ' empty'}" id="detail-${item.id}">${item.detail ? escHtml(item.detail) : '상세 내용 없음'}</p>
+    <div class="expanded-view-mode">
+      <p class="expanded-title-display">${escHtml(item.title)}</p>
+      <p class="expanded-detail-display${item.detail ? '' : ' empty'}">${item.detail ? escHtml(item.detail) : '상세 내용 없음'}</p>
+    </div>
+    <div class="expanded-edit-mode" style="display:none">
+      <div class="inline-edit-field">
+        <div class="inline-edit-label">제목</div>
+        <div class="inline-edit-content" data-field="title" contenteditable="true" inputmode="text">${escHtml(item.title)}</div>
+      </div>
+      <div class="inline-edit-field">
+        <div class="inline-edit-label">상세</div>
+        <div class="inline-edit-content multiline" data-field="detail" contenteditable="true" inputmode="text">${item.detail ? escHtml(item.detail) : ''}</div>
+      </div>
+    </div>
     <div class="meta-grid">
       <div class="meta-field">
         <label>상태</label>
@@ -1373,52 +2018,33 @@ function renderExpandedPanel(item) {
       </div>
       <div class="meta-field">
         <label>반복</label>
-        <div style="display:flex;align-items:center;height:30px">
-          ${item.meta.repeat
-            ? `<span class="meta-tag repeat" style="font-size:11px;padding:3px 8px">${item.meta.repeat}</span>`
-            : `<span style="font-size:12px;color:var(--text-3)">없음</span>`
-          }
-        </div>
+        <div style="display:flex;align-items:center;height:30px">${repeatHtml}</div>
       </div>
       <div class="meta-field">
         <label>시작일</label>
-        <input type="date" data-field="startDate" value="${item.meta.startDate || ''}">
+        <input type="date" data-field="startDate" value="${item.meta.startDate || ''}" ${item.meta.repeat ? 'disabled style="opacity:0.35;cursor:not-allowed"' : ''}>
       </div>
       <div class="meta-field">
         <label>데드라인</label>
-        <input type="date" data-field="deadline" value="${item.meta.deadline || ''}">
+        <input type="date" data-field="deadline" value="${item.meta.deadline || ''}" ${item.meta.repeat ? 'disabled style="opacity:0.35;cursor:not-allowed"' : ''}>
       </div>
       <div class="meta-field full-width">
         <label>색상</label>
-        <div class="color-picker-row" data-color-picker>
-          ${colorDots.map(c => `
-            <div class="color-dot${item.meta.color === c.val ? ' selected' : ''}" 
-                 data-color-val="${c.val}" 
-                 style="background:${c.bg}" 
-                 title="${c.label}"></div>
-          `).join('')}
-        </div>
-      </div>
-      <div class="meta-field full-width">
-        <label>제목 편집</label>
-        <input type="text" data-field="title" value="${escHtml(item.title)}" style="font-size:14px;font-weight:500">
-      </div>
-      <div class="meta-field full-width">
-        <label>상세 내용</label>
-        <textarea data-field="detail" rows="3" style="background:var(--surface3);border:0.5px solid var(--border2);border-radius:var(--radius-xs);color:var(--text);font-family:var(--font-body);font-size:12px;padding:6px 8px;outline:none;width:100%;resize:vertical">${escHtml(item.detail)}</textarea>
+        <div class="color-picker-row" data-color-picker>${colorDotsHtml}</div>
       </div>
       <div class="meta-field full-width">
         <label>옵션</label>
         <label class="template-toggle" style="cursor:pointer">
           <div class="toggle-switch${item.meta.memorable ? ' on' : ''}" data-template-switch></div>
-          <span>Memorable</span>
+          <span>보관하기</span>
         </label>
       </div>
     </div>
     <div class="expanded-actions">
-      <button class="action-btn danger" data-delete>삭제</button>
+      <button class="action-btn danger${item.meta.repeat ? ' disabled' : ''}" data-delete ${item.meta.repeat ? 'disabled' : ''}>삭제</button>
       <button class="action-btn archive${item.meta.memorable ? '' : ' disabled'}" data-archive ${item.meta.memorable ? '' : 'disabled'}>보관</button>
-      <button class="action-btn save" data-save>저장</button>
+      ${item.meta.repeat ? '<button class="action-btn repeat-close" data-repeat-close>' + (StatsRepository.isCompletedThisPeriod(item.id, item.meta.repeat) ? '마감 취소' : '개별 마감') + '</button>' : ''}
+      <button class="action-btn save" data-save data-editing="false">수정</button>
     </div>
   `;
 }
@@ -1431,17 +2057,32 @@ function wireExpandedPanel(card, item) {
     tSwitch.addEventListener('click', () => {
       memorableVal = !memorableVal;
       tSwitch.classList.toggle('on', memorableVal);
-      // 보관 버튼 활성/비활성 동적 반영
       const archiveBtn = card.querySelector('[data-archive]');
       if (archiveBtn) {
         archiveBtn.disabled = !memorableVal;
         archiveBtn.classList.toggle('disabled', !memorableVal);
       }
+      // 즉시 저장
+      item.meta.memorable = memorableVal;
+      TodoRepository.update(item.id, { meta: { ...item.meta, memorable: memorableVal } });
+      // 카드 상단 meta-row의 Memorable 배지 즉시 업데이트
+      const metaRow = card.querySelector('.card-meta-row');
+      if (metaRow) {
+        const existing = metaRow.querySelector('.meta-tag.template');
+        if (memorableVal && !existing) {
+          const badge = document.createElement('span');
+          badge.className = 'meta-tag template';
+          badge.textContent = '보관하기';
+          metaRow.appendChild(badge);
+        } else if (!memorableVal && existing) {
+          existing.remove();
+        }
+      }
     });
     tSwitch._getVal = () => memorableVal;
   }
 
-  // Color picker
+  // Color picker — 클릭 즉시 저장
   const colorDots = card.querySelectorAll('[data-color-picker] .color-dot');
   let selectedColor = item.meta.color;
   colorDots.forEach(dot => {
@@ -1449,29 +2090,112 @@ function wireExpandedPanel(card, item) {
       colorDots.forEach(d => d.classList.remove('selected'));
       dot.classList.add('selected');
       selectedColor = dot.dataset.colorVal;
+      // 즉시 저장
+      item.meta.color = selectedColor;
+      TodoRepository.update(item.id, { meta: { ...item.meta, color: selectedColor } });
+      // 카드 색상 바 즉시 반영
+      const hex = getColorVar(selectedColor);
+      if (hex) card.style.setProperty('--card-color', hex);
+      else card.style.removeProperty('--card-color');
     });
   });
 
-  // Save
-  card.querySelector('[data-save]')?.addEventListener('click', () => {
-    const titleVal = card.querySelector('[data-field="title"]')?.value.trim();
-    const detailVal = card.querySelector('[data-field="detail"]')?.value.trim();
-    const startDate = card.querySelector('[data-field="startDate"]')?.value || null;
-    const deadline = card.querySelector('[data-field="deadline"]')?.value || null;
-    const memorable = tSwitch?._getVal() ?? item.meta.memorable;
+  // 트래커 렌더
+  renderTrackers(card, item);
 
-    if (titleVal) {
-      TodoRepository.update(item.id, {
-        title: titleVal,
-        detail: detailVal,
-        meta: {
-          status: item.meta.status,   // 직접 수정 불가 — 기존 값 유지
-          repeat: item.meta.repeat,   // 직접 수정 불가 — 기존 값 유지
-          startDate, deadline, memorable, color: selectedColor
+  // date input — 변경 즉시 저장 + scrollIntoView
+  card.querySelectorAll('input[type="date"]').forEach(el => {
+    el.addEventListener('focus', () => {
+      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 320);
+    });
+    el.addEventListener('change', () => {
+      const field = el.dataset.field;
+      item.meta[field] = el.value || null;
+      TodoRepository.update(item.id, { meta: { ...item.meta, [field]: el.value || null } });
+    });
+  });
+
+  // Memorable switch — 즉시 저장 (기존 클릭 핸들러는 tSwitch에 있고, 여기서 추가)
+
+  // 수정/저장 토글 버튼
+  const saveBtn = card.querySelector('[data-save]');
+  const viewMode = card.querySelector('.expanded-view-mode');
+  const editMode = card.querySelector('.expanded-edit-mode');
+  const titleField = card.querySelector('[data-field="title"]');
+  const detailField = card.querySelector('[data-field="detail"]');
+
+  // contenteditable 필드 포커스 시 키보드가 가리지 않도록 scrollIntoView
+  [titleField, detailField].forEach(el => {
+    if (!el) return;
+    el.addEventListener('focus', () => {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 320); // 키보드 올라오는 시간 대기
+    });
+  });
+
+  saveBtn?.addEventListener('click', () => {
+    const isEditing = saveBtn.dataset.editing === 'true';
+
+    if (!isEditing) {
+      // 수정 모드 진입
+      viewMode.style.display = 'none';
+      editMode.style.display = 'block';
+      saveBtn.textContent = '저장';
+      saveBtn.dataset.editing = 'true';
+      // 제목 필드에 포커스 + 커서 끝으로
+      if (titleField) {
+        titleField.focus();
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.selectNodeContents(titleField);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    } else {
+      // 저장 — 텍스트만 업데이트, collapse하지 않음
+      const titleVal = (titleField?.innerText || '').trim();
+      const detailVal = (detailField?.innerText || '').trimEnd();
+      const memorable = tSwitch?._getVal() ?? item.meta.memorable;
+
+      if (titleVal) {
+        // item 객체를 in-place 업데이트하여 재렌더 없이 상태 유지
+        item.title = titleVal;
+        item.detail = detailVal;
+        item.meta.memorable = memorable;
+        TodoRepository.update(item.id, { title: titleVal, detail: detailVal, meta: { ...item.meta, memorable } });
+
+        // 뷰모드 텍스트만 갱신, collapse 안 함
+        const viewTitle = card.querySelector('.expanded-title-display');
+        const viewDetail = card.querySelector('.expanded-detail-display');
+        if (viewTitle) viewTitle.textContent = titleVal;
+        if (viewDetail) {
+          viewDetail.textContent = detailVal || '상세 내용 없음';
+          viewDetail.classList.toggle('empty', !detailVal);
         }
-      });
-      expandedId = null;
-      renderAll();
+        // 카드 헤더 제목도 갱신
+        const cardTitle = card.querySelector('.card-title');
+        if (cardTitle) cardTitle.textContent = titleVal;
+
+        // 수정 모드 → 보기 모드 전환 (collapse 없이)
+        viewMode.style.display = '';
+        editMode.style.display = 'none';
+        saveBtn.textContent = '수정';
+        saveBtn.dataset.editing = 'false';
+      }
+    }
+  });
+
+  // 제목 필드: Enter 키로 저장 (줄바꿈 X)
+  titleField?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); saveBtn.click(); }
+  });
+  // 상세 필드: Enter는 줄바꿈 허용, Shift+Enter도 동일
+  detailField?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      // 기본 동작(줄바꿈) 허용 — 별도 처리 없음
+      e.stopPropagation();
     }
   });
 
@@ -1489,6 +2213,35 @@ function wireExpandedPanel(card, item) {
     renderAll();
     renderArchive();
   });
+
+  // 개별 마감 (반복형 전용)
+  card.querySelector('[data-repeat-close]')?.addEventListener('click', () => {
+    const fresh = TodoRepository.getAll().find(i => i.id === item.id);
+    if (!fresh) return;
+    const alreadyClosed = StatsRepository.isCompletedThisPeriod(item.id, item.meta.repeat);
+    if (alreadyClosed) {
+      // 마감 취소: 이번 기간 기록 삭제
+      const statsData = JSON.parse(localStorage.getItem('todo_stats_v1') || '{}');
+      if (statsData[item.id]) {
+        const key = StatsRepository.getPeriodKey(item.meta.repeat);
+        delete statsData[item.id][key];
+        localStorage.setItem('todo_stats_v1', JSON.stringify(statsData));
+      }
+      showToast('이번 기간 마감 취소됨');
+    } else {
+      // 개별 마감: 현재 완료 여부로 기록
+      const done = fresh.meta.status === 'Completed';
+      StatsRepository.mark(item.id, item.meta.repeat, done);
+      showToast(done ? '완료로 기록됨' : '미완료로 기록됨');
+    }
+    // 버튼 텍스트 즉시 업데이트
+    const btn = card.querySelector('[data-repeat-close]');
+    if (btn) {
+      const nowClosed = StatsRepository.isCompletedThisPeriod(item.id, item.meta.repeat);
+      btn.textContent = nowClosed ? '마감 취소' : '개별 마감';
+    }
+    renderStats();
+  });
 }
 
 function updateStats(items) {
@@ -1505,64 +2258,110 @@ function updateStats(items) {
   }
 }
 
-// ── DRAG & DROP ───────────────────────────────────────────────────
+// ── DRAG & DROP (pointer events — works on mobile & desktop) ────────
 function setupDragDrop() {
   const list = document.getElementById('todo-list');
-  const cards = [...list.querySelectorAll('.todo-card:not(.pinned)')];
+  const cards = [...list.querySelectorAll('.todo-card')];
 
   cards.forEach(card => {
-    if (card.classList.contains('pinned')) return;
+    const handle = card.querySelector('.card-drag-handle');
+    if (!handle) return;
 
-    card.setAttribute('draggable', true);
+    let startY = 0, startX = 0;
+    let isDragging = false;
+    let clone = null;
+    let placeholder = null;
 
-    card.addEventListener('dragstart', (e) => {
-      dragState.dragging = card;
-      card.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-      // Placeholder
-      dragState.placeholder = document.createElement('div');
-      dragState.placeholder.className = 'drag-placeholder';
-      setTimeout(() => card.style.opacity = '0.4', 0);
-    });
+    // 드래그 영역: 핸들 자체 + card-main의 왼쪽 48px 영역
+    const cardMain = card.querySelector('.card-main');
+    const dragZone = cardMain || handle;
 
-    card.addEventListener('dragend', () => {
-      card.classList.remove('dragging');
-      card.style.opacity = '';
-      dragState.placeholder?.remove();
-      dragState = { dragging: null, placeholder: null };
-      saveOrder();
-    });
-
-    card.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      if (!dragState.dragging || dragState.dragging === card) return;
-      e.dataTransfer.dropEffect = 'move';
-      const rect = card.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2;
-      if (e.clientY < mid) {
-        list.insertBefore(dragState.placeholder, card);
-      } else {
-        list.insertBefore(dragState.placeholder, card.nextSibling);
+    dragZone.addEventListener('pointerdown', (e) => {
+      // card-main에서는 왼쪽 48px 이내만 드래그 허용
+      if (e.currentTarget === cardMain) {
+        const rect = cardMain.getBoundingClientRect();
+        if (e.clientX - rect.left > 48) return;
       }
-    });
-
-    card.addEventListener('drop', (e) => {
+      if (card.classList.contains('expanded')) return;
       e.preventDefault();
-      if (!dragState.dragging || dragState.dragging === card) return;
-      const rect = card.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2;
-      if (e.clientY < mid) {
-        list.insertBefore(dragState.dragging, card);
-      } else {
-        list.insertBefore(dragState.dragging, card.nextSibling);
-      }
-    });
-  });
+      e.stopPropagation();
 
-  list.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    if (!dragState.placeholder || list.contains(dragState.placeholder)) return;
-    list.appendChild(dragState.placeholder);
+      startY = e.clientY;
+      startX = e.clientX;
+      isDragging = false;
+
+      const cardRect = card.getBoundingClientRect();
+
+      const onMove = (ev) => {
+        const dy = Math.abs(ev.clientY - startY);
+        const dx = Math.abs(ev.clientX - startX);
+
+        if (!isDragging && (dy > 6 || dx > 6)) {
+          isDragging = true;
+
+          // Create floating clone
+          clone = card.cloneNode(true);
+          clone.style.cssText = `
+            position: fixed;
+            left: ${cardRect.left}px;
+            top: ${cardRect.top}px;
+            width: ${cardRect.width}px;
+            opacity: 0.85;
+            pointer-events: none;
+            z-index: 1000;
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            transition: none;
+          `;
+          document.body.appendChild(clone);
+
+          // Placeholder
+          placeholder = document.createElement('div');
+          placeholder.className = 'drag-placeholder';
+          placeholder.style.height = cardRect.height + 'px';
+          list.insertBefore(placeholder, card);
+          card.style.display = 'none';
+          dragState = { dragging: card, placeholder };
+        }
+
+        if (!isDragging) return;
+
+        const moveY = ev.clientY - startY;
+        clone.style.top = (cardRect.top + moveY) + 'px';
+
+        // Find insertion point
+        const siblings = [...list.children].filter(el =>
+          el !== placeholder && el !== card && el.classList.contains('todo-card')
+        );
+        let insertBefore = null;
+        for (const sib of siblings) {
+          const r = sib.getBoundingClientRect();
+          if (ev.clientY < r.top + r.height / 2) { insertBefore = sib; break; }
+        }
+        if (insertBefore) list.insertBefore(placeholder, insertBefore);
+        else list.appendChild(placeholder);
+      };
+
+      const onUp = () => {
+        document.removeEventListener('pointermove', onMove);
+        document.removeEventListener('pointerup', onUp);
+
+        if (isDragging && clone && placeholder) {
+          clone.remove();
+          card.style.display = '';
+          list.insertBefore(card, placeholder);
+          placeholder.remove();
+          saveOrder();
+        }
+        dragState = { dragging: null, placeholder: null };
+        isDragging = false;
+        clone = null;
+        placeholder = null;
+      };
+
+      document.addEventListener('pointermove', onMove);
+      document.addEventListener('pointerup', onUp);
+    });
   });
 }
 
@@ -1570,20 +2369,14 @@ function saveOrder() {
   const list = document.getElementById('todo-list');
   const cards = [...list.querySelectorAll('.todo-card')];
   const newOrder = cards.map(c => c.dataset.id).filter(Boolean);
-
-  // Merge with pinned order
-  const allItems = TodoRepository.getSorted();
-  const pinnedIds = allItems.filter(i => i.pinned).map(i => i.id);
-  const combined = [...pinnedIds, ...newOrder.filter(id => !pinnedIds.includes(id))];
-  TodoRepository.reorder(combined);
+  TodoRepository.reorder(newOrder);
 }
 
 // ── SUB BAR ───────────────────────────────────────────────────────
 document.getElementById('show-completed-top-btn').addEventListener('click', () => {
   showCompleted = !showCompleted;
-  const btn = document.getElementById('show-completed-top-btn');
-  btn.classList.toggle('active', showCompleted);
-  document.getElementById('show-completed-label').textContent = showCompleted ? '숨기기' : '전부 보기';
+  localStorage.setItem('show_completed', showCompleted);
+  document.getElementById('show-completed-label').textContent = showCompleted ? '전부 보기' : '미완료만';
   renderAll();
 });
 
@@ -1624,14 +2417,39 @@ function renderArchive() {
 
     const updatedDate = new Date(item.updatedAt).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
 
+    // 날짜 텍스트 포맷
+    const fmtDate = (d) => d ? new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' }) : null;
+    const startStr = fmtDate(item.meta.startDate);
+    const deadlineStr = fmtDate(item.meta.deadline);
+    const metaLines = [
+      startStr ? `<span><strong>시작</strong>${startStr}</span>` : '',
+      deadlineStr ? `<span><strong>데드라인</strong>${deadlineStr}</span>` : '',
+    ].filter(Boolean).join('');
+
     card.innerHTML = `
-      <div class="archive-card-title">${escHtml(item.title)}</div>
-      <div class="archive-card-date">${updatedDate}</div>
-      <button class="archive-restore-btn" title="복원">복원</button>
-      <button class="archive-delete-btn" title="삭제">삭제</button>
+      <div class="archive-card-main">
+        <div class="archive-card-title">${escHtml(item.title)}</div>
+        <div class="archive-card-date">${updatedDate}</div>
+        <button class="archive-expand-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 9l-7 7-7-7"/></svg>
+        </button>
+      </div>
+      <div class="archive-card-detail">
+        <p class="archive-detail-text${item.detail ? '' : ' empty'}">${item.detail ? escHtml(item.detail) : '내용 없음'}</p>
+        ${metaLines ? `<div class="archive-meta-line">${metaLines}</div>` : ''}
+        <div class="archive-card-actions">
+          <button class="archive-restore-btn">복원</button>
+          <button class="archive-delete-btn">삭제</button>
+        </div>
+      </div>
     `;
+
+    card.querySelector('.archive-expand-btn').addEventListener('click', () => {
+      card.classList.toggle('expanded');
+    });
     card.querySelector('.archive-restore-btn').addEventListener('click', () => {
-      TodoRepository.update(item.id, { meta: { status: 'Active' } });
+      const fresh = TodoRepository.getAll().find(i => i.id === item.id);
+      if (fresh) TodoRepository.update(item.id, { meta: { ...fresh.meta, status: 'Active' } });
       renderArchive();
       renderAll();
     });
@@ -1646,9 +2464,11 @@ function renderArchive() {
 
 // ── 마감 (CLOSE) BUTTON ───────────────────────────────────────────
 document.getElementById('close-btn').addEventListener('click', () => {
-  const completedItems = TodoRepository.getAll().filter(i => i.meta.status === 'Completed');
-  if (completedItems.length === 0) {
-    showToast('완료된 TODO가 없어요');
+  const allItems = TodoRepository.getAll();
+  const completedItems = allItems.filter(i => i.meta.status === 'Completed');
+  const repeatItems = allItems.filter(i => i.meta.repeat && i.meta.status !== 'Archived' && !i.meta.paused);
+  if (completedItems.length === 0 && repeatItems.length === 0) {
+    showToast('처리할 TODO가 없어요');
     return;
   }
   const memorableItems = completedItems.filter(i => i.meta.memorable);
@@ -1659,31 +2479,91 @@ document.getElementById('close-btn').addEventListener('click', () => {
   const descEl = document.getElementById('confirm-desc');
   if (countEl) countEl.textContent = archiveCount;
   if (descEl) {
-    if (archiveCount > 0) {
-      descEl.innerHTML = `Memorable ${archiveCount}개는 보관함으로,<br>나머지 ${completedItems.length - archiveCount}개는 삭제됩니다.`;
-    } else {
-      descEl.innerHTML = `완료된 TODO ${completedItems.length}개가<br>모두 삭제됩니다. (Memorable 없음)`;
-    }
+    const now2 = MockClock.now();
+    const dow2 = now2.getDay();
+    const isLastDay2 = new Date(now2.getFullYear(), now2.getMonth()+1, 0).getDate() === now2.getDate();
+    const closableRepeat = repeatItems.filter(i =>
+      (i.meta.repeat === 'Daily') ||
+      (i.meta.repeat === 'Weekly' && dow2 === 0) ||
+      (i.meta.repeat === 'Monthly' && isLastDay2)
+    );
+    const parts = [];
+    if (closableRepeat.length > 0) parts.push(`반복 ${closableRepeat.length}개 기록`);
+    if (archiveCount > 0) parts.push(`보관 ${archiveCount}개`);
+    const nonMemo = completedItems.filter(i => !i.meta.repeat && !i.meta.memorable).length;
+    if (nonMemo > 0) parts.push(`삭제 ${nonMemo}개`);
+    descEl.innerHTML = parts.length > 0
+      ? parts.join(' · ') + '<br><span style="font-size:11px;color:var(--text-3)">마감을 진행할까요?</span>'
+      : '마감할 항목이 없어요';
   }
   modal.classList.add('open');
 
   document.getElementById('confirm-cancel').onclick = () => modal.classList.remove('open');
   document.getElementById('confirm-ok').onclick = () => {
-    completedItems.forEach(item => {
+    const now = MockClock.now();
+    const dow = now.getDay(); // 0=Sun
+    const isLastDayOfMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() === now.getDate();
+    let archived = 0, deleted = 0, statRecorded = 0;
+
+    // 반복 todo 전체를 마감 조건에 따라 처리 (완료 여부 무관)
+    repeatItems.forEach(item => {
+      const shouldClose =
+        (item.meta.repeat === 'Daily') ||
+        (item.meta.repeat === 'Weekly' && dow === 0) ||
+        (item.meta.repeat === 'Monthly' && isLastDayOfMonth);
+
+      if (shouldClose) {
+        const done = item.meta.status === 'Completed';
+        StatsRepository.mark(item.id, item.meta.repeat, done);
+        // 현재 저장된 최신 데이터를 읽어서 status만 리셋 — 나머지 필드 보존
+        const fresh = TodoRepository.getAll().find(i => i.id === item.id);
+        if (fresh) {
+          TodoRepository.update(item.id, { meta: { ...fresh.meta, status: 'Active' } });
+        }
+        statRecorded++;
+      }
+      // shouldClose가 아닌 경우 아무것도 안 함
+    });
+
+    // 일반 todo (반복 없는 것만) 처리
+    completedItems.filter(i => !i.meta.repeat).forEach(item => {
       if (item.meta.memorable) {
         TodoRepository.update(item.id, { meta: { status: 'Archived' } });
+        archived++;
       } else {
         TodoRepository.remove(item.id);
+        deleted++;
       }
     });
+
     modal.classList.remove('open');
-    showCompleted = false;
+    showCompleted = true;
+    localStorage.setItem('show_completed', 'true');
     document.getElementById('show-completed-top-btn').classList.remove('active');
     document.getElementById('show-completed-label').textContent = '전부 보기';
     renderAll();
-    showToast(archiveCount > 0 ? `${archiveCount}개 보관, ${completedItems.length - archiveCount}개 삭제됐어요` : `${completedItems.length}개가 삭제됐어요`);
+    renderStats();
+    const parts = [];
+    if (statRecorded) parts.push(`반복 ${statRecorded}개 기록됨`);
+    if (archived) parts.push(`${archived}개 보관`);
+    if (deleted) parts.push(`${deleted}개 삭제`);
+    showToast(parts.join(', ') || '마감 완료');
   };
 });
+
+// ── STAT ACTION MODAL ────────────────────────────────────────────
+function showStatModal(title, desc, okLabel, onOk, okStyle) {
+  const modal = document.getElementById('stat-modal');
+  document.getElementById('stat-modal-title').textContent = title;
+  document.getElementById('stat-modal-desc').textContent = desc;
+  const okBtn = document.getElementById('stat-modal-ok');
+  okBtn.textContent = okLabel || '확인';
+  okBtn.style.cssText = okStyle || '';
+  modal.classList.add('open');
+  const close = () => modal.classList.remove('open');
+  document.getElementById('stat-modal-cancel').onclick = close;
+  okBtn.onclick = () => { close(); onOk(); };
+}
 
 // ── TOAST ─────────────────────────────────────────────────────────
 function showToast(msg) {
@@ -1716,7 +2596,7 @@ const detailInput = document.getElementById('todo-detail-input');
 const submitBtn = document.getElementById('add-submit-btn');
 const metaToggle = document.getElementById('meta-expand-toggle');
 const metaBlock = document.getElementById('add-meta-block');
-const charHint = document.getElementById('title-char-hint');
+// charHint 제거됨
 const memorableSwitch = document.getElementById('add-memorable-switch');
 const memorableToggle = document.getElementById('add-memorable-toggle');
 
@@ -1732,8 +2612,15 @@ function openSheet() {
   document.getElementById('add-repeat').value = '';
   document.getElementById('add-start-date').value = '';
   document.getElementById('add-deadline').value = '';
+  // 날짜 필드 활성화 초기화
+  ['add-start-date', 'add-deadline'].forEach(id => {
+    const el = document.getElementById(id);
+    el.disabled = false;
+    el.style.opacity = '';
+    el.style.cursor = '';
+  });
   submitBtn.disabled = true;
-  charHint.textContent = '0/100';
+
   metaBlock.classList.remove('open');
   metaToggle.classList.remove('expanded');
   selectedAddColor = '';
@@ -1742,6 +2629,10 @@ function openSheet() {
   document.querySelectorAll('#add-color-picker .color-dot').forEach((d, i) => {
     d.classList.toggle('selected', i === 0);
   });
+  // 트래커 초기화
+  document.getElementById('add-tracker-list').innerHTML = '';
+  document.getElementById('add-tracker-picker').style.display = 'none';
+  addTrackers = [];
   setTimeout(() => titleInput.focus(), 350);
 }
 
@@ -1750,20 +2641,36 @@ function closeSheet() {
 }
 
 titleInput.addEventListener('input', () => {
-  autoResize(titleInput);
-  const len = titleInput.value.trim().length;
-  charHint.textContent = `${len}/100`;
-  submitBtn.disabled = len === 0;
+  submitBtn.disabled = titleInput.value.trim().length === 0;
 });
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = el.scrollHeight + 'px';
-}
 
 metaToggle.addEventListener('click', () => {
   const open = metaBlock.classList.toggle('open');
   metaToggle.classList.toggle('expanded', open);
+});
+
+// 반복 선택 시 시작일/데드라인 비활성화
+document.getElementById('add-repeat').addEventListener('change', function() {
+  const hasRepeat = this.value !== '';
+  const startEl = document.getElementById('add-start-date');
+  const deadlineEl = document.getElementById('add-deadline');
+  if (hasRepeat) {
+    startEl.value = '';
+    deadlineEl.value = '';
+    startEl.disabled = true;
+    deadlineEl.disabled = true;
+    startEl.style.opacity = '0.35';
+    startEl.style.cursor = 'not-allowed';
+    deadlineEl.style.opacity = '0.35';
+    deadlineEl.style.cursor = 'not-allowed';
+  } else {
+    startEl.disabled = false;
+    deadlineEl.disabled = false;
+    startEl.style.opacity = '';
+    startEl.style.cursor = '';
+    deadlineEl.style.opacity = '';
+    deadlineEl.style.cursor = '';
+  }
 });
 
 memorableToggle.addEventListener('click', () => {
@@ -1785,12 +2692,28 @@ titleInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (!submitBtn.disabled) addTodo(); }
 });
 
+function normalizeTitle(s) {
+  return s.replace(/\s+/g, '').toLowerCase();
+}
+
 function addTodo() {
   const title = titleInput.value.trim();
   if (!title) return;
+  const norm = normalizeTitle(title);
+  const isDuplicate = TodoRepository.getAll().some(i => normalizeTitle(i.title) === norm);
+  if (isDuplicate) {
+    titleInput.style.outline = '1.5px solid var(--red)';
+    titleInput.placeholder = '이미 있는 이름이에요';
+    setTimeout(() => {
+      titleInput.style.outline = '';
+      titleInput.placeholder = '제목을 입력하세요';
+    }, 2000);
+    return;
+  }
   TodoRepository.create({
     title,
     detail: detailInput.value.trim(),
+    trackers: addTrackers.map(t => ({ ...t })),
     meta: {
       status: 'Active',
       repeat: document.getElementById('add-repeat').value || null,
@@ -1804,6 +2727,152 @@ function addTodo() {
   renderAll();
 }
 
+
+// ── TRACKER SYSTEM ───────────────────────────────────────────────────
+document.getElementById('add-tracker-btn').addEventListener('click', () => {
+  const picker = document.getElementById('add-tracker-picker');
+  picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
+});
+
+document.querySelectorAll('#add-tracker-picker .tracker-type-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const type = btn.dataset.type;
+    const id = 'tr_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+    const tracker = type === 'checkbox'
+      ? { id, type: 'checkbox', text: '', checked: false }
+      : { id, type: 'counter', label: '', current: 0, goal: 10 };
+    addTrackers.push(tracker);
+    renderAddTrackerItem(tracker);
+    document.getElementById('add-tracker-picker').style.display = 'none';
+  });
+});
+
+function renderAddTrackerItem(tracker) {
+  const list = document.getElementById('add-tracker-list');
+  const el = document.createElement('div');
+  el.className = 'tracker-item';
+  el.dataset.tid = tracker.id;
+  if (tracker.type === 'checkbox') {
+    el.innerHTML = `<div class="tracker-checkbox${tracker.checked ? ' checked' : ''}"></div><input class="tracker-text-input${tracker.checked ? ' checked' : ''}" placeholder="항목 이름" value="${escHtml(tracker.text)}"><button class="tracker-delete-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+    const cb = el.querySelector('.tracker-checkbox');
+    const inp = el.querySelector('.tracker-text-input');
+    cb.addEventListener('click', () => { tracker.checked = !tracker.checked; cb.classList.toggle('checked', tracker.checked); inp.classList.toggle('checked', tracker.checked); });
+    inp.addEventListener('input', () => { tracker.text = inp.value; });
+  } else {
+    el.innerHTML = `<input class="tracker-counter-label" placeholder="설명" value="${escHtml(tracker.label)}"><div class="tracker-counter-controls"><input class="tracker-counter-val-input" type="number" min="0" value="${tracker.current}" style="width:38px"><span class="tracker-counter-sep">/</span><input class="tracker-counter-goal" type="number" min="0" value="${tracker.goal}"><button class="tracker-counter-btn" data-dir="1">+</button></div><button class="tracker-delete-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+    el.querySelector('.tracker-counter-label').addEventListener('input', e => { tracker.label = e.target.value; });
+    el.querySelector('.tracker-counter-val-input').addEventListener('input', e => { tracker.current = parseInt(e.target.value) || 0; });
+    el.querySelector('.tracker-counter-goal').addEventListener('input', e => { tracker.goal = parseInt(e.target.value) || 0; });
+    el.querySelector('.tracker-counter-btn').addEventListener('click', () => {
+      tracker.current++;
+      el.querySelector('.tracker-counter-val-input').value = tracker.current;
+    });
+  }
+  el.querySelector('.tracker-delete-btn').addEventListener('click', () => { addTrackers = addTrackers.filter(t => t.id !== tracker.id); el.remove(); });
+  list.appendChild(el);
+}
+
+function renderTrackers(card, item) {
+  const existing = card.querySelector('.tracker-section-expanded');
+  if (existing) existing.remove();
+  if (!item.trackers || item.trackers.length === 0) {
+    // 트래커 없어도 추가 UI는 보여줌
+    appendTrackerAddRow(card, item);
+    return;
+  }
+  const section = document.createElement('div');
+  section.className = 'tracker-section-expanded';
+  section.style.cssText = 'margin-bottom:10px;';
+  const header = document.createElement('div');
+  header.className = 'tracker-section-header';
+  header.innerHTML = '<span class="tracker-section-label">트래커</span>';
+  section.appendChild(header);
+  item.trackers.forEach(tracker => {
+    const el = buildTrackerEl(tracker, item, card, section);
+    section.appendChild(el);
+  });
+  appendTrackerAddRow(card, item, section);
+  const metaGrid = card.querySelector('.meta-grid');
+  if (metaGrid) metaGrid.before(section);
+  else card.querySelector('.card-expanded').appendChild(section);
+}
+
+function buildTrackerEl(tracker, item, card, section) {
+  const el = document.createElement('div');
+  el.className = 'tracker-item';
+  el.dataset.tid = tracker.id;
+  if (tracker.type === 'checkbox') {
+    el.innerHTML = `<div class="tracker-checkbox${tracker.checked ? ' checked' : ''}"></div><input class="tracker-text-input${tracker.checked ? ' checked' : ''}" placeholder="항목 이름" value="${escHtml(tracker.text)}" style="flex:1"><button class="tracker-delete-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+    const inp = el.querySelector('.tracker-text-input');
+    inp.addEventListener('input', e => { tracker.text = e.target.value; saveTrackers(item); });
+    el.querySelector('.tracker-checkbox').addEventListener('click', () => {
+      tracker.checked = !tracker.checked;
+      el.querySelector('.tracker-checkbox').classList.toggle('checked', tracker.checked);
+      inp.classList.toggle('checked', tracker.checked);
+      saveTrackers(item);
+    });
+  } else {
+    el.innerHTML = `<input class="tracker-counter-label" placeholder="설명" value="${escHtml(tracker.label)}" style="flex:1;min-width:0"><div class="tracker-counter-controls"><input class="tracker-counter-val-input" type="number" min="0" value="${tracker.current}" style="width:38px"><span class="tracker-counter-sep">/</span><input class="tracker-counter-goal" type="number" min="0" value="${tracker.goal}" style="width:38px"><button class="tracker-counter-btn" data-dir="1">+</button></div><button class="tracker-delete-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+    el.querySelector('.tracker-counter-label').addEventListener('input', e => { tracker.label = e.target.value; saveTrackers(item); });
+    el.querySelector('.tracker-counter-val-input').addEventListener('input', e => { tracker.current = parseInt(e.target.value) || 0; saveTrackers(item); });
+    el.querySelector('.tracker-counter-goal').addEventListener('change', e => { tracker.goal = parseInt(e.target.value) || 0; saveTrackers(item); });
+    el.querySelector('.tracker-counter-btn').addEventListener('click', () => {
+      tracker.current++;
+      el.querySelector('.tracker-counter-val-input').value = tracker.current;
+      saveTrackers(item);
+    });
+  }
+  el.querySelector('.tracker-delete-btn').addEventListener('click', () => {
+    item.trackers = item.trackers.filter(t => t.id !== tracker.id);
+    saveTrackers(item);
+    el.remove();
+    if (item.trackers.length === 0) renderTrackers(card, item);
+  });
+  return el;
+}
+
+function appendTrackerAddRow(card, item, section) {
+  if (!section) {
+    // section 없으면 새로 만들어서 추가
+    const s = document.createElement('div');
+    s.className = 'tracker-section-expanded';
+    s.style.cssText = 'margin-bottom:10px;';
+    const h = document.createElement('div');
+    h.className = 'tracker-section-header';
+    h.innerHTML = '<span class="tracker-section-label">트래커</span>';
+    s.appendChild(h);
+    appendTrackerAddRow(card, item, s);
+    const metaGrid = card.querySelector('.meta-grid');
+    if (metaGrid) metaGrid.before(s);
+    return;
+  }
+  const addRow = document.createElement('div');
+  addRow.style.cssText = 'margin-top:4px;';
+  addRow.innerHTML = `<button class="tracker-add-btn exp-tracker-add-btn" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:10px;height:10px"><path d="M12 5v14M5 12h14"/></svg> 트래커 추가</button><div class="exp-tracker-picker" style="display:none;margin-top:4px"><div class="tracker-type-picker"><button class="tracker-type-btn" data-type="checkbox">☑ 체크박스</button><button class="tracker-type-btn" data-type="counter">🔢 카운터</button></div></div>`;
+  addRow.querySelector('.exp-tracker-add-btn').addEventListener('click', () => {
+    const p = addRow.querySelector('.exp-tracker-picker');
+    p.style.display = p.style.display === 'none' ? 'block' : 'none';
+  });
+  addRow.querySelectorAll('.tracker-type-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = 'tr_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+      const t = btn.dataset.type === 'checkbox'
+        ? { id, type: 'checkbox', text: '', checked: false }
+        : { id, type: 'counter', label: '', current: 0, goal: 10 };
+      if (!item.trackers) item.trackers = [];
+      item.trackers.push(t);
+      saveTrackers(item);
+      addRow.querySelector('.exp-tracker-picker').style.display = 'none';
+      renderTrackers(card, item);
+    });
+  });
+  section.appendChild(addRow);
+}
+
+function saveTrackers(item) {
+  TodoRepository.update(item.id, { trackers: item.trackers });
+}
+
 // ── MISC ──────────────────────────────────────────────────────────
 function escHtml(str) {
   if (!str) return '';
@@ -1811,7 +2880,7 @@ function escHtml(str) {
 }
 
 function updateDateLabel() {
-  const now = new Date();
+  const now = MockClock.now();
   const label = now.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
   document.getElementById('date-label').textContent = label;
 }
@@ -1833,9 +2902,241 @@ function seedIfEmpty() {
   if (all[0]) TodoRepository.update(all[0].id, { pinned: true });
 }
 
+
+// ── STATS RENDER ──────────────────────────────────────────────────
+const HEATMAP_MAX = { Daily: 28, Weekly: 16, Monthly: 12 };
+
+function renderStats() {
+  // 통계탭은 paused 포함 모든 반복 todo 표시
+  const items = TodoRepository.getAll().filter(i => i.meta.repeat);
+  const list = document.getElementById('stats-list');
+  const empty = document.getElementById('stats-empty');
+  list.innerHTML = '';
+
+  if (items.length === 0) { empty.classList.add('show'); return; }
+  empty.classList.remove('show');
+
+  items.forEach(item => {
+    const colorHex = getColorVar(item.meta.color);
+    const repeat = item.meta.repeat;
+    const maxPeriods = HEATMAP_MAX[repeat] || 12;
+    const createdAt = new Date(item.createdAt);
+
+    // getHistory가 반환하는 모든 기간 중 생성일 이후만 필터 (로컬 기준)
+    const allHistory = StatsRepository.getHistory(item.id, repeat, maxPeriods);
+    const createdLocal = new Date(createdAt.getFullYear(), createdAt.getMonth(), createdAt.getDate());
+    const history = allHistory.filter(h => {
+      const periodStart = new Date(h.date.getFullYear(), h.date.getMonth(), h.date.getDate());
+      if (repeat === 'Weekly') periodStart.setDate(periodStart.getDate() - ((periodStart.getDay() + 6) % 7));
+      else if (repeat === 'Monthly') periodStart.setDate(1);
+      return periodStart >= createdLocal;
+    });
+
+    if (history.length === 0) return;
+
+    const currentKey = StatsRepository.getPeriodKey(repeat);
+
+    // 기록이 실제로 저장된 기간만 통계에 반영
+    // (현재 기간이더라도 이미 마감 기록이 있으면 포함)
+    const allRecorded = StatsRepository.getAllForItem(item.id);
+    const recordedHistory = history.filter(h =>
+      h.key !== currentKey || h.key in allRecorded
+    );
+    const doneCount = recordedHistory.filter(h => h.done).length;
+    const total = recordedHistory.length;
+    const rate = total > 0 ? Math.round((doneCount / total) * 100) : 0;
+
+    // streak: 최근부터 연속 완료 수 (현재 기간 제외)
+    let streak = 0;
+    for (let i = recordedHistory.length - 1; i >= 0; i--) {
+      if (recordedHistory[i].done) streak++; else break;
+    }
+
+    const card = document.createElement('div');
+    card.className = 'stat-card';
+    if (colorHex) card.style.setProperty('--card-color', colorHex);
+
+    // repeat 배지 색상
+    const repeatClass = repeat === 'Daily' ? 'repeat-daily' : repeat === 'Weekly' ? 'repeat-weekly' : 'repeat-monthly';
+
+    // Heatmap cells
+    const cellsHtml = history.map(h => {
+      const isCurrent = h.key === currentKey;
+      let cls = 'heatmap-cell';
+      if (isCurrent) cls += ' current';
+      else if (h.done) cls += ' done';
+      else if (!isCurrent && h.key in allRecorded) cls += ' missed';
+      // currentKey가 allRecorded에 있으면 (마감됨) done/missed 반영
+      if (isCurrent && h.key in allRecorded) {
+        cls = 'heatmap-cell' + (h.done ? ' done' : ' missed');
+      }
+      let label = '';
+      if (repeat === 'Daily') label = String(h.date.getDate()).padStart(2,'0');
+      else if (repeat === 'Weekly') label = 'W' + h.key.split('W')[1];
+      else label = (h.date.getMonth() + 1) + '월';
+      return `<div class="${cls}" title="${label}"></div>`;
+    }).join('');
+
+    const labelsHtml = history.map((h, i) => {
+      let label = '';
+      if (repeat === 'Daily') label = i % 7 === 0 ? String(h.date.getDate()) : '';
+      else if (repeat === 'Weekly') label = h.key.split('W')[1];
+      else label = String(h.date.getMonth() + 1);
+      return `<div class="heatmap-label">${label}</div>`;
+    }).join('');
+
+    const isPaused = !!item.meta.paused;
+    const pausedBadge = isPaused ? ' <span class="meta-tag" style="font-size:9px;padding:1px 5px;background:var(--surface3);color:var(--text-3)">중단</span>' : '';
+
+    card.innerHTML = `
+      <div class="stat-card-header">
+        <div class="stat-card-title">${escHtml(item.title)}${pausedBadge}</div>
+        <div class="stat-card-badges">
+          <span class="meta-tag ${repeatClass}" style="font-size:10px;padding:2px 6px">${repeat}</span>
+          <span class="stat-rate">${total > 0 ? rate + '%' : '—'}</span>
+        </div>
+      </div>
+      <div class="stat-heatmap">${cellsHtml}</div>
+      <div class="heatmap-label-row">${labelsHtml}</div>
+      <div class="stat-summary">
+        <div class="stat-summary-item">
+          <div class="stat-summary-val">${doneCount}</div>
+          <div class="stat-summary-lbl">완료</div>
+        </div>
+        <div class="stat-summary-item">
+          <div class="stat-summary-val">${total - doneCount}</div>
+          <div class="stat-summary-lbl">미완료</div>
+        </div>
+        <div class="stat-summary-item">
+          <div class="stat-summary-val">${streak}</div>
+          <div class="stat-summary-lbl">연속</div>
+        </div>
+        <div class="stat-summary-item">
+          <div class="stat-summary-val">${total > 0 ? rate + '%' : '—'}</div>
+          <div class="stat-summary-lbl">달성률</div>
+        </div>
+      </div>
+      <div class="stat-actions">
+        <button class="action-btn stat-pause-btn">${isPaused ? '재개' : '중단'}</button>
+        <button class="action-btn stat-reset-btn">새로 시작</button>
+        <button class="action-btn danger stat-delete-btn">삭제</button>
+      </div>
+    `;
+
+    card.querySelector('.stat-reset-btn').addEventListener('click', () => {
+      showStatModal(
+        '새로 시작하기',
+        '"' + item.title + '"의 기존 통계를 모두 지우고 오늘부터 새로 시작할까요?',
+        '새로 시작',
+        () => {
+          const statsData = JSON.parse(localStorage.getItem('todo_stats_v1') || '{}');
+          delete statsData[item.id];
+          localStorage.setItem('todo_stats_v1', JSON.stringify(statsData));
+          const fresh = TodoRepository.getAll().find(i => i.id === item.id);
+          if (fresh) {
+            TodoRepository.update(item.id, { createdAt: new Date().toISOString() });
+          }
+          renderStats();
+        },
+        'background:var(--accent);border:none;color:#fff;font-weight:600;'
+      );
+    });
+
+    card.querySelector('.stat-pause-btn').addEventListener('click', () => {
+      const fresh = TodoRepository.getAll().find(i => i.id === item.id);
+      if (!fresh) return;
+      TodoRepository.update(item.id, { meta: { ...fresh.meta, paused: !fresh.meta.paused } });
+      renderStats();
+      renderAll();
+    });
+
+    card.querySelector('.stat-delete-btn').addEventListener('click', () => {
+      showStatModal(
+        item.title + ' 삭제',
+        '이 반복 TODO와 통계 기록을 모두 삭제할까요? 되돌릴 수 없어요.',
+        '삭제',
+        () => {
+          const statsData = JSON.parse(localStorage.getItem('todo_stats_v1') || '{}');
+          delete statsData[item.id];
+          localStorage.setItem('todo_stats_v1', JSON.stringify(statsData));
+          TodoRepository.remove(item.id);
+          renderStats();
+          renderAll();
+        },
+        'background:var(--red);border:none;color:#fff;font-weight:600;'
+      );
+    });
+
+    list.appendChild(card);
+  });
+}
+
+// ── STATS VIEW EVENTS ─────────────────────────────────────────────
+document.getElementById('stats-view-btn').addEventListener('click', () => {
+  renderStats();
+  const el = document.getElementById('stats-overlay');
+  el.style.display = 'flex';
+  requestAnimationFrame(() => el.classList.add('open'));
+});
+
+document.getElementById('stats-back-btn').addEventListener('click', () => {
+  const el = document.getElementById('stats-overlay');
+  el.classList.remove('open');
+  setTimeout(() => { el.style.display = 'none'; }, 280);
+});
+
+// ── MOCK CLOCK EVENTS ─────────────────────────────────────────────
+document.getElementById('mock-set-btn').addEventListener('click', () => {
+  const val = document.getElementById('mock-input').value;
+  if (!val) return;
+  MockClock.set(new Date(val));
+  document.getElementById('mock-panel').classList.add('mocked');
+  document.getElementById('mock-label').textContent = '🕐 MOCK ON';
+  updateDateLabel();
+  renderAll();
+  showToast('Mock 시간 적용됨: ' + MockClock.now().toLocaleString('ko-KR'));
+});
+
+document.getElementById('mock-reset-btn').addEventListener('click', () => {
+  MockClock.set(null);
+  document.getElementById('mock-panel').classList.remove('mocked');
+  document.getElementById('mock-label').textContent = '🕐 Mock';
+  document.getElementById('mock-input').value = '';
+  updateDateLabel();
+  renderAll();
+  showToast('Mock 시간 해제됨');
+});
+
+document.getElementById('mock-hide-btn').addEventListener('click', () => {
+  document.getElementById('mock-panel').style.display = 'none';
+  document.getElementById('mock-toggle-btn').classList.add('visible');
+  localStorage.setItem('mock_panel_hidden', 'true');
+});
+
+document.getElementById('mock-toggle-btn').addEventListener('click', () => {
+  document.getElementById('mock-panel').style.display = '';
+  document.getElementById('mock-toggle-btn').classList.remove('visible');
+  localStorage.setItem('mock_panel_hidden', 'false');
+});
+
 // ── INIT ──────────────────────────────────────────────────────────
+// mock-input 초기값 + 숨김 상태 복원
+(function() {
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('mock-input').value =
+    `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  if (localStorage.getItem('mock_panel_hidden') === 'true') {
+    document.getElementById('mock-panel').style.display = 'none';
+    document.getElementById('mock-toggle-btn').classList.add('visible');
+  }
+})();
 updateDateLabel();
 seedIfEmpty();
+// showCompleted 초기 상태를 버튼에 반영
+(function() {
+  document.getElementById('show-completed-label').textContent = showCompleted ? '전부 보기' : '미완료만';
+})();
 renderAll();
 </script>
 </body>
