@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TODO</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=Bricolage+Grotesque:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
   /* ── DESIGN TOKENS (expense-dashboard 스타일 시스템) ── */
   :root {
@@ -21,22 +20,29 @@
     --accent: #534ab7;
     --accent-dim: #eeedfe;
     --accent-border: rgba(83,74,183,0.35);
-    --red: #a32d2d;
-    --red-dim: #fcebeb;
-    --amber: #854f0b;
-    --amber-dim: #faeeda;
-    --blue: #1a5276;
+    --red: #c0392b;
+    --red-dim: #fbeaea;
+    --amber: #b07d2e;
+    --amber-dim: #fdf3e0;
+    --blue: #2471a3;
     --blue-dim: #d6eaf8;
-    --teal: #0f6e56;
-    --teal-dim: #e1f5ee;
-    --purple: #6c3483;
-    --purple-dim: #f5eef8;
+    --teal: #148f77;
+    --teal-dim: #d5f5ed;
+    --purple: #7d3c98;
+    --purple-dim: #f4ecf7;
+    /* 팔레트 */
+    --palette-red: #c0534a;
+    --palette-green: #4a9e6b;
+    --palette-yellow: #c9973a;
+    --palette-blue: #3a7cc9;
+    --palette-magenta: #a0478a;
+    --palette-cyan: #2e9aab;
     --radius: 12px;
     --radius-sm: 8px;
     --radius-xs: 5px;
-    --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-mono: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+    --font-display: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
     --transition: 0.15s ease;
   }
   @media (prefers-color-scheme: dark) {
@@ -53,16 +59,23 @@
       --accent: #afa9ec;
       --accent-dim: #26215c;
       --accent-border: rgba(175,169,236,0.35);
-      --red: #f7c1c1;
-      --red-dim: #501313;
-      --amber: #fac775;
-      --amber-dim: #412402;
-      --blue: #9ec8f0;
+      --red: #f08070;
+      --red-dim: #4a1a14;
+      --amber: #f0c070;
+      --amber-dim: #3a2200;
+      --blue: #7ab8f0;
       --blue-dim: #0d2137;
-      --teal: #9fe1cb;
+      --teal: #5ecfb0;
       --teal-dim: #04342c;
-      --purple: #d2a8e8;
+      --purple: #c898e8;
       --purple-dim: #2e1542;
+      /* 팔레트 */
+      --palette-red: #e06860;
+      --palette-green: #60c080;
+      --palette-yellow: #e0b050;
+      --palette-blue: #5090e0;
+      --palette-magenta: #c060a8;
+      --palette-cyan: #40b8c8;
     }
   }
 
@@ -208,13 +221,17 @@
     content: '';
     position: absolute;
     left: 0; top: 0; bottom: 0;
-    width: 3px;
+    width: 8px;
     background: var(--card-color, transparent);
     border-radius: 3px 0 0 3px;
+    transition: width 0.18s ease;
+  }
+  .todo-card.expanded::before {
+    width: 3px;
   }
 
   .card-main {
-    padding: 11px 12px 11px 16px;
+    padding: 11px 12px 11px 20px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -360,12 +377,99 @@
     font-size: 13px;
     color: var(--text-2);
     line-height: 1.6;
-    white-space: pre-wrap;
   }
   .expanded-detail-display.empty { color: var(--text-3); font-style: italic; }
+  /* 마크다운 렌더링 스타일 */
+  .expanded-detail-display.md-rendered p { margin-bottom: 6px; }
+  .expanded-detail-display.md-rendered p:last-child { margin-bottom: 0; }
+  .expanded-detail-display.md-rendered strong { color: var(--text); font-weight: 600; }
+  .expanded-detail-display.md-rendered em { font-style: italic; }
+  .expanded-detail-display.md-rendered del { color: var(--text-3); }
+  .expanded-detail-display.md-rendered code {
+    font-family: monospace; font-size: 11px;
+    background: var(--surface3); color: var(--accent);
+    padding: 1px 5px; border-radius: 3px;
+  }
+  .expanded-detail-display.md-rendered pre {
+    background: var(--surface3); border-radius: var(--radius-xs);
+    padding: 8px 10px; overflow-x: auto; margin: 6px 0;
+  }
+  .expanded-detail-display.md-rendered pre code { background:none; padding:0; font-size:12px; color:var(--text-2); }
+  .expanded-detail-display.md-rendered ul,
+  .expanded-detail-display.md-rendered ol { padding-left: 16px; margin: 4px 0; }
+  .expanded-detail-display.md-rendered li { margin-bottom: 2px; }
+  .expanded-detail-display.md-rendered blockquote {
+    border-left: 3px solid var(--accent-border); padding-left: 10px;
+    margin: 6px 0; color: var(--text-3); font-style: italic;
+  }
+  .expanded-detail-display.md-rendered h1,
+  .expanded-detail-display.md-rendered h2,
+  .expanded-detail-display.md-rendered h3 {
+    color: var(--text); font-weight: 600; margin-bottom: 4px; margin-top: 8px;
+  }
+  .expanded-detail-display.md-rendered h1 { font-size: 16px; }
+  .expanded-detail-display.md-rendered h2 { font-size: 14px; }
+  .expanded-detail-display.md-rendered h3 { font-size: 13px; }
+  .expanded-detail-display.md-rendered a { color: var(--blue); text-decoration: underline; }
+  .expanded-detail-display.md-rendered hr { border:none; border-top:0.5px solid var(--border2); margin:8px 0; }
 
   .expanded-edit-mode { padding: 10px 0 8px; }
   .inline-edit-field { margin-bottom: 8px; }
+
+  /* ── WYSIWYG 마크다운 에디터 ── */
+  .md-editor {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.7;
+    padding: 8px 10px;
+    border-radius: var(--radius-xs);
+    border: 0.5px solid var(--accent-border);
+    background: var(--surface2);
+    min-height: 60px;
+    outline: none;
+    -webkit-user-select: text;
+    user-select: text;
+    cursor: text;
+    touch-action: manipulation;
+    word-break: break-word;
+  }
+  .md-editor:focus { border-color: var(--accent); background: var(--surface); }
+  /* 에디터 내부 렌더링 스타일 */
+  .md-editor h1 { font-size: 18px; font-weight: 700; color: var(--text); margin: 4px 0 2px; line-height: 1.3; }
+  .md-editor h2 { font-size: 15px; font-weight: 700; color: var(--text); margin: 4px 0 2px; line-height: 1.3; }
+  .md-editor h3 { font-size: 13px; font-weight: 700; color: var(--text); margin: 3px 0 2px; line-height: 1.3; }
+  .md-editor strong { color: var(--text); font-weight: 700; }
+  .md-editor em { font-style: italic; }
+  .md-editor del { color: var(--text-3); }
+  .md-editor code {
+    font-family: monospace; font-size: 11px;
+    background: var(--surface3); color: var(--accent);
+    padding: 1px 5px; border-radius: 3px;
+  }
+  .md-editor blockquote {
+    border-left: 3px solid var(--accent-border);
+    padding-left: 10px; color: var(--text-3); font-style: italic;
+    margin: 2px 0;
+  }
+  .md-editor ul { padding-left: 18px; margin: 2px 0; list-style: disc; }
+  .md-editor ol { padding-left: 18px; margin: 2px 0; list-style: disc; }
+  /* 순번 리스트: 숫자 그대로 표시 */
+  .md-editor .ol-item {
+    display: flex;
+    gap: 2px;
+    padding-left: 4px;
+    margin-bottom: 1px;
+  }
+  .md-editor .ol-item .ol-num {
+    flex-shrink: 0;
+    color: var(--text-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .md-editor .ol-item .ol-content { flex: 1; }
+  .md-editor li { margin-bottom: 1px; }
+  .md-editor hr { border: none; border-top: 0.5px solid var(--border2); margin: 6px 0; }
+  /* 입력 중인 raw 줄은 흐리게 */
+  .md-editor .raw-line { color: var(--text-3); font-style: normal; }
   .inline-edit-label {
     font-family: var(--font-mono);
     font-size: 10px;
@@ -451,9 +555,11 @@
     cursor: pointer;
     border: 2px solid transparent;
     transition: border-color var(--transition), transform var(--transition);
+    flex-shrink: 0;
   }
   .color-dot:hover { transform: scale(1.15); }
   .color-dot.selected { border-color: var(--text); }
+  .color-dot-custom { overflow: hidden; }
 
   .template-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
   .toggle-switch {
@@ -607,9 +713,10 @@
     padding: 0 0 env(safe-area-inset-bottom, 16px);
     transform: translateY(100%);
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    max-height: 90vh;
+    max-height: 92vh;
     overflow-y: auto;
     scrollbar-width: none;
+    /* 키보드 올라올 때 위치 전환은 JS에서 처리 */
   }
   #add-sheet::-webkit-scrollbar { display: none; }
   #modal-overlay.open #add-sheet { transform: translateY(0); }
@@ -675,9 +782,10 @@
     padding: 0;
     caret-color: var(--accent);
     resize: none;
-    min-height: 40px;
+    min-height: 24px;
     margin-top: 8px;
     line-height: 1.6;
+    overflow: hidden; /* auto-resize를 위해 */
   }
   .sheet-detail-input::placeholder { color: var(--text-3); }
 
@@ -1225,39 +1333,35 @@
     display: flex;
     gap: 6px;
     margin-bottom: 8px;
-    padding: 8px 10px;
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    border: 0.5px solid var(--border);
+    padding: 4px 0;
   }
   .tracker-type-btn {
     flex: 1;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    padding: 6px 8px;
+    font-size: 12px;
+    padding: 6px 0;
     border-radius: var(--radius-xs);
-    border: 0.5px solid var(--border2);
+    border: none;
     background: transparent;
-    color: var(--text-2);
+    color: var(--text);
     cursor: pointer;
-    text-align: center;
-    transition: all var(--transition);
+    text-align: left;
+    transition: color var(--transition);
+    font-weight: 500;
   }
-  .tracker-type-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
+  .tracker-type-btn:hover { color: var(--accent); }
 
   /* 트래커 아이템 공통 */
   .tracker-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 10px;
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    border: 0.5px solid var(--border);
-    margin-bottom: 5px;
-    transition: border-color var(--transition);
+    padding: 5px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 2px;
   }
-  .tracker-item:hover { border-color: var(--border2); }
+  .tracker-item:last-child { border-bottom: none; }
   .tracker-delete-btn {
     width: 18px; height: 18px;
     background: none; border: none;
@@ -1302,6 +1406,7 @@
     color: var(--text);
     caret-color: var(--accent);
     min-width: 0;
+    padding: 0;
   }
   .tracker-text-input::placeholder { color: var(--text-3); }
   .tracker-text-input.checked { text-decoration: line-through; color: var(--text-3); }
@@ -1317,6 +1422,7 @@
     font-family: var(--font-body);
     caret-color: var(--accent);
     min-width: 0;
+    padding: 0;
   }
   .tracker-counter-label::placeholder { color: var(--text-3); }
   .tracker-counter-controls {
@@ -1326,20 +1432,19 @@
     flex-shrink: 0;
   }
   .tracker-counter-btn {
-    width: 22px; height: 22px;
-    background: var(--surface3);
-    border: 0.5px solid var(--border2);
-    border-radius: 4px;
+    width: 20px; height: 20px;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-2);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-3);
     display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition);
+    transition: color var(--transition);
     line-height: 1;
     flex-shrink: 0;
   }
-  .tracker-counter-btn:hover { background: var(--surface2); color: var(--accent); border-color: var(--accent-border); }
+  .tracker-counter-btn:hover { color: var(--accent); }
   .tracker-counter-val {
     font-family: var(--font-mono);
     font-size: 12px;
@@ -1357,16 +1462,17 @@
     font-family: var(--font-mono);
     font-size: 12px;
     width: 36px;
-    background: var(--surface3);
-    border: 0.5px solid var(--border2);
-    border-radius: 3px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border2);
     color: var(--text);
     text-align: center;
-    padding: 2px 4px;
+    padding: 2px 2px;
     outline: none;
+    border-radius: 0;
   }
   .tracker-counter-goal:focus,
-  .tracker-counter-val-input:focus { border-color: var(--accent-border); }
+  .tracker-counter-val-input:focus { border-bottom-color: var(--accent); }
   /* 숫자 input 화살표 숨김 */
   .tracker-counter-goal::-webkit-inner-spin-button,
   .tracker-counter-val-input::-webkit-inner-spin-button,
@@ -1375,6 +1481,8 @@
   .tracker-counter-goal, .tracker-counter-val-input { -moz-appearance: textfield; }
 
 </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
 </head>
 <body>
 <div id="app">
@@ -1520,7 +1628,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <path d="M19 9l-7 7-7-7"/>
         </svg>
-        메타데이터 추가
+        설정
       </button>
       <div id="add-meta-block">
         <!-- 트래커 섹션 -->
@@ -1567,13 +1675,16 @@
           <div class="meta-field full-width">
             <label>색상</label>
             <div class="color-picker-row" id="add-color-picker">
-              <div class="color-dot" data-color="" style="background:var(--surface3); border-color: var(--text)" title="없음"></div>
-              <div class="color-dot" data-color="var(--accent)" style="background:var(--accent)" title="Green"></div>
-              <div class="color-dot" data-color="var(--blue)" style="background:var(--blue)" title="Blue"></div>
-              <div class="color-dot" data-color="var(--amber)" style="background:var(--amber)" title="Amber"></div>
-              <div class="color-dot" data-color="var(--red)" style="background:var(--red)" title="Red"></div>
-              <div class="color-dot" data-color="var(--purple)" style="background:var(--purple)" title="Purple"></div>
-              <div class="color-dot" data-color="var(--teal)" style="background:var(--teal)" title="Teal"></div>
+              <div class="color-dot selected" data-color="" style="background:var(--surface3);border-color:var(--text)" title="없음"></div>
+              <div class="color-dot" data-color="var(--palette-red)" style="background:var(--palette-red)" title="Red"></div>
+              <div class="color-dot" data-color="var(--palette-green)" style="background:var(--palette-green)" title="Green"></div>
+              <div class="color-dot" data-color="var(--palette-yellow)" style="background:var(--palette-yellow)" title="Yellow"></div>
+              <div class="color-dot" data-color="var(--palette-blue)" style="background:var(--palette-blue)" title="Blue"></div>
+              <div class="color-dot" data-color="var(--palette-magenta)" style="background:var(--palette-magenta)" title="Magenta"></div>
+              <div class="color-dot" data-color="var(--palette-cyan)" style="background:var(--palette-cyan)" title="Cyan"></div>
+              <div class="color-dot color-dot-custom" data-color="" title="커스텀" style="background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);border:none;position:relative;overflow:hidden">
+                <input type="color" class="color-custom-input" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;border:none;padding:0">
+              </div>
             </div>
           </div>
           <div class="meta-field full-width">
@@ -1593,6 +1704,35 @@
 </div>
 
 <script>
+// ── MARKDOWN SERVICE (계층 분리 — 제거/교체 용이) ────────────────────
+const MarkdownService = (() => {
+  const isAvailable = () => typeof window.marked !== 'undefined' && typeof window.DOMPurify !== 'undefined';
+
+  const render = (text) => {
+    if (!text) return '';
+    if (!isAvailable()) return escHtml(text).replace(/\n/g, '<br>');
+    try {
+      const rawHtml = window.marked.parse(text, {
+        breaks: true,
+        gfm: true,
+        headerIds: false,
+        mangle: false,
+      });
+      return window.DOMPurify.sanitize(rawHtml, {
+        ALLOWED_TAGS: ['p','br','strong','em','del','ul','ol','li',
+                       'blockquote','code','pre','h1','h2','h3','h4',
+                       'a','hr','table','thead','tbody','tr','th','td'],
+        ALLOWED_ATTR: ['href','target','rel'],
+      });
+    } catch {
+      return escHtml(text).replace(/\n/g, '<br>');
+    }
+  };
+
+  const isEnabled = () => isAvailable();
+  return { render, isEnabled };
+})();
+
 // ── MOCK CLOCK (테스트용) ─────────────────────────────────────────
 const MockClock = (() => {
   let _mockDate = null;
@@ -1687,6 +1827,433 @@ const StatsRepository = (() => {
   };
 
   return { mark, isCompletedThisPeriod, getHistory, getPeriodKey, getAllForItem };
+})();
+
+// ── WYSIWYG MARKDOWN ENGINE ─────────────────────────────────────────
+// 지원 문법:
+//  헤딩   : # H1  ## H2  ### H3  (줄 시작, 스페이스 후 확정)
+//  굵게   : **text** 또는 __text__
+//  기울임 : *text* 또는 _text_  (** 제외)
+//  취소선 : ~~text~~
+//  인라인코드: `code`
+//  인용   : > text  (줄 시작)
+//  리스트 : - item  또는 * item  (줄 시작, 스페이스 후 확정)
+//  순번   : 1. item  (줄 시작, 스페이스 후 확정)
+//  구분선 : --- 또는 *** (줄 전체)
+//  저장   : 편집기 raw text(innerText)를 그대로 item.detail에 저장
+
+const WysiwygEditor = (() => {
+
+  // raw text → DOM 노드 배열 (줄 단위 파싱)
+  function parseToNodes(text) {
+    const lines = text.split('\n');
+    const nodes = [];
+    let currentUl = null;
+    let currentOl = null;
+
+    for (const line of lines) {
+      // 비순번 리스트
+      const ulMatch = line.match(/^[-*] (.+)/);
+      if (ulMatch) {
+        if (!currentUl) { currentUl = document.createElement('ul'); nodes.push(currentUl); }
+        currentOl = null;
+        const li = document.createElement('li');
+        setInline(li, ulMatch[1]);
+        currentUl.appendChild(li);
+        continue;
+      }
+      // 순번 리스트는 parseLine에서 처리
+      // 리스트 아닌 줄 → ul 종료
+      currentUl = null;
+      currentOl = null;
+      nodes.push(parseLine(line));
+    }
+    return nodes;
+  }
+
+  function parseLine(line) {
+    // 헤딩
+    const h3 = line.match(/^### (.+)/);
+    if (h3) { const el = document.createElement('h3'); setInline(el, h3[1]); return el; }
+    const h2 = line.match(/^## (.+)/);
+    if (h2) { const el = document.createElement('h2'); setInline(el, h2[1]); return el; }
+    const h1 = line.match(/^# (.+)/);
+    if (h1) { const el = document.createElement('h1'); setInline(el, h1[1]); return el; }
+    // 인용
+    const bq = line.match(/^> (.+)/);
+    if (bq) { const el = document.createElement('blockquote'); setInline(el, bq[1]); return el; }
+    // 순번 리스트 → 숫자 그대로 표시, 들여쓰기만
+    const olMatch = line.match(/^(\d+)\. (.*)/);
+    if (olMatch) {
+      const div = document.createElement('div');
+      div.className = 'ol-item';
+      div.dataset.olNum = olMatch[1];
+      const num = document.createElement('span');
+      num.className = 'ol-num';
+      num.textContent = olMatch[1] + '.';
+      const body = document.createElement('span');
+      body.className = 'ol-content';
+      setInline(body, olMatch[2] || '');
+      div.appendChild(num);
+      div.appendChild(body);
+      return div;
+    }
+    // 비순번 리스트
+    const ul = line.match(/^[-*] (.+)/);
+    if (ul) {
+      const li = document.createElement('li'); setInline(li, ul[1]);
+      const wrapper = document.createElement('ul'); wrapper.appendChild(li); return wrapper;
+    }
+    // 구분선
+    if (/^(-{3,}|\*{3,})$/.test(line.trim())) {
+      return document.createElement('hr');
+    }
+    // 빈 줄
+    if (line.trim() === '') {
+      const br = document.createElement('br'); return br;
+    }
+    // 일반 단락
+    const p = document.createElement('p');
+    setInline(p, line);
+    return p;
+  }
+
+  // 인라인 마크다운 파싱 (굵게/기울임/취소선/인라인코드)
+  function setInline(el, text) {
+    el.innerHTML = parseInline(text);
+  }
+
+  function parseInline(text) {
+    // 인라인코드 (다른 것보다 먼저)
+    text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+    // 굵게 ** 또는 __
+    text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+    // 취소선 ~~
+    text = text.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+    // 기울임 * 또는 _ (단독)
+    text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    text = text.replace(/_([^_]+)_/g, '<em>$1</em>');
+    return text;
+  }
+
+  // DOM → raw text (저장용)
+  function extractRawText(editorEl) {
+    const lines = [];
+    for (const child of editorEl.childNodes) {
+      lines.push(nodeToRaw(child));
+    }
+    return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  function getInlineRaw(el) {
+    // 인라인 HTML을 raw 마크다운으로 역변환
+    let result = '';
+    for (const node of el.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        result += node.textContent;
+      } else {
+        const t = node.tagName?.toLowerCase();
+        const inner = getInlineRaw(node);
+        if (t === 'strong' || t === 'b') result += `**${inner}**`;
+        else if (t === 'em' || t === 'i') result += `*${inner}*`;
+        else if (t === 'del' || t === 's') result += `~~${inner}~~`;
+        else if (t === 'code') result += `\`${inner}\``;
+        else result += inner;
+      }
+    }
+    return result;
+  }
+
+  function nodeToRaw(node) {
+    if (node.nodeType === Node.TEXT_NODE) return node.textContent;
+    const tag = node.tagName?.toLowerCase();
+    if (!tag) return '';
+    if (tag === 'hr') return '---';
+    if (tag === 'br') return '';
+    const inner = getInlineRaw(node);
+    if (tag === 'h1') return '# ' + inner;
+    if (tag === 'h2') return '## ' + inner;
+    if (tag === 'h3') return '### ' + inner;
+    if (tag === 'blockquote') return '> ' + inner;
+    if (tag === 'ul') {
+      return [...node.querySelectorAll(':scope > li')]
+        .map(li => '- ' + getInlineRaw(li)).join('\n');
+    }
+    if (tag === 'ol') {
+      return [...node.querySelectorAll(':scope > li')]
+        .map(li => '- ' + getInlineRaw(li)).join('\n');
+    }
+    // ol-item div: "숫자. 내용" 형태로 복원
+    if (tag === 'div' && node.classList?.contains('ol-item')) {
+      const num = node.querySelector('.ol-num')?.textContent.replace('.','').trim() || '';
+      const body = getInlineRaw(node.querySelector('.ol-content') || node);
+      return num ? `${num}. ${body}` : body;
+    }
+    if (tag === 'p' || tag === 'div') return inner || '';
+    return inner;
+  }
+
+  // 에디터 초기화: raw text를 DOM으로 렌더
+  function init(editorEl, rawText) {
+    editorEl.innerHTML = '';
+    if (!rawText) return;
+    const nodes = parseToNodes(rawText);
+    nodes.forEach(n => editorEl.appendChild(n));
+  }
+
+  // 키 입력 처리: Space/Enter 후 줄 앞 패턴 감지 → 변환
+  function handleKeydown(e, editorEl) {
+    if (e.key === 'Enter') {
+      handleEnter(e, editorEl);
+    }
+    // Backspace: 블록 앞에서 누르면 일반 단락으로 해제
+    if (e.key === 'Backspace') {
+      handleBackspace(e, editorEl);
+    }
+  }
+
+  function handleInput(e, editorEl) {
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return;
+    const range = sel.getRangeAt(0);
+    let node = range.startContainer;
+    // 현재 커서가 있는 블록 요소 찾기
+    let block = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
+    while (block && block !== editorEl && block.parentElement !== editorEl) {
+      block = block.parentElement;
+    }
+    if (!block) return;
+
+    // 첫 입력 시 에디터 자체가 block인 경우: 텍스트 노드를 p로 감싸기
+    if (block === editorEl) {
+      // editorEl 안의 텍스트 노드를 p로 래핑
+      const children = [...editorEl.childNodes];
+      for (const child of children) {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const p = document.createElement('p');
+          p.textContent = child.textContent;
+          child.replaceWith(p);
+          block = p;
+          setCursorAtEnd(p);
+          break;
+        }
+      }
+      if (block === editorEl) return;
+    }
+
+    // p 또는 div 요소만 변환 대상 (이미 li 안에 있으면 변환 안 함)
+    const tag = block.tagName?.toLowerCase();
+    if (tag !== 'p' && tag !== 'div') return;
+
+    const text = block.innerText || block.textContent || '';
+
+    // 스페이스 또는 입력 후 패턴 확인
+    let newEl = null;
+    let contentAfter = '';
+
+    if (/^### /.test(text)) { newEl = document.createElement('h3'); contentAfter = text.slice(4); }
+    else if (/^## /.test(text)) { newEl = document.createElement('h2'); contentAfter = text.slice(3); }
+    else if (/^# /.test(text)) { newEl = document.createElement('h1'); contentAfter = text.slice(2); }
+    else if (/^> /.test(text)) { newEl = document.createElement('blockquote'); contentAfter = text.slice(2); }
+    else if (/^[-*] /.test(text)) {
+      const ul = document.createElement('ul');
+      const li = document.createElement('li');
+      li.innerHTML = parseInline(text.slice(2));
+      ul.appendChild(li);
+      block.replaceWith(ul);
+      // 커서를 li 끝으로
+      setCursorAtEnd(li);
+      return;
+    }
+    else if (/^\d+\. /.test(text)) {
+      const match = text.match(/^(\d+)\. (.*)/);
+      const div = document.createElement('div');
+      div.className = 'ol-item';
+      div.dataset.olNum = match[1];
+      const num = document.createElement('span');
+      num.className = 'ol-num';
+      num.textContent = match[1] + '.';
+      const body = document.createElement('span');
+      body.className = 'ol-content';
+      body.innerHTML = parseInline(match[2] || '');
+      div.appendChild(num); div.appendChild(body);
+      block.replaceWith(div);
+      setCursorAtEnd(body);
+      return;
+    }
+    else if (/^(-{3,}|\*{3,})$/.test(text.trim())) {
+      const hr = document.createElement('hr');
+      block.replaceWith(hr);
+      // hr 뒤에 새 p 추가
+      const p = document.createElement('p'); p.innerHTML = '<br>';
+      hr.after(p);
+      setCursorAtEnd(p);
+      return;
+    }
+
+    if (newEl) {
+      setInline(newEl, contentAfter);
+      block.replaceWith(newEl);
+      setCursorAtEnd(newEl);
+    }
+  }
+
+  function handleEnter(e, editorEl) {
+    e.preventDefault();
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return;
+    const range = sel.getRangeAt(0);
+    let node = range.startContainer;
+    let block = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
+    while (block && block !== editorEl && block.parentElement !== editorEl) {
+      block = block.parentElement;
+    }
+    const tag = block?.tagName?.toLowerCase();
+
+    // 헤딩/인용에서 Enter → 새 p
+    if (['h1','h2','h3','blockquote'].includes(tag)) {
+      const p = document.createElement('p'); p.innerHTML = '<br>';
+      block.after(p);
+      setCursorAtEnd(p);
+      return;
+    }
+    // ol-item에서 Enter → 새 ol-item (숫자 그대로 유지, 빈 경우 p로 탈출)
+    if (block.classList?.contains('ol-item') || block.classList?.contains('ol-content')) {
+      const olItem = block.classList.contains('ol-item') ? block : block.closest('.ol-item');
+      if (!olItem) { /* fallthrough */ } else {
+        const bodyEl = olItem.querySelector('.ol-content');
+        const bodyText = (bodyEl?.innerText || '').trim();
+        if (bodyText === '') {
+          const p = document.createElement('p'); p.innerHTML = '<br>';
+          olItem.replaceWith(p);
+          setCursorAtEnd(p);
+        } else {
+          const newDiv = document.createElement('div');
+          newDiv.className = 'ol-item';
+          const newBody = document.createElement('span');
+          newBody.className = 'ol-content';
+          newBody.innerHTML = '<br>';
+          newDiv.appendChild(newBody);
+          olItem.after(newDiv);
+          setCursorAtEnd(newBody);
+        }
+        return;
+      }
+    }
+    // ul 리스트에서 Enter → 빈 li면 리스트 탈출, 아니면 기존 리스트에 새 li 추가
+    if (tag === 'li') {
+      const liText = (block.innerText || '').trim();
+      const listEl = block.parentElement;
+      if (liText === '') {
+        const p = document.createElement('p'); p.innerHTML = '<br>';
+        block.remove();
+        listEl.after(p);
+        if (listEl.querySelectorAll('li').length === 0) listEl.remove();
+        setCursorAtEnd(p);
+      } else {
+        const newLi = document.createElement('li'); newLi.innerHTML = '<br>';
+        block.after(newLi);
+        setCursorAtEnd(newLi);
+      }
+      return;
+    }
+    // 기본: 새 p 삽입
+    const p = document.createElement('p'); p.innerHTML = '<br>';
+    if (block && block !== editorEl) block.after(p);
+    else editorEl.appendChild(p);
+    setCursorAtEnd(p);
+  }
+
+  function handleBackspace(e, editorEl) {
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return;
+    const range = sel.getRangeAt(0);
+    if (!range.collapsed) return; // 선택 영역 있으면 기본 동작
+    let node = range.startContainer;
+    let block = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
+    while (block && block !== editorEl && block.parentElement !== editorEl) {
+      block = block.parentElement;
+    }
+    const tag = block?.tagName?.toLowerCase();
+
+    // 헤딩/인용 맨 앞에서 Backspace → p로 변환
+    if (['h1','h2','h3','blockquote'].includes(tag)) {
+      // 커서가 맨 앞일 때만
+      if (range.startOffset !== 0) return;
+      e.preventDefault();
+      const p = document.createElement('p');
+      p.innerHTML = block.innerHTML || '<br>';
+      block.replaceWith(p);
+      setCursorAtEnd(p);
+      return;
+    }
+
+    // ol-item 처리
+    if (block.classList?.contains('ol-content') || block.classList?.contains('ol-item')) {
+      const olItem = block.classList.contains('ol-item') ? block : block.closest('.ol-item');
+      if (olItem) {
+        const bodyEl = olItem.querySelector('.ol-content');
+        const bodyText = (bodyEl?.innerText || '').trim();
+        if (bodyText === '') {
+          e.preventDefault();
+          const prev = olItem.previousElementSibling;
+          const p = document.createElement('p'); p.innerHTML = '<br>';
+          olItem.replaceWith(p);
+          setCursorAtEnd(prev || p);
+          return;
+        }
+      }
+    }
+
+    // li 안에서 처리
+    if (tag === 'li') {
+      const liText = (block.innerText || '').trim();
+      // 빈 li에서 Backspace → li 제거 후 위 항목 끝으로 커서
+      if (liText === '' && range.startOffset === 0) {
+        e.preventDefault();
+        const listEl = block.parentElement;
+        const prevLi = block.previousElementSibling;
+        const nextLi = block.nextElementSibling;
+        block.remove();
+        // li가 모두 없어지면 리스트 자체 제거하고 p 생성
+        if (listEl.querySelectorAll('li').length === 0) {
+          const p = document.createElement('p'); p.innerHTML = '<br>';
+          listEl.replaceWith(p);
+          setCursorAtEnd(p);
+        } else if (prevLi) {
+          setCursorAtEnd(prevLi);
+        } else if (nextLi) {
+          setCursorAtEnd(nextLi);
+        }
+        return;
+      }
+      // li 맨 앞에서 Backspace → 첫 li면 리스트 탈출
+      if (range.startOffset === 0 && !block.previousElementSibling) {
+        e.preventDefault();
+        const listEl = block.parentElement;
+        const p = document.createElement('p');
+        p.innerHTML = block.innerHTML || '<br>';
+        block.remove();
+        listEl.before(p);
+        if (listEl.querySelectorAll('li').length === 0) listEl.remove();
+        setCursorAtEnd(p);
+        return;
+      }
+    }
+  }
+
+  function setCursorAtEnd(el) {
+    el.focus();
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+  return { init, handleKeydown, handleInput, extractRawText, parseInline };
 })();
 
 // ── DATA LAYER (Repository Pattern) ──────────────────────────────
@@ -1836,16 +2403,19 @@ let showCompleted = localStorage.getItem('show_completed') !== 'false';
 
 // ── RENDER ────────────────────────────────────────────────────────
 function getColorVar(colorVal) {
-  // Map CSS variable strings to hex for style
-  const map = {
-    'var(--accent)': '#c8f064',
-    'var(--blue)': '#6db3f2',
-    'var(--amber)': '#f4a535',
-    'var(--red)': '#ff6b6b',
-    'var(--purple)': '#a89fec',
-    'var(--teal)': '#5dcaa5',
-  };
-  return map[colorVal] || colorVal || '';
+  if (!colorVal) return '';
+  // CSS 변수는 런타임에 실제 색상값으로 변환
+  if (colorVal.startsWith('var(')) {
+    const tmp = document.createElement('div');
+    tmp.style.color = colorVal;
+    document.body.appendChild(tmp);
+    const computed = getComputedStyle(tmp).color;
+    document.body.removeChild(tmp);
+    // rgb(r,g,b) → #rrggbb
+    const m = computed.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    if (m) return '#' + [m[1],m[2],m[3]].map(n=>parseInt(n).toString(16).padStart(2,'0')).join('');
+  }
+  return colorVal;
 }
 
 function filterItems(items) {
@@ -1974,22 +2544,26 @@ function createCard(item) {
 
 function renderExpandedPanel(item) {
   const colorDots = [
-    { val: '', bg: 'var(--surface3)', label: '없음' },
-    { val: 'var(--accent)', bg: 'var(--accent)', label: 'Green' },
-    { val: 'var(--blue)', bg: 'var(--blue)', label: 'Blue' },
-    { val: 'var(--amber)', bg: 'var(--amber)', label: 'Amber' },
-    { val: 'var(--red)', bg: 'var(--red)', label: 'Red' },
-    { val: 'var(--purple)', bg: 'var(--purple)', label: 'Purple' },
-    { val: 'var(--teal)', bg: 'var(--teal)', label: 'Teal' },
+    { val: '', bg: 'var(--surface3)', label: '없음', border: 'var(--text)' },
+    { val: 'var(--palette-red)', bg: 'var(--palette-red)', label: 'Red' },
+    { val: 'var(--palette-green)', bg: 'var(--palette-green)', label: 'Green' },
+    { val: 'var(--palette-yellow)', bg: 'var(--palette-yellow)', label: 'Yellow' },
+    { val: 'var(--palette-blue)', bg: 'var(--palette-blue)', label: 'Blue' },
+    { val: 'var(--palette-magenta)', bg: 'var(--palette-magenta)', label: 'Magenta' },
+    { val: 'var(--palette-cyan)', bg: 'var(--palette-cyan)', label: 'Cyan' },
   ];
   const statusLabel = { Active: 'Active', Completed: 'Completed', Overdue: 'Overdue', NotYet: 'Not yet', Archived: 'Archived' };
   const resolvedStatus = TodoService.resolveStatus(item);
+  const isCustomColor = item.meta.color && !colorDots.some(c => c.val === item.meta.color);
   const colorDotsHtml = colorDots.map(c =>
     '<div class="color-dot' + (item.meta.color === c.val ? ' selected' : '') + '"' +
     ' data-color-val="' + c.val + '"' +
-    ' style="background:' + c.bg + '"' +
+    ' style="background:' + c.bg + (c.border ? ';border-color:' + c.border : '') + '"' +
     ' title="' + c.label + '"></div>'
-  ).join('');
+  ).join('') +
+  '<div class="color-dot color-dot-custom' + (isCustomColor ? ' selected' : '') + '" data-color-val="__custom__" title="커스텀"' +
+  ' style="background:' + (isCustomColor ? item.meta.color : 'conic-gradient(red,yellow,lime,cyan,blue,magenta,red)') + ';border:' + (isCustomColor ? '' : 'none') + ';position:relative;overflow:hidden">' +
+  '<input type="color" class="color-custom-input" value="' + (isCustomColor ? item.meta.color : '#888888') + '" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;border:none;padding:0"></div>';
   const repeatHtml = item.meta.repeat
     ? '<span class="meta-tag ' + (item.meta.repeat === 'Daily' ? 'repeat-daily' : item.meta.repeat === 'Weekly' ? 'repeat-weekly' : 'repeat-monthly') + '" style="font-size:11px;padding:3px 8px">' + item.meta.repeat + '</span>'
     : '<span style="font-size:12px;color:var(--text-3)">없음</span>';
@@ -1997,7 +2571,7 @@ function renderExpandedPanel(item) {
   return `
     <div class="expanded-view-mode">
       <p class="expanded-title-display">${escHtml(item.title)}</p>
-      <p class="expanded-detail-display${item.detail ? '' : ' empty'}">${item.detail ? escHtml(item.detail) : '상세 내용 없음'}</p>
+      <div class="expanded-detail-display" data-md-detail></div>
     </div>
     <div class="expanded-edit-mode" style="display:none">
       <div class="inline-edit-field">
@@ -2006,7 +2580,7 @@ function renderExpandedPanel(item) {
       </div>
       <div class="inline-edit-field">
         <div class="inline-edit-label">상세</div>
-        <div class="inline-edit-content multiline" data-field="detail" contenteditable="true" inputmode="text">${item.detail ? escHtml(item.detail) : ''}</div>
+        <div class="md-editor" data-field="detail" contenteditable="true" inputmode="text" data-md-editor spellcheck="false"></div>
       </div>
     </div>
     <div class="meta-grid">
@@ -2085,20 +2659,58 @@ function wireExpandedPanel(card, item) {
   // Color picker — 클릭 즉시 저장
   const colorDots = card.querySelectorAll('[data-color-picker] .color-dot');
   let selectedColor = item.meta.color;
+
+  const applyColor = (val) => {
+    selectedColor = val;
+    item.meta.color = val;
+    TodoRepository.update(item.id, { meta: { ...item.meta, color: val } });
+    const hex = getColorVar(val);
+    if (hex) card.style.setProperty('--card-color', hex);
+    else card.style.removeProperty('--card-color');
+  };
+
   colorDots.forEach(dot => {
-    dot.addEventListener('click', () => {
+    // 커스텀 컬러 input 처리
+    const customInput = dot.querySelector('.color-custom-input');
+    if (customInput) {
+      customInput.addEventListener('input', (e) => {
+        e.stopPropagation();
+        const hex = e.target.value;
+        dot.style.background = hex;
+        colorDots.forEach(d => d.classList.remove('selected'));
+        dot.classList.add('selected');
+        applyColor(hex);
+      });
+    }
+    dot.addEventListener('click', (e) => {
+      if (e.target.classList.contains('color-custom-input')) return;
+      const val = dot.dataset.colorVal;
+      if (val === '__custom__') { dot.querySelector('.color-custom-input')?.click(); return; }
       colorDots.forEach(d => d.classList.remove('selected'));
       dot.classList.add('selected');
-      selectedColor = dot.dataset.colorVal;
-      // 즉시 저장
-      item.meta.color = selectedColor;
-      TodoRepository.update(item.id, { meta: { ...item.meta, color: selectedColor } });
-      // 카드 색상 바 즉시 반영
-      const hex = getColorVar(selectedColor);
-      if (hex) card.style.setProperty('--card-color', hex);
-      else card.style.removeProperty('--card-color');
+      applyColor(val);
     });
   });
+
+  // 뷰모드 detail 렌더링
+  const detailDisplayEl = card.querySelector('[data-md-detail]');
+  if (detailDisplayEl) {
+    if (item.detail) {
+      detailDisplayEl.innerHTML = MarkdownService.render(item.detail);
+      detailDisplayEl.classList.toggle('md-rendered', MarkdownService.isEnabled());
+    } else {
+      detailDisplayEl.textContent = '상세 내용 없음';
+      detailDisplayEl.classList.add('empty');
+    }
+  }
+
+  // WYSIWYG 에디터 초기화
+  const editorEl = card.querySelector('[data-md-editor]');
+  if (editorEl) {
+    WysiwygEditor.init(editorEl, item.detail || '');
+    editorEl.addEventListener('keydown', (e) => WysiwygEditor.handleKeydown(e, editorEl));
+    editorEl.addEventListener('input', (e) => WysiwygEditor.handleInput(e, editorEl));
+  }
 
   // 트래커 렌더
   renderTrackers(card, item);
@@ -2122,17 +2734,19 @@ function wireExpandedPanel(card, item) {
   const viewMode = card.querySelector('.expanded-view-mode');
   const editMode = card.querySelector('.expanded-edit-mode');
   const titleField = card.querySelector('[data-field="title"]');
-  const detailField = card.querySelector('[data-field="detail"]');
+  const detailField = card.querySelector('[data-field="detail"]'); // contenteditable fallback
 
   // contenteditable 필드 포커스 시 키보드가 가리지 않도록 scrollIntoView
-  [titleField, detailField].forEach(el => {
+  [titleField, editorEl].forEach(el => {
     if (!el) return;
     el.addEventListener('focus', () => {
       setTimeout(() => {
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 320); // 키보드 올라오는 시간 대기
+      }, 320);
     });
   });
+
+
 
   saveBtn?.addEventListener('click', () => {
     const isEditing = saveBtn.dataset.editing === 'true';
@@ -2156,7 +2770,8 @@ function wireExpandedPanel(card, item) {
     } else {
       // 저장 — 텍스트만 업데이트, collapse하지 않음
       const titleVal = (titleField?.innerText || '').trim();
-      const detailVal = (detailField?.innerText || '').trimEnd();
+      // WYSIWYG 에디터에서 raw text 추출
+      const detailVal = editorEl ? WysiwygEditor.extractRawText(editorEl) : (detailField?.innerText || '').trimEnd();
       const memorable = tSwitch?._getVal() ?? item.meta.memorable;
 
       if (titleVal) {
@@ -2171,8 +2786,15 @@ function wireExpandedPanel(card, item) {
         const viewDetail = card.querySelector('.expanded-detail-display');
         if (viewTitle) viewTitle.textContent = titleVal;
         if (viewDetail) {
-          viewDetail.textContent = detailVal || '상세 내용 없음';
-          viewDetail.classList.toggle('empty', !detailVal);
+          if (detailVal) {
+            viewDetail.innerHTML = MarkdownService.render(detailVal);
+            viewDetail.classList.remove('empty');
+            viewDetail.classList.toggle('md-rendered', MarkdownService.isEnabled());
+          } else {
+            viewDetail.textContent = '상세 내용 없음';
+            viewDetail.classList.add('empty');
+            viewDetail.classList.remove('md-rendered');
+          }
         }
         // 카드 헤더 제목도 갱신
         const cardTitle = card.querySelector('.card-title');
@@ -2608,6 +3230,7 @@ function openSheet() {
   overlay.classList.add('open');
   titleInput.value = '';
   detailInput.value = '';
+  detailInput.style.height = '';
   document.getElementById('add-status').value = 'Active';
   document.getElementById('add-repeat').value = '';
   document.getElementById('add-start-date').value = '';
@@ -2633,15 +3256,58 @@ function openSheet() {
   document.getElementById('add-tracker-list').innerHTML = '';
   document.getElementById('add-tracker-picker').style.display = 'none';
   addTrackers = [];
-  setTimeout(() => titleInput.focus(), 350);
+  setTimeout(() => {
+    titleInput.focus();
+    // 모바일: 첫 포커스 시 sheet를 키보드 위로 스크롤
+    if (window.visualViewport) {
+      const scrollUp = () => {
+        const vv = window.visualViewport;
+        // 키보드가 올라와서 viewport가 줄었을 때
+        const keyboardHeight = window.innerHeight - vv.height - vv.offsetTop;
+        if (keyboardHeight > 50) {
+          overlay.style.height = vv.height + 'px';
+          overlay.style.top = vv.offsetTop + 'px';
+          // sheet가 화면에 다 보이도록 스크롤
+          const sheet = document.getElementById('add-sheet');
+          sheet.scrollTop = 0;
+        }
+      };
+      window.visualViewport.addEventListener('resize', scrollUp, { once: true });
+    }
+  }, 350);
 }
 
 function closeSheet() {
   overlay.classList.remove('open');
+  // viewport 복원
+  overlay.style.height = '';
+  overlay.style.top = '';
 }
 
 titleInput.addEventListener('input', () => {
   submitBtn.disabled = titleInput.value.trim().length === 0;
+});
+
+// 상세 입력 필드 자동 높이 조절
+function resizeDetailInput() {
+  detailInput.style.height = 'auto';
+  detailInput.style.height = detailInput.scrollHeight + 'px';
+}
+detailInput.addEventListener('input', resizeDetailInput);
+
+// 상세 필드 포커스 시 키보드 위로 스크롤
+detailInput.addEventListener('focus', () => {
+  setTimeout(() => {
+    detailInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (window.visualViewport) {
+      const vv = window.visualViewport;
+      const kbHeight = window.innerHeight - vv.height - vv.offsetTop;
+      if (kbHeight > 50) {
+        overlay.style.height = vv.height + 'px';
+        overlay.style.top = vv.offsetTop + 'px';
+      }
+    }
+  }, 320);
 });
 
 metaToggle.addEventListener('click', () => {
@@ -2680,7 +3346,20 @@ memorableToggle.addEventListener('click', () => {
 
 // Color picker in add sheet
 document.querySelectorAll('#add-color-picker .color-dot').forEach(dot => {
-  dot.addEventListener('click', () => {
+  const customInput = dot.querySelector('.color-custom-input');
+  if (customInput) {
+    customInput.addEventListener('input', (e) => {
+      e.stopPropagation();
+      const hex = e.target.value;
+      dot.style.background = hex;
+      document.querySelectorAll('#add-color-picker .color-dot').forEach(d => d.classList.remove('selected'));
+      dot.classList.add('selected');
+      selectedAddColor = hex;
+    });
+  }
+  dot.addEventListener('click', (e) => {
+    if (e.target.classList.contains('color-custom-input')) return;
+    if (dot.classList.contains('color-dot-custom')) { dot.querySelector('.color-custom-input')?.click(); return; }
     document.querySelectorAll('#add-color-picker .color-dot').forEach(d => d.classList.remove('selected'));
     dot.classList.add('selected');
     selectedAddColor = dot.dataset.color;
@@ -3118,6 +3797,22 @@ document.getElementById('mock-toggle-btn').addEventListener('click', () => {
   document.getElementById('mock-toggle-btn').classList.remove('visible');
   localStorage.setItem('mock_panel_hidden', 'false');
 });
+
+// ── VIEWPORT RESIZE (키보드 대응) ────────────────────────────────────
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    if (!overlay.classList.contains('open')) return;
+    const vv = window.visualViewport;
+    const kbHeight = window.innerHeight - vv.height - vv.offsetTop;
+    if (kbHeight > 50) {
+      overlay.style.height = vv.height + 'px';
+      overlay.style.top = vv.offsetTop + 'px';
+    } else {
+      overlay.style.height = '';
+      overlay.style.top = '';
+    }
+  });
+}
 
 // ── INIT ──────────────────────────────────────────────────────────
 // mock-input 초기값 + 숨김 상태 복원
