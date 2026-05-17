@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>TODO</title>
+<title>마침표</title>
 
 <style>
   /* ── DESIGN TOKENS (expense-dashboard 스타일 시스템) ── */
@@ -91,6 +91,9 @@
     overflow: hidden;
   }
 
+  /* PC에서 #app 양 옆 빈 공간 클릭/스크롤을 todo-scroll로 위임 */
+  body { cursor: default; }
+
   #app {
     height: 100vh;
     display: flex;
@@ -173,6 +176,13 @@
   .sub-bar-btn:hover { border-color: var(--border2); color: var(--text-2); }
   .sub-bar-btn.active { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
   .sub-bar-btn.active svg { transform: rotate(180deg); }
+  .filter-check-row {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--text-2);
+    padding: 5px 0; cursor: pointer; white-space: nowrap;
+  }
+  .filter-check-row input[type="checkbox"] { accent-color: var(--accent); width: 14px; height: 14px; cursor: pointer; }
+  .filter-check-row:hover { color: var(--text); }
 
   /* ── TODO LIST ── */
   #todo-scroll {
@@ -206,8 +216,34 @@
   .card-expanded { user-select: text; cursor: default; }
   .card-expanded * { -webkit-user-select: text; user-select: text; }
   .inline-edit-content { -webkit-user-modify: read-write; }
+  .inline-edit-content.multiline {
+    display: block;
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-2);
+    line-height: 1.6;
+    min-height: 60px;
+    padding: 6px 10px;
+    background: var(--surface2);
+    border: 0.5px solid var(--accent-border);
+    border-radius: var(--radius-xs);
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    white-space: pre-wrap;
+    caret-color: var(--accent);
+  }
+  .inline-edit-content.multiline:focus {
+    border-color: var(--accent);
+    background: var(--surface);
+  }
 
   .todo-card:hover { border-color: var(--border2); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .todo-card.inactive-today { opacity: 0.45; }
+  .todo-card.inactive-today .card-checkbox { pointer-events: none; }
+  .todo-card.inactive-today .card-drag-handle { opacity: 0.1; cursor: default; pointer-events: none; }
   .todo-card.dragging {
     opacity: 0.5;
     transform: scale(0.98);
@@ -287,6 +323,10 @@
     text-overflow: ellipsis;
     transition: color var(--transition);
   }
+  .todo-card.repeat-overdue .card-title {
+    text-decoration: line-through;
+    color: var(--text-3);
+  }
   .card-title.done { text-decoration: line-through; color: var(--text-3); }
 
   .card-meta-row {
@@ -303,8 +343,13 @@
     border-radius: 20px;
     letter-spacing: 0.02em;
     font-weight: 500;
+    line-height: 1.4;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
   }
   .meta-tag.status-active { background: var(--accent-dim); color: var(--accent); }
+  .meta-tag.status-inactive { background: var(--surface3); color: var(--text-3); }
   .meta-tag.status-completed { background: var(--surface2); color: var(--text-3); }
   .meta-tag.status-archived { background: var(--surface2); color: var(--text-3); }
   .meta-tag.status-overdue { background: var(--red-dim); color: var(--red); }
@@ -364,193 +409,46 @@
   }
   .card-expanded.open { display: block; }
 
-  /* ── EXPANDED INLINE EDIT ── */
-  .expanded-view-mode { padding: 10px 0 8px; }
-  .expanded-title-display {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.4;
-    margin-bottom: 4px;
-  }
-  .expanded-detail-display {
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.6;
-  }
-  .expanded-detail-display.empty { color: var(--text-3); font-style: italic; }
-  /* 마크다운 렌더링 스타일 */
-  .expanded-detail-display.md-rendered p { margin-bottom: 6px; }
-  .expanded-detail-display.md-rendered p:last-child { margin-bottom: 0; }
-  .expanded-detail-display.md-rendered strong { color: var(--text); font-weight: 600; }
-  .expanded-detail-display.md-rendered em { font-style: italic; }
-  .expanded-detail-display.md-rendered del { color: var(--text-3); }
-  .expanded-detail-display.md-rendered code {
-    font-family: monospace; font-size: 11px;
-    background: var(--surface3); color: var(--accent);
-    padding: 1px 5px; border-radius: 3px;
-  }
-  .expanded-detail-display.md-rendered pre {
-    background: var(--surface3); border-radius: var(--radius-xs);
-    padding: 8px 10px; overflow-x: auto; margin: 6px 0;
-  }
-  .expanded-detail-display.md-rendered pre code { background:none; padding:0; font-size:12px; color:var(--text-2); }
-  .expanded-detail-display.md-rendered ul,
-  .expanded-detail-display.md-rendered ol { padding-left: 16px; margin: 4px 0; }
-  .expanded-detail-display.md-rendered li { margin-bottom: 2px; }
-  .expanded-detail-display.md-rendered blockquote {
-    border-left: 3px solid var(--accent-border); padding-left: 10px;
-    margin: 6px 0; color: var(--text-3); font-style: italic;
-  }
-  .expanded-detail-display.md-rendered h1,
-  .expanded-detail-display.md-rendered h2,
-  .expanded-detail-display.md-rendered h3 {
-    color: var(--text); font-weight: 600; margin-bottom: 4px; margin-top: 8px;
-  }
-  .expanded-detail-display.md-rendered h1 { font-size: 16px; }
-  .expanded-detail-display.md-rendered h2 { font-size: 14px; }
-  .expanded-detail-display.md-rendered h3 { font-size: 13px; }
-  .expanded-detail-display.md-rendered a { color: var(--blue); text-decoration: underline; }
-  .expanded-detail-display.md-rendered hr { border:none; border-top:0.5px solid var(--border2); margin:8px 0; }
-
-  .expanded-edit-mode { padding: 10px 0 8px; }
-  .inline-edit-field { margin-bottom: 8px; }
-
-  /* ── WYSIWYG 마크다운 에디터 ── */
-  .md-editor {
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.7;
-    padding: 8px 10px;
-    border-radius: var(--radius-xs);
-    border: 0.5px solid var(--accent-border);
-    background: var(--surface2);
-    min-height: 60px;
-    outline: none;
-    -webkit-user-select: text;
-    user-select: text;
-    cursor: text;
-    touch-action: manipulation;
-    word-break: break-word;
-  }
-  .md-editor:focus { border-color: var(--accent); background: var(--surface); }
-  /* 에디터 내부 렌더링 스타일 */
-  .md-editor h1 { font-size: 18px; font-weight: 700; color: var(--text); margin: 4px 0 2px; line-height: 1.3; }
-  .md-editor h2 { font-size: 15px; font-weight: 700; color: var(--text); margin: 4px 0 2px; line-height: 1.3; }
-  .md-editor h3 { font-size: 13px; font-weight: 700; color: var(--text); margin: 3px 0 2px; line-height: 1.3; }
-  .md-editor strong { color: var(--text); font-weight: 700; }
-  .md-editor em { font-style: italic; }
-  .md-editor del { color: var(--text-3); }
-  .md-editor code {
-    font-family: monospace; font-size: 11px;
-    background: var(--surface3); color: var(--accent);
-    padding: 1px 5px; border-radius: 3px;
-  }
-  .md-editor blockquote {
-    border-left: 3px solid var(--accent-border);
-    padding-left: 10px; color: var(--text-3); font-style: italic;
-    margin: 2px 0;
-  }
-  .md-editor ul { padding-left: 18px; margin: 2px 0; list-style: disc; }
-  .md-editor ol { padding-left: 18px; margin: 2px 0; list-style: disc; }
-  /* 순번 리스트: 숫자 그대로 표시 */
-  .md-editor .ol-item {
-    display: flex;
-    gap: 2px;
-    padding-left: 4px;
-    margin-bottom: 1px;
-  }
-  .md-editor .ol-item .ol-num {
-    flex-shrink: 0;
-    color: var(--text-2);
-    font-variant-numeric: tabular-nums;
-  }
-  .md-editor .ol-item .ol-content { flex: 1; }
-  .md-editor li { margin-bottom: 1px; }
-  .md-editor hr { border: none; border-top: 0.5px solid var(--border2); margin: 6px 0; }
-  /* 입력 중인 raw 줄은 흐리게 */
-  .md-editor .raw-line { color: var(--text-3); font-style: normal; }
-  .inline-edit-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-3);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 3px;
-  }
-  .inline-edit-content {
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.4;
-    padding: 6px 10px;
-    border-radius: var(--radius-xs);
-    border: 0.5px solid var(--accent-border);
-    background: var(--surface2);
-    outline: none;
-    min-height: 34px;
-    word-break: break-word;
-    -webkit-user-select: text;
-    user-select: text;
-    cursor: text;
-    touch-action: manipulation;
-  }
-  .inline-edit-content.multiline {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--text-2);
-    min-height: 60px;
-    white-space: pre-wrap;
-  }
-  .inline-edit-content:focus {
-    border-color: var(--accent);
-    background: var(--surface);
-    box-shadow: 0 0 0 2px var(--accent-dim);
-  }
-
   .meta-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
     margin-top: 8px;
   }
-
   .meta-field {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
   }
   .meta-field label {
-    font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-3);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
   .meta-field input, .meta-field select {
     background: var(--surface2);
     border: 0.5px solid var(--border2);
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-sm);
     color: var(--text);
     font-family: var(--font-body);
-    font-size: 12px;
-    padding: 6px 8px;
+    font-size: 13px;
+    padding: 7px 10px;
     outline: none;
     transition: border-color var(--transition);
     width: 100%;
+    appearance: auto;
   }
   .meta-field input:focus, .meta-field select:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-dim);
   }
   .meta-field input[type="date"]:focus { border-color: var(--accent-border); }
   .meta-field select option { background: var(--surface); }
   .meta-field.full-width { grid-column: 1 / -1; }
 
-  .color-picker-row { display: flex; gap: 6px; margin-top: 4px; }
+  .color-picker-row { display: flex; gap: 6px; margin-top: 4px; flex-wrap: wrap; }
   .color-dot {
-    width: 20px; height: 20px;
+    width: 24px; height: 24px;
     border-radius: 50%;
     cursor: pointer;
     border: 2px solid transparent;
@@ -563,10 +461,10 @@
 
   .template-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
   .toggle-switch {
-    width: 32px; height: 18px;
+    width: 36px; height: 20px;
     background: var(--surface3);
     border: 0.5px solid var(--border2);
-    border-radius: 9px;
+    border-radius: 10px;
     position: relative;
     transition: background var(--transition);
     flex-shrink: 0;
@@ -574,15 +472,15 @@
   .toggle-switch.on { background: var(--accent-dim); border-color: var(--accent-border); }
   .toggle-switch::after {
     content: '';
-    width: 12px; height: 12px;
+    width: 14px; height: 14px;
     background: var(--text-3);
     border-radius: 50%;
     position: absolute;
     top: 2px; left: 2px;
     transition: transform var(--transition), background var(--transition);
   }
-  .toggle-switch.on::after { transform: translateX(14px); background: var(--accent); }
-  .template-toggle span { font-size: 12px; color: var(--text-2); }
+  .toggle-switch.on::after { transform: translateX(16px); background: var(--accent); }
+  .template-toggle span { font-size: 13px; color: var(--text-2); }
 
   .expanded-actions {
     display: flex;
@@ -592,16 +490,15 @@
     border-top: 0.5px solid var(--border);
   }
   .action-btn {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    padding: 6px 12px;
-    border-radius: var(--radius-xs);
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: var(--radius-sm);
     border: 0.5px solid var(--border2);
     background: transparent;
     color: var(--text-2);
     cursor: pointer;
-    letter-spacing: 0.03em;
     transition: all var(--transition);
+    font-family: var(--font-body);
   }
   .action-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
   .action-btn.danger:hover { border-color: rgba(163,45,45,0.4); color: var(--red); background: var(--red-dim); }
@@ -609,14 +506,20 @@
   .action-btn.archive.disabled { opacity: 0.3; cursor: not-allowed; }
   .action-btn.archive.disabled:hover { border-color: var(--border2); color: var(--text-2); background: transparent; }
   .action-btn.danger.disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
-  .action-btn.danger.disabled:hover { border-color: var(--border2); color: var(--text-2); background: transparent; }
   .action-btn.save { margin-left: auto; }
   .action-btn.repeat-close { border-color: var(--blue-dim); color: var(--blue); }
   .action-btn.repeat-close:hover { border-color: var(--blue); background: var(--blue-dim); color: var(--blue); }
+  .action-btn.repeat-close.disabled,
+  .action-btn.repeat-close[disabled] {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+    border-color: var(--border2);
+    color: var(--text-3);
+  }
 
   /* SECTION LABEL */
   .section-label {
-    font-family: var(--font-mono);
     font-size: 10px;
     color: var(--text-3);
     letter-spacing: 0.1em;
@@ -626,12 +529,7 @@
     align-items: center;
     gap: 8px;
   }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 0.5px;
-    background: var(--border);
-  }
+  .section-label::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
 
   /* ── EMPTY STATE ── */
   #empty-state {
@@ -688,614 +586,57 @@
   #close-btn:active { transform: translateX(6px) scale(0.96); }
   #close-btn svg { width: 20px; height: 20px; }
 
-  /* ── MODAL OVERLAY ── */
-  #modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(3px);
-    z-index: 200;
-    display: none;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  #modal-overlay.open { display: flex; }
-
-  /* ── ADD SHEET ── */
-  #add-sheet {
-    background: var(--surface);
-    border-radius: 16px 16px 0 0;
-    border-top: 0.5px solid var(--border2);
-    border-left: 0.5px solid var(--border);
-    border-right: 0.5px solid var(--border);
-    width: 100%;
-    max-width: 480px;
-    padding: 0 0 env(safe-area-inset-bottom, 16px);
-    transform: translateY(100%);
-    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    max-height: 92vh;
-    overflow-y: auto;
-    scrollbar-width: none;
-    /* 키보드 올라올 때 위치 전환은 JS에서 처리 */
-  }
-  #add-sheet::-webkit-scrollbar { display: none; }
-  #modal-overlay.open #add-sheet { transform: translateY(0); }
-
-  .sheet-handle {
-    width: 36px; height: 4px;
-    background: var(--border2);
-    border-radius: 2px;
-    margin: 12px auto 4px;
-  }
-
-  .sheet-header {
-    padding: 8px 20px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .sheet-header h2 {
-    font-size: 16px;
+/* ── EXPANDED INLINE EDIT ── */
+  .expanded-view-mode { padding: 10px 0 8px; }
+  .expanded-title-display {
+    font-size: 15px;
     font-weight: 600;
     color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 4px;
   }
-
-  .sheet-close {
-    width: 28px; height: 28px;
-    background: var(--surface2);
-    border: 0.5px solid var(--border);
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--text-2);
-    display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition);
-  }
-  .sheet-close:hover { background: var(--surface3); color: var(--text); }
-  .sheet-close svg { width: 12px; height: 12px; }
-
-  .sheet-body { padding: 16px 20px; }
-
-  .sheet-input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-family: var(--font-body);
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text);
-    padding: 0;
-    caret-color: var(--accent);
-    display: block;
-  }
-  .sheet-input::placeholder { color: var(--text-3); }
-
-  .sheet-detail-input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-family: var(--font-body);
-    font-size: 14px;
-    color: var(--text-2);
-    padding: 0;
-    caret-color: var(--accent);
-    resize: none;
-    min-height: 24px;
-    margin-top: 8px;
-    line-height: 1.6;
-    overflow: hidden; /* auto-resize를 위해 */
-  }
-  .sheet-detail-input::placeholder { color: var(--text-3); }
-
-  .sheet-divider { height: 0.5px; background: var(--border); margin: 12px 0; }
-
-  .meta-expand-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: none;
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 7px 12px;
-    cursor: pointer;
-    color: var(--text-3);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    transition: all var(--transition);
-    width: 100%;
-    justify-content: center;
-  }
-  .meta-expand-btn:hover { border-color: var(--border2); color: var(--text-2); }
-  .meta-expand-btn svg { width: 12px; height: 12px; transition: transform var(--transition); }
-  .meta-expand-btn.expanded svg { transform: rotate(180deg); }
-
-  #add-meta-block { display: none; padding-top: 12px; }
-  #add-meta-block.open { display: block; }
-
-  .sheet-footer {
-    padding: 12px 20px 16px;
-    border-top: 0.5px solid var(--border);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .submit-btn {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 10px 24px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition);
-  }
-  .submit-btn:hover { opacity: 0.88; }
-  .submit-btn:active { transform: scale(0.97); }
-  .submit-btn:disabled { opacity: 0.35; cursor: default; }
-
-  .char-hint {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-3);
-  }
-
-  /* ── DRAG PLACEHOLDER ── */
-  .drag-placeholder {
-    height: 52px;
-    border: 1.5px dashed var(--accent-border);
-    border-radius: var(--radius);
-    background: var(--accent-dim);
-    pointer-events: none;
-  }
-
-  /* ── ARCHIVE OVERLAY ── */
-  #archive-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 150;
-    display: none;
-    flex-direction: column;
-    max-width: 480px;
-    margin: 0 auto;
-    transform: translateX(100%);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  #archive-overlay.open { display: flex; transform: translateX(0); }
-  #archive-panel {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  #archive-header {
-    padding: 18px 20px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 0.5px solid var(--border);
-    flex-shrink: 0;
-    background: var(--surface);
-  }
-  #archive-header-left { display: flex; align-items: center; gap: 12px; }
-  #archive-back-btn {
-    width: 32px; height: 32px;
-    background: var(--surface2);
-    border: 0.5px solid var(--border);
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--text-2);
-    display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition);
-  }
-  #archive-back-btn:hover { background: var(--surface3); color: var(--text); }
-  #archive-header h2 { font-size: 18px; font-weight: 600; color: var(--text); }
-  #archive-count-pill {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 0.5px solid var(--border2);
-    color: var(--text-3);
-    background: var(--surface2);
-  }
-  #archive-scroll {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px 16px 40px;
-    scrollbar-width: none;
-    background: var(--bg);
-  }
-  #archive-scroll::-webkit-scrollbar { display: none; }
-  #archive-list { display: flex; flex-direction: column; gap: 6px; }
-  #archive-empty { display: none; flex-direction: column; align-items: center; padding: 60px 20px; gap: 8px; color: var(--text-3); text-align: center; }
-  #archive-empty.show { display: flex; }
-
-  .archive-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    position: relative;
-    overflow: hidden;
-    transition: border-color var(--transition);
-  }
-  .archive-card:hover { border-color: var(--border2); }
-  .archive-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--card-color, transparent);
-    border-radius: 3px 0 0 3px;
-  }
-  .archive-card-main {
-    padding: 10px 12px 10px 16px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .archive-card-title { flex: 1; font-size: 13px; font-weight: 500; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .archive-card-date { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); flex-shrink: 0; }
-  .archive-expand-btn {
-    width: 22px; height: 22px; background: none; border: none;
-    cursor: pointer; color: var(--text-3); display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: color var(--transition);
-  }
-  .archive-expand-btn:hover { color: var(--text-2); }
-  .archive-expand-btn svg { width: 11px; height: 11px; transition: transform var(--transition); }
-  .archive-card.expanded .archive-expand-btn svg { transform: rotate(180deg); }
-  .archive-card-detail {
-    display: none;
-    padding: 0 14px 12px 16px;
-    border-top: 0.5px solid var(--border);
-  }
-  .archive-card.expanded .archive-card-detail { display: block; }
-  .archive-detail-text {
-    font-size: 12px; color: var(--text-2); line-height: 1.55;
-    white-space: pre-wrap; margin: 8px 0 6px;
-    min-height: 0;
-  }
-  .archive-detail-text.empty { color: var(--text-3); font-style: italic; }
-  .archive-meta-line {
-    font-family: var(--font-mono); font-size: 10px; color: var(--text-3);
-    margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap;
-  }
-  .archive-meta-line span { display: flex; gap: 4px; align-items: center; }
-  .archive-meta-line strong { color: var(--text-2); font-weight: 500; }
-  .archive-card-actions {
-    display: flex; gap: 6px; margin-top: 8px; padding-top: 8px;
-    border-top: 0.5px solid var(--border);
-  }
-  .archive-restore-btn {
-    font-family: var(--font-mono); font-size: 10px; padding: 3px 8px;
-    border-radius: 4px; border: 0.5px solid var(--border2);
-    background: transparent; color: var(--text-3); cursor: pointer; flex-shrink: 0;
-    transition: all var(--transition);
-  }
-  .archive-restore-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
-  .archive-delete-btn {
-    font-family: var(--font-mono); font-size: 10px; padding: 3px 8px;
-    border-radius: 4px; border: 0.5px solid var(--border2);
-    background: transparent; color: var(--text-3); cursor: pointer; flex-shrink: 0;
-    transition: all var(--transition);
-  }
-  .archive-delete-btn:hover { border-color: rgba(163,45,45,0.4); color: var(--red); background: var(--red-dim); }
-  .archive-card-actions { justify-content: flex-end; }
-  .archive-card-actions .archive-restore-btn { margin-right: auto; }
-
-  /* ── CONFIRM MODAL ── */
-  #confirm-modal {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.40);
-    backdrop-filter: blur(4px);
-    z-index: 300; display: none;
-    align-items: center; justify-content: center;
-    padding: 20px;
-  }
-  #confirm-modal.open { display: flex; }
-  #confirm-box {
-    background: var(--surface);
-    border: 0.5px solid var(--border2);
-    border-radius: var(--radius);
-    padding: 24px 20px 20px;
-    width: 100%; max-width: 300px;
-    text-align: center;
-  }
-  #confirm-box h3 { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
-  #confirm-box p { font-size: 13px; color: var(--text-2); line-height: 1.6; margin-bottom: 20px; }
-  #confirm-box p span { color: var(--accent); font-weight: 500; }
-  .confirm-actions { display: flex; gap: 8px; }
-  .confirm-actions button { flex: 1; padding: 10px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 14px; cursor: pointer; transition: all var(--transition); }
-  #confirm-cancel { background: var(--surface2); border: 0.5px solid var(--border2); color: var(--text-2); }
-  #confirm-cancel:hover { background: var(--surface3); }
-  #confirm-ok { background: var(--accent); border: none; color: #fff; font-weight: 600; }
-  #confirm-ok:hover { opacity: 0.88; }
-
-  /* ── STAT ACTION MODAL ── */
-  #stat-modal {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(4px);
-    z-index: 400; display: none;
-    align-items: center; justify-content: center;
-    padding: 24px;
-  }
-  #stat-modal.open { display: flex; }
-  #stat-modal-box {
-    background: var(--surface);
-    border: 0.5px solid var(--border2);
-    border-radius: var(--radius);
-    padding: 22px 20px 18px;
-    width: 100%; max-width: 280px;
-  }
-  #stat-modal-title {
-    font-size: 15px; font-weight: 600;
-    color: var(--text); margin-bottom: 6px;
-  }
-  #stat-modal-desc {
-    font-size: 12px; color: var(--text-2);
-    line-height: 1.55; margin-bottom: 18px;
-  }
-
-  /* ── CARD ANIMATIONS ── */
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .todo-card { animation: cardIn 0.18s ease forwards; }
-
-  /* ── STATS OVERLAY ── */
-  #stats-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 150;
-    display: none;
-    flex-direction: column;
-    max-width: 480px;
-    margin: 0 auto;
-    transform: translateX(100%);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  #stats-overlay.open { display: flex; transform: translateX(0); }
-  #stats-panel {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  #stats-header {
-    padding: 18px 20px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 0.5px solid var(--border);
-    flex-shrink: 0;
-    background: var(--surface);
-  }
-  #stats-header-left { display: flex; align-items: center; gap: 12px; }
-  #stats-back-btn {
-    width: 32px; height: 32px;
-    background: var(--surface2);
-    border: 0.5px solid var(--border);
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--text-2);
-    display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition);
-  }
-  #stats-back-btn:hover { background: var(--surface3); color: var(--text); }
-  #stats-header h2 { font-size: 18px; font-weight: 600; color: var(--text); }
-
-  #stats-scroll {
-    flex: 1;
-    overflow-y: auto;
-    padding: 12px 16px 40px;
-    scrollbar-width: none;
-    background: var(--bg);
-  }
-  #stats-scroll::-webkit-scrollbar { display: none; }
-  #stats-list { display: flex; flex-direction: column; gap: 12px; }
-  #stats-empty { display: none; flex-direction: column; align-items: center; padding: 60px 20px; gap: 8px; color: var(--text-3); text-align: center; }
-  #stats-empty.show { display: flex; }
-
-  .stat-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    position: relative;
-    overflow: hidden;
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--card-color, var(--border2));
-    border-radius: 3px 0 0 3px;
-  }
-  .stat-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  .stat-card-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .stat-card-badges {
-    display: flex;
-    gap: 5px;
-    flex-shrink: 0;
-    margin-left: 8px;
-  }
-  .stat-rate {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  /* 히트맵 그리드 */
-  .stat-heatmap {
-    display: flex;
-    gap: 3px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-  .heatmap-cell {
-    width: 20px; height: 20px;
-    border-radius: 4px;
-    background: var(--surface3);
-    border: 0.5px solid var(--border);
-    position: relative;
-    flex-shrink: 0;
-  }
-  .heatmap-cell.done { background: var(--blue); border-color: transparent; }
-  .heatmap-cell.current { box-shadow: 0 0 0 1.5px var(--accent); }
-  .heatmap-cell.missed { background: var(--red-dim); border-color: transparent; }
-
-  .heatmap-label-row {
-    display: flex;
-    gap: 3px;
-    margin-top: 3px;
-    flex-wrap: wrap;
-  }
-  .heatmap-label {
-    width: 20px;
-    font-family: var(--font-mono);
-    font-size: 8px;
-    color: var(--text-3);
-    text-align: center;
-    flex-shrink: 0;
-  }
-
-  .stat-summary {
-    display: flex;
-    gap: 12px;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 0.5px solid var(--border);
-  }
-  .stat-summary-item {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-  .stat-summary-val {
-    font-family: var(--font-mono);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .stat-summary-lbl {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: var(--text-3);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-  .stat-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 0.5px solid var(--border);
-  }
-  .stat-actions .action-btn { font-size: 11px; }
-  .stat-actions .stat-delete-btn { margin-left: auto; }
-
-  /* ── MOCK CLOCK PANEL ── */
-  #mock-panel {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    background: var(--surface);
-    border: 1px dashed var(--amber);
-    border-radius: var(--radius-sm);
-    padding: 6px 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    z-index: 500;
-    font-family: var(--font-mono);
-    font-size: 10px;
-  }
-  #mock-label { color: var(--amber); font-weight: 600; }
-  #mock-input {
-    background: var(--surface2);
-    border: 0.5px solid var(--border2);
-    border-radius: var(--radius-xs);
-    color: var(--text);
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 3px 6px;
-    outline: none;
-    width: 150px;
-  }
-  #mock-set-btn, #mock-reset-btn {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: var(--radius-xs);
-    border: 0.5px solid var(--border2);
-    background: transparent;
-    color: var(--text-2);
-    cursor: pointer;
-    transition: all var(--transition);
-  }
-  #mock-set-btn:hover { border-color: var(--amber); color: var(--amber); }
-  #mock-reset-btn:hover { border-color: var(--red); color: var(--red); }
-  #mock-panel.mocked { border-color: var(--red); }
-  #mock-panel.mocked #mock-label { color: var(--red); }
-  #mock-hide-btn {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: var(--radius-xs);
-    border: 0.5px solid var(--border2);
-    background: transparent;
-    color: var(--text-3);
-    cursor: pointer;
-    transition: all var(--transition);
-  }
-  #mock-hide-btn:hover { border-color: var(--red); color: var(--red); }
-  #mock-toggle-btn {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    width: 28px; height: 28px;
-    background: var(--surface2);
-    border: 0.5px solid var(--border);
-    border-radius: 50%;
-    cursor: pointer;
+  .expanded-detail-display {
     font-size: 13px;
-    display: none;
-    align-items: center; justify-content: center;
-    z-index: 499;
-    transition: all var(--transition);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    color: var(--text-2);
+    line-height: 1.6;
   }
-  #mock-toggle-btn:hover { background: var(--surface3); }
-  #mock-toggle-btn.visible { display: flex; }
+  .expanded-detail-display.empty { color: var(--text-3); font-style: italic; }
+  /* 마크다운 렌더링 스타일 */
+  .expanded-detail-display.md-rendered p { margin-bottom: 6px; }
+  .expanded-detail-display.md-rendered p:last-child { margin-bottom: 0; }
+  .expanded-detail-display.md-rendered strong { color: var(--text); font-weight: 600; }
+  .expanded-detail-display.md-rendered em { font-style: italic; }
+  .expanded-detail-display.md-rendered del { color: var(--text-3); }
+  .expanded-detail-display.md-rendered code {
+    font-family: monospace; font-size: 11px;
+    background: var(--surface3); color: var(--accent);
+    padding: 1px 5px; border-radius: 3px;
+  }
+  .expanded-detail-display.md-rendered pre {
+    background: var(--surface3); border-radius: var(--radius-xs);
+    padding: 8px 10px; overflow-x: auto; margin: 6px 0;
+  }
+  .expanded-detail-display.md-rendered pre code { background:none; padding:0; font-size:12px; color:var(--text-2); }
+  .expanded-detail-display.md-rendered ul,
+  .expanded-detail-display.md-rendered ol { padding-left: 16px; margin: 4px 0; }
+  .expanded-detail-display.md-rendered li { margin-bottom: 2px; }
+  .expanded-detail-display.md-rendered blockquote {
+    border-left: 3px solid var(--accent-border); padding-left: 10px;
+    margin: 6px 0; color: var(--text-3); font-style: italic;
+  }
+  .expanded-detail-display.md-rendered h1,
+  .expanded-detail-display.md-rendered h2,
+  .expanded-detail-display.md-rendered h3 {
+    color: var(--text); font-weight: 600; margin-bottom: 4px; margin-top: 8px;
+  }
+  .expanded-detail-display.md-rendered h1 { font-size: 16px; }
+  .expanded-detail-display.md-rendered h2 { font-size: 14px; }
+  .expanded-detail-display.md-rendered h3 { font-size: 13px; }
+  .expanded-detail-display.md-rendered a { color: var(--blue); text-decoration: underline; }
+  .expanded-detail-display.md-rendered hr { border:none; border-top:0.5px solid var(--border2); margin:8px 0; }
 
-
+  .expanded-edit-mode { padding: 10px 0 8px; }
+  .inline-edit-field { margin-bottom: 8px; }
 
   /* ── TRACKER ── */
   .tracker-section {
@@ -1328,7 +669,7 @@
   }
   .tracker-add-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
 
-  /* 트래커 종류 선택 드롭다운 */
+  /* 추적기 종류 선택 드롭다운 */
   .tracker-type-picker {
     display: flex;
     gap: 6px;
@@ -1350,7 +691,7 @@
   }
   .tracker-type-btn:hover { color: var(--accent); }
 
-  /* 트래커 아이템 공통 */
+  /* 추적기 아이템 공통 */
   .tracker-item {
     display: flex;
     align-items: center;
@@ -1374,7 +715,7 @@
   .tracker-delete-btn:hover { color: var(--red); background: var(--red-dim); }
   .tracker-delete-btn svg { width: 11px; height: 11px; }
 
-  /* 체크박스 트래커 */
+  /* 체크박스 추적기 */
   .tracker-checkbox {
     width: 16px; height: 16px;
     border: 1.5px solid var(--border2);
@@ -1411,7 +752,7 @@
   .tracker-text-input::placeholder { color: var(--text-3); }
   .tracker-text-input.checked { text-decoration: line-through; color: var(--text-3); }
 
-  /* 카운터 트래커 */
+  /* 카운터 추적기 */
   .tracker-counter-label {
     flex: 1;
     font-size: 13px;
@@ -1480,6 +821,304 @@
   .tracker-counter-val-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
   .tracker-counter-goal, .tracker-counter-val-input { -moz-appearance: textfield; }
 
+
+  /* 마크다운 렌더 뷰 */
+  .expanded-detail-display.md-rendered p { margin-bottom: 6px; }
+  .expanded-detail-display.md-rendered p:last-child { margin-bottom: 0; }
+  .expanded-detail-display.md-rendered strong { color: var(--text); font-weight: 600; }
+  .expanded-detail-display.md-rendered em { font-style: italic; }
+  .expanded-detail-display.md-rendered del { color: var(--text-3); }
+  .expanded-detail-display.md-rendered code { font-family: monospace; font-size: 11px; background: var(--surface3); color: var(--accent); padding: 1px 5px; border-radius: 3px; }
+  .expanded-detail-display.md-rendered pre { background: var(--surface3); border-radius: var(--radius-xs); padding: 8px 10px; margin: 4px 0; overflow-x: auto; }
+  .expanded-detail-display.md-rendered pre code { background: none; padding: 0; font-size: 12px; }
+  .expanded-detail-display.md-rendered ul { padding-left: 16px; margin: 3px 0; list-style: disc; }
+  .expanded-detail-display.md-rendered ol { padding-left: 16px; margin: 3px 0; list-style: decimal; }
+  .expanded-detail-display.md-rendered li { margin-bottom: 2px; }
+  .expanded-detail-display.md-rendered blockquote { border-left: 3px solid var(--accent-border); padding-left: 10px; margin: 4px 0; color: var(--text-3); font-style: italic; }
+  .expanded-detail-display.md-rendered h1 { font-size: 16px; font-weight: 600; color: var(--text); margin: 6px 0 3px; }
+  .expanded-detail-display.md-rendered h2 { font-size: 14px; font-weight: 600; color: var(--text); margin: 5px 0 3px; }
+  .expanded-detail-display.md-rendered h3 { font-size: 13px; font-weight: 600; color: var(--text); margin: 4px 0 2px; }
+  .expanded-detail-display.md-rendered a { color: var(--blue); text-decoration: underline; }
+  .expanded-detail-display.md-rendered hr { border: none; border-top: 0.5px solid var(--border2); margin: 6px 0; }
+
+  /* ── MODAL OVERLAY ── */
+  #modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(3px);
+    z-index: 200; display: none;
+    align-items: flex-end; justify-content: center;
+  }
+  #modal-overlay.open { display: flex; }
+
+  /* ── ADD SHEET ── */
+  #add-sheet {
+    background: var(--surface);
+    border-radius: 16px 16px 0 0;
+    border-top: 0.5px solid var(--border2);
+    border-left: 0.5px solid var(--border);
+    border-right: 0.5px solid var(--border);
+    width: 100%; max-width: 480px;
+    padding: 0 0 env(safe-area-inset-bottom, 16px);
+    transform: translateY(100%);
+    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+    max-height: 92vh; overflow-y: auto; scrollbar-width: none;
+  }
+  #add-sheet::-webkit-scrollbar { display: none; }
+  #modal-overlay.open #add-sheet { transform: translateY(0); }
+
+  .sheet-header {
+    padding: 8px 20px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .sheet-header h2 { font-size: 16px; font-weight: 600; color: var(--text); }
+  .sheet-close {
+    width: 28px; height: 28px;
+    background: var(--surface2); border: 0.5px solid var(--border);
+    border-radius: 50%; cursor: pointer; color: var(--text-2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition);
+  }
+  .sheet-close:hover { background: var(--surface3); color: var(--text); }
+  .sheet-close svg { width: 12px; height: 12px; }
+  .sheet-body { padding: 16px 20px; }
+  .sheet-input {
+    width: 100%; background: transparent; border: none; outline: none;
+    font-family: var(--font-body); font-size: 17px; font-weight: 600;
+    color: var(--text); padding: 0; caret-color: var(--accent); display: block;
+  }
+  .sheet-input::placeholder { color: var(--text-3); }
+  .sheet-detail-input {
+    width: 100%; background: transparent; border: none; outline: none;
+    font-family: var(--font-body); font-size: 14px; color: var(--text-2);
+    padding: 0; caret-color: var(--accent); resize: none;
+    min-height: 24px; margin-top: 8px; line-height: 1.6; overflow: hidden;
+  }
+  .sheet-detail-input::placeholder { color: var(--text-3); }
+  .sheet-divider { height: 0.5px; background: var(--border); margin: 12px 0; }
+  .meta-expand-btn {
+    display: flex; align-items: center; gap: 6px; background: none;
+    border: 0.5px solid var(--border); border-radius: var(--radius-sm);
+    padding: 7px 12px; cursor: pointer; color: var(--text-3);
+    font-family: var(--font-body); font-size: 12px;
+    transition: all var(--transition); width: 100%; justify-content: center;
+  }
+  .meta-expand-btn:hover { border-color: var(--border2); color: var(--text-2); }
+  .meta-expand-btn svg { width: 12px; height: 12px; transition: transform var(--transition); }
+  .meta-expand-btn.expanded svg { transform: rotate(180deg); }
+  #add-meta-block { display: none; padding-top: 12px; }
+  #add-meta-block.open { display: block; }
+  .sheet-footer {
+    padding: 12px 20px 16px; border-top: 0.5px solid var(--border);
+    display: flex; justify-content: flex-end; align-items: center;
+  }
+  .submit-btn {
+    background: var(--accent); color: #fff; border: none;
+    border-radius: var(--radius-sm); padding: 10px 24px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all var(--transition);
+  }
+  .submit-btn:hover { opacity: 0.88; }
+  .submit-btn:active { transform: scale(0.97); }
+  .submit-btn:disabled { opacity: 0.35; cursor: default; }
+
+  /* ── REPEAT PICKER ── */
+  .repeat-chip {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font-body);
+  }
+  .repeat-chip:hover { border-color: var(--accent-border); color: var(--accent); }
+  .repeat-chip.selected { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent); font-weight: 600; }
+
+  /* ── DRAG PLACEHOLDER ── */
+  .drag-placeholder {
+    height: 52px; border: 1.5px dashed var(--accent-border);
+    border-radius: var(--radius); background: var(--accent-dim);
+    pointer-events: none;
+  }
+
+  /* ── ARCHIVE OVERLAY ── */
+  #archive-overlay {
+    position: fixed; inset: 0; background: var(--bg); z-index: 150;
+    display: none; flex-direction: column;
+    max-width: 480px; margin: 0 auto;
+  }
+  #archive-overlay.open { display: flex; }
+  #archive-panel { display: flex; flex-direction: column; height: 100%; width: 100%; overflow: hidden; }
+  #archive-header {
+    padding: 18px 20px 14px; display: flex; align-items: center;
+    justify-content: space-between; border-bottom: 0.5px solid var(--border);
+    flex-shrink: 0; background: var(--surface);
+  }
+  #archive-header-left { display: flex; align-items: center; gap: 12px; }
+  #archive-back-btn {
+    width: 32px; height: 32px; background: var(--surface2);
+    border: 0.5px solid var(--border); border-radius: 50%;
+    cursor: pointer; color: var(--text-2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition);
+  }
+  #archive-back-btn:hover { background: var(--surface3); color: var(--text); }
+  #archive-header h2 { font-size: 18px; font-weight: 600; color: var(--text); }
+  #archive-count-pill {
+    font-size: 11px; padding: 3px 10px; border-radius: 20px;
+    border: 0.5px solid var(--border2); color: var(--text-3); background: var(--surface2);
+  }
+  #archive-scroll { flex: 1; overflow-y: auto; padding: 10px 16px 40px; scrollbar-width: none; background: var(--bg); }
+  #archive-scroll::-webkit-scrollbar { display: none; }
+  #archive-list { display: flex; flex-direction: column; gap: 6px; }
+  #archive-empty { display: none; flex-direction: column; align-items: center; padding: 60px 20px; gap: 8px; color: var(--text-3); text-align: center; }
+  #archive-empty.show { display: flex; }
+  .archive-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); position: relative; overflow: hidden; transition: border-color var(--transition); }
+  .archive-card:hover { border-color: var(--border2); }
+  .archive-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--card-color, transparent); border-radius: 3px 0 0 3px; }
+  .archive-card-main { padding: 10px 12px 10px 16px; display: flex; align-items: center; gap: 8px; }
+  .archive-card-title { flex: 1; font-size: 13px; font-weight: 500; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .archive-card-date { font-size: 11px; color: var(--text-3); flex-shrink: 0; }
+  .archive-expand-btn { width: 22px; height: 22px; background: none; border: none; cursor: pointer; color: var(--text-3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: color var(--transition); }
+  .archive-expand-btn:hover { color: var(--text-2); }
+  .archive-expand-btn svg { width: 11px; height: 11px; transition: transform var(--transition); }
+  .archive-card.expanded .archive-expand-btn svg { transform: rotate(180deg); }
+  .archive-card-detail { display: none; padding: 0 14px 12px 16px; border-top: 0.5px solid var(--border); }
+  .archive-card.expanded .archive-card-detail { display: block; }
+  .archive-detail-text { font-size: 12px; color: var(--text-2); line-height: 1.55; margin: 8px 0 6px; }
+  .archive-detail-text.empty { color: var(--text-3); font-style: italic; }
+  .archive-meta-line { font-size: 10px; color: var(--text-3); margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .archive-meta-line span { display: flex; gap: 4px; align-items: center; }
+  .archive-meta-line strong { color: var(--text-2); font-weight: 500; }
+  .archive-card-actions { display: flex; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 0.5px solid var(--border); justify-content: flex-end; }
+  .archive-card-actions .archive-restore-btn { margin-right: auto; }
+  .archive-restore-btn { font-size: 11px; padding: 4px 10px; border-radius: var(--radius-xs); border: 0.5px solid var(--border2); background: transparent; color: var(--text-3); cursor: pointer; flex-shrink: 0; transition: all var(--transition); }
+  .archive-restore-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
+  .archive-delete-btn { font-size: 11px; padding: 4px 10px; border-radius: var(--radius-xs); border: 0.5px solid var(--border2); background: transparent; color: var(--text-3); cursor: pointer; flex-shrink: 0; transition: all var(--transition); }
+  .archive-delete-btn:hover { border-color: rgba(163,45,45,0.4); color: var(--red); background: var(--red-dim); }
+
+  /* ── STATS OVERLAY ── */
+  #stats-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 150; display: none; flex-direction: column; max-width: 480px; margin: 0 auto; }
+  #stats-overlay.open { display: flex; }
+  #stats-panel { display: flex; flex-direction: column; height: 100%; width: 100%; overflow: hidden; }
+  #stats-header { padding: 18px 20px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 0.5px solid var(--border); flex-shrink: 0; background: var(--surface); }
+  #stats-header-left { display: flex; align-items: center; gap: 12px; }
+  #stats-back-btn { width: 32px; height: 32px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 50%; cursor: pointer; color: var(--text-2); display: flex; align-items: center; justify-content: center; transition: all var(--transition); }
+  #stats-back-btn:hover { background: var(--surface3); color: var(--text); }
+  #stats-header h2 { font-size: 18px; font-weight: 600; color: var(--text); }
+  #stats-scroll { flex: 1; overflow-y: auto; padding: 12px 16px 40px; scrollbar-width: none; background: var(--bg); }
+  #stats-scroll::-webkit-scrollbar { display: none; }
+  #stats-list { display: flex; flex-direction: column; gap: 12px; }
+  #stats-empty { display: none; flex-direction: column; align-items: center; padding: 60px 20px; gap: 8px; color: var(--text-3); text-align: center; }
+  #stats-empty.show { display: flex; }
+
+  /* ── REPORT OVERLAY ── */
+  #report-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 150; display: none; flex-direction: column; max-width: 480px; margin: 0 auto; }
+  #report-overlay.open { display: flex; }
+  #report-panel { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+  #report-header { padding: 18px 20px 14px; display: flex; align-items: center; border-bottom: 0.5px solid var(--border); flex-shrink: 0; background: var(--surface); }
+  #report-header-left { display: flex; align-items: center; gap: 12px; }
+  #report-back-btn { width: 32px; height: 32px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 50%; cursor: pointer; color: var(--text-2); display: flex; align-items: center; justify-content: center; transition: all var(--transition); }
+  #report-back-btn:hover { background: var(--surface3); color: var(--text); }
+  #report-header h2 { font-size: 18px; font-weight: 600; color: var(--text); }
+  #report-scroll { flex: 1; overflow-y: auto; padding: 12px 16px 40px; scrollbar-width: none; background: var(--bg); }
+  #report-scroll::-webkit-scrollbar { display: none; }
+  #report-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .report-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .report-card-header { padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; gap: 8px; }
+  .report-card-header:hover { background: var(--surface2); }
+  .report-date { font-size: 14px; font-weight: 600; color: var(--text); }
+  .report-dow { font-size: 11px; color: var(--text-3); background: var(--surface3); border-radius: 20px; padding: 2px 8px; }
+  .report-summary { font-size: 11px; color: var(--text-3); flex: 1; text-align: right; }
+  .report-chevron { color: var(--text-3); transition: transform var(--transition); flex-shrink: 0; }
+  .report-card.expanded .report-chevron { transform: rotate(180deg); }
+
+  .report-body { display: none; padding: 0 14px 14px; border-top: 0.5px solid var(--border); }
+  .report-card.expanded .report-body { display: block; }
+
+  .report-text { font-size: 13px; color: var(--text-2); line-height: 1.8; padding-top: 12px; white-space: pre-wrap; }
+  .report-actions { display: flex; gap: 6px; margin-top: 12px; padding-top: 10px; border-top: 0.5px solid var(--border); justify-content: flex-end; }
+  .report-save-btn { font-size: 11px; padding: 4px 10px; border-radius: var(--radius-xs); border: 0.5px solid var(--border2); background: transparent; color: var(--text-3); cursor: pointer; transition: all var(--transition); font-family: var(--font-body); }
+  .report-save-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
+
+  /* ── SETTINGS OVERLAY ── */
+  #settings-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 150; display: none; flex-direction: column; max-width: 480px; margin: 0 auto; transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); }
+  #settings-overlay.open { display: flex; transform: translateX(0); }
+  #settings-panel { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+  #settings-header { padding: 18px 20px 14px; display: flex; align-items: center; border-bottom: 0.5px solid var(--border); flex-shrink: 0; background: var(--surface); }
+  #settings-header-left { display: flex; align-items: center; gap: 12px; }
+  #settings-back-btn { width: 32px; height: 32px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 50%; cursor: pointer; color: var(--text-2); display: flex; align-items: center; justify-content: center; transition: all var(--transition); }
+  #settings-back-btn:hover { background: var(--surface3); color: var(--text); }
+  #settings-header h2 { font-size: 18px; font-weight: 600; color: var(--text); }
+  #settings-scroll { flex: 1; overflow-y: auto; padding: 16px 20px 40px; scrollbar-width: none; background: var(--bg); }
+  #settings-scroll::-webkit-scrollbar { display: none; }
+  .settings-section { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
+  .settings-section-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .settings-section-desc { font-size: 12px; color: var(--text-3); line-height: 1.5; margin-bottom: 12px; }
+  .settings-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .settings-row label { font-size: 13px; color: var(--text-2); }
+  .settings-row input[type="time"] { background: var(--surface2); border: 0.5px solid var(--border2); border-radius: var(--radius-xs); color: var(--text); font-size: 14px; font-weight: 600; padding: 6px 10px; outline: none; transition: border-color var(--transition); }
+  .settings-row input[type="time"]:focus { border-color: var(--accent); }
+  .stat-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; position: relative; overflow: hidden; }
+  .stat-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--card-color, var(--border2)); border-radius: 3px 0 0 3px; }
+  .stat-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .stat-card-title { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .stat-card-badges { display: flex; gap: 5px; flex-shrink: 0; margin-left: 8px; }
+  .stat-rate { font-size: 11px; font-weight: 600; color: var(--accent); }
+  .stat-heatmap { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 4px; }
+  .heatmap-cell { width: 20px; height: 20px; border-radius: 4px; background: var(--surface3); border: 0.5px solid var(--border); flex-shrink: 0; }
+  .heatmap-cell.done { background: var(--blue); border-color: transparent; }
+  .heatmap-cell.current { box-shadow: 0 0 0 1.5px var(--accent); }
+  .heatmap-cell.missed { background: var(--red-dim); border-color: transparent; }
+  .heatmap-label-row { display: flex; gap: 3px; margin-top: 3px; flex-wrap: wrap; }
+  .heatmap-label { width: 20px; font-size: 8px; color: var(--text-3); text-align: center; flex-shrink: 0; }
+  .stat-summary { display: flex; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--border); }
+  .stat-summary-item { display: flex; flex-direction: column; gap: 1px; }
+  .stat-summary-val { font-size: 16px; font-weight: 600; color: var(--text); }
+  .stat-summary-lbl { font-size: 9px; color: var(--text-3); letter-spacing: 0.05em; text-transform: uppercase; }
+  .stat-actions { display: flex; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--border); }
+  .stat-actions .action-btn { font-size: 11px; }
+  .stat-actions .stat-delete-btn { margin-left: auto; }
+
+  /* ── CONFIRM / STAT MODAL ── */
+  #confirm-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.40); backdrop-filter: blur(4px); z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px; }
+  #confirm-modal.open { display: flex; }
+  #confirm-box { background: var(--surface); border: 0.5px solid var(--border2); border-radius: var(--radius); padding: 24px 20px 20px; width: 100%; max-width: 300px; text-align: center; }
+  #confirm-box h3 { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  #confirm-box p { font-size: 13px; color: var(--text-2); line-height: 1.6; margin-bottom: 20px; }
+  .confirm-actions { display: flex; gap: 8px; }
+  .confirm-actions button { flex: 1; padding: 10px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 14px; cursor: pointer; transition: all var(--transition); }
+  #confirm-cancel { background: var(--surface2); border: 0.5px solid var(--border2); color: var(--text-2); }
+  #confirm-cancel:hover { background: var(--surface3); }
+  #confirm-ok { background: var(--accent); border: none; color: #fff; font-weight: 600; }
+  #confirm-ok:hover { opacity: 0.88; }
+  #stat-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.45); backdrop-filter: blur(4px); z-index: 400; display: none; align-items: center; justify-content: center; padding: 24px; }
+  #stat-modal.open { display: flex; }
+  #stat-modal-box { background: var(--surface); border: 0.5px solid var(--border2); border-radius: var(--radius); padding: 22px 20px 18px; width: 100%; max-width: 280px; }
+  #stat-modal-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  #stat-modal-desc { font-size: 12px; color: var(--text-2); line-height: 1.55; margin-bottom: 18px; }
+
+  /* ── MOCK CLOCK PANEL ── */
+  #mock-panel { position: fixed; top: 12px; right: 12px; background: var(--surface); border: 1px dashed var(--amber); border-radius: var(--radius-sm); padding: 6px 10px; display: flex; align-items: center; gap: 6px; z-index: 500; font-size: 10px; }
+  #mock-label { color: var(--amber); font-weight: 600; }
+  #mock-input { background: var(--surface2); border: 0.5px solid var(--border2); border-radius: var(--radius-xs); color: var(--text); font-size: 10px; padding: 3px 6px; outline: none; width: 150px; }
+  #mock-set-btn, #mock-reset-btn, #mock-hide-btn { font-size: 10px; padding: 3px 8px; border-radius: var(--radius-xs); border: 0.5px solid var(--border2); background: transparent; color: var(--text-2); cursor: pointer; transition: all var(--transition); }
+  #mock-set-btn:hover { border-color: var(--amber); color: var(--amber); }
+  #mock-reset-btn:hover, #mock-hide-btn:hover { border-color: var(--red); color: var(--red); }
+  #mock-panel.mocked { border-color: var(--red); }
+  #mock-panel.mocked #mock-label { color: var(--red); }
+  #mock-toggle-btn { position: fixed; top: 10px; right: 10px; width: 28px; height: 28px; background: var(--surface2); border: 0.5px solid var(--border); border-radius: 50%; cursor: pointer; font-size: 13px; display: none; align-items: center; justify-content: center; z-index: 499; transition: all var(--transition); }
+  #mock-toggle-btn:hover { background: var(--surface3); }
+  #mock-toggle-btn.visible { display: flex; }
+
+  /* ── CARD ANIMATIONS ── */
+  @keyframes cardIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .todo-card { animation: cardIn 0.18s ease forwards; }
 </style>
   <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
@@ -1488,20 +1127,28 @@
 <div id="app">
   <header id="header">
     <div id="header-left">
-      <h1>TODO</h1>
+      <h1>마침표</h1>
       <div class="date-label" id="date-label"></div>
     </div>
     <div class="stats-pills">
-      <div class="stat-pill active" id="stat-active">0 active</div>
-      <div class="stat-pill overdue" id="stat-overdue" style="display:none">0 overdue</div>
+      <div class="stat-pill active" id="stat-active">0 진행 중</div>
+      <div class="stat-pill overdue" id="stat-overdue" style="display:none">0 기한 도과</div>
+      <div class="stat-pill" id="stat-closed" style="display:none;background:var(--accent-dim);color:var(--accent);border-color:var(--accent-border);align-items:center;line-height:1">✓ 마감</div>
     </div>
   </header>
 
   <div id="sub-bar">
-    <button id="show-completed-top-btn" class="sub-bar-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><path d="M19 9l-7 7-7-7"/></svg>
-    <span id="show-completed-label">전부 보기</span>
-    </button>
+    <div id="filter-btn-wrap" style="position:relative">
+      <button id="filter-toggle-btn" class="sub-bar-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        필터
+      </button>
+      <div id="filter-dropdown" style="display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:8px 12px;z-index:200;min-width:130px;box-shadow:0 4px 16px rgba(0,0,0,0.1)">
+        <label class="filter-check-row"><input type="checkbox" id="fc-active" checked> 진행 중</label>
+        <label class="filter-check-row"><input type="checkbox" id="fc-completed" checked> 완료됨</label>
+        <label class="filter-check-row"><input type="checkbox" id="fc-inactive" checked> 비활성화</label>
+      </div>
+    </div>
     <button id="archive-view-btn" class="sub-bar-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v11a1 1 0 001 1h14a1 1 0 001-1V9"/><path d="M10 13h4"/></svg>
       보관함
@@ -1509,6 +1156,14 @@
     <button id="stats-view-btn" class="sub-bar-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       통계
+    </button>
+    <button id="report-view-btn" class="sub-bar-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      보고서
+    </button>
+    <button id="settings-view-btn" class="sub-bar-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      설정
     </button>
   </div>
 
@@ -1567,10 +1222,14 @@
 <!-- MOCK CLOCK PANEL (테스트용) -->
 <div id="mock-panel">
   <div id="mock-label">🕐 Mock</div>
-  <input type="datetime-local" id="mock-input">
+  <input type="date" id="mock-date-input">
+  <input type="time" id="mock-time-input" value="07:00" style="width:80px">
   <button id="mock-set-btn">적용</button>
   <button id="mock-reset-btn">리셋</button>
-  <button id="mock-hide-btn" title="숨기기" style="padding:2px 6px">✕</button>
+  <button id="mock-clear-btn" title="데이터 초기화">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+  </button>
+  <button id="mock-hide-btn" title="숨기기">✕</button>
 </div>
 <button id="mock-toggle-btn" title="Mock 시계 열기">🕐</button>
 
@@ -1586,6 +1245,63 @@
     <path d="M20 6L9 17l-5-5"/>
   </svg>
 </button>
+
+<!-- REPORT OVERLAY -->
+<div id="report-overlay">
+  <div id="report-panel">
+    <div id="report-header">
+      <div id="report-header-left">
+        <button id="report-back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:16px;height:16px"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>보고서</h2>
+      </div>
+    </div>
+    <div id="report-scroll">
+      <div id="report-list"></div>
+      <div id="report-empty" style="display:none;padding:60px 20px;text-align:center;color:var(--text-3);font-size:13px">
+        아직 보고서가 없어요.<br>마감 버튼을 눌러 보고서를 생성해 보세요.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS OVERLAY -->
+<div id="settings-overlay">
+  <div id="settings-panel">
+    <div id="settings-header">
+      <div id="settings-header-left">
+        <button id="settings-back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:16px;height:16px"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>설정</h2>
+      </div>
+    </div>
+    <div id="settings-scroll">
+      <div class="settings-section">
+        <div class="settings-section-title">개시 시간</div>
+        <div class="settings-section-desc">이 시간 이후에 앱에 접속하면 새로운 하루가 시작돼요. 미완료 반복 TODO는 자동으로 마감 처리돼요.</div>
+        <div class="settings-row">
+          <label for="open-time-input">개시 시간</label>
+          <input type="time" id="open-time-input" value="06:00">
+        </div>
+        <button id="save-open-time-btn" class="submit-btn" style="margin-top:12px;width:100%">저장</button>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">마지막 접속 정보</div>
+        <div class="settings-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+          <span style="font-size:12px;color:var(--text-3)">마지막 접속</span>
+          <span id="settings-last-visit" style="font-size:13px;color:var(--text-2)">-</span>
+        </div>
+        <div class="settings-row" style="flex-direction:column;align-items:flex-start;gap:4px;margin-top:8px">
+          <span style="font-size:12px;color:var(--text-3)">마지막 마감</span>
+          <span id="settings-last-closed" style="font-size:13px;color:var(--text-2)">-</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- STAT ACTION MODAL -->
 <div id="stat-modal">
@@ -1631,10 +1347,10 @@
         설정
       </button>
       <div id="add-meta-block">
-        <!-- 트래커 섹션 -->
+        <!-- 추적기 섹션 -->
         <div class="tracker-section" style="margin-top:12px">
           <div class="tracker-section-header">
-            <span class="tracker-section-label">트래커</span>
+            <span class="tracker-section-label">추적기</span>
             <button class="tracker-add-btn" id="add-tracker-btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:10px;height:10px"><path d="M12 5v14M5 12h14"/></svg>
               추가
@@ -1659,9 +1375,11 @@
             <label>반복</label>
             <select id="add-repeat">
               <option value="">없음</option>
-              <option value="Daily">Daily</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
+              <option value="Daily">매일</option>
+              <option value="Weekly">매주</option>
+              <option value="Monthly">매월</option>
+              <option value="DayOfMonth">일자</option>
+              <option value="DayOfWeek">요일</option>
             </select>
           </div>
           <div class="meta-field">
@@ -1669,8 +1387,12 @@
             <input type="date" id="add-start-date">
           </div>
           <div class="meta-field">
-            <label>데드라인</label>
+            <label>종료일</label>
             <input type="date" id="add-deadline">
+          </div>
+          <div class="meta-field full-width" id="add-repeat-detail" style="display:none">
+            <label id="add-repeat-detail-label">선택</label>
+            <div id="add-repeat-detail-picker" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px"></div>
           </div>
           <div class="meta-field full-width">
             <label>색상</label>
@@ -1688,7 +1410,7 @@
             </div>
           </div>
           <div class="meta-field full-width">
-            <label>옵션</label>
+            <label>설정</label>
             <label class="template-toggle" id="add-memorable-toggle">
               <div class="toggle-switch" id="add-memorable-switch"></div>
               <span>보관하기</span>
@@ -1739,7 +1461,10 @@ const MockClock = (() => {
   const now = () => _mockDate ? new Date(_mockDate) : new Date();
   const set = (d) => { _mockDate = d ? new Date(d) : null; };
   const isActive = () => _mockDate !== null;
-  return { now, set, isActive };
+  const PANEL_KEY = 'mock_panel_hidden';
+  const isPanelHidden = () => localStorage.getItem(PANEL_KEY) === 'true';
+  const setPanelHidden = (v) => localStorage.setItem(PANEL_KEY, v ? 'true' : 'false');
+  return { now, set, isActive, isPanelHidden, setPanelHidden };
 })();
 
 // ── STATS REPOSITORY ──────────────────────────────────────────────
@@ -1770,12 +1495,13 @@ const StatsRepository = (() => {
 
   const getPeriodKey = (repeat, date) => {
     const d = date || MockClock.now();
-    if (repeat === 'Daily') {
-      return 'daily:' + localDateStr(d);
-    } else if (repeat === 'Weekly') {
-      return 'weekly:' + localISOWeek(d);
-    } else if (repeat === 'Monthly') {
-      return `monthly:${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    if (!repeat) return null;
+    if (repeat === 'Daily') return 'daily:' + localDateStr(d);
+    if (repeat === 'Weekly') return 'weekly:' + localISOWeek(d);
+    if (repeat === 'Monthly') return `monthly:${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    // DayOfWeek/DayOfMonth: 날짜 기반 키 (주차가 아닌 해당 날짜로 구분)
+    if (repeat && (repeat.startsWith('DayOfWeek:') || repeat.startsWith('DayOfMonth:'))) {
+      return 'date:' + localDateStr(d);
     }
     return null;
   };
@@ -1801,19 +1527,31 @@ const StatsRepository = (() => {
     const history = data[itemId] || {};
     const result = [];
     const now = MockClock.now();
-    // 로컬 자정 기준 날짜 복사
     const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const isWeekBased = repeat && (repeat === 'Weekly');
+    const isDateBased = !!(repeat && (repeat.startsWith('DayOfWeek:') || repeat.startsWith('DayOfMonth:')));
 
     for (let i = periodsBack - 1; i >= 0; i--) {
       let d;
       if (repeat === 'Daily') {
-        d = new Date(base);
-        d.setDate(base.getDate() - i);
-      } else if (repeat === 'Weekly') {
-        d = new Date(base);
-        d.setDate(base.getDate() - i * 7);
+        d = new Date(base); d.setDate(base.getDate() - i);
+      } else if (isWeekBased) {
+        d = new Date(base); d.setDate(base.getDate() - i * 7);
       } else if (repeat === 'Monthly') {
         d = new Date(base.getFullYear(), base.getMonth() - i, 1);
+      } else if (isDateBased) {
+        // 날짜 기반: 하루씩 순회하되 해당 요일/일자인 날만 포함
+        d = new Date(base); d.setDate(base.getDate() - i);
+        // 해당 날짜/요일이 아니면 스킵
+        if (repeat.startsWith('DayOfWeek:')) {
+          const days = repeat.slice(10).split(',').map(Number);
+          if (!days.includes(d.getDay())) continue;
+        } else if (repeat.startsWith('DayOfMonth:')) {
+          const dates = repeat.slice(11).split(',').map(Number);
+          if (!dates.includes(d.getDate())) continue;
+        }
+      } else {
+        continue;
       }
       const key = getPeriodKey(repeat, d);
       result.push({ key, done: !!(history[key]), date: d });
@@ -1829,432 +1567,6 @@ const StatsRepository = (() => {
   return { mark, isCompletedThisPeriod, getHistory, getPeriodKey, getAllForItem };
 })();
 
-// ── WYSIWYG MARKDOWN ENGINE ─────────────────────────────────────────
-// 지원 문법:
-//  헤딩   : # H1  ## H2  ### H3  (줄 시작, 스페이스 후 확정)
-//  굵게   : **text** 또는 __text__
-//  기울임 : *text* 또는 _text_  (** 제외)
-//  취소선 : ~~text~~
-//  인라인코드: `code`
-//  인용   : > text  (줄 시작)
-//  리스트 : - item  또는 * item  (줄 시작, 스페이스 후 확정)
-//  순번   : 1. item  (줄 시작, 스페이스 후 확정)
-//  구분선 : --- 또는 *** (줄 전체)
-//  저장   : 편집기 raw text(innerText)를 그대로 item.detail에 저장
-
-const WysiwygEditor = (() => {
-
-  // raw text → DOM 노드 배열 (줄 단위 파싱)
-  function parseToNodes(text) {
-    const lines = text.split('\n');
-    const nodes = [];
-    let currentUl = null;
-    let currentOl = null;
-
-    for (const line of lines) {
-      // 비순번 리스트
-      const ulMatch = line.match(/^[-*] (.+)/);
-      if (ulMatch) {
-        if (!currentUl) { currentUl = document.createElement('ul'); nodes.push(currentUl); }
-        currentOl = null;
-        const li = document.createElement('li');
-        setInline(li, ulMatch[1]);
-        currentUl.appendChild(li);
-        continue;
-      }
-      // 순번 리스트는 parseLine에서 처리
-      // 리스트 아닌 줄 → ul 종료
-      currentUl = null;
-      currentOl = null;
-      nodes.push(parseLine(line));
-    }
-    return nodes;
-  }
-
-  function parseLine(line) {
-    // 헤딩
-    const h3 = line.match(/^### (.+)/);
-    if (h3) { const el = document.createElement('h3'); setInline(el, h3[1]); return el; }
-    const h2 = line.match(/^## (.+)/);
-    if (h2) { const el = document.createElement('h2'); setInline(el, h2[1]); return el; }
-    const h1 = line.match(/^# (.+)/);
-    if (h1) { const el = document.createElement('h1'); setInline(el, h1[1]); return el; }
-    // 인용
-    const bq = line.match(/^> (.+)/);
-    if (bq) { const el = document.createElement('blockquote'); setInline(el, bq[1]); return el; }
-    // 순번 리스트 → 숫자 그대로 표시, 들여쓰기만
-    const olMatch = line.match(/^(\d+)\. (.*)/);
-    if (olMatch) {
-      const div = document.createElement('div');
-      div.className = 'ol-item';
-      div.dataset.olNum = olMatch[1];
-      const num = document.createElement('span');
-      num.className = 'ol-num';
-      num.textContent = olMatch[1] + '.';
-      const body = document.createElement('span');
-      body.className = 'ol-content';
-      setInline(body, olMatch[2] || '');
-      div.appendChild(num);
-      div.appendChild(body);
-      return div;
-    }
-    // 비순번 리스트
-    const ul = line.match(/^[-*] (.+)/);
-    if (ul) {
-      const li = document.createElement('li'); setInline(li, ul[1]);
-      const wrapper = document.createElement('ul'); wrapper.appendChild(li); return wrapper;
-    }
-    // 구분선
-    if (/^(-{3,}|\*{3,})$/.test(line.trim())) {
-      return document.createElement('hr');
-    }
-    // 빈 줄
-    if (line.trim() === '') {
-      const br = document.createElement('br'); return br;
-    }
-    // 일반 단락
-    const p = document.createElement('p');
-    setInline(p, line);
-    return p;
-  }
-
-  // 인라인 마크다운 파싱 (굵게/기울임/취소선/인라인코드)
-  function setInline(el, text) {
-    el.innerHTML = parseInline(text);
-  }
-
-  function parseInline(text) {
-    // 인라인코드 (다른 것보다 먼저)
-    text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-    // 굵게 ** 또는 __
-    text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-    // 취소선 ~~
-    text = text.replace(/~~([^~]+)~~/g, '<del>$1</del>');
-    // 기울임 * 또는 _ (단독)
-    text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-    text = text.replace(/_([^_]+)_/g, '<em>$1</em>');
-    return text;
-  }
-
-  // DOM → raw text (저장용)
-  function extractRawText(editorEl) {
-    const lines = [];
-    for (const child of editorEl.childNodes) {
-      lines.push(nodeToRaw(child));
-    }
-    return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
-  }
-
-  function getInlineRaw(el) {
-    // 인라인 HTML을 raw 마크다운으로 역변환
-    let result = '';
-    for (const node of el.childNodes) {
-      if (node.nodeType === Node.TEXT_NODE) {
-        result += node.textContent;
-      } else {
-        const t = node.tagName?.toLowerCase();
-        const inner = getInlineRaw(node);
-        if (t === 'strong' || t === 'b') result += `**${inner}**`;
-        else if (t === 'em' || t === 'i') result += `*${inner}*`;
-        else if (t === 'del' || t === 's') result += `~~${inner}~~`;
-        else if (t === 'code') result += `\`${inner}\``;
-        else result += inner;
-      }
-    }
-    return result;
-  }
-
-  function nodeToRaw(node) {
-    if (node.nodeType === Node.TEXT_NODE) return node.textContent;
-    const tag = node.tagName?.toLowerCase();
-    if (!tag) return '';
-    if (tag === 'hr') return '---';
-    if (tag === 'br') return '';
-    const inner = getInlineRaw(node);
-    if (tag === 'h1') return '# ' + inner;
-    if (tag === 'h2') return '## ' + inner;
-    if (tag === 'h3') return '### ' + inner;
-    if (tag === 'blockquote') return '> ' + inner;
-    if (tag === 'ul') {
-      return [...node.querySelectorAll(':scope > li')]
-        .map(li => '- ' + getInlineRaw(li)).join('\n');
-    }
-    if (tag === 'ol') {
-      return [...node.querySelectorAll(':scope > li')]
-        .map(li => '- ' + getInlineRaw(li)).join('\n');
-    }
-    // ol-item div: "숫자. 내용" 형태로 복원
-    if (tag === 'div' && node.classList?.contains('ol-item')) {
-      const num = node.querySelector('.ol-num')?.textContent.replace('.','').trim() || '';
-      const body = getInlineRaw(node.querySelector('.ol-content') || node);
-      return num ? `${num}. ${body}` : body;
-    }
-    if (tag === 'p' || tag === 'div') return inner || '';
-    return inner;
-  }
-
-  // 에디터 초기화: raw text를 DOM으로 렌더
-  function init(editorEl, rawText) {
-    editorEl.innerHTML = '';
-    if (!rawText) return;
-    const nodes = parseToNodes(rawText);
-    nodes.forEach(n => editorEl.appendChild(n));
-  }
-
-  // 키 입력 처리: Space/Enter 후 줄 앞 패턴 감지 → 변환
-  function handleKeydown(e, editorEl) {
-    if (e.key === 'Enter') {
-      handleEnter(e, editorEl);
-    }
-    // Backspace: 블록 앞에서 누르면 일반 단락으로 해제
-    if (e.key === 'Backspace') {
-      handleBackspace(e, editorEl);
-    }
-  }
-
-  function handleInput(e, editorEl) {
-    const sel = window.getSelection();
-    if (!sel.rangeCount) return;
-    const range = sel.getRangeAt(0);
-    let node = range.startContainer;
-    // 현재 커서가 있는 블록 요소 찾기
-    let block = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
-    while (block && block !== editorEl && block.parentElement !== editorEl) {
-      block = block.parentElement;
-    }
-    if (!block) return;
-
-    // 첫 입력 시 에디터 자체가 block인 경우: 텍스트 노드를 p로 감싸기
-    if (block === editorEl) {
-      // editorEl 안의 텍스트 노드를 p로 래핑
-      const children = [...editorEl.childNodes];
-      for (const child of children) {
-        if (child.nodeType === Node.TEXT_NODE) {
-          const p = document.createElement('p');
-          p.textContent = child.textContent;
-          child.replaceWith(p);
-          block = p;
-          setCursorAtEnd(p);
-          break;
-        }
-      }
-      if (block === editorEl) return;
-    }
-
-    // p 또는 div 요소만 변환 대상 (이미 li 안에 있으면 변환 안 함)
-    const tag = block.tagName?.toLowerCase();
-    if (tag !== 'p' && tag !== 'div') return;
-
-    const text = block.innerText || block.textContent || '';
-
-    // 스페이스 또는 입력 후 패턴 확인
-    let newEl = null;
-    let contentAfter = '';
-
-    if (/^### /.test(text)) { newEl = document.createElement('h3'); contentAfter = text.slice(4); }
-    else if (/^## /.test(text)) { newEl = document.createElement('h2'); contentAfter = text.slice(3); }
-    else if (/^# /.test(text)) { newEl = document.createElement('h1'); contentAfter = text.slice(2); }
-    else if (/^> /.test(text)) { newEl = document.createElement('blockquote'); contentAfter = text.slice(2); }
-    else if (/^[-*] /.test(text)) {
-      const ul = document.createElement('ul');
-      const li = document.createElement('li');
-      li.innerHTML = parseInline(text.slice(2));
-      ul.appendChild(li);
-      block.replaceWith(ul);
-      // 커서를 li 끝으로
-      setCursorAtEnd(li);
-      return;
-    }
-    else if (/^\d+\. /.test(text)) {
-      const match = text.match(/^(\d+)\. (.*)/);
-      const div = document.createElement('div');
-      div.className = 'ol-item';
-      div.dataset.olNum = match[1];
-      const num = document.createElement('span');
-      num.className = 'ol-num';
-      num.textContent = match[1] + '.';
-      const body = document.createElement('span');
-      body.className = 'ol-content';
-      body.innerHTML = parseInline(match[2] || '');
-      div.appendChild(num); div.appendChild(body);
-      block.replaceWith(div);
-      setCursorAtEnd(body);
-      return;
-    }
-    else if (/^(-{3,}|\*{3,})$/.test(text.trim())) {
-      const hr = document.createElement('hr');
-      block.replaceWith(hr);
-      // hr 뒤에 새 p 추가
-      const p = document.createElement('p'); p.innerHTML = '<br>';
-      hr.after(p);
-      setCursorAtEnd(p);
-      return;
-    }
-
-    if (newEl) {
-      setInline(newEl, contentAfter);
-      block.replaceWith(newEl);
-      setCursorAtEnd(newEl);
-    }
-  }
-
-  function handleEnter(e, editorEl) {
-    e.preventDefault();
-    const sel = window.getSelection();
-    if (!sel.rangeCount) return;
-    const range = sel.getRangeAt(0);
-    let node = range.startContainer;
-    let block = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
-    while (block && block !== editorEl && block.parentElement !== editorEl) {
-      block = block.parentElement;
-    }
-    const tag = block?.tagName?.toLowerCase();
-
-    // 헤딩/인용에서 Enter → 새 p
-    if (['h1','h2','h3','blockquote'].includes(tag)) {
-      const p = document.createElement('p'); p.innerHTML = '<br>';
-      block.after(p);
-      setCursorAtEnd(p);
-      return;
-    }
-    // ol-item에서 Enter → 새 ol-item (숫자 그대로 유지, 빈 경우 p로 탈출)
-    if (block.classList?.contains('ol-item') || block.classList?.contains('ol-content')) {
-      const olItem = block.classList.contains('ol-item') ? block : block.closest('.ol-item');
-      if (!olItem) { /* fallthrough */ } else {
-        const bodyEl = olItem.querySelector('.ol-content');
-        const bodyText = (bodyEl?.innerText || '').trim();
-        if (bodyText === '') {
-          const p = document.createElement('p'); p.innerHTML = '<br>';
-          olItem.replaceWith(p);
-          setCursorAtEnd(p);
-        } else {
-          const newDiv = document.createElement('div');
-          newDiv.className = 'ol-item';
-          const newBody = document.createElement('span');
-          newBody.className = 'ol-content';
-          newBody.innerHTML = '<br>';
-          newDiv.appendChild(newBody);
-          olItem.after(newDiv);
-          setCursorAtEnd(newBody);
-        }
-        return;
-      }
-    }
-    // ul 리스트에서 Enter → 빈 li면 리스트 탈출, 아니면 기존 리스트에 새 li 추가
-    if (tag === 'li') {
-      const liText = (block.innerText || '').trim();
-      const listEl = block.parentElement;
-      if (liText === '') {
-        const p = document.createElement('p'); p.innerHTML = '<br>';
-        block.remove();
-        listEl.after(p);
-        if (listEl.querySelectorAll('li').length === 0) listEl.remove();
-        setCursorAtEnd(p);
-      } else {
-        const newLi = document.createElement('li'); newLi.innerHTML = '<br>';
-        block.after(newLi);
-        setCursorAtEnd(newLi);
-      }
-      return;
-    }
-    // 기본: 새 p 삽입
-    const p = document.createElement('p'); p.innerHTML = '<br>';
-    if (block && block !== editorEl) block.after(p);
-    else editorEl.appendChild(p);
-    setCursorAtEnd(p);
-  }
-
-  function handleBackspace(e, editorEl) {
-    const sel = window.getSelection();
-    if (!sel.rangeCount) return;
-    const range = sel.getRangeAt(0);
-    if (!range.collapsed) return; // 선택 영역 있으면 기본 동작
-    let node = range.startContainer;
-    let block = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
-    while (block && block !== editorEl && block.parentElement !== editorEl) {
-      block = block.parentElement;
-    }
-    const tag = block?.tagName?.toLowerCase();
-
-    // 헤딩/인용 맨 앞에서 Backspace → p로 변환
-    if (['h1','h2','h3','blockquote'].includes(tag)) {
-      // 커서가 맨 앞일 때만
-      if (range.startOffset !== 0) return;
-      e.preventDefault();
-      const p = document.createElement('p');
-      p.innerHTML = block.innerHTML || '<br>';
-      block.replaceWith(p);
-      setCursorAtEnd(p);
-      return;
-    }
-
-    // ol-item 처리
-    if (block.classList?.contains('ol-content') || block.classList?.contains('ol-item')) {
-      const olItem = block.classList.contains('ol-item') ? block : block.closest('.ol-item');
-      if (olItem) {
-        const bodyEl = olItem.querySelector('.ol-content');
-        const bodyText = (bodyEl?.innerText || '').trim();
-        if (bodyText === '') {
-          e.preventDefault();
-          const prev = olItem.previousElementSibling;
-          const p = document.createElement('p'); p.innerHTML = '<br>';
-          olItem.replaceWith(p);
-          setCursorAtEnd(prev || p);
-          return;
-        }
-      }
-    }
-
-    // li 안에서 처리
-    if (tag === 'li') {
-      const liText = (block.innerText || '').trim();
-      // 빈 li에서 Backspace → li 제거 후 위 항목 끝으로 커서
-      if (liText === '' && range.startOffset === 0) {
-        e.preventDefault();
-        const listEl = block.parentElement;
-        const prevLi = block.previousElementSibling;
-        const nextLi = block.nextElementSibling;
-        block.remove();
-        // li가 모두 없어지면 리스트 자체 제거하고 p 생성
-        if (listEl.querySelectorAll('li').length === 0) {
-          const p = document.createElement('p'); p.innerHTML = '<br>';
-          listEl.replaceWith(p);
-          setCursorAtEnd(p);
-        } else if (prevLi) {
-          setCursorAtEnd(prevLi);
-        } else if (nextLi) {
-          setCursorAtEnd(nextLi);
-        }
-        return;
-      }
-      // li 맨 앞에서 Backspace → 첫 li면 리스트 탈출
-      if (range.startOffset === 0 && !block.previousElementSibling) {
-        e.preventDefault();
-        const listEl = block.parentElement;
-        const p = document.createElement('p');
-        p.innerHTML = block.innerHTML || '<br>';
-        block.remove();
-        listEl.before(p);
-        if (listEl.querySelectorAll('li').length === 0) listEl.remove();
-        setCursorAtEnd(p);
-        return;
-      }
-    }
-  }
-
-  function setCursorAtEnd(el) {
-    el.focus();
-    const range = document.createRange();
-    const sel = window.getSelection();
-    range.selectNodeContents(el);
-    range.collapse(false);
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
-
-  return { init, handleKeydown, handleInput, extractRawText, parseInline };
-})();
 
 // ── DATA LAYER (Repository Pattern) ──────────────────────────────
 const TodoRepository = (() => {
@@ -2371,8 +1683,11 @@ const TodoService = {
 
   resolveStatus: (item) => {
     if (!item?.meta?.status) return 'Active';
+    if (item.meta.status === 'Inactive') return 'Inactive';
+    if (item.meta.status === 'Completed') return 'Completed';
+    if (item.meta.status === 'Archived') return 'Archived';
+    if (item.meta.status === 'Overdue') return 'Overdue';
     if (TodoService.checkNotYet(item)) return 'NotYet';
-    if (TodoService.checkOverdue(item)) return 'Overdue';
     return item.meta.status;
   },
 
@@ -2385,7 +1700,7 @@ const TodoService = {
   toggle: (id) => {
     const items = TodoRepository.getAll();
     const item = items.find(i => i.id === id);
-    if (!item) return;
+    if (!item || item.meta.status === 'Inactive') return;
     const newStatus = item.meta.status === 'Completed' ? 'Active' : 'Completed';
     // memorable은 절대 변경하지 않고 status만 업데이트
     return TodoRepository.update(id, { meta: { status: newStatus, memorable: item.meta.memorable } });
@@ -2399,7 +1714,14 @@ let expandedId = null;
 let selectedAddColor = '';
 let addMemorableOn = false;
 let addTrackers = [];
-let showCompleted = localStorage.getItem('show_completed') !== 'false';
+
+// 필터 상태
+let visibleStatuses = new Set(
+  JSON.parse(localStorage.getItem('visible_statuses') || '["active","completed","inactive"]')
+);
+function saveVisibleStatuses() {
+  localStorage.setItem('visible_statuses', JSON.stringify([...visibleStatuses]));
+}
 
 // ── RENDER ────────────────────────────────────────────────────────
 function getColorVar(colorVal) {
@@ -2418,14 +1740,32 @@ function getColorVar(colorVal) {
   return colorVal;
 }
 
+// 개시시간을 고려한 "실효 날짜" 반환 (개시시간 전이면 어제)
+function getEffectiveNow() {
+  const now = MockClock.now();
+  const [h, m] = AppSession.getOpenTime().split(':').map(Number);
+  const todayOpen = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0);
+  if (now < todayOpen) {
+    // 개시시간 전 → 어제를 실효 날짜로
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+  }
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
+function isInactiveToday(item) {
+  // meta.status로만 판단 (checkDayTransitions가 이미 올바르게 세팅)
+  return item.meta.status === 'Inactive';
+}
+
 function filterItems(items) {
-  // 'all': Archived 항상 숨김, Completed·NotYet은 showCompleted 플래그에 따라 숨김
   return items.filter(i => {
     if (i.meta.paused) return false;
     const s = TodoService.resolveStatus(i);
     if (s === 'Archived') return false;
-    if ((s === 'Completed' || s === 'NotYet') && !showCompleted) return false;
-    return true;
+    const inactive = isInactiveToday(i);
+    if (inactive) return visibleStatuses.has('inactive');
+    if (s === 'Completed' || s === 'NotYet') return visibleStatuses.has('completed');
+    return visibleStatuses.has('active');
   });
 }
 
@@ -2461,17 +1801,30 @@ function createCard(item) {
   const colorHex = getColorVar(item.meta.color);
 
   const card = document.createElement('div');
-  card.className = `todo-card${item.pinned ? ' pinned' : ''}${expandedId === item.id ? ' expanded' : ''}`;
+  const isRepeatOverdue = item.meta.repeat && TodoService.resolveStatus(item) === 'Overdue';
+  card.className = `todo-card${item.pinned ? ' pinned' : ''}${expandedId === item.id ? ' expanded' : ''}${isInactiveToday(item) ? ' inactive-today' : ''}${isRepeatOverdue ? ' repeat-overdue' : ''}`;
   card.dataset.id = item.id;
   if (colorHex) card.style.setProperty('--card-color', colorHex);
 
   // Build meta tags
-  const statusLabel = { Active: 'Active', Completed: 'Completed', Overdue: 'Overdue', NotYet: 'Not yet', Archived: 'Archived' };
+  const statusLabel = { Active: '진행 중', Completed: '완료됨', Overdue: '기한 도과', NotYet: '시작 전', Archived: '보관됨' };
+  const todayInactive = isInactiveToday(item);
   let metaTagsHTML = '';
-  metaTagsHTML += `<span class="meta-tag status-${status.toLowerCase()}">${statusLabel[status] || status}</span>`;
+  if (todayInactive) {
+    metaTagsHTML += `<span class="meta-tag status-inactive">비활성화</span>`;
+  } else {
+    metaTagsHTML += `<span class="meta-tag status-${status.toLowerCase()}">${statusLabel[status] || status}</span>`;
+  }
   if (item.meta.repeat) {
-    const rClass = item.meta.repeat === 'Daily' ? 'repeat-daily' : item.meta.repeat === 'Weekly' ? 'repeat-weekly' : 'repeat-monthly';
-    metaTagsHTML += `<span class="meta-tag ${rClass}">${item.meta.repeat}</span>`;
+    const rClass = repeatClass(item.meta.repeat);
+    metaTagsHTML += `<span class="meta-tag ${rClass}">${repeatLabel(item.meta.repeat)}</span>`;
+    // 이번 기간 마감 기록이 있으면 '마감' 배지
+    const curKey = StatsRepository.getPeriodKey(item.meta.repeat);
+    const recorded = StatsRepository.getAllForItem(item.id);
+    if (curKey && curKey in recorded) {
+      const isDone = recorded[curKey];
+      metaTagsHTML += `<span class="meta-tag" style="font-size:9px;padding:1px 5px;vertical-align:middle;${isDone ? 'background:var(--accent-dim);color:var(--accent)' : 'background:var(--red-dim);color:var(--red)'}">마감</span>`;
+    }
   }
   if (item.meta.memorable) metaTagsHTML += `<span class="meta-tag template">보관하기</span>`;
   if (item.meta.deadline) {
@@ -2484,7 +1837,7 @@ function createCard(item) {
       <div class="card-drag-handle" data-drag>
         <span></span><span></span><span></span>
       </div>
-      <div class="card-checkbox${isDone ? ' checked' : ''}" data-toggle></div>
+      <div class="card-checkbox${isDone ? ' checked' : ''}${todayInactive ? ' disabled' : ''}" data-toggle style="${todayInactive ? 'pointer-events:none;opacity:0.35;cursor:not-allowed' : ''}"></div>
       <div class="card-title-wrap">
         <div class="card-title${isDone ? ' done' : ''}">${escHtml(item.title)}</div>
         <div class="card-meta-row">${metaTagsHTML}</div>
@@ -2508,6 +1861,7 @@ function createCard(item) {
   let clickTimer = null;
   card.querySelector('[data-toggle]').addEventListener('click', (e) => {
     e.stopPropagation();
+    if (isInactiveToday(item)) return; // 비활성화 투두 완료 처리 차단
     clearTimeout(clickTimer);
     clickTimer = setTimeout(() => {
       TodoService.toggle(item.id);
@@ -2515,9 +1869,10 @@ function createCard(item) {
     }, 220);
   });
 
-  // 더블클릭으로 Active ↔ Completed 토글
+  // 더블클릭으로 Active ↔ Completed 토글 (비활성화 투두 제외)
   card.querySelector('.card-main').addEventListener('dblclick', (e) => {
     if (e.target.closest('[data-pin],[data-toggle],[data-expand]')) return;
+    if (isInactiveToday(item)) return;
     e.stopPropagation();
     clearTimeout(clickTimer); // 싱글클릭 타이머 취소
     TodoService.toggle(item.id);
@@ -2552,7 +1907,7 @@ function renderExpandedPanel(item) {
     { val: 'var(--palette-magenta)', bg: 'var(--palette-magenta)', label: 'Magenta' },
     { val: 'var(--palette-cyan)', bg: 'var(--palette-cyan)', label: 'Cyan' },
   ];
-  const statusLabel = { Active: 'Active', Completed: 'Completed', Overdue: 'Overdue', NotYet: 'Not yet', Archived: 'Archived' };
+  const statusLabel = { Active: '진행 중', Inactive: '비활성화', Completed: '완료됨', Overdue: '기한 도과', NotYet: '시작 전', Archived: '보관됨' };
   const resolvedStatus = TodoService.resolveStatus(item);
   const isCustomColor = item.meta.color && !colorDots.some(c => c.val === item.meta.color);
   const colorDotsHtml = colorDots.map(c =>
@@ -2565,7 +1920,7 @@ function renderExpandedPanel(item) {
   ' style="background:' + (isCustomColor ? item.meta.color : 'conic-gradient(red,yellow,lime,cyan,blue,magenta,red)') + ';border:' + (isCustomColor ? '' : 'none') + ';position:relative;overflow:hidden">' +
   '<input type="color" class="color-custom-input" value="' + (isCustomColor ? item.meta.color : '#888888') + '" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;border:none;padding:0"></div>';
   const repeatHtml = item.meta.repeat
-    ? '<span class="meta-tag ' + (item.meta.repeat === 'Daily' ? 'repeat-daily' : item.meta.repeat === 'Weekly' ? 'repeat-weekly' : 'repeat-monthly') + '" style="font-size:11px;padding:3px 8px">' + item.meta.repeat + '</span>'
+    ? '<span class="meta-tag ' + repeatClass(item.meta.repeat) + '" style="font-size:11px;padding:3px 8px">' + repeatLabel(item.meta.repeat) + '</span>'
     : '<span style="font-size:12px;color:var(--text-3)">없음</span>';
 
   return `
@@ -2580,7 +1935,7 @@ function renderExpandedPanel(item) {
       </div>
       <div class="inline-edit-field">
         <div class="inline-edit-label">상세</div>
-        <div class="md-editor" data-field="detail" contenteditable="true" inputmode="text" data-md-editor spellcheck="false"></div>
+        <textarea class="inline-edit-content multiline" data-field="detail" placeholder="상세 내용 (마크다운 지원)" spellcheck="false"></textarea>
       </div>
     </div>
     <div class="meta-grid">
@@ -2599,7 +1954,7 @@ function renderExpandedPanel(item) {
         <input type="date" data-field="startDate" value="${item.meta.startDate || ''}" ${item.meta.repeat ? 'disabled style="opacity:0.35;cursor:not-allowed"' : ''}>
       </div>
       <div class="meta-field">
-        <label>데드라인</label>
+        <label>종료일</label>
         <input type="date" data-field="deadline" value="${item.meta.deadline || ''}" ${item.meta.repeat ? 'disabled style="opacity:0.35;cursor:not-allowed"' : ''}>
       </div>
       <div class="meta-field full-width">
@@ -2607,7 +1962,7 @@ function renderExpandedPanel(item) {
         <div class="color-picker-row" data-color-picker>${colorDotsHtml}</div>
       </div>
       <div class="meta-field full-width">
-        <label>옵션</label>
+        <label>설정</label>
         <label class="template-toggle" style="cursor:pointer">
           <div class="toggle-switch${item.meta.memorable ? ' on' : ''}" data-template-switch></div>
           <span>보관하기</span>
@@ -2617,7 +1972,7 @@ function renderExpandedPanel(item) {
     <div class="expanded-actions">
       <button class="action-btn danger${item.meta.repeat ? ' disabled' : ''}" data-delete ${item.meta.repeat ? 'disabled' : ''}>삭제</button>
       <button class="action-btn archive${item.meta.memorable ? '' : ' disabled'}" data-archive ${item.meta.memorable ? '' : 'disabled'}>보관</button>
-      ${item.meta.repeat ? '<button class="action-btn repeat-close" data-repeat-close>' + (StatsRepository.isCompletedThisPeriod(item.id, item.meta.repeat) ? '마감 취소' : '개별 마감') + '</button>' : ''}
+      ${item.meta.repeat ? '<button class="action-btn repeat-close' + (item.meta.status === 'Inactive' ? ' disabled' : '') + '" data-repeat-close' + (item.meta.status === 'Inactive' ? ' disabled' : '') + '>개별 마감</button>' : ''}
       <button class="action-btn save" data-save data-editing="false">수정</button>
     </div>
   `;
@@ -2628,6 +1983,14 @@ function wireExpandedPanel(card, item) {
   const tSwitch = card.querySelector('[data-template-switch]');
   if (tSwitch) {
     let memorableVal = item.meta.memorable;
+    // 반복형이면 보관하기 비활성화
+    if (item.meta.repeat) {
+      tSwitch.style.opacity = '0.35';
+      tSwitch.style.pointerEvents = 'none';
+      const tLabel = card.querySelector('.template-toggle');
+      if (tLabel) { tLabel.style.opacity = '0.35'; tLabel.style.pointerEvents = 'none'; }
+    }
+
     tSwitch.addEventListener('click', () => {
       memorableVal = !memorableVal;
       tSwitch.classList.toggle('on', memorableVal);
@@ -2692,27 +2055,7 @@ function wireExpandedPanel(card, item) {
     });
   });
 
-  // 뷰모드 detail 렌더링
-  const detailDisplayEl = card.querySelector('[data-md-detail]');
-  if (detailDisplayEl) {
-    if (item.detail) {
-      detailDisplayEl.innerHTML = MarkdownService.render(item.detail);
-      detailDisplayEl.classList.toggle('md-rendered', MarkdownService.isEnabled());
-    } else {
-      detailDisplayEl.textContent = '상세 내용 없음';
-      detailDisplayEl.classList.add('empty');
-    }
-  }
-
-  // WYSIWYG 에디터 초기화
-  const editorEl = card.querySelector('[data-md-editor]');
-  if (editorEl) {
-    WysiwygEditor.init(editorEl, item.detail || '');
-    editorEl.addEventListener('keydown', (e) => WysiwygEditor.handleKeydown(e, editorEl));
-    editorEl.addEventListener('input', (e) => WysiwygEditor.handleInput(e, editorEl));
-  }
-
-  // 트래커 렌더
+    // 추적기 렌더
   renderTrackers(card, item);
 
   // date input — 변경 즉시 저장 + scrollIntoView
@@ -2734,10 +2077,33 @@ function wireExpandedPanel(card, item) {
   const viewMode = card.querySelector('.expanded-view-mode');
   const editMode = card.querySelector('.expanded-edit-mode');
   const titleField = card.querySelector('[data-field="title"]');
-  const detailField = card.querySelector('[data-field="detail"]'); // contenteditable fallback
+  const detailField = card.querySelector('[data-field="detail"]');
+
+  // 뷰모드 detail 렌더링 (marked.js)
+  const detailDisplayEl = card.querySelector('[data-md-detail]');
+  if (detailDisplayEl) {
+    if (item.detail) {
+      detailDisplayEl.innerHTML = MarkdownService.render(item.detail);
+      detailDisplayEl.classList.toggle('md-rendered', MarkdownService.isEnabled());
+    } else {
+      detailDisplayEl.textContent = '상세 내용 없음';
+      detailDisplayEl.classList.add('empty');
+    }
+  }
+
+  // textarea에 기존 내용 세팅
+  if (detailField && detailField.tagName === 'TEXTAREA') {
+    detailField.value = item.detail || '';
+    detailField.style.height = 'auto';
+    detailField.style.height = detailField.scrollHeight + 'px';
+    detailField.addEventListener('input', () => {
+      detailField.style.height = 'auto';
+      detailField.style.height = detailField.scrollHeight + 'px';
+    });
+  }
 
   // contenteditable 필드 포커스 시 키보드가 가리지 않도록 scrollIntoView
-  [titleField, editorEl].forEach(el => {
+  [titleField, detailField].forEach(el => {
     if (!el) return;
     el.addEventListener('focus', () => {
       setTimeout(() => {
@@ -2770,8 +2136,7 @@ function wireExpandedPanel(card, item) {
     } else {
       // 저장 — 텍스트만 업데이트, collapse하지 않음
       const titleVal = (titleField?.innerText || '').trim();
-      // WYSIWYG 에디터에서 raw text 추출
-      const detailVal = editorEl ? WysiwygEditor.extractRawText(editorEl) : (detailField?.innerText || '').trimEnd();
+      const detailVal = (detailField?.value || '').trimEnd();
       const memorable = tSwitch?._getVal() ?? item.meta.memorable;
 
       if (titleVal) {
@@ -2839,29 +2204,13 @@ function wireExpandedPanel(card, item) {
   // 개별 마감 (반복형 전용)
   card.querySelector('[data-repeat-close]')?.addEventListener('click', () => {
     const fresh = TodoRepository.getAll().find(i => i.id === item.id);
-    if (!fresh) return;
-    const alreadyClosed = StatsRepository.isCompletedThisPeriod(item.id, item.meta.repeat);
-    if (alreadyClosed) {
-      // 마감 취소: 이번 기간 기록 삭제
-      const statsData = JSON.parse(localStorage.getItem('todo_stats_v1') || '{}');
-      if (statsData[item.id]) {
-        const key = StatsRepository.getPeriodKey(item.meta.repeat);
-        delete statsData[item.id][key];
-        localStorage.setItem('todo_stats_v1', JSON.stringify(statsData));
-      }
-      showToast('이번 기간 마감 취소됨');
-    } else {
-      // 개별 마감: 현재 완료 여부로 기록
-      const done = fresh.meta.status === 'Completed';
-      StatsRepository.mark(item.id, item.meta.repeat, done);
-      showToast(done ? '완료로 기록됨' : '미완료로 기록됨');
-    }
-    // 버튼 텍스트 즉시 업데이트
-    const btn = card.querySelector('[data-repeat-close]');
-    if (btn) {
-      const nowClosed = StatsRepository.isCompletedThisPeriod(item.id, item.meta.repeat);
-      btn.textContent = nowClosed ? '마감 취소' : '개별 마감';
-    }
+    if (!fresh || fresh.meta.status === 'Inactive') return;
+    const done = fresh.meta.status === 'Completed';
+    StatsRepository.mark(item.id, item.meta.repeat, done);
+    // 보고서 업데이트
+    const effective = getEffectiveNow();
+    ReportRepository.upsertItem(AppSession.dateKey(effective), effective.getDay(), fresh, done);
+    showToast(done ? '완료로 기록됨' : '미완료로 기록됨');
     renderStats();
   });
 }
@@ -2870,13 +2219,34 @@ function updateStats(items) {
   const active = items.filter(i => i.meta.status === 'Active' && !TodoService.checkOverdue(i)).length;
   const overdue = items.filter(i => TodoService.checkOverdue(i)).length;
 
-  document.getElementById('stat-active').textContent = `${active} active`;
+  document.getElementById('stat-active').textContent = `${active} 진행 중`;
   const overdueEl = document.getElementById('stat-overdue');
   if (overdue > 0) {
     overdueEl.style.display = '';
-    overdueEl.textContent = `${overdue} overdue`;
+    overdueEl.textContent = `${overdue} 기한 도과`;
   } else {
     overdueEl.style.display = 'none';
+  }
+
+  // 오늘 전체 마감 여부 배지
+  const closedEl = document.getElementById('stat-closed');
+  if (closedEl) {
+    const lastClosed = AppSession.getLastClosed();
+    const effective = getEffectiveNow();
+    const effectiveKey = AppSession.dateKey(effective);
+    // lastClosed도 effective 기준으로 판단
+    let closedKey = null;
+    if (lastClosed) {
+      const lc = lastClosed;
+      const [h, m] = AppSession.getOpenTime().split(':').map(Number);
+      const lcOpen = new Date(lc.getFullYear(), lc.getMonth(), lc.getDate(), h, m, 0);
+      const lcEffective = lc >= lcOpen
+        ? new Date(lc.getFullYear(), lc.getMonth(), lc.getDate())
+        : new Date(lc.getFullYear(), lc.getMonth(), lc.getDate() - 1);
+      closedKey = AppSession.dateKey(lcEffective);
+    }
+    const closedToday = closedKey === effectiveKey;
+    closedEl.style.display = closedToday ? 'flex' : 'none';
   }
 }
 
@@ -2893,18 +2263,26 @@ function setupDragDrop() {
     let isDragging = false;
     let clone = null;
     let placeholder = null;
+    let pointerId = null;
 
-    // 드래그 영역: 핸들 자체 + card-main의 왼쪽 48px 영역
     const cardMain = card.querySelector('.card-main');
     const dragZone = cardMain || handle;
 
+    // 드래그 영역 touch-action 설정 (브라우저 스크롤 간섭 방지)
+    dragZone.style.touchAction = 'pan-y';
+    handle.style.touchAction = 'none';
+
     dragZone.addEventListener('pointerdown', (e) => {
-      // card-main에서는 왼쪽 48px 이내만 드래그 허용
       if (e.currentTarget === cardMain) {
         const rect = cardMain.getBoundingClientRect();
         if (e.clientX - rect.left > 48) return;
       }
       if (card.classList.contains('expanded')) return;
+
+      pointerId = e.pointerId;
+      // pointer capture: 손가락이 요소 밖으로 나가도 이벤트 유지
+      try { dragZone.setPointerCapture(pointerId); } catch {}
+
       e.preventDefault();
       e.stopPropagation();
 
@@ -2915,13 +2293,15 @@ function setupDragDrop() {
       const cardRect = card.getBoundingClientRect();
 
       const onMove = (ev) => {
+        if (ev.pointerId !== pointerId) return;
         const dy = Math.abs(ev.clientY - startY);
         const dx = Math.abs(ev.clientX - startX);
 
-        if (!isDragging && (dy > 6 || dx > 6)) {
+        if (!isDragging && dy > 8) {
           isDragging = true;
+          // touch-action: none으로 전환해서 스크롤 완전 차단
+          dragZone.style.touchAction = 'none';
 
-          // Create floating clone
           clone = card.cloneNode(true);
           clone.style.cssText = `
             position: fixed;
@@ -2937,7 +2317,6 @@ function setupDragDrop() {
           `;
           document.body.appendChild(clone);
 
-          // Placeholder
           placeholder = document.createElement('div');
           placeholder.className = 'drag-placeholder';
           placeholder.style.height = cardRect.height + 'px';
@@ -2951,7 +2330,6 @@ function setupDragDrop() {
         const moveY = ev.clientY - startY;
         clone.style.top = (cardRect.top + moveY) + 'px';
 
-        // Find insertion point
         const siblings = [...list.children].filter(el =>
           el !== placeholder && el !== card && el.classList.contains('todo-card')
         );
@@ -2964,9 +2342,15 @@ function setupDragDrop() {
         else list.appendChild(placeholder);
       };
 
-      const onUp = () => {
-        document.removeEventListener('pointermove', onMove);
-        document.removeEventListener('pointerup', onUp);
+      const onUp = (ev) => {
+        if (ev && ev.pointerId !== pointerId) return;
+        dragZone.removeEventListener('pointermove', onMove);
+        dragZone.removeEventListener('pointerup', onUp);
+        dragZone.removeEventListener('pointercancel', onUp);
+
+        // touch-action 복원
+        dragZone.style.touchAction = 'pan-y';
+        handle.style.touchAction = 'none';
 
         if (isDragging && clone && placeholder) {
           clone.remove();
@@ -2979,10 +2363,12 @@ function setupDragDrop() {
         isDragging = false;
         clone = null;
         placeholder = null;
+        pointerId = null;
       };
 
-      document.addEventListener('pointermove', onMove);
-      document.addEventListener('pointerup', onUp);
+      dragZone.addEventListener('pointermove', onMove);
+      dragZone.addEventListener('pointerup', onUp);
+      dragZone.addEventListener('pointercancel', onUp);
     });
   });
 }
@@ -2995,24 +2381,38 @@ function saveOrder() {
 }
 
 // ── SUB BAR ───────────────────────────────────────────────────────
-document.getElementById('show-completed-top-btn').addEventListener('click', () => {
-  showCompleted = !showCompleted;
-  localStorage.setItem('show_completed', showCompleted);
-  document.getElementById('show-completed-label').textContent = showCompleted ? '전부 보기' : '미완료만';
-  renderAll();
+// ── 필터 드롭다운 ────────────────────────────────────────────────────────
+document.getElementById('filter-toggle-btn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  const dd = document.getElementById('filter-dropdown');
+  dd.style.display = (dd.style.display === 'block') ? 'none' : 'block';
+});
+
+document.addEventListener('click', (e) => {
+  if (!document.getElementById('filter-btn-wrap').contains(e.target)) {
+    document.getElementById('filter-dropdown').style.display = 'none';
+  }
+});
+
+['fc-active', 'fc-completed', 'fc-inactive'].forEach(id => {
+  const key = id.replace('fc-', '');
+  const el = document.getElementById(id);
+  el.checked = visibleStatuses.has(key);
+  el.addEventListener('change', () => {
+    if (el.checked) visibleStatuses.add(key);
+    else visibleStatuses.delete(key);
+    saveVisibleStatuses();
+    renderAll();
+  });
 });
 
 document.getElementById('archive-view-btn').addEventListener('click', () => {
   renderArchive();
-  const el = document.getElementById('archive-overlay');
-  el.style.display = 'flex';
-  requestAnimationFrame(() => el.classList.add('open'));
+  document.getElementById('archive-overlay').classList.add('open');
 });
 
 document.getElementById('archive-back-btn').addEventListener('click', () => {
-  const el = document.getElementById('archive-overlay');
-  el.classList.remove('open');
-  setTimeout(() => { el.style.display = 'none'; }, 300);
+  document.getElementById('archive-overlay').classList.remove('open');
 });
 
 // ── ARCHIVE RENDER ────────────────────────────────────────────────
@@ -3084,11 +2484,115 @@ function renderArchive() {
   });
 }
 
+// ── 마감 핵심 로직 (버튼 + 자동마감 공용) ─────────────────────────────────
+function performClose(targetDate, _autoClose = false) {
+  const now = targetDate || MockClock.now();
+  const allItems = TodoRepository.getAll();
+  const completedItems = allItems.filter(i => i.meta.status === 'Completed');
+  // 매주/매달은 전체 마감 제외 — 개별 마감만 가능
+  // Inactive/Archived/paused 제외
+  const repeatItems = allItems.filter(i =>
+    i.meta.repeat &&
+    i.meta.repeat !== 'Weekly' &&
+    i.meta.repeat !== 'Monthly' &&
+    i.meta.status !== 'Archived' &&
+    i.meta.status !== 'Inactive' &&
+    !i.meta.paused
+  );
+  let archived = 0, deleted = 0, statRecorded = 0;
+
+  repeatItems.forEach(item => {
+    const r = item.meta.repeat;
+    const shouldClose =
+      (r === 'Daily') ||
+      (r && r.startsWith('DayOfWeek:')) ||
+      (r && r.startsWith('DayOfMonth:'));
+    if (!shouldClose) return;
+
+    const fresh = TodoRepository.getAll().find(i => i.id === item.id);
+    if (!fresh) return;
+    const done = fresh.meta.status === 'Completed';
+    StatsRepository.mark(item.id, item.meta.repeat, done);
+
+    if (done) {
+      // 완료 → Completed 상태 유지 (개시시간 전 완료 보존)
+      // 상태 변경 없음, 통계만 기록
+    } else {
+      // 미완료 → Overdue (빗금 표시)
+      TodoRepository.update(item.id, { meta: { ...fresh.meta, status: 'Overdue', inactive: false, prevStatus: null } });
+    }
+    statRecorded++;
+  });
+
+  // 일반 TODO (반복 없는 것)
+  // 종료일이 오늘인 미완료 비반복형 → Overdue
+  const today = now;
+  const todayStr = AppSession.dateKey(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+  const nonRepeatAll = allItems.filter(i => !i.meta.repeat && i.meta.status !== 'Archived' && !i.meta.paused);
+  const deadlineOverdue = [];
+  nonRepeatAll.forEach(item => {
+    if (item.meta.deadline && item.meta.deadline === todayStr && item.meta.status !== 'Completed') {
+      TodoRepository.update(item.id, { meta: { ...item.meta, status: 'Overdue' } });
+      deadlineOverdue.push(item);
+    }
+  });
+
+  // 완료된 비반복형 → 삭제 또는 보관 (보고서에 먼저 기록)
+  const nonRepeatDone = [];
+  completedItems.filter(i => !i.meta.repeat).forEach(item => {
+    nonRepeatDone.push(item);
+    if (item.meta.memorable) {
+      TodoRepository.update(item.id, { meta: { status: 'Archived' } });
+      archived++;
+    } else {
+      TodoRepository.remove(item.id);
+      deleted++;
+    }
+  });
+
+  AppSession.setLastClosed(now);
+
+  // 보고서 업데이트 (자동마감이 아닌 경우만)
+  if (!_autoClose) {
+    const effective = getEffectiveNow();
+    const rDateKey = AppSession.dateKey(effective);
+    const allNow = TodoRepository.getAll();
+
+    // 반복형 완료 (Weekly/Monthly 제외)
+    const repeatDone = allNow.filter(i =>
+      i.meta.repeat && i.meta.status === 'Completed' &&
+      !['Weekly', 'Monthly'].includes(i.meta.repeat)
+    );
+    // 반복형 미완료 (Overdue로 바뀐 것)
+    const repeatMissed = repeatItems.filter(r2 => {
+      const fresh = allNow.find(i => i.id === r2.id);
+      return fresh && fresh.meta.status === 'Overdue';
+    });
+
+    // 비반복형 완료 (이미 삭제/보관됐으므로 미리 수집한 목록 사용)
+    // 비반복형 미완료 (종료일 도과)
+    const reportDone = [...repeatDone, ...nonRepeatDone];
+    const reportMissed = [...repeatMissed, ...deadlineOverdue];
+
+    if (reportDone.length + reportMissed.length > 0) {
+      ReportRepository.upsert(rDateKey, effective.getDay(), reportDone, reportMissed);
+    }
+  }
+
+  return { statRecorded, archived, deleted };
+}
 // ── 마감 (CLOSE) BUTTON ───────────────────────────────────────────
 document.getElementById('close-btn').addEventListener('click', () => {
   const allItems = TodoRepository.getAll();
   const completedItems = allItems.filter(i => i.meta.status === 'Completed');
-  const repeatItems = allItems.filter(i => i.meta.repeat && i.meta.status !== 'Archived' && !i.meta.paused);
+  const repeatItems = allItems.filter(i =>
+    i.meta.repeat &&
+    i.meta.repeat !== 'Weekly' &&
+    i.meta.repeat !== 'Monthly' &&
+    i.meta.status !== 'Archived' &&
+    i.meta.status !== 'Inactive' &&
+    !i.meta.paused
+  );
   if (completedItems.length === 0 && repeatItems.length === 0) {
     showToast('처리할 TODO가 없어요');
     return;
@@ -3104,10 +2608,11 @@ document.getElementById('close-btn').addEventListener('click', () => {
     const now2 = MockClock.now();
     const dow2 = now2.getDay();
     const isLastDay2 = new Date(now2.getFullYear(), now2.getMonth()+1, 0).getDate() === now2.getDate();
+    // 매주/매달은 개별 마감만 — 전체 마감에서 제외
     const closableRepeat = repeatItems.filter(i =>
       (i.meta.repeat === 'Daily') ||
-      (i.meta.repeat === 'Weekly' && dow2 === 0) ||
-      (i.meta.repeat === 'Monthly' && isLastDay2)
+      (i.meta.repeat && i.meta.repeat.startsWith('DayOfWeek:')) ||
+      (i.meta.repeat && i.meta.repeat.startsWith('DayOfMonth:'))
     );
     const parts = [];
     if (closableRepeat.length > 0) parts.push(`반복 ${closableRepeat.length}개 기록`);
@@ -3122,47 +2627,8 @@ document.getElementById('close-btn').addEventListener('click', () => {
 
   document.getElementById('confirm-cancel').onclick = () => modal.classList.remove('open');
   document.getElementById('confirm-ok').onclick = () => {
-    const now = MockClock.now();
-    const dow = now.getDay(); // 0=Sun
-    const isLastDayOfMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() === now.getDate();
-    let archived = 0, deleted = 0, statRecorded = 0;
-
-    // 반복 todo 전체를 마감 조건에 따라 처리 (완료 여부 무관)
-    repeatItems.forEach(item => {
-      const shouldClose =
-        (item.meta.repeat === 'Daily') ||
-        (item.meta.repeat === 'Weekly' && dow === 0) ||
-        (item.meta.repeat === 'Monthly' && isLastDayOfMonth);
-
-      if (shouldClose) {
-        const done = item.meta.status === 'Completed';
-        StatsRepository.mark(item.id, item.meta.repeat, done);
-        // 현재 저장된 최신 데이터를 읽어서 status만 리셋 — 나머지 필드 보존
-        const fresh = TodoRepository.getAll().find(i => i.id === item.id);
-        if (fresh) {
-          TodoRepository.update(item.id, { meta: { ...fresh.meta, status: 'Active' } });
-        }
-        statRecorded++;
-      }
-      // shouldClose가 아닌 경우 아무것도 안 함
-    });
-
-    // 일반 todo (반복 없는 것만) 처리
-    completedItems.filter(i => !i.meta.repeat).forEach(item => {
-      if (item.meta.memorable) {
-        TodoRepository.update(item.id, { meta: { status: 'Archived' } });
-        archived++;
-      } else {
-        TodoRepository.remove(item.id);
-        deleted++;
-      }
-    });
-
+    const { statRecorded, archived, deleted } = performClose(MockClock.now());
     modal.classList.remove('open');
-    showCompleted = true;
-    localStorage.setItem('show_completed', 'true');
-    document.getElementById('show-completed-top-btn').classList.remove('active');
-    document.getElementById('show-completed-label').textContent = '전부 보기';
     renderAll();
     renderStats();
     const parts = [];
@@ -3235,13 +2701,14 @@ function openSheet() {
   document.getElementById('add-repeat').value = '';
   document.getElementById('add-start-date').value = '';
   document.getElementById('add-deadline').value = '';
-  // 날짜 필드 활성화 초기화
+  document.getElementById('add-repeat-detail').style.display = 'none';
+  document.getElementById('add-repeat-detail-picker').innerHTML = '';
   ['add-start-date', 'add-deadline'].forEach(id => {
     const el = document.getElementById(id);
-    el.disabled = false;
-    el.style.opacity = '';
-    el.style.cursor = '';
+    el.disabled = false; el.style.opacity = ''; el.style.cursor = '';
   });
+  const memToggle = document.getElementById('add-memorable-toggle');
+  if (memToggle) { memToggle.style.opacity = ''; memToggle.style.pointerEvents = ''; }
   submitBtn.disabled = true;
 
   metaBlock.classList.remove('open');
@@ -3252,7 +2719,7 @@ function openSheet() {
   document.querySelectorAll('#add-color-picker .color-dot').forEach((d, i) => {
     d.classList.toggle('selected', i === 0);
   });
-  // 트래커 초기화
+  // 추적기 초기화
   document.getElementById('add-tracker-list').innerHTML = '';
   document.getElementById('add-tracker-picker').style.display = 'none';
   addTrackers = [];
@@ -3317,25 +2784,63 @@ metaToggle.addEventListener('click', () => {
 
 // 반복 선택 시 시작일/데드라인 비활성화
 document.getElementById('add-repeat').addEventListener('change', function() {
-  const hasRepeat = this.value !== '';
+  const val = this.value;
+  const hasRepeat = val !== '';
   const startEl = document.getElementById('add-start-date');
   const deadlineEl = document.getElementById('add-deadline');
+  const detailEl = document.getElementById('add-repeat-detail');
+  const labelEl = document.getElementById('add-repeat-detail-label');
+  const pickerEl = document.getElementById('add-repeat-detail-picker');
+
+  const memorableToggle = document.getElementById('add-memorable-toggle');
+  const memorableSwitch2 = document.getElementById('add-memorable-switch');
   if (hasRepeat) {
-    startEl.value = '';
-    deadlineEl.value = '';
-    startEl.disabled = true;
-    deadlineEl.disabled = true;
-    startEl.style.opacity = '0.35';
-    startEl.style.cursor = 'not-allowed';
-    deadlineEl.style.opacity = '0.35';
-    deadlineEl.style.cursor = 'not-allowed';
+    startEl.value = ''; deadlineEl.value = '';
+    startEl.disabled = true; deadlineEl.disabled = true;
+    startEl.style.opacity = '0.35'; startEl.style.cursor = 'not-allowed';
+    deadlineEl.style.opacity = '0.35'; deadlineEl.style.cursor = 'not-allowed';
+    // 보관하기 비활성화
+    if (memorableToggle) { memorableToggle.style.opacity = '0.35'; memorableToggle.style.pointerEvents = 'none'; }
+    if (memorableSwitch2) { memorableSwitch2.classList.remove('on'); }
+    addMemorableOn = false;
   } else {
-    startEl.disabled = false;
-    deadlineEl.disabled = false;
-    startEl.style.opacity = '';
-    startEl.style.cursor = '';
-    deadlineEl.style.opacity = '';
-    deadlineEl.style.cursor = '';
+    startEl.disabled = false; deadlineEl.disabled = false;
+    startEl.style.opacity = ''; startEl.style.cursor = '';
+    deadlineEl.style.opacity = ''; deadlineEl.style.cursor = '';
+    // 보관하기 활성화
+    if (memorableToggle) { memorableToggle.style.opacity = ''; memorableToggle.style.pointerEvents = ''; }
+  }
+
+  pickerEl.innerHTML = '';
+  if (val === 'DayOfMonth') {
+    detailEl.style.display = '';
+    labelEl.textContent = '반복 일자 선택 (복수 선택 가능)';
+    for (let d = 1; d <= 31; d++) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'repeat-chip';
+      btn.textContent = d + '일';
+      btn.dataset.val = d;
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('selected');
+      });
+      pickerEl.appendChild(btn);
+    }
+  } else if (val === 'DayOfWeek') {
+    detailEl.style.display = '';
+    labelEl.textContent = '반복 요일 선택 (복수 선택 가능)';
+    const days = ['일', '월', '화', '수', '목', '금', '토'];
+    days.forEach((name, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'repeat-chip';
+      btn.textContent = name + '요일';
+      btn.dataset.val = idx;
+      btn.addEventListener('click', () => btn.classList.toggle('selected'));
+      pickerEl.appendChild(btn);
+    });
+  } else {
+    detailEl.style.display = 'none';
   }
 });
 
@@ -3370,17 +2875,35 @@ submitBtn.addEventListener('click', addTodo);
 titleInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (!submitBtn.disabled) addTodo(); }
 });
-
-function normalizeTitle(s) {
-  return s.replace(/\s+/g, '').toLowerCase();
-}
+// 내용 입력 중 Ctrl+Enter로 바로 추가
+detailInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); if (!submitBtn.disabled) addTodo(); }
+});
 
 function addTodo() {
   const title = titleInput.value.trim();
   if (!title) return;
-  const norm = normalizeTitle(title);
-  const isDuplicate = TodoRepository.getAll().some(i => normalizeTitle(i.title) === norm);
-  if (isDuplicate) {
+
+  // 같은 이름의 투두 중복 체크
+  const duplicate = TodoRepository.getAll().find(i =>
+    i.title.trim() === title && i.meta.status !== 'Archived'
+  );
+  if (duplicate) {
+    showToast('같은 이름의 TODO가 이미 있어요');
+    titleInput.focus();
+    return;
+  }
+
+  // 오늘 전체 마감 후 반복형 생성 시 안내 (토스트, 생성은 허용)
+  const repeatValCheck = document.getElementById('add-repeat').value;
+  if (repeatValCheck) {
+    const lastClosed = AppSession.getLastClosed();
+    const effective = getEffectiveNow();
+    if (lastClosed && AppSession.dateKey(lastClosed) === AppSession.dateKey(effective)) {
+      showToast('오늘 마감 이후 생성된 반복 TODO예요. 개별 마감으로 이번 주기를 마감해 주세요.');
+    }
+  }
+  if (duplicate) {
     titleInput.style.outline = '1.5px solid var(--red)';
     titleInput.placeholder = '이미 있는 이름이에요';
     setTimeout(() => {
@@ -3389,13 +2912,38 @@ function addTodo() {
     }, 2000);
     return;
   }
+  const repeatVal = (() => {
+    const rv = document.getElementById('add-repeat').value;
+    if (rv === 'DayOfMonth') {
+      const sel = [...document.querySelectorAll('#add-repeat-detail-picker .repeat-chip.selected')].map(b => b.dataset.val);
+      return sel.length ? 'DayOfMonth:' + sel.join(',') : null;
+    }
+    if (rv === 'DayOfWeek') {
+      const sel = [...document.querySelectorAll('#add-repeat-detail-picker .repeat-chip.selected')].map(b => b.dataset.val);
+      return sel.length ? 'DayOfWeek:' + sel.join(',') : null;
+    }
+    return rv || null;
+  })();
+
+  // 오늘 해당 여부로 초기 상태 결정
+  const effective = getEffectiveNow();
+  let initialStatus = 'Active';
+  if (repeatVal && repeatVal.startsWith('DayOfWeek:')) {
+    const days = repeatVal.slice(10).split(',').map(Number);
+    if (!days.includes(effective.getDay())) initialStatus = 'Inactive';
+  } else if (repeatVal && repeatVal.startsWith('DayOfMonth:')) {
+    const dates = repeatVal.slice(11).split(',').map(Number);
+    if (!dates.includes(effective.getDate())) initialStatus = 'Inactive';
+  }
+
   TodoRepository.create({
     title,
     detail: detailInput.value.trim(),
     trackers: addTrackers.map(t => ({ ...t })),
     meta: {
-      status: 'Active',
-      repeat: document.getElementById('add-repeat').value || null,
+      status: initialStatus,
+      inactive: initialStatus === 'Inactive',
+      repeat: repeatVal,
       startDate: document.getElementById('add-start-date').value || null,
       deadline: document.getElementById('add-deadline').value || null,
       memorable: addMemorableOn,
@@ -3455,7 +3003,7 @@ function renderTrackers(card, item) {
   const existing = card.querySelector('.tracker-section-expanded');
   if (existing) existing.remove();
   if (!item.trackers || item.trackers.length === 0) {
-    // 트래커 없어도 추가 UI는 보여줌
+    // 추적기 없어도 추가 UI는 보여줌
     appendTrackerAddRow(card, item);
     return;
   }
@@ -3464,7 +3012,7 @@ function renderTrackers(card, item) {
   section.style.cssText = 'margin-bottom:10px;';
   const header = document.createElement('div');
   header.className = 'tracker-section-header';
-  header.innerHTML = '<span class="tracker-section-label">트래커</span>';
+  header.innerHTML = '<span class="tracker-section-label">추적기</span>';
   section.appendChild(header);
   item.trackers.forEach(tracker => {
     const el = buildTrackerEl(tracker, item, card, section);
@@ -3518,7 +3066,7 @@ function appendTrackerAddRow(card, item, section) {
     s.style.cssText = 'margin-bottom:10px;';
     const h = document.createElement('div');
     h.className = 'tracker-section-header';
-    h.innerHTML = '<span class="tracker-section-label">트래커</span>';
+    h.innerHTML = '<span class="tracker-section-label">추적기</span>';
     s.appendChild(h);
     appendTrackerAddRow(card, item, s);
     const metaGrid = card.querySelector('.meta-grid');
@@ -3527,7 +3075,7 @@ function appendTrackerAddRow(card, item, section) {
   }
   const addRow = document.createElement('div');
   addRow.style.cssText = 'margin-top:4px;';
-  addRow.innerHTML = `<button class="tracker-add-btn exp-tracker-add-btn" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:10px;height:10px"><path d="M12 5v14M5 12h14"/></svg> 트래커 추가</button><div class="exp-tracker-picker" style="display:none;margin-top:4px"><div class="tracker-type-picker"><button class="tracker-type-btn" data-type="checkbox">☑ 체크박스</button><button class="tracker-type-btn" data-type="counter">🔢 카운터</button></div></div>`;
+  addRow.innerHTML = `<button class="tracker-add-btn exp-tracker-add-btn" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:10px;height:10px"><path d="M12 5v14M5 12h14"/></svg> 추적기 추가</button><div class="exp-tracker-picker" style="display:none;margin-top:4px"><div class="tracker-type-picker"><button class="tracker-type-btn" data-type="checkbox">☑ 체크박스</button><button class="tracker-type-btn" data-type="counter">🔢 카운터</button></div></div>`;
   addRow.querySelector('.exp-tracker-add-btn').addEventListener('click', () => {
     const p = addRow.querySelector('.exp-tracker-picker');
     p.style.display = p.style.display === 'none' ? 'block' : 'none';
@@ -3552,6 +3100,224 @@ function saveTrackers(item) {
   TodoRepository.update(item.id, { trackers: item.trackers });
 }
 
+// ── REPEAT LABEL HELPER ─────────────────────────────────────────────
+function repeatLabel(val) {
+  if (!val) return '';
+  if (val === 'Daily') return '매일';
+  if (val === 'Weekly') return '매주';
+  if (val === 'Monthly') return '매월';
+  if (val && val.startsWith('DayOfMonth:')) {
+    const days = val.slice(11).split(',').map(d => d + '일');
+    return days.join('·');
+  }
+  if (val && val.startsWith('DayOfWeek:')) {
+    const names = ['일', '월', '화', '수', '목', '금', '토'];
+    const days = val.slice(10).split(',').map(d => names[parseInt(d)] || d);
+    return days.join('·') + '요일';
+  }
+  return val;
+}
+
+function repeatClass(val) {
+  if (!val) return '';
+  if (val === 'Daily') return 'repeat-daily';
+  if (val === 'Weekly') return 'repeat-weekly';
+  if (val === 'Monthly') return 'repeat-monthly';
+  if (val && val.startsWith('DayOfMonth:')) return 'repeat-monthly';
+  if (val && val.startsWith('DayOfWeek:')) return 'repeat-weekly';
+  return 'repeat-daily';
+}
+
+// ── REPORT REPOSITORY ───────────────────────────────────────────────────
+const ReportRepository = (() => {
+  const KEY = 'app_reports_v1';
+  const MAX = 7;
+  const DOW_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
+  // ISO 8601: 월=1 ~ 일=7 (JS getDay()는 일=0 ~ 토=6)
+  const toISODow = (jsDow) => jsDow === 0 ? 7 : jsDow;
+  const dowName = (jsDow) => DOW_NAMES[jsDow];
+
+  const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+  const write = (d) => localStorage.setItem(KEY, JSON.stringify(d));
+
+  // 오늘 보고서 생성 또는 업데이트 (기존 기록과 merge)
+  const upsert = (dateKey, dow, done, missed) => {
+    const reports = read();
+    const idx = reports.findIndex(r => r.date === dateKey);
+    const doneTitles = done.map(i => i.title || i);
+    const missedTitles = missed.map(i => i.title || i);
+    if (idx !== -1) {
+      const r = reports[idx];
+      // 기존 기록과 merge — 중복 제거, 기존 항목 유지
+      const mergedDone = [...new Set([...r.done, ...doneTitles])];
+      // missed에서 done으로 이동한 항목 제거
+      const mergedMissed = [...new Set([...r.missed, ...missedTitles])]
+        .filter(t => !mergedDone.includes(t));
+      // done에서 missed로 이동한 항목 제거
+      const finalDone = mergedDone.filter(t => !mergedMissed.includes(t));
+      reports[idx] = { ...r, done: finalDone, missed: mergedMissed,
+        dow: r.dow || toISODow(dow), dowName: r.dowName || dowName(dow),
+        updatedAt: new Date().toISOString() };
+    } else {
+      const entry = {
+        date: dateKey, dow: toISODow(dow), dowName: dowName(dow),
+        done: [...new Set(doneTitles)],
+        missed: [...new Set(missedTitles)].filter(t => !doneTitles.includes(t)),
+        updatedAt: new Date().toISOString(),
+      };
+      reports.unshift(entry);
+      if (reports.length > MAX) reports.pop();
+    }
+    write(reports);
+    return reports.find(r => r.date === dateKey);
+  };
+
+  // 개별 마감: 특정 아이템 하나를 보고서에 추가/갱신
+  const upsertItem = (dateKey, dow, item, done) => {
+    const reports = read();
+    const idx = reports.findIndex(r => r.date === dateKey);
+    if (idx !== -1) {
+      const r = reports[idx];
+      // 기존 목록에서 제거 후 재추가
+      r.done = r.done.filter(t => t !== item.title);
+      r.missed = r.missed.filter(t => t !== item.title);
+      if (done) r.done.push(item.title);
+      else r.missed.push(item.title);
+      r.updatedAt = new Date().toISOString();
+      write(reports);
+    } else {
+      // 해당 날 보고서 없으면 새로 생성
+      const entry = {
+        date: dateKey,
+        dow: toISODow(dow), dowName: dowName(dow),
+        done: done ? [item.title] : [],
+        missed: done ? [] : [item.title],
+        updatedAt: new Date().toISOString(),
+      };
+      reports.unshift(entry);
+      if (reports.length > MAX) reports.pop();
+      write(reports);
+    }
+  };
+
+  const getAll = () => read();
+
+  // 보고서 텍스트 생성
+  const toText = (report) => {
+    const lines = [];
+    const dowLabel = report.dowName || report.dow;
+    lines.push('📅 ' + report.date + ' (' + dowLabel + '요일)');
+    lines.push('');
+    lines.push('✅ 완료한 일');
+    if (report.done.length > 0) {
+      report.done.forEach(function(t) { lines.push('  • ' + t); });
+    } else { lines.push('  (없음)'); }
+    lines.push('');
+    lines.push('❌ 완료하지 못한 일');
+    if (report.missed.length > 0) {
+      report.missed.forEach(function(t) { lines.push('  • ' + t); });
+    } else { lines.push('  (없음)'); }
+    return lines.join('\n');
+  };
+
+  return { upsert, upsertItem, getAll, toText };
+})();
+
+// ── APP SESSION (개시시간 + 자동마감) ────────────────────────────────────
+const AppSession = (() => {
+  const KEY_LAST_VISIT  = 'app_last_visit';
+  const KEY_LAST_CLOSED = 'app_last_closed';
+  const KEY_OPEN_TIME   = 'app_open_time';
+
+  const getOpenTime  = () => localStorage.getItem(KEY_OPEN_TIME) || '06:00';
+  const setOpenTime  = (t) => localStorage.setItem(KEY_OPEN_TIME, t);
+  const getLastVisit = () => { const v = localStorage.getItem(KEY_LAST_VISIT);  return v ? new Date(v) : null; };
+  const setLastVisit = (d) => localStorage.setItem(KEY_LAST_VISIT, d.toISOString());
+  const getLastClosed  = () => { const v = localStorage.getItem(KEY_LAST_CLOSED); return v ? new Date(v) : null; };
+  const setLastClosed  = (d) => localStorage.setItem(KEY_LAST_CLOSED, d.toISOString());
+
+  const openTimeOf = (date, timeStr) => {
+    const [h, m] = timeStr.split(':').map(Number);
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, 0);
+  };
+
+  const dateKey = (d) =>
+    `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+  const daysBetween = (a, b) => {
+    const days = [];
+    const cur = new Date(a.getFullYear(), a.getMonth(), a.getDate());
+    const end = new Date(b.getFullYear(), b.getMonth(), b.getDate());
+    while (cur < end) { days.push(new Date(cur)); cur.setDate(cur.getDate() + 1); }
+    return days;
+  };
+
+  const onAppStart = () => {
+    const now = MockClock.now();
+    const openTimeStr = getOpenTime();
+    const lastVisit   = getLastVisit();
+    const lastClosed  = getLastClosed();
+
+    const todayOpenTime = openTimeOf(now, openTimeStr);
+    const effectiveToday = now >= todayOpenTime
+      ? new Date(now.getFullYear(), now.getMonth(), now.getDate())
+      : new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+
+    const effectiveTodayKey = dateKey(effectiveToday);
+    const lastClosedKey = lastClosed ? dateKey(lastClosed) : null;
+
+    // lastVisit도 effective 기준으로 날짜 계산
+    let lastVisitKey = null;
+    if (lastVisit) {
+      const lvOpen = openTimeOf(lastVisit, openTimeStr);
+      const lvEffective = lastVisit >= lvOpen
+        ? new Date(lastVisit.getFullYear(), lastVisit.getMonth(), lastVisit.getDate())
+        : new Date(lastVisit.getFullYear(), lastVisit.getMonth(), lastVisit.getDate() - 1);
+      lastVisitKey = dateKey(lvEffective);
+    }
+
+    if (lastVisit && lastVisitKey !== effectiveTodayKey) {
+      // 날짜가 바뀐 경우 — 마지막 방문일에 마감 안 됐으면 그 날 마감
+      if (lastClosedKey !== lastVisitKey) {
+        const lastVisitDay = new Date(lastVisit.getFullYear(), lastVisit.getMonth(), lastVisit.getDate());
+        performClose(lastVisitDay);
+      }
+
+      // 미접속 기간 체크
+      const missedStart = new Date(lastVisit.getFullYear(), lastVisit.getMonth(), lastVisit.getDate() + 1);
+      const missedDays  = daysBetween(missedStart, effectiveToday);
+
+      if (missedDays.length > 0) {
+        showStatModal(
+          '자동 마감',
+          missedDays.length + '일간 접속하지 않았어요.\n미접속 기간(' + dateKey(missedDays[0]) + ' ~ ' + dateKey(missedDays[missedDays.length-1]) + ') 동안 자동 마감을 할까요?',
+          '자동 마감',
+          () => {
+            missedDays.forEach(day => performClose(day, true));
+            checkDayTransitions();
+            renderAll();
+            showToast(missedDays.length + '일치 자동 마감 완료');
+          },
+          'background:var(--accent);border:none;color:#fff;font-weight:600;'
+        );
+      } else {
+        // 어제→오늘 전환: 날짜 관련 상태 업데이트
+        checkDayTransitions();
+        // 개시 시간이 지나 새 하루가 시작될 때 토스트
+        setTimeout(() => showToast('🌅 새로운 하루를 시작합니다'), 300);
+      }
+    } else {
+      // 같은 날 재접속 — 상태 변경 없음 (checkDayTransitions 호출 안 함)
+      // 단, 첫 접속(lastVisit 없음)이면 초기 상태 설정
+      if (!lastVisit) checkDayTransitions();
+    }
+
+    setLastVisit(now);
+  };
+
+  return { onAppStart, getOpenTime, setOpenTime, getLastVisit, getLastClosed, setLastClosed, dateKey };
+})();
+
 // ── MISC ──────────────────────────────────────────────────────────
 function escHtml(str) {
   if (!str) return '';
@@ -3566,24 +3332,22 @@ function updateDateLabel() {
 
 // ── SEED DATA (only if first time) ───────────────────────────────
 function seedIfEmpty() {
-  if (TodoRepository.getAll().length > 0) return;
-  const seeds = [
-    { title: '프로젝트 설계 문서 작성', detail: '아키텍처 다이어그램 포함, 팀장 리뷰 전까지 완성', meta: { status: 'Active', color: 'var(--blue)', deadline: new Date(Date.now() + 2*86400000).toISOString().slice(0,10) } },
-    { title: '주간 회의 준비', detail: '', meta: { status: 'Active', repeat: 'Weekly', color: 'var(--accent)' } },
-    { title: '운동 루틴 확인', detail: '스트레칭 10분 + 유산소 30분', meta: { status: 'Active', repeat: 'Daily', color: 'var(--teal)' } },
-    { title: '독서 — Atomic Habits', detail: '오늘 목표: 3챕터', meta: { status: 'Active', color: '' } },
-    { title: '청구서 납부', detail: '공과금, 카드값', meta: { status: 'Overdue', color: 'var(--red)', deadline: new Date(Date.now() - 86400000).toISOString().slice(0,10) } },
-    { title: '코드 리팩토링 (완료)', detail: '', meta: { status: 'Completed', color: '' } },
-  ];
-  seeds.forEach(s => TodoRepository.create(s));
-  // Pin first item
-  const all = TodoRepository.getAll();
-  if (all[0]) TodoRepository.update(all[0].id, { pinned: true });
+  // 기본 데이터 생성 비활성화
 }
 
 
 // ── STATS RENDER ──────────────────────────────────────────────────
 const HEATMAP_MAX = { Daily: 28, Weekly: 16, Monthly: 12 };
+// DayOfWeek/DayOfMonth는 주간 기준으로 히스토리 표시
+function getMaxPeriods(repeat) {
+  if (!repeat) return 12;
+  if (repeat === 'Daily') return 28;
+  if (repeat === 'Weekly') return 16;
+  if (repeat === 'Monthly') return 12;
+  // DayOfWeek/DayOfMonth: 해당 날만 필터되므로 충분히 많이 순회
+  if (repeat && (repeat.startsWith('DayOfWeek:') || repeat.startsWith('DayOfMonth:'))) return 90;
+  return 12;
+}
 
 function renderStats() {
   // 통계탭은 paused 포함 모든 반복 todo 표시
@@ -3598,17 +3362,16 @@ function renderStats() {
   items.forEach(item => {
     const colorHex = getColorVar(item.meta.color);
     const repeat = item.meta.repeat;
-    const maxPeriods = HEATMAP_MAX[repeat] || 12;
+    const maxPeriods = getMaxPeriods(repeat);
     const createdAt = new Date(item.createdAt);
 
     // getHistory가 반환하는 모든 기간 중 생성일 이후만 필터 (로컬 기준)
     const allHistory = StatsRepository.getHistory(item.id, repeat, maxPeriods);
     const createdLocal = new Date(createdAt.getFullYear(), createdAt.getMonth(), createdAt.getDate());
     const history = allHistory.filter(h => {
-      const periodStart = new Date(h.date.getFullYear(), h.date.getMonth(), h.date.getDate());
-      if (repeat === 'Weekly') periodStart.setDate(periodStart.getDate() - ((periodStart.getDay() + 6) % 7));
-      else if (repeat === 'Monthly') periodStart.setDate(1);
-      return periodStart >= createdLocal;
+      // h.date는 해당 기간을 대표하는 날짜 — 생성일과 직접 비교
+      const hDate = new Date(h.date.getFullYear(), h.date.getMonth(), h.date.getDate());
+      return hDate >= createdLocal;
     });
 
     if (history.length === 0) return;
@@ -3636,7 +3399,7 @@ function renderStats() {
     if (colorHex) card.style.setProperty('--card-color', colorHex);
 
     // repeat 배지 색상
-    const repeatClass = repeat === 'Daily' ? 'repeat-daily' : repeat === 'Weekly' ? 'repeat-weekly' : 'repeat-monthly';
+    const rptClass = repeatClass(repeat);
 
     // Heatmap cells
     const cellsHtml = history.map(h => {
@@ -3667,11 +3430,19 @@ function renderStats() {
     const isPaused = !!item.meta.paused;
     const pausedBadge = isPaused ? ' <span class="meta-tag" style="font-size:9px;padding:1px 5px;background:var(--surface3);color:var(--text-3)">중단</span>' : '';
 
+    // 이번 기간에 마감 기록이 있으면 '마감' 배지
+    const closedPeriodKey = StatsRepository.getPeriodKey(repeat);
+    const closedThisPeriod = closedPeriodKey && (closedPeriodKey in allRecorded);
+    const closedDone = closedThisPeriod && allRecorded[closedPeriodKey];
+    const closedBadge = closedThisPeriod
+      ? ` <span class="meta-tag" style="font-size:9px;padding:1px 5px;${closedDone ? 'background:var(--accent-dim);color:var(--accent)' : 'background:var(--red-dim);color:var(--red)'}">마감</span>`
+      : '';
+
     card.innerHTML = `
       <div class="stat-card-header">
-        <div class="stat-card-title">${escHtml(item.title)}${pausedBadge}</div>
+        <div class="stat-card-title">${escHtml(item.title)}${pausedBadge}${closedBadge}</div>
         <div class="stat-card-badges">
-          <span class="meta-tag ${repeatClass}" style="font-size:10px;padding:2px 6px">${repeat}</span>
+          <span class="meta-tag ${rptClass}" style="font-size:10px;padding:2px 6px">${repeatLabel(repeat)}</span>
           <span class="stat-rate">${total > 0 ? rate + '%' : '—'}</span>
         </div>
       </div>
@@ -3739,6 +3510,8 @@ function renderStats() {
           delete statsData[item.id];
           localStorage.setItem('todo_stats_v1', JSON.stringify(statsData));
           TodoRepository.remove(item.id);
+          // 통계 오버레이 닫기 (fab/close-btn이 가려지는 문제 방지)
+          document.getElementById('stats-overlay').classList.remove('open');
           renderStats();
           renderAll();
         },
@@ -3750,52 +3523,149 @@ function renderStats() {
   });
 }
 
+// ── REPORT VIEW ──────────────────────────────────────────────────────
+function renderReport() {
+  const list = document.getElementById('report-list');
+  const empty = document.getElementById('report-empty');
+  const reports = ReportRepository.getAll();
+  list.innerHTML = '';
+  if (reports.length === 0) { empty.style.display = ''; return; }
+  empty.style.display = 'none';
+
+  reports.forEach(report => {
+    const card = document.createElement('div');
+    card.className = 'report-card';
+    const summaryText = `완료 ${report.done.length} · 미완료 ${report.missed.length}`;
+    card.innerHTML = `
+      <div class="report-card-header">
+        <span class="report-date">${report.date}</span>
+        <span class="report-dow">${report.dowName || report.dow}요일</span>
+        <span class="report-summary">${summaryText}</span>
+        <svg class="report-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px"><path d="M19 9l-7 7-7-7"/></svg>
+      </div>
+      <div class="report-body">
+        <div class="report-text">${ReportRepository.toText(report)}</div>
+        <div class="report-actions">
+          <button class="report-save-btn" data-save-json>📄 JSON으로 저장</button>
+          <button class="report-save-btn" data-save-text>📝 텍스트로 저장</button>
+        </div>
+      </div>
+    `;
+    card.querySelector('.report-card-header').addEventListener('click', () => {
+      card.classList.toggle('expanded');
+    });
+    card.querySelector('[data-save-json]').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = `report_${report.date}.json`; a.click();
+    });
+    card.querySelector('[data-save-text]').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const blob = new Blob([ReportRepository.toText(report)], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = `report_${report.date}.txt`; a.click();
+    });
+    list.appendChild(card);
+  });
+}
+
+document.getElementById('report-view-btn').addEventListener('click', () => {
+  document.getElementById('report-overlay').classList.add('open');
+  renderReport();
+});
+document.getElementById('report-back-btn').addEventListener('click', () => {
+  document.getElementById('report-overlay').classList.remove('open');
+});
+
 // ── STATS VIEW EVENTS ─────────────────────────────────────────────
 document.getElementById('stats-view-btn').addEventListener('click', () => {
   renderStats();
-  const el = document.getElementById('stats-overlay');
-  el.style.display = 'flex';
-  requestAnimationFrame(() => el.classList.add('open'));
+  document.getElementById('stats-overlay').classList.add('open');
 });
 
 document.getElementById('stats-back-btn').addEventListener('click', () => {
-  const el = document.getElementById('stats-overlay');
-  el.classList.remove('open');
-  setTimeout(() => { el.style.display = 'none'; }, 280);
+  document.getElementById('stats-overlay').classList.remove('open');
+});
+
+// 설정 오버레이
+document.getElementById('settings-view-btn').addEventListener('click', () => {
+  document.getElementById('settings-overlay').classList.add('open');
+  document.getElementById('open-time-input').value = AppSession.getOpenTime();
+  const lv = AppSession.getLastVisit();
+  const lc = AppSession.getLastClosed();
+  document.getElementById('settings-last-visit').textContent = lv ? lv.toLocaleString('ko-KR') : '없음';
+  document.getElementById('settings-last-closed').textContent = lc ? lc.toLocaleString('ko-KR') : '없음';
+});
+
+document.getElementById('settings-back-btn').addEventListener('click', () => {
+  document.getElementById('settings-overlay').classList.remove('open');
+});
+
+document.getElementById('save-open-time-btn').addEventListener('click', () => {
+  const val = document.getElementById('open-time-input').value;
+  if (!val) return;
+  AppSession.setOpenTime(val);
+  showToast('개시 시간이 ' + val + '로 저장됐어요');
 });
 
 // ── MOCK CLOCK EVENTS ─────────────────────────────────────────────
 document.getElementById('mock-set-btn').addEventListener('click', () => {
-  const val = document.getElementById('mock-input').value;
-  if (!val) return;
-  MockClock.set(new Date(val));
+  const dateVal = document.getElementById('mock-date-input').value;
+  const timeVal = document.getElementById('mock-time-input').value || '07:00';
+  if (!dateVal) { showToast('날짜를 선택해주세요'); return; }
+  const mockNow = new Date(dateVal + 'T' + timeVal);
+  MockClock.set(mockNow);
   document.getElementById('mock-panel').classList.add('mocked');
   document.getElementById('mock-label').textContent = '🕐 MOCK ON';
   updateDateLabel();
+
+  checkDayTransitions();
   renderAll();
-  showToast('Mock 시간 적용됨: ' + MockClock.now().toLocaleString('ko-KR'));
+  showToast('Mock 시간 적용됨: ' + mockNow.toLocaleString('ko-KR'));
 });
 
 document.getElementById('mock-reset-btn').addEventListener('click', () => {
   MockClock.set(null);
   document.getElementById('mock-panel').classList.remove('mocked');
   document.getElementById('mock-label').textContent = '🕐 Mock';
-  document.getElementById('mock-input').value = '';
+  document.getElementById('mock-date-input').value = '';
+  document.getElementById('mock-time-input').value = '07:00';
   updateDateLabel();
+  checkDayTransitions();
   renderAll();
   showToast('Mock 시간 해제됨');
+});
+
+document.getElementById('mock-clear-btn').addEventListener('click', () => {
+  const btn = document.getElementById('mock-clear-btn');
+  if (btn.dataset.confirming === 'true') {
+    localStorage.clear();
+    location.reload();
+  } else {
+    btn.dataset.confirming = 'true';
+    btn.style.borderColor = 'var(--red)';
+    btn.style.color = 'var(--red)';
+    btn.title = '한 번 더 누르면 초기화';
+    setTimeout(() => {
+      btn.dataset.confirming = 'false';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+      btn.title = '데이터 초기화';
+    }, 2500);
+  }
 });
 
 document.getElementById('mock-hide-btn').addEventListener('click', () => {
   document.getElementById('mock-panel').style.display = 'none';
   document.getElementById('mock-toggle-btn').classList.add('visible');
-  localStorage.setItem('mock_panel_hidden', 'true');
+  MockClock.setPanelHidden(true);
 });
 
 document.getElementById('mock-toggle-btn').addEventListener('click', () => {
   document.getElementById('mock-panel').style.display = '';
   document.getElementById('mock-toggle-btn').classList.remove('visible');
-  localStorage.setItem('mock_panel_hidden', 'false');
+  MockClock.setPanelHidden(false);
 });
 
 // ── VIEWPORT RESIZE (키보드 대응) ────────────────────────────────────
@@ -3814,25 +3684,109 @@ if (window.visualViewport) {
   });
 }
 
+// ── PC 좌우 빈 공간 스크롤 위임 ────────────────────────────────────────
+document.body.addEventListener('wheel', (e) => {
+  const todoScroll = document.getElementById('todo-scroll');
+  if (!todoScroll) return;
+  // 이벤트가 이미 todo-scroll 내부에서 발생했으면 스킵
+  if (todoScroll.contains(e.target)) return;
+  // 오버레이가 열려있으면 스킵
+  if (document.getElementById('modal-overlay')?.classList.contains('open')) return;
+  if (document.getElementById('archive-overlay')?.classList.contains('open')) return;
+  if (document.getElementById('stats-overlay')?.classList.contains('open')) return;
+  e.preventDefault();
+  todoScroll.scrollTop += e.deltaY;
+}, { passive: false });
+
+// ── 날짜 변경 감지 및 inactive 전환 ─────────────────────────────────────
+// 반복형 TODO 추적기 초기화 (체크박스→false, 카운터→0)
+function resetTrackers(item) {
+  if (!item.trackers || item.trackers.length === 0) return;
+  const resetted = item.trackers.map(t => {
+    if (t.type === 'counter') return { ...t, current: 0 };
+    return { ...t, checked: false }; // checkbox
+  });
+  TodoRepository.update(item.id, { trackers: resetted });
+}
+
+function checkDayTransitions(rerender = false) {
+  const effective = getEffectiveNow();
+  const todayDate = effective.getDate();
+  const todayDow  = effective.getDay();
+  let changed = false;
+
+  TodoRepository.getAll().forEach(item => {
+    const r = item.meta.repeat;
+
+    let shouldBeActive = false;
+    let resetCompleted = false; // Completed 상태도 Active로 리셋할지
+
+    if (r === 'Daily') {
+      shouldBeActive = true;
+      resetCompleted = true; // 매일: 다음날 개시 시 완료 → 진행 중
+    } else if (r === 'Weekly') {
+      shouldBeActive = (todayDow === 1);
+      resetCompleted = true; // 매주: 월요일 개시 시 완료 → 진행 중
+    } else if (r === 'Monthly') {
+      shouldBeActive = (todayDate === 1);
+      resetCompleted = true; // 매달: 1일 개시 시 완료 → 진행 중
+    } else if (r && r.startsWith('DayOfWeek:')) {
+      shouldBeActive = r.slice(10).split(',').map(Number).includes(todayDow);
+      resetCompleted = false; // 개시시간 전 완료는 유지
+    } else if (r && r.startsWith('DayOfMonth:')) {
+      shouldBeActive = r.slice(11).split(',').map(Number).includes(todayDate);
+      resetCompleted = false;
+    } else {
+      return;
+    }
+
+    if (shouldBeActive) {
+      if (item.meta.status === 'Inactive') {
+        const restoreStatus = item.meta.prevStatus || 'Active';
+        TodoRepository.update(item.id, { meta: { ...item.meta, status: restoreStatus, inactive: false, prevStatus: null } });
+        resetTrackers(item);
+        changed = true;
+      } else if (item.meta.status === 'Overdue') {
+        TodoRepository.update(item.id, { meta: { ...item.meta, status: 'Active', inactive: false, prevStatus: null } });
+        resetTrackers(item);
+        changed = true;
+      } else if (item.meta.status === 'Completed' && resetCompleted) {
+        // 매일/매주/매달: 새 주기 시작 시 완료 → 진행 중
+        TodoRepository.update(item.id, { meta: { ...item.meta, status: 'Active', inactive: false, prevStatus: null } });
+        resetTrackers(item);
+        changed = true;
+      }
+    } else {
+      // 오늘 해당 아님 — Active/Overdue/Completed 모두 Inactive로
+      if (item.meta.status === 'Active' || item.meta.status === 'Overdue' ||
+          (item.meta.status === 'Completed' && !resetCompleted)) {
+        TodoRepository.update(item.id, { meta: { ...item.meta, status: 'Inactive', inactive: true, prevStatus: item.meta.status } });
+        changed = true;
+      }
+    }
+  });
+  if (rerender && changed) renderAll();
+}
+
 // ── INIT ──────────────────────────────────────────────────────────
 // mock-input 초기값 + 숨김 상태 복원
 (function() {
   const now = new Date();
   const pad = n => String(n).padStart(2,'0');
-  document.getElementById('mock-input').value =
-    `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
-  if (localStorage.getItem('mock_panel_hidden') === 'true') {
+  document.getElementById('mock-date-input').value =
+    `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+  document.getElementById('mock-time-input').value =
+    `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  if (MockClock.isPanelHidden()) {
     document.getElementById('mock-panel').style.display = 'none';
     document.getElementById('mock-toggle-btn').classList.add('visible');
   }
 })();
 updateDateLabel();
 seedIfEmpty();
-// showCompleted 초기 상태를 버튼에 반영
-(function() {
-  document.getElementById('show-completed-label').textContent = showCompleted ? '전부 보기' : '미완료만';
-})();
+AppSession.onAppStart();
 renderAll();
+
 </script>
 </body>
 </html>
