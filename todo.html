@@ -1545,7 +1545,14 @@ const CloudAdapter = (() => {
         try {
           const remote = JSON.parse(text);
           if (remote !== null) {
-            localStorage.setItem(key, JSON.stringify(remote));
+            // push 시 JSON.stringify로 직렬화했으므로, 역직렬화한 값을 다시 저장
+            // primitive(string/number)는 그대로 문자열로, object/array는 JSON.stringify
+            if (typeof remote === 'object') {
+              localStorage.setItem(key, JSON.stringify(remote));
+            } else {
+              // string/number: localStorage에는 raw string으로 저장 (getItem이 string 반환)
+              localStorage.setItem(key, String(remote));
+            }
             DevPanel.isEnabled() && console.log('[Cloud]', key, '→ 로컬 업데이트');
           } else {
             DevPanel.isEnabled() && console.log('[Cloud]', key, '→ null, 로컬 유지');
