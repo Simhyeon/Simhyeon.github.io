@@ -1144,9 +1144,9 @@
         필터
       </button>
       <div id="filter-dropdown" style="display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:8px 12px;z-index:200;min-width:130px;box-shadow:0 4px 16px rgba(0,0,0,0.1)">
-        <label class="filter-check-row"><input type="checkbox" id="fc-active" checked> 진행 중</label>
-        <label class="filter-check-row"><input type="checkbox" id="fc-completed" checked> 완료됨</label>
-        <label class="filter-check-row"><input type="checkbox" id="fc-inactive" checked> 비활성화</label>
+        <label class="filter-check-row"><input type="checkbox" id="fc-active"> 진행 중</label>
+        <label class="filter-check-row"><input type="checkbox" id="fc-completed"> 완료됨</label>
+        <label class="filter-check-row"><input type="checkbox" id="fc-inactive"> 비활성화</label>
       </div>
     </div>
     <button id="archive-view-btn" class="sub-bar-btn">
@@ -1286,6 +1286,33 @@
           <input type="time" id="open-time-input" value="06:00">
         </div>
         <button id="save-open-time-btn" class="submit-btn" style="margin-top:12px;width:100%">저장</button>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">🛠 개발자</div>
+        <div class="settings-row">
+          <label>개발자 패널 표시</label>
+          <label class="template-toggle" id="dev-panel-toggle" style="cursor:pointer">
+            <div class="toggle-switch" id="dev-panel-switch"></div>
+            <span id="dev-panel-label">비활성화</span>
+          </label>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">☁️ 클라우드 동기화</div>
+        <div class="settings-section-desc">Cloudflare Workers KV를 사용해 여러 기기에서 동기화할 수 있어요. Worker URL을 입력하고 활성화하세요.</div>
+        <div class="settings-row" style="margin-bottom:10px">
+          <label for="cloud-url-input">Worker URL</label>
+          <input type="url" id="cloud-url-input" placeholder="https://xxx.workers.dev"
+            style="font-size:12px;width:60%;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--radius-xs);color:var(--text);padding:5px 8px;outline:none">
+        </div>
+        <div class="settings-row">
+          <label>클라우드 동기화 사용</label>
+          <label class="template-toggle" id="cloud-enabled-toggle" style="cursor:pointer">
+            <div class="toggle-switch" id="cloud-enabled-switch"></div>
+            <span id="cloud-enabled-label">비활성화</span>
+          </label>
+        </div>
+        <button id="cloud-sync-now-btn" class="submit-btn" style="margin-top:12px;width:100%;font-size:13px">지금 동기화</button>
       </div>
       <div class="settings-section">
         <div class="settings-section-title">마지막 접속 정보</div>
@@ -1455,6 +1482,111 @@ const MarkdownService = (() => {
   return { render, isEnabled };
 })();
 
+// ── CLOUD ADAPTER (Cloudflare Workers KV) ───────────────────────────
+const CloudAdapter = (() => {
+  const KEY_URL     = 'cloud_worker_url';
+  const KEY_ENABLED = 'cloud_enabled';
+
+  const getWorkerUrl = () => (localStorage.getItem(KEY_URL) || '').replace(/\/$/, '');
+  const setWorkerUrl = (url) => localStorage.setItem(KEY_URL, url.trim().replace(/\/$/, ''));
+  const isEnabled    = () => localStorage.getItem(KEY_ENABLED) === 'true' && !!getWorkerUrl();
+  const setEnabled   = (v) => localStorage.setItem(KEY_ENABLED, v ? 'true' : 'false');
+
+  // signal 없이 fetch (iframe 호환성 — AbortSignal 클론 오류 방지)
+  const safeFetch = (url, opts) => fetch(url, opts);
+
+  const pull = async (key) => {
+    if (!isEnabled()) return null;
+    const url = getWorkerUrl() + '/' + key;
+    try {
+      DevPanel.isEnabled() && console.log('[Cloud] GET', url);
+      const res = await safeFetch(url);
+      DevPanel.isEnabled() && console.log('[Cloud] GET', key, '→', res.status);
+      if (!res.ok) return null;
+      const text = await res.text();
+      DevPanel.isEnabled() && console.log('[Cloud] body:', text.slice(0, 100));
+      try { return JSON.parse(text); } catch { return null; }
+    } catch (e) {
+      DevPanel.isEnabled() && console.error('[Cloud] GET 오류:', e.message);
+      return null;
+    }
+  };
+
+  const push = (key, data) => {
+    if (!isEnabled()) return;
+    const url = getWorkerUrl() + '/' + key;
+    safeFetch(url, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).then(res => {
+      DevPanel.isEnabled() && console.log('[Cloud] PUT', key, '→', res.status);
+    }).catch(e => {
+      DevPanel.isEnabled() && console.error('[Cloud] PUT 오류:', e.message);
+    });
+  };
+
+  const pullAll = async (keys) => {
+    if (!isEnabled()) {
+      DevPanel.isEnabled() && console.warn('[Cloud] 비활성화. URL:', getWorkerUrl(), '/ enabled:', localStorage.getItem(KEY_ENABLED));
+      return false;
+    }
+    DevPanel.isEnabled() && console.log('[Cloud] pullAll 시작. URL:', getWorkerUrl());
+    let connected = false;
+    for (const key of keys) {
+      try {
+        const url = getWorkerUrl() + '/' + key;
+        const res = await safeFetch(url);
+        DevPanel.isEnabled() && console.log('[Cloud]', key, '→', res.status, res.statusText);
+        if (!res.ok) { DevPanel.isEnabled() && console.warn('[Cloud]', key, '스킵'); continue; }
+        connected = true;
+        const text = await res.text();
+        DevPanel.isEnabled() && console.log('[Cloud]', key, 'body:', text.slice(0, 80));
+        try {
+          const remote = JSON.parse(text);
+          if (remote !== null) {
+            localStorage.setItem(key, JSON.stringify(remote));
+            DevPanel.isEnabled() && console.log('[Cloud]', key, '→ 로컬 업데이트');
+          } else {
+            DevPanel.isEnabled() && console.log('[Cloud]', key, '→ null, 로컬 유지');
+          }
+        } catch (e) { DevPanel.isEnabled() && console.error('[Cloud]', key, 'JSON 오류:', e.message); }
+      } catch (e) { DevPanel.isEnabled() && console.error('[Cloud]', key, 'fetch 오류:', e.message); }
+    }
+    DevPanel.isEnabled() && console.log('[Cloud] pullAll 완료. connected:', connected);
+    return connected;
+  };
+
+  return { isEnabled, setEnabled, getWorkerUrl, setWorkerUrl, push, pull, pullAll };
+})();// ── DEVELOPER PANEL ──────────────────────────────────────────────────
+const DevPanel = (() => {
+  const KEY = 'dev_panel_enabled';
+  const isEnabled = () => localStorage.getItem(KEY) === 'true';
+  const setEnabled = (v) => {
+    localStorage.setItem(KEY, v ? 'true' : 'false');
+    apply();
+  };
+  const apply = () => {
+    const on = isEnabled();
+    const toggleBtn = document.getElementById('mock-toggle-btn');
+    const panel = document.getElementById('mock-panel');
+    if (toggleBtn) {
+      if (on) {
+        toggleBtn.style.display = '';
+        toggleBtn.classList.add('visible');
+      } else {
+        toggleBtn.classList.remove('visible');
+        toggleBtn.style.display = 'none';
+        if (panel) {
+          panel.style.display = 'none';
+          MockClock.setPanelHidden(true);
+        }
+      }
+    }
+  };
+  return { isEnabled, setEnabled, apply };
+})();
+
 // ── MOCK CLOCK (테스트용) ─────────────────────────────────────────
 const MockClock = (() => {
   let _mockDate = null;
@@ -1564,11 +1696,34 @@ const StatsRepository = (() => {
     return data[itemId] || {};
   };
 
-  return { mark, isCompletedThisPeriod, getHistory, getPeriodKey, getAllForItem };
+  const deletePeriodKey = (itemId, repeat) => {
+    const key = getPeriodKey(repeat);
+    if (!key) return;
+    const data = read();
+    if (data[itemId] && key in data[itemId]) {
+      delete data[itemId][key];
+      write(data);
+    }
+  };
+
+  const deleteItem = (itemId) => {
+    const data = read();
+    if (data[itemId]) {
+      delete data[itemId];
+      write(data);
+    }
+  };
+
+  return { mark, isCompletedThisPeriod, getHistory, getPeriodKey, getAllForItem, deletePeriodKey, deleteItem };
 })();
 
 
 // ── DATA LAYER (Repository Pattern) ──────────────────────────────
+// 클라우드 동기화 대상 키 목록
+const SYNC_KEYS = [
+  'todo_items_v1', 'todo_order_v1', 'todo_stats_v1',
+  'app_reports_v1', 'app_last_visit', 'app_last_closed', 'app_open_time',
+];
 const TodoRepository = (() => {
   const STORAGE_KEY = 'todo_items_v1';
   const ORDER_KEY = 'todo_order_v1';
@@ -1594,8 +1749,14 @@ const TodoRepository = (() => {
   const getAll = () => adapter.read();
   const getOrder = () => adapter.readOrder();
 
-  const save = (items) => adapter.write(items);
-  const saveOrder = (order) => adapter.writeOrder(order);
+  const save = (items) => {
+    adapter.write(items);
+    CloudAdapter.push(STORAGE_KEY, items);  // write-through
+  };
+  const saveOrder = (order) => {
+    adapter.writeOrder(order);
+    CloudAdapter.push(ORDER_KEY, order);  // write-through
+  };
 
   const create = (data) => {
     const items = getAll();
@@ -1717,7 +1878,7 @@ let addTrackers = [];
 
 // 필터 상태
 let visibleStatuses = new Set(
-  JSON.parse(localStorage.getItem('visible_statuses') || '["active","completed","inactive"]')
+  safeParse(localStorage.getItem('visible_statuses'), ["active"])
 );
 function saveVisibleStatuses() {
   localStorage.setItem('visible_statuses', JSON.stringify([...visibleStatuses]));
@@ -1865,7 +2026,7 @@ function createCard(item) {
     clearTimeout(clickTimer);
     clickTimer = setTimeout(() => {
       TodoService.toggle(item.id);
-      renderAll();
+      scheduleRender();
     }, 220);
   });
 
@@ -1876,7 +2037,7 @@ function createCard(item) {
     e.stopPropagation();
     clearTimeout(clickTimer); // 싱글클릭 타이머 취소
     TodoService.toggle(item.id);
-    renderAll();
+    scheduleRender();
   });
 
 
@@ -1884,7 +2045,7 @@ function createCard(item) {
   card.querySelector('[data-expand]').addEventListener('click', (e) => {
     e.stopPropagation();
     expandedId = expandedId === item.id ? null : item.id;
-    renderAll();
+    scheduleRender();
   });
 
   // Wire expanded panel events
@@ -2094,12 +2255,14 @@ function wireExpandedPanel(card, item) {
   // textarea에 기존 내용 세팅
   if (detailField && detailField.tagName === 'TEXTAREA') {
     detailField.value = item.detail || '';
-    detailField.style.height = 'auto';
-    detailField.style.height = detailField.scrollHeight + 'px';
-    detailField.addEventListener('input', () => {
+    // 카드 expand 후 레이아웃이 완전히 확정된 뒤 높이 계산
+    const autoResize = () => {
       detailField.style.height = 'auto';
       detailField.style.height = detailField.scrollHeight + 'px';
-    });
+    };
+    // double rAF: 첫 번째 프레임에 스타일 계산, 두 번째 프레임에 높이 적용
+    requestAnimationFrame(() => requestAnimationFrame(autoResize));
+    detailField.addEventListener('input', autoResize);
   }
 
   // contenteditable 필드 포커스 시 키보드가 가리지 않도록 scrollIntoView
@@ -2109,6 +2272,14 @@ function wireExpandedPanel(card, item) {
       setTimeout(() => {
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 320);
+    });
+    // blur 시 자동 저장 (편집 모드일 때만)
+    el.addEventListener('blur', () => {
+      if (!saveBtn?.dataset.editing) return;
+      const titleVal = titleField?.value?.trim();
+      if (!titleVal) return;
+      const detailVal = detailField?.value?.trimEnd() || '';
+      TodoRepository.update(item.id, { title: titleVal, detail: detailVal, meta: { ...item.meta } });
     });
   });
 
@@ -2123,6 +2294,11 @@ function wireExpandedPanel(card, item) {
       editMode.style.display = 'block';
       saveBtn.textContent = '저장';
       saveBtn.dataset.editing = 'true';
+      // editMode가 block이 된 직후 textarea 높이 계산 (display:none → block 전환 후)
+      if (detailField && detailField.tagName === 'TEXTAREA') {
+        detailField.style.height = 'auto';
+        detailField.style.height = detailField.scrollHeight + 'px';
+      }
       // 제목 필드에 포커스 + 커서 끝으로
       if (titleField) {
         titleField.focus();
@@ -2190,14 +2366,14 @@ function wireExpandedPanel(card, item) {
   card.querySelector('[data-delete]')?.addEventListener('click', () => {
     TodoRepository.remove(item.id);
     expandedId = null;
-    renderAll();
+    scheduleRender();
   });
 
   // Archive
   card.querySelector('[data-archive]')?.addEventListener('click', () => {
     TodoRepository.update(item.id, { meta: { status: 'Archived' } });
     expandedId = null;
-    renderAll();
+    scheduleRender();
     renderArchive();
   });
 
@@ -2397,12 +2573,11 @@ document.addEventListener('click', (e) => {
 ['fc-active', 'fc-completed', 'fc-inactive'].forEach(id => {
   const key = id.replace('fc-', '');
   const el = document.getElementById(id);
-  el.checked = visibleStatuses.has(key);
   el.addEventListener('change', () => {
     if (el.checked) visibleStatuses.add(key);
     else visibleStatuses.delete(key);
     saveVisibleStatuses();
-    renderAll();
+    scheduleRender();
   });
 });
 
@@ -2473,12 +2648,12 @@ function renderArchive() {
       const fresh = TodoRepository.getAll().find(i => i.id === item.id);
       if (fresh) TodoRepository.update(item.id, { meta: { ...fresh.meta, status: 'Active' } });
       renderArchive();
-      renderAll();
+      scheduleRender();
     });
     card.querySelector('.archive-delete-btn').addEventListener('click', () => {
       TodoRepository.remove(item.id);
       renderArchive();
-      renderAll();
+      scheduleRender();
     });
     list.appendChild(card);
   });
@@ -2487,19 +2662,33 @@ function renderArchive() {
 // ── 마감 핵심 로직 (버튼 + 자동마감 공용) ─────────────────────────────────
 function performClose(targetDate, _autoClose = false) {
   const now = targetDate || MockClock.now();
+  // 개시시간 기준으로 실효 날짜 계산 (개시시간 전이면 어제)
+  const [oh, om] = AppSession.getOpenTime().split(':').map(Number);
+  const nowOpen = new Date(now.getFullYear(), now.getMonth(), now.getDate(), oh, om, 0);
+  const closeDate = now >= nowOpen
+    ? new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    : new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+  const closeDateKey = AppSession.dateKey(closeDate);
+
   const allItems = TodoRepository.getAll();
-  const completedItems = allItems.filter(i => i.meta.status === 'Completed');
-  // 매주/매달은 전체 마감 제외 — 개별 마감만 가능
-  // Inactive/Archived/paused 제외
+
+  // ── 마감 전 상태 스냅샷 (done 판단은 마감 시점 상태 기준) ──────────────
+  const statusSnapshot = {};
+  allItems.forEach(i => { statusSnapshot[i.id] = i.meta.status; });
+
+  const completedItems = allItems.filter(i => statusSnapshot[i.id] === 'Completed');
+  // 매주/매달은 전체 마감 제외, Inactive/Archived/paused 제외
   const repeatItems = allItems.filter(i =>
     i.meta.repeat &&
     i.meta.repeat !== 'Weekly' &&
     i.meta.repeat !== 'Monthly' &&
-    i.meta.status !== 'Archived' &&
-    i.meta.status !== 'Inactive' &&
+    statusSnapshot[i.id] !== 'Archived' &&
+    statusSnapshot[i.id] !== 'Inactive' &&
     !i.meta.paused
   );
   let archived = 0, deleted = 0, statRecorded = 0;
+  const repeatDoneItems = [];
+  const repeatMissedItems = [];
 
   repeatItems.forEach(item => {
     const r = item.meta.repeat;
@@ -2509,29 +2698,29 @@ function performClose(targetDate, _autoClose = false) {
       (r && r.startsWith('DayOfMonth:'));
     if (!shouldClose) return;
 
-    const fresh = TodoRepository.getAll().find(i => i.id === item.id);
-    if (!fresh) return;
-    const done = fresh.meta.status === 'Completed';
+    // 스냅샷 기준으로 done 판단 (checkDayTransitions 실행 전 상태)
+    const done = statusSnapshot[item.id] === 'Completed';
     StatsRepository.mark(item.id, item.meta.repeat, done);
 
+    const fresh = TodoRepository.getAll().find(i => i.id === item.id);
+    if (!fresh) return;
     if (done) {
-      // 완료 → Completed 상태 유지 (개시시간 전 완료 보존)
-      // 상태 변경 없음, 통계만 기록
+      repeatDoneItems.push(item);
+      // 완료 → Completed 유지 (상태 변경 없음)
     } else {
-      // 미완료 → Overdue (빗금 표시)
+      repeatMissedItems.push(item);
+      // 미완료 → Overdue
       TodoRepository.update(item.id, { meta: { ...fresh.meta, status: 'Overdue', inactive: false, prevStatus: null } });
     }
     statRecorded++;
   });
 
-  // 일반 TODO (반복 없는 것)
   // 종료일이 오늘인 미완료 비반복형 → Overdue
-  const today = now;
-  const todayStr = AppSession.dateKey(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
-  const nonRepeatAll = allItems.filter(i => !i.meta.repeat && i.meta.status !== 'Archived' && !i.meta.paused);
+  const todayStr = closeDateKey;
+  const nonRepeatAll = allItems.filter(i => !i.meta.repeat && statusSnapshot[i.id] !== 'Archived' && !i.meta.paused);
   const deadlineOverdue = [];
   nonRepeatAll.forEach(item => {
-    if (item.meta.deadline && item.meta.deadline === todayStr && item.meta.status !== 'Completed') {
+    if (item.meta.deadline && item.meta.deadline === todayStr && statusSnapshot[item.id] !== 'Completed') {
       TodoRepository.update(item.id, { meta: { ...item.meta, status: 'Overdue' } });
       deadlineOverdue.push(item);
     }
@@ -2554,28 +2743,11 @@ function performClose(targetDate, _autoClose = false) {
 
   // 보고서 업데이트 (자동마감이 아닌 경우만)
   if (!_autoClose) {
-    const effective = getEffectiveNow();
-    const rDateKey = AppSession.dateKey(effective);
-    const allNow = TodoRepository.getAll();
-
-    // 반복형 완료 (Weekly/Monthly 제외)
-    const repeatDone = allNow.filter(i =>
-      i.meta.repeat && i.meta.status === 'Completed' &&
-      !['Weekly', 'Monthly'].includes(i.meta.repeat)
-    );
-    // 반복형 미완료 (Overdue로 바뀐 것)
-    const repeatMissed = repeatItems.filter(r2 => {
-      const fresh = allNow.find(i => i.id === r2.id);
-      return fresh && fresh.meta.status === 'Overdue';
-    });
-
-    // 비반복형 완료 (이미 삭제/보관됐으므로 미리 수집한 목록 사용)
-    // 비반복형 미완료 (종료일 도과)
-    const reportDone = [...repeatDone, ...nonRepeatDone];
-    const reportMissed = [...repeatMissed, ...deadlineOverdue];
-
+    const reportDone = [...repeatDoneItems, ...nonRepeatDone];
+    const reportMissed = [...repeatMissedItems, ...deadlineOverdue];
     if (reportDone.length + reportMissed.length > 0) {
-      ReportRepository.upsert(rDateKey, effective.getDay(), reportDone, reportMissed);
+      // targetDate 기준 날짜/요일로 보고서 저장
+      ReportRepository.upsert(closeDateKey, closeDate.getDay(), reportDone, reportMissed);
     }
   }
 
@@ -2629,7 +2801,7 @@ document.getElementById('close-btn').addEventListener('click', () => {
   document.getElementById('confirm-ok').onclick = () => {
     const { statRecorded, archived, deleted } = performClose(MockClock.now());
     modal.classList.remove('open');
-    renderAll();
+    scheduleRender();
     renderStats();
     const parts = [];
     if (statRecorded) parts.push(`반복 ${statRecorded}개 기록됨`);
@@ -2951,7 +3123,7 @@ function addTodo() {
     }
   });
   closeSheet();
-  renderAll();
+  scheduleRender();
 }
 
 
@@ -3138,7 +3310,10 @@ const ReportRepository = (() => {
   const dowName = (jsDow) => DOW_NAMES[jsDow];
 
   const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
-  const write = (d) => localStorage.setItem(KEY, JSON.stringify(d));
+  const write = (d) => {
+    localStorage.setItem(KEY, JSON.stringify(d));
+    CloudAdapter.push(KEY, d);
+  };
 
   // 오늘 보고서 생성 또는 업데이트 (기존 기록과 merge)
   const upsert = (dateKey, dow, done, missed) => {
@@ -3230,11 +3405,20 @@ const AppSession = (() => {
   const KEY_OPEN_TIME   = 'app_open_time';
 
   const getOpenTime  = () => localStorage.getItem(KEY_OPEN_TIME) || '06:00';
-  const setOpenTime  = (t) => localStorage.setItem(KEY_OPEN_TIME, t);
+  const setOpenTime = (t) => {
+    localStorage.setItem(KEY_OPEN_TIME, t);
+    CloudAdapter.push(KEY_OPEN_TIME, t);
+  };
   const getLastVisit = () => { const v = localStorage.getItem(KEY_LAST_VISIT);  return v ? new Date(v) : null; };
-  const setLastVisit = (d) => localStorage.setItem(KEY_LAST_VISIT, d.toISOString());
+  const setLastVisit = (d) => {
+    localStorage.setItem(KEY_LAST_VISIT, d.toISOString());
+    CloudAdapter.push(KEY_LAST_VISIT, d.toISOString());
+  };
   const getLastClosed  = () => { const v = localStorage.getItem(KEY_LAST_CLOSED); return v ? new Date(v) : null; };
-  const setLastClosed  = (d) => localStorage.setItem(KEY_LAST_CLOSED, d.toISOString());
+  const setLastClosed = (d) => {
+    localStorage.setItem(KEY_LAST_CLOSED, d.toISOString());
+    CloudAdapter.push(KEY_LAST_CLOSED, d.toISOString());
+  };
 
   const openTimeOf = (date, timeStr) => {
     const [h, m] = timeStr.split(':').map(Number);
@@ -3319,6 +3503,17 @@ const AppSession = (() => {
 })();
 
 // ── MISC ──────────────────────────────────────────────────────────
+// ── 공통 유틸리티 ──────────────────────────────────────────────────────
+function safeParse(str, fallback = null) {
+  try { return JSON.parse(str); } catch { return fallback; }
+}
+
+let _renderTimer = null;
+function scheduleRender() {
+  if (_renderTimer) cancelAnimationFrame(_renderTimer);
+  _renderTimer = requestAnimationFrame(() => { _renderTimer = null; renderAll(); });
+}
+
 function escHtml(str) {
   if (!str) return '';
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -3479,9 +3674,7 @@ function renderStats() {
         '"' + item.title + '"의 기존 통계를 모두 지우고 오늘부터 새로 시작할까요?',
         '새로 시작',
         () => {
-          const statsData = JSON.parse(localStorage.getItem('todo_stats_v1') || '{}');
-          delete statsData[item.id];
-          localStorage.setItem('todo_stats_v1', JSON.stringify(statsData));
+          StatsRepository.deleteItem(item.id);
           const fresh = TodoRepository.getAll().find(i => i.id === item.id);
           if (fresh) {
             TodoRepository.update(item.id, { createdAt: new Date().toISOString() });
@@ -3497,7 +3690,7 @@ function renderStats() {
       if (!fresh) return;
       TodoRepository.update(item.id, { meta: { ...fresh.meta, paused: !fresh.meta.paused } });
       renderStats();
-      renderAll();
+      scheduleRender();
     });
 
     card.querySelector('.stat-delete-btn').addEventListener('click', () => {
@@ -3506,14 +3699,12 @@ function renderStats() {
         '이 반복 TODO와 통계 기록을 모두 삭제할까요? 되돌릴 수 없어요.',
         '삭제',
         () => {
-          const statsData = JSON.parse(localStorage.getItem('todo_stats_v1') || '{}');
-          delete statsData[item.id];
-          localStorage.setItem('todo_stats_v1', JSON.stringify(statsData));
+          StatsRepository.deleteItem(item.id);
           TodoRepository.remove(item.id);
           // 통계 오버레이 닫기 (fab/close-btn이 가려지는 문제 방지)
           document.getElementById('stats-overlay').classList.remove('open');
           renderStats();
-          renderAll();
+          scheduleRender();
         },
         'background:var(--red);border:none;color:#fff;font-weight:600;'
       );
@@ -3596,10 +3787,69 @@ document.getElementById('settings-view-btn').addEventListener('click', () => {
   const lc = AppSession.getLastClosed();
   document.getElementById('settings-last-visit').textContent = lv ? lv.toLocaleString('ko-KR') : '없음';
   document.getElementById('settings-last-closed').textContent = lc ? lc.toLocaleString('ko-KR') : '없음';
+  // 개발자 패널 상태 복원
+  const devOn = DevPanel.isEnabled();
+  document.getElementById('dev-panel-switch').classList.toggle('on', devOn);
+  document.getElementById('dev-panel-label').textContent = devOn ? '활성화' : '비활성화';
+  // 클라우드 설정 복원
+  document.getElementById('cloud-url-input').value = CloudAdapter.getWorkerUrl();
+  const enabled = CloudAdapter.isEnabled();
+  document.getElementById('cloud-enabled-switch').classList.toggle('on', enabled);
+  document.getElementById('cloud-enabled-label').textContent = enabled ? '활성화' : '비활성화';
 });
 
 document.getElementById('settings-back-btn').addEventListener('click', () => {
   document.getElementById('settings-overlay').classList.remove('open');
+});
+
+// ── 개발자 패널 토글 이벤트 ───────────────────────────────────────────────
+document.getElementById('dev-panel-toggle').addEventListener('click', () => {
+  const next = !DevPanel.isEnabled();
+  DevPanel.setEnabled(next);
+  document.getElementById('dev-panel-switch').classList.toggle('on', next);
+  document.getElementById('dev-panel-label').textContent = next ? '활성화' : '비활성화';
+  showToast(next ? '🛠 개발자 패널 활성화됨' : '개발자 패널 비활성화됨');
+});
+
+// ── 클라우드 설정 이벤트 ─────────────────────────────────────────────────
+document.getElementById('cloud-url-input').addEventListener('blur', () => {
+  CloudAdapter.setWorkerUrl(document.getElementById('cloud-url-input').value);
+});
+
+document.getElementById('cloud-enabled-toggle').addEventListener('click', () => {
+  const url = document.getElementById('cloud-url-input').value.trim();
+  if (!url && !CloudAdapter.isEnabled()) {
+    showToast('Worker URL을 먼저 입력해주세요');
+    return;
+  }
+  if (url) CloudAdapter.setWorkerUrl(url);
+  const next = !CloudAdapter.isEnabled();
+  CloudAdapter.setEnabled(next);
+  const sw = document.getElementById('cloud-enabled-switch');
+  const lb = document.getElementById('cloud-enabled-label');
+  sw.classList.toggle('on', next);
+  lb.textContent = next ? '활성화' : '비활성화';
+  showToast(next ? '☁️ 클라우드 동기화 활성화됨' : '클라우드 동기화 비활성화됨');
+});
+
+document.getElementById('cloud-sync-now-btn').addEventListener('click', async () => {
+  if (!CloudAdapter.isEnabled()) {
+    showToast('클라우드 동기화가 활성화되어 있지 않아요');
+    return;
+  }
+  const btn = document.getElementById('cloud-sync-now-btn');
+  btn.textContent = '동기화 중...';
+  btn.disabled = true;
+  const synced = await CloudAdapter.pullAll(SYNC_KEYS);
+  btn.textContent = '지금 동기화';
+  btn.disabled = false;
+  if (synced) {
+    AppSession.onAppStart();
+    scheduleRender();
+    showToast('☁️ 동기화 완료');
+  } else {
+    showToast('동기화 실패 — URL과 연결을 확인해주세요');
+  }
 });
 
 document.getElementById('save-open-time-btn').addEventListener('click', () => {
@@ -3619,9 +3869,9 @@ document.getElementById('mock-set-btn').addEventListener('click', () => {
   document.getElementById('mock-panel').classList.add('mocked');
   document.getElementById('mock-label').textContent = '🕐 MOCK ON';
   updateDateLabel();
-
-  checkDayTransitions();
-  renderAll();
+  // onAppStart로 마감→개시 전체 흐름 실행
+  AppSession.onAppStart();
+  scheduleRender();
   showToast('Mock 시간 적용됨: ' + mockNow.toLocaleString('ko-KR'));
 });
 
@@ -3633,7 +3883,7 @@ document.getElementById('mock-reset-btn').addEventListener('click', () => {
   document.getElementById('mock-time-input').value = '07:00';
   updateDateLabel();
   checkDayTransitions();
-  renderAll();
+  scheduleRender();
   showToast('Mock 시간 해제됨');
 });
 
@@ -3699,14 +3949,19 @@ document.body.addEventListener('wheel', (e) => {
 }, { passive: false });
 
 // ── 날짜 변경 감지 및 inactive 전환 ─────────────────────────────────────
-// 반복형 TODO 추적기 초기화 (체크박스→false, 카운터→0)
+// 반복형 TODO 추적기 초기화 (체크박스→false, 카운터→0, 마감 배지 제거)
 function resetTrackers(item) {
-  if (!item.trackers || item.trackers.length === 0) return;
-  const resetted = item.trackers.map(t => {
-    if (t.type === 'counter') return { ...t, current: 0 };
-    return { ...t, checked: false }; // checkbox
-  });
-  TodoRepository.update(item.id, { trackers: resetted });
+  if (item.trackers && item.trackers.length > 0) {
+    const resetted = item.trackers.map(t => {
+      if (t.type === 'counter') return { ...t, current: 0 };
+      return { ...t, checked: false };
+    });
+    TodoRepository.update(item.id, { trackers: resetted });
+  }
+  // 현재 기간 통계 기록 제거 → 마감 배지 사라짐
+  if (item.meta.repeat) {
+    StatsRepository.deletePeriodKey(item.id, item.meta.repeat);
+  }
 }
 
 function checkDayTransitions(rerender = false) {
@@ -3782,10 +4037,25 @@ function checkDayTransitions(rerender = false) {
     document.getElementById('mock-toggle-btn').classList.add('visible');
   }
 })();
+// 개발자 패널 활성화 여부 적용
+DevPanel.apply();
 updateDateLabel();
 seedIfEmpty();
-AppSession.onAppStart();
-renderAll();
+// 체크박스 초기 상태를 visibleStatuses와 동기화 (INIT에서 한 번만)
+['fc-active', 'fc-completed', 'fc-inactive'].forEach(id => {
+  const key = id.replace('fc-', '');
+  document.getElementById(id).checked = visibleStatuses.has(key);
+});
+// 클라우드 활성화 시 KV에서 pull 후 앱 시작
+(async () => {
+  if (CloudAdapter.isEnabled()) {
+    showToast('☁️ 클라우드에서 데이터를 불러오는 중...');
+    const synced = await CloudAdapter.pullAll(SYNC_KEYS);
+    if (synced) showToast('☁️ 동기화 완료');
+  }
+  AppSession.onAppStart();
+  renderAll();
+})();
 
 </script>
 </body>
