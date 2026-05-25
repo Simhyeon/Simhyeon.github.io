@@ -1305,6 +1305,11 @@
           <input type="url" id="cloud-url-input" placeholder="https://xxx.workers.dev"
             style="font-size:12px;width:60%;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--radius-xs);color:var(--text);padding:5px 8px;outline:none">
         </div>
+        <div class="settings-row" style="margin-bottom:10px">
+          <label for="cloud-token-input">Secret Token</label>
+          <input type="password" id="cloud-token-input" placeholder="Bearer 토큰"
+            style="font-size:12px;width:60%;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--radius-xs);color:var(--text);padding:5px 8px;outline:none">
+        </div>
         <div class="settings-row">
           <label>클라우드 동기화 사용</label>
           <label class="template-toggle" id="cloud-enabled-toggle" style="cursor:pointer">
@@ -1486,14 +1491,23 @@ const MarkdownService = (() => {
 const CloudAdapter = (() => {
   const KEY_URL     = 'cloud_worker_url';
   const KEY_ENABLED = 'cloud_enabled';
+  const KEY_TOKEN   = 'cloud_secret_token';
 
-  const getWorkerUrl = () => (localStorage.getItem(KEY_URL) || '').replace(/\/$/, '');
-  const setWorkerUrl = (url) => localStorage.setItem(KEY_URL, url.trim().replace(/\/$/, ''));
-  const isEnabled    = () => localStorage.getItem(KEY_ENABLED) === 'true' && !!getWorkerUrl();
-  const setEnabled   = (v) => localStorage.setItem(KEY_ENABLED, v ? 'true' : 'false');
+  const getWorkerUrl  = () => (localStorage.getItem(KEY_URL) || '').replace(/\/$/, '');
+  const setWorkerUrl  = (url) => localStorage.setItem(KEY_URL, url.trim().replace(/\/$/, ''));
+  const isEnabled     = () => localStorage.getItem(KEY_ENABLED) === 'true' && !!getWorkerUrl();
+  const setEnabled    = (v) => localStorage.setItem(KEY_ENABLED, v ? 'true' : 'false');
+  const getToken      = () => localStorage.getItem(KEY_TOKEN) || '';
+  const setToken      = (t) => localStorage.setItem(KEY_TOKEN, t.trim());
 
   // signal 없이 fetch (iframe 호환성 — AbortSignal 클론 오류 방지)
-  const safeFetch = (url, opts) => fetch(url, opts);
+  const safeFetch = (url, opts = {}) => {
+    const token = getToken();
+    if (token) {
+      opts.headers = { ...opts.headers, 'Authorization': 'Bearer ' + token };
+    }
+    return fetch(url, opts);
+  };
 
   const pull = async (key) => {
     if (!isEnabled()) return null;
@@ -1564,7 +1578,7 @@ const CloudAdapter = (() => {
     return connected;
   };
 
-  return { isEnabled, setEnabled, getWorkerUrl, setWorkerUrl, push, pull, pullAll };
+  return { isEnabled, setEnabled, getWorkerUrl, setWorkerUrl, getToken, setToken, push, pull, pullAll };
 })();// ── DEVELOPER PANEL ──────────────────────────────────────────────────
 const DevPanel = (() => {
   const KEY = 'dev_panel_enabled';
@@ -3512,7 +3526,11 @@ const AppSession = (() => {
 // ── MISC ──────────────────────────────────────────────────────────
 // ── 공통 유틸리티 ──────────────────────────────────────────────────────
 function safeParse(str, fallback = null) {
-  try { return JSON.parse(str); } catch { return fallback; }
+  if (str === null || str === undefined) return fallback;
+  try {
+    const parsed = JSON.parse(str);
+    return parsed === null ? fallback : parsed;
+  } catch { return fallback; }
 }
 
 let _renderTimer = null;
@@ -3800,6 +3818,7 @@ document.getElementById('settings-view-btn').addEventListener('click', () => {
   document.getElementById('dev-panel-label').textContent = devOn ? '활성화' : '비활성화';
   // 클라우드 설정 복원
   document.getElementById('cloud-url-input').value = CloudAdapter.getWorkerUrl();
+  document.getElementById('cloud-token-input').value = CloudAdapter.getToken();
   const enabled = CloudAdapter.isEnabled();
   document.getElementById('cloud-enabled-switch').classList.toggle('on', enabled);
   document.getElementById('cloud-enabled-label').textContent = enabled ? '활성화' : '비활성화';
@@ -3822,6 +3841,9 @@ document.getElementById('dev-panel-toggle').addEventListener('click', () => {
 document.getElementById('cloud-url-input').addEventListener('blur', () => {
   CloudAdapter.setWorkerUrl(document.getElementById('cloud-url-input').value);
 });
+document.getElementById('cloud-token-input').addEventListener('blur', () => {
+  CloudAdapter.setToken(document.getElementById('cloud-token-input').value);
+});
 
 document.getElementById('cloud-enabled-toggle').addEventListener('click', () => {
   const url = document.getElementById('cloud-url-input').value.trim();
@@ -3830,6 +3852,8 @@ document.getElementById('cloud-enabled-toggle').addEventListener('click', () => 
     return;
   }
   if (url) CloudAdapter.setWorkerUrl(url);
+  const tok = document.getElementById('cloud-token-input').value.trim();
+  if (tok) CloudAdapter.setToken(tok);
   const next = !CloudAdapter.isEnabled();
   CloudAdapter.setEnabled(next);
   const sw = document.getElementById('cloud-enabled-switch');
