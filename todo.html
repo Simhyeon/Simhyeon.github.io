@@ -1308,6 +1308,7 @@
         <div class="settings-row" style="margin-bottom:10px">
           <label for="cloud-token-input">Secret Token</label>
           <input type="password" id="cloud-token-input" placeholder="Bearer 토큰"
+            autocomplete="new-password"
             style="font-size:12px;width:60%;background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--radius-xs);color:var(--text);padding:5px 8px;outline:none">
         </div>
         <div class="settings-row">
@@ -1369,8 +1370,8 @@
       </button>
     </div>
     <div class="sheet-body">
-      <input type="text" class="sheet-input" id="todo-title-input" placeholder="제목을 입력하세요">
-      <textarea class="sheet-detail-input" id="todo-detail-input" placeholder="상세 내용 (선택)" rows="3"></textarea>
+      <input type="text" class="sheet-input" id="todo-title-input" placeholder="제목을 입력하세요" autocomplete="off">
+      <textarea class="sheet-detail-input" id="todo-detail-input" placeholder="상세 내용 (선택)" autocomplete="off" rows="3"></textarea>
       <div class="sheet-divider"></div>
       <button class="meta-expand-btn" id="meta-expand-toggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -1647,7 +1648,7 @@ const StatsRepository = (() => {
   };
 
   const getPeriodKey = (repeat, date) => {
-    const d = date || MockClock.now();
+    const d = date || getEffectiveNow();
     if (!repeat) return null;
     if (repeat === 'Daily') return 'daily:' + localDateStr(d);
     if (repeat === 'Weekly') return 'weekly:' + localISOWeek(d);
@@ -1796,8 +1797,8 @@ const TodoRepository = (() => {
         color: data.meta?.color || '',
       },
       trackers: data.trackers || [],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      createdAt: MockClock.now().toISOString(),
+      updatedAt: MockClock.now().toISOString(),
     };
     items.push(newItem);
     save(items);
@@ -1813,7 +1814,7 @@ const TodoRepository = (() => {
     const items = getAll();
     const idx = items.findIndex(i => i.id === id);
     if (idx === -1) return null;
-    const updatedItem = { ...items[idx], ...patch, updatedAt: new Date().toISOString() };
+    const updatedItem = { ...items[idx], ...patch, updatedAt: MockClock.now().toISOString() };
     if (patch.meta) {
       // 기존 meta를 먼저 두고 patch.meta로 덮어쓰기 — repeat 등 미지정 필드는 보존
       updatedItem.meta = { ...items[idx].meta, ...patch.meta };
@@ -2243,7 +2244,17 @@ function wireExpandedPanel(card, item) {
   // date input — 변경 즉시 저장 + scrollIntoView
   card.querySelectorAll('input[type="date"]').forEach(el => {
     el.addEventListener('focus', () => {
-      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 320);
+    el.addEventListener('focus', () => {
+      setTimeout(() => {
+        const scrollContainer = document.getElementById('todo-scroll');
+        if (!scrollContainer) return;
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        if (elRect.bottom > containerRect.bottom - 16) {
+          scrollContainer.scrollTop += elRect.bottom - containerRect.bottom + 24;
+        }
+      }, 320);
+    });
     });
     el.addEventListener('change', () => {
       const field = el.dataset.field;
@@ -2286,12 +2297,19 @@ function wireExpandedPanel(card, item) {
     detailField.addEventListener('input', autoResize);
   }
 
-  // contenteditable 필드 포커스 시 키보드가 가리지 않도록 scrollIntoView
+  // contenteditable 필드 포커스 시 키보드가 가리지 않도록 스크롤
   [titleField, detailField].forEach(el => {
     if (!el) return;
     el.addEventListener('focus', () => {
       setTimeout(() => {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const scrollContainer = document.getElementById('todo-scroll');
+        if (!scrollContainer) return;
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        // 필드가 컨테이너 하단 밖으로 나간 경우에만 스크롤
+        if (elRect.bottom > containerRect.bottom - 16) {
+          scrollContainer.scrollTop += elRect.bottom - containerRect.bottom + 24;
+        }
       }, 320);
     });
     // blur 시 자동 저장 (편집 모드일 때만)
@@ -2489,6 +2507,17 @@ function setupDragDrop() {
 
       const cardRect = card.getBoundingClientRect();
 
+      const scrollEl = document.getElementById('todo-scroll');
+      let autoScrollTimer = null;
+
+      const startAutoScroll = (speed) => {
+        if (autoScrollTimer) return;
+        autoScrollTimer = setInterval(() => { scrollEl.scrollTop += speed; }, 16);
+      };
+      const stopAutoScroll = () => {
+        if (autoScrollTimer) { clearInterval(autoScrollTimer); autoScrollTimer = null; }
+      };
+
       const onMove = (ev) => {
         if (ev.pointerId !== pointerId) return;
         const dy = Math.abs(ev.clientY - startY);
@@ -2527,6 +2556,19 @@ function setupDragDrop() {
         const moveY = ev.clientY - startY;
         clone.style.top = (cardRect.top + moveY) + 'px';
 
+        // 자동 스크롤: 화면 상하단 80px 영역 진입 시
+        const viewH = window.innerHeight;
+        const ZONE = 80;
+        if (ev.clientY < ZONE) {
+          const speed = Math.round((ZONE - ev.clientY) / ZONE * 12 + 2);
+          startAutoScroll(-speed);
+        } else if (ev.clientY > viewH - ZONE) {
+          const speed = Math.round((ev.clientY - (viewH - ZONE)) / ZONE * 12 + 2);
+          startAutoScroll(speed);
+        } else {
+          stopAutoScroll();
+        }
+
         const siblings = [...list.children].filter(el =>
           el !== placeholder && el !== card && el.classList.contains('todo-card')
         );
@@ -2544,6 +2586,7 @@ function setupDragDrop() {
         dragZone.removeEventListener('pointermove', onMove);
         dragZone.removeEventListener('pointerup', onUp);
         dragZone.removeEventListener('pointercancel', onUp);
+        stopAutoScroll();
 
         // touch-action 복원
         dragZone.style.touchAction = 'pan-y';
@@ -3353,13 +3396,13 @@ const ReportRepository = (() => {
       const finalDone = mergedDone.filter(t => !mergedMissed.includes(t));
       reports[idx] = { ...r, done: finalDone, missed: mergedMissed,
         dow: r.dow || toISODow(dow), dowName: r.dowName || dowName(dow),
-        updatedAt: new Date().toISOString() };
+        updatedAt: MockClock.now().toISOString() };
     } else {
       const entry = {
         date: dateKey, dow: toISODow(dow), dowName: dowName(dow),
         done: [...new Set(doneTitles)],
         missed: [...new Set(missedTitles)].filter(t => !doneTitles.includes(t)),
-        updatedAt: new Date().toISOString(),
+        updatedAt: MockClock.now().toISOString(),
       };
       reports.unshift(entry);
       if (reports.length > MAX) reports.pop();
@@ -3379,7 +3422,7 @@ const ReportRepository = (() => {
       r.missed = r.missed.filter(t => t !== item.title);
       if (done) r.done.push(item.title);
       else r.missed.push(item.title);
-      r.updatedAt = new Date().toISOString();
+      r.updatedAt = MockClock.now().toISOString();
       write(reports);
     } else {
       // 해당 날 보고서 없으면 새로 생성
@@ -3388,7 +3431,7 @@ const ReportRepository = (() => {
         dow: toISODow(dow), dowName: dowName(dow),
         done: done ? [item.title] : [],
         missed: done ? [] : [item.title],
-        updatedAt: new Date().toISOString(),
+        updatedAt: MockClock.now().toISOString(),
       };
       reports.unshift(entry);
       if (reports.length > MAX) reports.pop();
@@ -3702,7 +3745,7 @@ function renderStats() {
           StatsRepository.deleteItem(item.id);
           const fresh = TodoRepository.getAll().find(i => i.id === item.id);
           if (fresh) {
-            TodoRepository.update(item.id, { createdAt: new Date().toISOString() });
+            TodoRepository.update(item.id, { createdAt: MockClock.now().toISOString() });
           }
           renderStats();
         },
