@@ -1627,7 +1627,10 @@ const MockClock = (() => {
 const StatsRepository = (() => {
   const KEY = 'todo_stats_v1';
   const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
-  const write = (d) => localStorage.setItem(KEY, JSON.stringify(d));
+  const write = (d) => {
+    localStorage.setItem(KEY, JSON.stringify(d));
+    CloudAdapter.push(KEY, d);  // write-through
+  };
 
   // 로컬 날짜를 'YYYY-MM-DD' 문자열로 변환 (UTC 아닌 로컬 기준)
   const localDateStr = (d) => {
@@ -2676,7 +2679,14 @@ function renderArchive() {
     card.className = 'archive-card';
     if (colorHex) card.style.setProperty('--card-color', colorHex);
 
-    const updatedDate = new Date(item.updatedAt).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
+    // 보관 날짜: updatedAt을 개시시간 기준으로 보정
+    const _archiveRaw = new Date(item.updatedAt);
+    const [_ah, _am] = AppSession.getOpenTime().split(':').map(Number);
+    const _archiveOpen = new Date(_archiveRaw.getFullYear(), _archiveRaw.getMonth(), _archiveRaw.getDate(), _ah, _am, 0);
+    const _archiveDate = _archiveRaw < _archiveOpen
+      ? new Date(_archiveRaw.getFullYear(), _archiveRaw.getMonth(), _archiveRaw.getDate() - 1)
+      : new Date(_archiveRaw.getFullYear(), _archiveRaw.getMonth(), _archiveRaw.getDate());
+    const updatedDate = _archiveDate.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
 
     // 날짜 텍스트 포맷
     const fmtDate = (d) => d ? new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' }) : null;
